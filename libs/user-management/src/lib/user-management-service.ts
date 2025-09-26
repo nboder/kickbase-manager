@@ -12,7 +12,7 @@ export class UserManagementService {
     this.currentUser = user;
   }
 
-  getCurrentUser() {
+  getCurrentUser(): CurrentUser {
     return this.currentUser;
   }
 }

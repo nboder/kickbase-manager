@@ -4,7 +4,8 @@ import { AppRouteDefinitions } from '@kickbase/definitions';
 export const appRoutes: Route[] = [
   {
     path: '',
-    children: [],
+    loadComponent: () =>
+      import('@kickbase/LoginManagement').then((comp) => comp.LoginManagement),
   },
   {
     path: AppRouteDefinitions.LOGIN,

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { KickbaseLoginService } from '../management/kickbase-login-service';
 import { LoginResponse } from '@kickbase/definitions';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import { UserManagementService } from '../../../../user-management/src/lib/user-management-service';
 
 @Component({
   selector: 'lib-login-management',
@@ -15,6 +16,7 @@ export class LoginManagement {
   password = signal<string>('');
 
   private readonly loginService = inject(KickbaseLoginService);
+  private readonly userService = inject(UserManagementService);
 
   loginUser() {
     this.loginService.login(this.username(), this.password()).subscribe({

@@ -1,7 +1,7 @@
 export class CurrentUser {
-  private readonly username: string;
-  private readonly id: string;
-  private readonly token: string;
+  readonly username: string;
+  readonly id: string;
+  readonly token: string;
 
   constructor(username: string, id: string, token: string) {
     this.username = username;
