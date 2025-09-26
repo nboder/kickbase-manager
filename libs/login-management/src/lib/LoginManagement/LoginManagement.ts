@@ -1,9 +1,18 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { KickbaseLoginService } from '../management/kickbase-login-service';
-import { LoginResponse } from '@kickbase/definitions';
+import {
+  AppRouteDefinitions,
+  KickbaseLeagueConstants,
+  LoginResponse,
+} from '@kickbase/definitions';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
-import { UserManagementService } from '../../../../user-management/src/lib/user-management-service';
+import {
+  LeagueManagementService,
+  UserManagementService,
+} from '@kickbase/UserManagement';
+import { CurrentUser } from '@kickbase/UserManagement';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lib-login-management',
@@ -17,11 +26,31 @@ export class LoginManagement {
 
   private readonly loginService = inject(KickbaseLoginService);
   private readonly userService = inject(UserManagementService);
+  private readonly leagueService = inject(LeagueManagementService);
+  private readonly router = inject(Router);
 
   loginUser() {
     this.loginService.login(this.username(), this.password()).subscribe({
       next: (loginResponse: LoginResponse) => {
-        console.log(loginResponse);
+        this.userService.setCurrentUser(
+          new CurrentUser(
+            loginResponse.u.email,
+            loginResponse.u.id,
+            loginResponse.tkn
+          )
+        );
+        const currentLeague = loginResponse.srvl.find((value) => value.id == KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID)
+        if (currentLeague) {
+          this.leagueService.setLeagueInformation(
+            currentLeague.lm.budget,
+            currentLeague.lm.teamValue,
+            currentLeague.lm.placement,
+            currentLeague.lm.points
+          )
+        } else {
+          console.error("League wasn't found. It is hardcoded!")
+        }
+        this.router.navigateByUrl(AppRouteDefinitions.STAFF_MANAGEMENT)
       },
       error: (err) => {
         console.log(err);

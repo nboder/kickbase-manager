@@ -3,9 +3,15 @@ export class KickbaseApi {
   private static readonly PATH_DELIMITER = '/';
   private static readonly USER_PATH = 'user';
   private static readonly LOGIN_PATH = 'login';
+  private static readonly LEAGUES_PATH = 'leagues';
+  private static readonly SQUAD_PATH = 'squad';
 
   static loginUrl(): string {
     return this.buildApiUrl([this.USER_PATH, this.LOGIN_PATH]);
+  }
+
+  static mySquadUrl(leagueId: string): string {
+    return this.buildApiUrl([this.LEAGUES_PATH, leagueId, this.SQUAD_PATH]);
   }
 
   private static buildApiUrl(paths: string[]): string {

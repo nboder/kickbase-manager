@@ -3,6 +3,6 @@ import { LoginResponseLeague } from './login-response-league';
 
 export interface LoginResponse {
   readonly u: LoginResponseUser
-  readonly srvl: LoginResponseLeague
+  readonly srvl: [LoginResponseLeague]
   readonly tkn: string
 }
