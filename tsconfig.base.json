@@ -15,7 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@kickbase/LeagueManagement": ["libs/league-management/src/index.ts"],
       "@kickbase/LoginManagement": ["libs/login-management/src/index.ts"],
       "@kickbase/UserManagement": ["libs/user-management/src/index.ts"],
       "@kickbase/definitions": ["libs/definitions/src/index.ts"],
