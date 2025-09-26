@@ -1,8 +1,8 @@
 export default {
-  displayName: 'login',
+  displayName: 'LoginManagement',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/libs/login',
+  coverageDirectory: '../../coverage/libs/login-management',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

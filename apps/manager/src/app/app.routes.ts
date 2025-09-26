@@ -1,9 +1,14 @@
 import { Route } from '@angular/router';
+import { AppRouteDefinitions } from '@kickbase/definitions';
 
 export const appRoutes: Route[] = [
   {
     path: '',
+    children: [],
+  },
+  {
+    path: AppRouteDefinitions.LOGIN,
     loadComponent: () =>
-      import('@kickbase/login').then((comp) => comp.Login),
+      import('@kickbase/LoginManagement').then((comp) => comp.LoginManagement),
   },
 ];
