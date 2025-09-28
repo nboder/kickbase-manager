@@ -14,13 +14,9 @@ export class KickbaseLoginService {
   private readonly httpClient = inject(HttpClient);
 
   login(username: string, password: string): Observable<LoginResponse> {
-    const login = new LoginRequest(username, password);
-    console.log(login)
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.httpClient.post<LoginResponse>(
       KickbaseApi.loginUrl(),
-      new LoginRequest(username, password),
-      { headers: headers}
+      new LoginRequest(username, password)
     );
   }
 }

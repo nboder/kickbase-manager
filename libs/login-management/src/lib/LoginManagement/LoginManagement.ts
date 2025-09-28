@@ -8,10 +8,10 @@ import {
 } from '@kickbase/definitions';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import {
+  CurrentUser,
   LeagueManagementService,
   UserManagementService,
 } from '@kickbase/UserManagement';
-import { CurrentUser } from '@kickbase/UserManagement';
 import { Router } from '@angular/router';
 
 @Component({
@@ -39,18 +39,21 @@ export class LoginManagement {
             loginResponse.tkn
           )
         );
-        const currentLeague = loginResponse.srvl.find((value) => value.id == KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID)
+        const currentLeague = loginResponse.srvl.find(
+          (value) =>
+            value.id == KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID
+        );
         if (currentLeague) {
           this.leagueService.setLeagueInformation(
             currentLeague.lm.budget,
             currentLeague.lm.teamValue,
             currentLeague.lm.placement,
             currentLeague.lm.points
-          )
+          );
         } else {
-          console.error("League wasn't found. It is hardcoded!")
+          console.error("League wasn't found. It is hardcoded!");
         }
-        this.router.navigateByUrl(AppRouteDefinitions.STAFF_MANAGEMENT)
+        this.router.navigateByUrl(AppRouteDefinitions.STAFF_MANAGEMENT);
       },
       error: (err) => {
         console.log(err);

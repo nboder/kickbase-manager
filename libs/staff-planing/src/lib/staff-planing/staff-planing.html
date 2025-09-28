@@ -1,7 +1,31 @@
 <p>StaffPlaning works!</p>
 <div>
-  Budget: {{ leagueService.getLeagueInformation().budget }}
-  Team Value: {{ leagueService.getLeagueInformation().teamValue }}
-  Points: {{ leagueService.getLeagueInformation().points }}
-  Placement: {{ leagueService.getLeagueInformation().placement }}
+  <div>
+    Budget: {{ leagueService.getLeagueInformation().budget }}
+    Team Value: {{ leagueService.getLeagueInformation().teamValue }}
+    Points: {{ leagueService.getLeagueInformation().points }}
+    Placement: {{ leagueService.getLeagueInformation().placement }}
+  </div>
+  <div>
+    <table>
+      <thead>
+      <th>#</th>
+      <th>Position</th>
+      <th>Name</th>
+      <th>Market Value</th>
+      <th>Want to sell?</th>
+      </thead>
+      <tbody>
+        @for (player of mySquad(); track player.playerId) {
+          <tr>
+            <td>{{ $index + 1 }}</td>
+            <td>{{ kickbasePositionToString(player.position) }}</td>
+            <td>{{ player.name }}</td>
+            <td>{{ player.marketValue | currency:'EUR':'symbol':'1.0-0' }}</td>
+            <td><input type="checkbox" (click)="setPlayerAsSellingCandidate(player, $event)" /></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
