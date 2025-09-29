@@ -1,41 +1,31 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { StaffPlaningService } from '../service/staff-planing-service';
-import {
-  KickbaseLeagueConstants,
-  kickbasePositionFromValue,
-  kickbasePositionToString,
-  Player,
-  SquadResponseStaff,
-} from '@kickbase/definitions';
+import { kickbasePositionToString, Player } from '@kickbase/definitions';
 import { LeagueManagementService } from '@kickbase/UserManagement';
-import { MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatRowDef, MatTable } from '@angular/material/table';
 import { CurrencyPipe } from '@angular/common';
-import { MatCheckbox } from '@angular/material/checkbox';
+import {
+  LocalStoragePersistenceManager,
+  PersistenceManager,
+  SellingPlayer,
+} from '@kickbase/persistence-management';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [
-    MatTable,
-    MatColumnDef,
-    MatHeaderCell,
-    MatCell,
-    MatHeaderRow,
-    MatRow,
-    MatRowDef,
-    CurrencyPipe,
-    MatCheckbox,
-  ],
+  imports: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrl: './staff-planing.scss',
 })
 export class StaffPlaning implements OnInit {
+  private readonly storageManager: PersistenceManager = inject(
+    LocalStoragePersistenceManager
+  );
   private readonly staffService = inject(StaffPlaningService);
   readonly leagueService = inject(LeagueManagementService);
 
   mySquad = signal<Player[]>([]);
-  displayedColumns: string[] = ['position', 'name', 'marketValue'];
 
   ngOnInit(): void {
+    this.storageManager.loadPlayersToSell();
     // this.staffService
     //   .fetchMyTeam(KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID.toString())
     //   .subscribe({
@@ -90,8 +80,18 @@ export class StaffPlaning implements OnInit {
   }
 
   setPlayerAsSellingCandidate(player: Player, event: Event) {
-    console.log(player)
-    console.log((event.target as HTMLInputElement).checked)
+    console.log(player);
+    console.log((event.target as HTMLInputElement).checked);
+    const element = event.target as HTMLInputElement;
+    if (element.checked) {
+      this.storageManager.storeSellablePlayer(
+        new SellingPlayer(player.playerId)
+      );
+    } else {
+      this.storageManager.removeSellablePlayer(
+        new SellingPlayer(player.playerId)
+      );
+    }
   }
 
   protected readonly kickbasePositionToString = kickbasePositionToString;
