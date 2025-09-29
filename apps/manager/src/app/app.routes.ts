@@ -16,5 +16,5 @@ export const appRoutes: Route[] = [
     path: AppRouteDefinitions.STAFF_MANAGEMENT,
     loadComponent: () =>
       import('@kickbase/staff-planing').then((comp) => comp.StaffPlaning),
-  }
+  },
 ];

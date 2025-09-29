@@ -1,30 +1,71 @@
 <p>StaffPlaning works!</p>
 <div>
   <div>
-    Budget: {{ leagueService.getLeagueInformation().budget }}
-    Team Value: {{ leagueService.getLeagueInformation().teamValue }}
-    Points: {{ leagueService.getLeagueInformation().points }}
-    Placement: {{ leagueService.getLeagueInformation().placement }}
+    Budget: {{ leagueService.getLeagueInformation().budget }} Team Value: {{
+    leagueService.getLeagueInformation().teamValue }} Points: {{
+    leagueService.getLeagueInformation().points }} Placement: {{
+    leagueService.getLeagueInformation().placement }}
   </div>
-  <div>
+  <div class="staff-section">
     <table>
       <thead>
-      <th>#</th>
-      <th>Position</th>
-      <th>Name</th>
-      <th>Market Value</th>
-      <th>Want to sell?</th>
+        <th>#</th>
+        <th>Position</th>
+        <th>Name</th>
+        <th>Market Value</th>
+        <th>Want to sell?</th>
       </thead>
       <tbody>
         @for (player of mySquad(); track player.playerId) {
-          <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ kickbasePositionToString(player.position) }}</td>
-            <td>{{ player.name }}</td>
-            <td>{{ player.marketValue | currency:'EUR':'symbol':'1.0-0' }}</td>
-            <td><input type="checkbox" (click)="setPlayerAsSellingCandidate(player, $event)" /></td>
-          </tr>
+        <tr>
+          <td>{{ $index + 1 }}</td>
+          <td [ngClass]="positionCssClassName(player.position)">
+            {{ kickbasePositionToString(player.position) }}
+          </td>
+          <td
+            [ngClass]="{'selling-candidate': isPlayerMarkForSelling(player), 'squad-member': player.isInSquad}"
+          >
+            {{ player.name }}
+          </td>
+          <td>{{ player.marketValue | currency:'EUR':'symbol':'1.0-0' }}</td>
+          <td>
+            <input
+              type="checkbox"
+              (click)="setPlayerAsSellingCandidate(player, $event)"
+              [checked]="isPlayerMarkForSelling(player)"
+            />
+          </td>
+        </tr>
         }
+      </tbody>
+    </table>
+  </div>
+  <div class="money-section">
+    <table>
+      <thead>
+        <th>Titel</th>
+        <th>Value</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aktueller Kontostand</td>
+          <td>
+            {{ leagueService.getLeagueInformation().budget |
+            currency:'EUR':'symbol':'1.0-0' }}
+          </td>
+        </tr>
+        <tr>
+          <td>Summer aller Verkäufe</td>
+          <td>{{ sumOfSoldPlayers() | currency:'EUR':'symbol':'1.0-0' }}</td>
+        </tr>
+        <tr>
+          <td>Summer aller Einkäufe</td>
+          <td>{{ sumOfBuyingPlayer() | currency:'EUR':'symbol':'1.0-0' }}</td>
+        </tr>
+        <tr>
+          <td>Finaler Kontostand</td>
+          <td>{{ finalAccountBalance() | currency:'EUR':'symbol':'1.0-0' }}</td>
+        </tr>
       </tbody>
     </table>
   </div>

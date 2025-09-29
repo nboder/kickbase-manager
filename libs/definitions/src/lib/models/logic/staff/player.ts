@@ -11,6 +11,7 @@ export class Player {
   readonly sevenDayPrediction: number;
   readonly twentyForHoursDevelopment: number;
   readonly position: KickbaseStaffPosition;
+  readonly isInSquad: boolean;
 
   constructor(responseData: StaffResponsePlayer) {
     this.playerId = responseData.i;
@@ -19,5 +20,6 @@ export class Player {
     this.sevenDayPrediction = responseData.sdmvt;
     this.twentyForHoursDevelopment = responseData.tfhmvt;
     this.position = kickbasePositionFromValue(responseData.pos);
+    this.isInSquad = responseData.lo != undefined;
   }
 }

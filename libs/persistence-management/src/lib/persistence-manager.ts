@@ -6,6 +6,8 @@ export interface PersistenceManager {
 
   loadPlayersToSell(): void;
 
+  containedInPlayersToSell(playerId: string): boolean;
+
   storeSellablePlayer(player: SellingPlayer): void;
 
   removeSellablePlayer(player: SellingPlayer): void;

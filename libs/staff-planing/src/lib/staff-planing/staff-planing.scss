@@ -1,0 +1,31 @@
+.staff-section {
+}
+
+.money-section {
+}
+
+.position {
+  &__GK {
+    background: beige;
+  }
+
+  &__DEF {
+    background: lightblue;
+  }
+
+  &__MF {
+    background: yellow;
+  }
+
+  &__FW {
+    background: lightgreen;
+  }
+}
+
+.selling-candidate {
+  background: lightcoral;
+}
+
+.squad-member {
+  background: lightgreen;
+}
