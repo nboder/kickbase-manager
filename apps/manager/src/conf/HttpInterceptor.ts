@@ -16,7 +16,6 @@ export const headerInterceptor: HttpInterceptorFn = (
     .set('Accept', 'application/json');
   if (!req.url.includes(KickbaseApi.loginUrl())) {
     const userService = inject(UserManagementService);
-    console.log(userService.getCurrentUser());
     modifiedHeaders = modifiedHeaders.set(
       'Authorization',
       `Bearer ${sessionStorage.getItem(userService.TOKEN_SESSION_KEY)}`

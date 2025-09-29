@@ -46,7 +46,6 @@ export class LocalStoragePersistenceManager implements PersistenceManager {
 
   storeSellablePlayer(player: SellingPlayer): void {
     this.savedPlayersToSell.update((currentValue) => {
-      console.log(currentValue);
       const currentPlayers = [...currentValue];
       currentPlayers.push(player);
       this.updatePlayersToSell(currentPlayers);
