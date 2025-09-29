@@ -1,6 +1,6 @@
 <div>
   <div class="staff-section">
-    <table>
+    <table class="staff-section__table">
       <thead>
         <th>#</th>
         <th>Position</th>
@@ -16,12 +16,14 @@
             {{ kickbasePositionToString(player.position) }}
           </td>
           <td
-            [ngClass]="{'squad-member': player.isInSquad, 'selling-candidate': isPlayerMarkForSelling(player)}"
+            [ngClass]="{'staff-section__squad-member': player.isInSquad, 'staff-section__selling-candidate': isPlayerMarkForSelling(player)}"
           >
             {{ player.name }}
           </td>
-          <td>{{ player.marketValue | currency:'EUR':'symbol':'1.0-0' }}</td>
-          <td>
+          <td class="staff-section__money_column">
+            {{ player.marketValue | currency:'EUR':'symbol':'1.0-0' }}
+          </td>
+          <td class="staff-section__action_column">
             <input
               type="checkbox"
               (click)="setPlayerAsSellingCandidate(player, $event)"
@@ -30,16 +32,26 @@
           </td>
         </tr>
         }
-        <tr class="reset-button" (click)="resetAllSellingCandidates()">
-          <td colspan="5">
-            <input type="button" value="Alle Verkäufe zurücksetzen" />
+        <tr>
+          <td class="staff-section__buttons" colspan="5">
+            <input
+              type="button"
+              value="All nicht im Squad verkaufen"
+              (click)="sellAllPlayersNotInSquad()"
+            />
+            <input
+              class="staff-section__buttons_reset"
+              type="button"
+              value="Alle Verkäufe zurücksetzen"
+              (click)="resetAllSellingCandidates()"
+            />
           </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="money-section">
-    <table>
+    <table class="money-section__table">
       <thead>
         <th>Titel</th>
         <th>Value</th>
@@ -47,29 +59,35 @@
       <tbody>
         <tr>
           <td>Aktuelle Teamvalue</td>
-          <td>
+          <td class="money-section__money_column">
             {{ leagueService.getLeagueInformation().teamValue |
             currency:'EUR':'symbol':'1.0-0' }}
           </td>
         </tr>
         <tr>
           <td>Aktueller Kontostand</td>
-          <td>
+          <td class="money-section__money_column">
             {{ leagueService.getLeagueInformation().budget |
             currency:'EUR':'symbol':'1.0-0' }}
           </td>
         </tr>
         <tr>
           <td>Summer aller Verkäufe</td>
-          <td>{{ sumOfSoldPlayers() | currency:'EUR':'symbol':'1.0-0' }}</td>
+          <td class="money-section__money_column">
+            {{ sumOfSoldPlayers() | currency:'EUR':'symbol':'1.0-0' }}
+          </td>
         </tr>
         <tr>
           <td>Summer aller Einkäufe</td>
-          <td>{{ sumOfBuyingPlayer() | currency:'EUR':'symbol':'1.0-0' }}</td>
+          <td class="money-section__money_column">
+            {{ sumOfBuyingPlayer() | currency:'EUR':'symbol':'1.0-0' }}
+          </td>
         </tr>
         <tr>
           <td>Finaler Kontostand</td>
-          <td>{{ finalAccountBalance() | currency:'EUR':'symbol':'1.0-0' }}</td>
+          <td class="money-section__money_column">
+            {{ finalAccountBalance() | currency:'EUR':'symbol':'1.0-0' }}
+          </td>
         </tr>
       </tbody>
     </table>

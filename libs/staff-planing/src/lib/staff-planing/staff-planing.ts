@@ -85,6 +85,14 @@ export class StaffPlaning implements OnInit {
     }
   }
 
+  sellAllPlayersNotInSquad() {
+    this.mySquad().forEach((player) => {
+      if (!player.isInSquad) {
+        this.storageManager.storeSellablePlayer(player);
+      }
+    });
+  }
+
   resetAllSellingCandidates() {
     this.storageManager.clearAllSellablePlayers();
   }
