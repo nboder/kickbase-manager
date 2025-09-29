@@ -16,7 +16,7 @@
             {{ kickbasePositionToString(player.position) }}
           </td>
           <td
-            [ngClass]="{'selling-candidate': isPlayerMarkForSelling(player), 'squad-member': player.isInSquad}"
+            [ngClass]="{'squad-member': player.isInSquad, 'selling-candidate': isPlayerMarkForSelling(player)}"
           >
             {{ player.name }}
           </td>
@@ -30,6 +30,11 @@
           </td>
         </tr>
         }
+        <tr class="reset-button" (click)="resetAllSellingCandidates()">
+          <td colspan="5">
+            <input type="button" value="Alle Verkäufe zurücksetzen" />
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

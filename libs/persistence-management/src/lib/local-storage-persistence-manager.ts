@@ -31,6 +31,7 @@ export class LocalStoragePersistenceManager implements PersistenceManager {
 
   clearAllSellablePlayers(): void {
     this.savedPlayersToSell.set([]);
+    this.updatePlayersToSell([]);
   }
 
   removeSellablePlayer(player: SellingPlayer): void {

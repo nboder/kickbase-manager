@@ -85,6 +85,10 @@ export class StaffPlaning implements OnInit {
     }
   }
 
+  resetAllSellingCandidates() {
+    this.storageManager.clearAllSellablePlayers();
+  }
+
   positionCssClassName(position: KickbaseStaffPosition): string {
     return 'position__' + kickbasePositionToString(position);
   }

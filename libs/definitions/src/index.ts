@@ -9,6 +9,11 @@ export * from './lib/models/api/login-response-league';
 export * from './lib/models/api/login-response-league-manager';
 export * from './lib/models/api/login-response-user';
 
+export * from './lib/models/api/players/player-response-information';
+
+export * from './lib/models/api/market/market-information-response';
+export * from './lib/models/api/market/market-information-player-response';
+
 export * from './lib/models/kickbase-staff-position';
 
 export * from './lib/models/api/staff/squad-response-staff';

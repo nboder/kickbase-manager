@@ -1,4 +1,5 @@
 .staff-section {
+  width: 50%;
   margin-bottom: 1rem;
 }
 
@@ -24,9 +25,12 @@
 }
 
 .selling-candidate {
-  background: lightcoral;
+  background: lightcoral !important;
 }
 
 .squad-member {
   background: lightgreen;
+}
+
+.reset-button {
 }
