@@ -14,10 +14,11 @@ import {
   PersistenceManager,
   SellingPlayer,
 } from '@kickbase/persistence-management';
+import { TransferMarket } from '../transfer-market/transfer-market';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [CurrencyPipe, NgClass],
+  imports: [CurrencyPipe, NgClass, TransferMarket],
   templateUrl: './staff-planing.html',
   styleUrl: './staff-planing.scss',
 })

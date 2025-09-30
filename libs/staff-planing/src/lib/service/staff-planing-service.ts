@@ -20,14 +20,6 @@ export class StaffPlaningService {
     );
   }
 
-  fetchMarketInformation(
-    leagueId: string
-  ): Observable<MarketInformationResponse> {
-    return this.httpClient.get<MarketInformationResponse>(
-      KickbaseApi.marketUrl(leagueId)
-    );
-  }
-
   fetchPlayerDetails(
     leagueId: string,
     playerId: string

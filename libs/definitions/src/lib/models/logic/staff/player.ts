@@ -1,25 +1,15 @@
 import { StaffResponsePlayer } from '../../api/staff/staff-response-player';
-import {
-  kickbasePositionFromValue,
-  KickbaseStaffPosition,
-} from '../../kickbase-staff-position';
+import { BasicPlayer } from '../basic-player';
 
-export class Player {
-  readonly playerId: string;
-  readonly name: string;
-  readonly marketValue: number;
+export class Player extends BasicPlayer {
   readonly sevenDayPrediction: number;
   readonly twentyForHoursDevelopment: number;
-  readonly position: KickbaseStaffPosition;
   readonly isInSquad: boolean;
 
   constructor(responseData: StaffResponsePlayer) {
-    this.playerId = responseData.i;
-    this.name = responseData.n;
-    this.marketValue = responseData.mv;
+    super(responseData.i, responseData.n, responseData.mv, responseData.pos);
     this.sevenDayPrediction = responseData.sdmvt;
     this.twentyForHoursDevelopment = responseData.tfhmvt;
-    this.position = kickbasePositionFromValue(responseData.pos);
     this.isInSquad = responseData.lo != undefined;
   }
 }

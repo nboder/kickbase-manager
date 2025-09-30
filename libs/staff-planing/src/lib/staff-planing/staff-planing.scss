@@ -1,5 +1,10 @@
+.container {
+  display: flex;
+  gap: 1em;
+}
+
 .staff-section {
-  width: 50%;
+  background: green;
   margin-bottom: 1rem;
 
   &__table {
