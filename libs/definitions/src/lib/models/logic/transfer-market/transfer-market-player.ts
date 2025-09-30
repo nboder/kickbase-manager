@@ -4,6 +4,7 @@ import { MarketInformationPlayerResponse } from '../../api/transfer-market/marke
 export class TransferMarketPlayer extends BasicPlayer {
   readonly firstName: string;
   readonly transferExpiringSeconds: number;
+
   constructor(responseData: MarketInformationPlayerResponse) {
     super(responseData.i, responseData.n, responseData.mv, responseData.pos);
     this.firstName = responseData.fn;
@@ -12,5 +13,9 @@ export class TransferMarketPlayer extends BasicPlayer {
 
   transferExpirationInHours(): number {
     return this.transferExpiringSeconds / 60 / 60;
+  }
+
+  transferExpirationInMinutes(): number {
+    return this.transferExpiringSeconds / 60;
   }
 }

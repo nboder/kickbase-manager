@@ -1,4 +1,12 @@
-.transfer-market__table {
-  border: 1px solid #ddd;
-  border-spacing: 6px;
+
+.transfer-market-section {
+
+  &__table {
+    border: 1px solid #ddd;
+    border-spacing: 6px;
+  }
+
+   &__selection-column {
+     text-align: center;
+   }
 }

@@ -1,5 +1,5 @@
-<div>
-  <table class="transfer-market__table">
+<div class="transfer-market-section">
+  <table class="transfer-market-section__table">
     <thead>
     <th>#</th>
     <th>Position</th>
@@ -17,9 +17,14 @@
           </td>
           <td>{{ transferMarketPlayer.firstName + ' ' + transferMarketPlayer.name }}</td>
           <td class="money-column">{{ transferMarketPlayer.marketValue | moneyPipe }}</td>
-          <td class="text-right">{{ transferMarketPlayer.transferExpirationInHours() | expirationTime }} h</td>
-          <td><input type="checkbox" /></td>
+          @let hours = transferMarketPlayer.transferExpirationInHours();
+          @if (hours > 1.0) {
+            <td class=" text-right">{{ transferMarketPlayer.transferExpirationInHours() | expirationTime }} h</td>
+          } @else {
+            <td class=" text-right">{{ transferMarketPlayer.transferExpirationInMinutes() | expirationTime }} min</td>
           }
+          <td class="transfer-market-section__selection-column"><input type="checkbox" /></td>
+      }
     </tbody>
   </table>
 </div>
