@@ -1,15 +1,21 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import {
+  ExpirationTimePipe,
   KickbaseLeagueConstants,
+  kickbasePositionToString,
+  KickbaseStaffPosition,
+  MoneyPipe,
   TransferMarketPlayer,
 } from '@kickbase/definitions';
 import { TransferMarketService } from '../service/transfer-market-service';
+import { DecimalPipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'lib-transfer-market',
-  imports: [],
+  imports: [MoneyPipe, ExpirationTimePipe, NgClass],
+  providers: [DecimalPipe],
   templateUrl: './transfer-market.html',
-  styleUrl: './transfer-market.scss',
+  styleUrls: ['./transfer-market.scss', '../shared.scss'],
 })
 export class TransferMarket implements OnInit {
   transferMarket = signal<TransferMarketPlayer[]>([]);
@@ -23,8 +29,13 @@ export class TransferMarket implements OnInit {
       )
       .subscribe({
         next: (data) => {
+          const transferData = data.it.map(
+            (data) => new TransferMarketPlayer(data)
+          );
           this.transferMarket.set(
-            data.it.map((data) => new TransferMarketPlayer(data))
+            transferData.sort(
+              (a, b) => a.transferExpiringSeconds - b.transferExpiringSeconds
+            )
           );
         },
         error: (err) => {
@@ -32,4 +43,10 @@ export class TransferMarket implements OnInit {
         },
       });
   }
+
+  positionCssClassName(position: KickbaseStaffPosition): string {
+    return 'position__' + kickbasePositionToString(position);
+  }
+
+  protected readonly kickbasePositionToString = kickbasePositionToString;
 }

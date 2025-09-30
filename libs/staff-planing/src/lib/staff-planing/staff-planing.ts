@@ -4,6 +4,7 @@ import {
   KickbaseLeagueConstants,
   kickbasePositionToString,
   KickbaseStaffPosition,
+  MoneyPipe,
   Player,
   SquadResponseStaff,
 } from '@kickbase/definitions';
@@ -18,9 +19,10 @@ import { TransferMarket } from '../transfer-market/transfer-market';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [CurrencyPipe, NgClass, TransferMarket],
+  imports: [NgClass, TransferMarket, MoneyPipe],
+  providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
-  styleUrl: './staff-planing.scss',
+  styleUrls: ['./staff-planing.scss', '../shared.scss'],
 })
 export class StaffPlaning implements OnInit {
   private readonly storageManager: PersistenceManager = inject(

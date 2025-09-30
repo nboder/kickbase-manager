@@ -4,10 +4,10 @@
 }
 
 .staff-section {
-  background: green;
   margin-bottom: 1rem;
 
   &__table {
+    border: 1px solid #ddd;
     border-spacing: 6px;
   }
 
@@ -41,27 +41,5 @@ td {
   &__table {
     border: 1px solid #ddd;
     -webkit-border-horizontal-spacing: 10px;
-  }
-
-  &__money_column {
-    text-align: right;
-  }
-}
-
-.position {
-  &__GK {
-    background: beige;
-  }
-
-  &__DEF {
-    background: lightblue;
-  }
-
-  &__MF {
-    background: yellow;
-  }
-
-  &__FW {
-    background: lightgreen;
   }
 }
