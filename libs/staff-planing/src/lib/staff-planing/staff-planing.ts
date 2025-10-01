@@ -52,11 +52,6 @@ export class StaffPlaning implements OnInit {
 
   sumOfBuyingPlayer = signal<number>(0);
 
-  updateSum(sum: number) {
-    console.log(sum);
-    this.sumOfBuyingPlayer.set(sum);
-  }
-
   finalAccountBalance = computed(() => {
     return (
       this.leagueService.getLeagueInformation().budget +
