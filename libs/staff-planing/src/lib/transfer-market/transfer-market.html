@@ -1,30 +1,67 @@
 <div class="transfer-market-section">
   <table class="transfer-market-section__table">
     <thead>
-    <th>#</th>
-    <th>Position</th>
-    <th>Name</th>
-    <th>Market Value</th>
-    <th>Expiring hours</th>
-    <th>Want to Buy?</th>
+      <th>#</th>
+      <th>Position</th>
+      <th>Name</th>
+      <th>Market Value</th>
+      <th>Expiring hours</th>
+      <th>Want to Buy?</th>
+      <th>Payment</th>
     </thead>
     <tbody>
-      @for (transferMarketPlayer of transferMarket(); track transferMarketPlayer.playerId) {
-        <tr>
-          <td>{{ $index + 1 }}</td>
-          <td
-            [ngClass]="positionCssClassName(transferMarketPlayer.position)">{{ kickbasePositionToString(transferMarketPlayer.position) }}
-          </td>
-          <td>{{ transferMarketPlayer.firstName + ' ' + transferMarketPlayer.name }}</td>
-          <td class="money-column">{{ transferMarketPlayer.marketValue | moneyPipe }}</td>
-          @let hours = transferMarketPlayer.transferExpirationInHours();
-          @if (hours > 1.0) {
-            <td class=" text-right">{{ transferMarketPlayer.transferExpirationInHours() | expirationTime }} h</td>
-          } @else {
-            <td class=" text-right">{{ transferMarketPlayer.transferExpirationInMinutes() | expirationTime }} min</td>
-          }
-          <td class="transfer-market-section__selection-column"><input type="checkbox" /></td>
-      }
+      @for (transferMarketPlayer of transferMarket(); track
+      transferMarketPlayer.playerId) {
+      <tr>
+        <td>{{ $index + 1 }}</td>
+        <td [ngClass]="positionCssClassName(transferMarketPlayer.position)">
+          {{ kickbasePositionToString(transferMarketPlayer.position) }}
+        </td>
+        <td>
+          {{ transferMarketPlayer.firstName + ' ' + transferMarketPlayer.name }}
+        </td>
+        <td class="money-column">
+          {{ transferMarketPlayer.marketValue | moneyPipe }}
+        </td>
+        @let hours = transferMarketPlayer.transferExpirationInHours(); @if
+        (hours > 1.0) {
+        <td class="text-right">
+          {{ transferMarketPlayer.transferExpirationInHours() | expirationTime
+          }} h
+        </td>
+        } @else {
+        <td class="text-right">
+          {{ transferMarketPlayer.transferExpirationInMinutes() | expirationTime
+          }} min
+        </td>
+        }
+        <td class="transfer-market-section__selection-column">
+          <input
+            type="checkbox"
+            (change)="togglePlayerForBuying(transferMarketPlayer, $event)"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            class="transfer-market-section__overpayment"
+            [attr.id]="transferMarketPlayer.playerId"
+            #overpayment
+            [disabled]="isNotPlayerMarkedForBuying(transferMarketPlayer)"
+          />
+        </td>
+        }
+      </tr>
+
+      <tr>
+        <td colspan="7" class="transfer-market-section__buttons">
+          <input
+            type="button"
+            value="Set Buy-Orders"
+            (click)="acceptBuyingOrders()"
+          />
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

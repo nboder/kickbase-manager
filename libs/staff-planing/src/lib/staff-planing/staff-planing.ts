@@ -1,4 +1,11 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { StaffPlaningService } from '../service/staff-planing-service';
 import {
   KickbaseLeagueConstants,
@@ -43,9 +50,12 @@ export class StaffPlaning implements OnInit {
     return sumOfSellingPlayers;
   });
 
-  sumOfBuyingPlayer = computed(() => {
-    return 0;
-  });
+  sumOfBuyingPlayer = signal<number>(0);
+
+  updateSum(sum: number) {
+    console.log(sum);
+    this.sumOfBuyingPlayer.set(sum);
+  }
 
   finalAccountBalance = computed(() => {
     return (
