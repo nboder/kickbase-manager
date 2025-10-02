@@ -2,11 +2,9 @@
   <div class="staff-section">
     <table class="staff-section__table">
       <thead>
-        <th>#</th>
-        <th>Position</th>
-        <th>Name</th>
-        <th>Market Value</th>
-        <th>Want to sell?</th>
+        @for (column of visibleColumns(); track column) {
+        <th>{{ column }}</th>
+        }
       </thead>
       <tbody>
         @for (player of mySquad(); track player.playerId) {
@@ -21,6 +19,11 @@
             {{ player.name }}
           </td>
           <td class="money-column">{{ player.marketValue | moneyPipe }}</td>
+          @if (showTfhTrendColumn()) {
+          <td class="money-column">
+            {{ player.twentyForHoursDevelopment | moneyPipe }}
+          </td>
+          }
           <td class="staff-section__action_column">
             <input
               type="checkbox"
@@ -31,8 +34,17 @@
         </tr>
         }
         <tr>
-          <td class="staff-section__buttons" colspan="5">
+          <td
+            class="staff-section__buttons"
+            [attr.colspan]="visibleColumns().length"
+          >
             <input
+              type="button"
+              value="Toggle 24h Trend"
+              (click)="showTfhTrendColumn.set(!showTfhTrendColumn())"
+            />
+            <input
+              class="staff-section__buttons_sell_not_in_squad"
               type="button"
               value="All nicht im Squad verkaufen"
               (click)="sellAllPlayersNotInSquad()"
