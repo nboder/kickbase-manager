@@ -1,11 +1,4 @@
-import {
-  Component,
-  computed,
-  inject,
-  OnInit,
-  signal,
-  ViewChild,
-} from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { StaffPlaningService } from '../service/staff-planing-service';
 import {
   KickbaseLeagueConstants,
