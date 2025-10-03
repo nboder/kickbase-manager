@@ -50,6 +50,7 @@ export class TransferMarket implements OnInit {
   private readonly overPayments: QueryList<ElementRef> | undefined;
   private readonly transferMarketService = inject(TransferMarketService);
   showGoldDiggers = signal<boolean>(false);
+  showPositiveMarketValueTrends = signal<boolean>(true);
   showOnlyPointMachines = signal<boolean>(false);
 
   readonly showHoursThreshold = 1.0;
@@ -147,11 +148,14 @@ export class TransferMarket implements OnInit {
       });
   }
 
-  shouldShowGoldDigger(player: TransferMarketPlayer): boolean {
+  shouldShowGoldDiggerOrPositiveMarketValueTrend(
+    player: TransferMarketPlayer
+  ): boolean {
     return (
-      this.showGoldDiggers() &&
-      player.twentyForHoursTrend >
-        TransferMarketDefinitions.GoldDiggerThresholdInEuro
+      (this.showGoldDiggers() &&
+        player.twentyForHoursTrend >
+          TransferMarketDefinitions.GoldDiggerThresholdInEuro) ||
+      (this.showPositiveMarketValueTrends() && player.twentyForHoursTrend > 0)
     );
   }
 
