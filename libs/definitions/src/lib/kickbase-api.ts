@@ -7,6 +7,8 @@ export class KickbaseApi {
   private static readonly SQUAD_PATH = 'squad';
   private static readonly PLAYERS_PATH = 'players';
   private static readonly MARKET_PATH = 'market';
+  private static readonly MANAGERS_PATH = 'managers';
+  private static readonly DASHBOARD_PATH = 'dashboard';
 
   static loginUrl(): string {
     return this.buildApiUrl([this.USER_PATH, this.LOGIN_PATH]);
@@ -26,6 +28,16 @@ export class KickbaseApi {
       leagueId,
       this.PLAYERS_PATH,
       playerId,
+    ]);
+  }
+
+  static managerDashboardUrl(leagueId: string, managerId: string): string {
+    return this.buildApiUrl([
+      this.LEAGUES_PATH,
+      leagueId,
+      this.MANAGERS_PATH,
+      managerId,
+      this.DASHBOARD_PATH,
     ]);
   }
 

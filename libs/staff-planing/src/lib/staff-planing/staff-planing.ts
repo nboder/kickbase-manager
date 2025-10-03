@@ -17,6 +17,7 @@ import {
 } from '@kickbase/persistence-management';
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { ManagerService } from '../service/manager-service';
 
 @Component({
   selector: 'lib-staff-planing',
@@ -31,6 +32,7 @@ export class StaffPlaning implements OnInit {
   );
   private readonly staffService = inject(StaffPlaningService);
   readonly leagueService = inject(LeagueManagementService);
+  readonly managerService = inject(ManagerService);
 
   private readonly tfhTrendColumnName = '24h Trend';
   showTfhTrendColumn = signal(false);

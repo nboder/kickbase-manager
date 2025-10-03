@@ -18,6 +18,8 @@ export * from './lib/models/api/players/player-detail-response';
 export * from './lib/models/api/transfer-market/market-information-response';
 export * from './lib/models/api/transfer-market/market-information-player-response';
 
+export * from './lib/models/api/manager/manager-response';
+
 export * from './lib/models/kickbase-staff-position';
 
 export * from './lib/models/api/squad/squad-response-staff';

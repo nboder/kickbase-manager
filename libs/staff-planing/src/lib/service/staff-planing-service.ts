@@ -1,10 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {
-  KickbaseApi,
-  PlayerResponseInformation,
-  SquadResponseStaff,
-} from '@kickbase/definitions';
+import { KickbaseApi, SquadResponseStaff } from '@kickbase/definitions';
 import { Observable } from 'rxjs';
 
 @Injectable({
