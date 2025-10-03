@@ -12,7 +12,7 @@
       <th>Expiring hours</th>
     </thead>
     <tbody>
-      @for (transferMarketPlayer of transferMarket(); track
+      @for (transferMarketPlayer of shownTransferMarketPlayers(); track
       transferMarketPlayer.playerId) {
       <tr
         [class.transfer-market-section__gold-digger]="shouldShowGoldDigger(transferMarketPlayer)"
@@ -70,10 +70,17 @@
         <td colspan="9" class="transfer-market-section__buttons">
           <div class="container">
             <mat-slide-toggle
+              [checked]="showOnlyPointMachines()"
+              (change)="showOnlyPointMachines.set($event.checked)"
+            >
+              Pointing Machines
+            </mat-slide-toggle>
+            <mat-slide-toggle
               [checked]="showGoldDiggers()"
               (change)="showGoldDiggers.set($event.checked)"
-              >Gold digger!</mat-slide-toggle
             >
+              Gold digger!
+            </mat-slide-toggle>
             <input
               type="button"
               value="Set Buy-Orders"

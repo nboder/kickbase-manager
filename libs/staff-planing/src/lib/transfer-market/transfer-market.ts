@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   ElementRef,
   inject,
   OnInit,
@@ -31,12 +32,25 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 export class TransferMarket implements OnInit {
   sumOfBuyingPlayers = output<number>();
 
-  transferMarket = signal<TransferMarketPlayer[]>([]);
+  private transferMarket = signal<TransferMarketPlayer[]>([]);
+  shownTransferMarketPlayers = computed(() => {
+    if (this.showOnlyPointMachines()) {
+      return this.transferMarket().filter((player) => {
+        return (
+          player.averagePoints >=
+          TransferMarketDefinitions.PointingMachineThreshold
+        );
+      });
+    } else {
+      return this.transferMarket();
+    }
+  });
 
   @ViewChildren('overpayment')
   private readonly overPayments: QueryList<ElementRef> | undefined;
   private readonly transferMarketService = inject(TransferMarketService);
   showGoldDiggers = signal<boolean>(false);
+  showOnlyPointMachines = signal<boolean>(false);
 
   readonly showHoursThreshold = 1.0;
   readonly showDaysThreshold = 48.0;
@@ -124,6 +138,7 @@ export class TransferMarket implements OnInit {
           if (currentPlayer) {
             currentPlayer.teamName = data.tn;
             currentPlayer.twentyForHoursTrend = data.tfhmvt;
+            currentPlayer.averagePoints = data.ap;
           }
         },
         error: (err) => {

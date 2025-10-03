@@ -38,11 +38,17 @@
             class="staff-section__buttons"
             [attr.colspan]="visibleColumns().length"
           >
-            <input
-              type="button"
-              value="Toggle 24h Trend"
-              (click)="showTfhTrendColumn.set(!showTfhTrendColumn())"
-            />
+            <mat-slide-toggle
+              [checked]="showTfhTrendColumn()"
+              (change)="showTfhTrendColumn.set(!showTfhTrendColumn())"
+            >
+              24h Trend
+            </mat-slide-toggle>
+            <!--            <input-->
+            <!--              type="button"-->
+            <!--              value="Toggle 24h Trend"-->
+            <!--              (click)="showTfhTrendColumn.set(!showTfhTrendColumn())"-->
+            <!--            />-->
             <input
               class="staff-section__buttons_sell_not_in_squad"
               type="button"

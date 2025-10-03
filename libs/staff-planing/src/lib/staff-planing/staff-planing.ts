@@ -16,10 +16,11 @@ import {
   SellingPlayer,
 } from '@kickbase/persistence-management';
 import { TransferMarket } from '../transfer-market/transfer-market';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [NgClass, TransferMarket, MoneyPipe],
+  imports: [NgClass, TransferMarket, MoneyPipe, MatSlideToggle],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],

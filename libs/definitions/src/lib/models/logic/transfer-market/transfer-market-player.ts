@@ -6,6 +6,7 @@ export class TransferMarketPlayer extends BasicPlayer {
   readonly transferExpiringSeconds: number;
   twentyForHoursTrend = 0;
   teamName = '';
+  averagePoints = 0;
 
   constructor(responseData: MarketInformationPlayerResponse) {
     super(responseData.i, responseData.n, responseData.mv, responseData.pos);
