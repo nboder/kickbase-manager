@@ -1,0 +1,22 @@
+.transfer-market-section {
+  &__table {
+    border: 1px solid #ddd;
+    border-spacing: 6px;
+  }
+
+  &__selection-column {
+    text-align: center;
+  }
+
+  &__overpayment {
+    text-align: end;
+  }
+
+  &__buttons {
+    text-align: right;
+  }
+
+  tr:nth-child(even) {
+    background: #f0f0f0;
+  }
+}

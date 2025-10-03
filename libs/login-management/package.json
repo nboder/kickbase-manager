@@ -1,0 +1,12 @@
+{
+  "name": "@kickbase/LoginManagement",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^20.2.0",
+    "@angular/core": "^20.2.0",
+    "@angular/forms": "^20.2.4",
+    "rxjs": "^7.8.2",
+    "@kickbase/definitions": "^0.0.1"
+  },
+  "sideEffects": false
+}

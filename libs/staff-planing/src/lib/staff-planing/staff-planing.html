@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="staff-section">
+    <table class="staff-section__table">
+      <thead>
+        @for (column of visibleColumns(); track column) {
+        <th>{{ column }}</th>
+        }
+      </thead>
+      <tbody>
+        @for (player of mySquad(); track player.playerId) {
+        <tr>
+          <td>{{ $index + 1 }}</td>
+          <td [ngClass]="positionCssClassName(player.position)">
+            {{ kickbasePositionToString(player.position) }}
+          </td>
+          <td
+            [ngClass]="{'staff-section__squad-member': player.isInSquad, 'staff-section__selling-candidate': isPlayerMarkForSelling(player)}"
+          >
+            {{ player.name }}
+          </td>
+          <td class="money-column">{{ player.marketValue | moneyPipe }}</td>
+          @if (showTfhTrendColumn()) {
+          <td class="money-column">
+            {{ player.twentyForHoursDevelopment | moneyPipe }}
+          </td>
+          }
+          <td class="staff-section__action_column">
+            <input
+              type="checkbox"
+              (click)="setPlayerAsSellingCandidate(player, $event)"
+              [checked]="isPlayerMarkForSelling(player)"
+            />
+          </td>
+        </tr>
+        }
+        <tr>
+          <td
+            class="staff-section__buttons"
+            [attr.colspan]="visibleColumns().length"
+          >
+            <input
+              type="button"
+              value="Toggle 24h Trend"
+              (click)="showTfhTrendColumn.set(!showTfhTrendColumn())"
+            />
+            <input
+              class="staff-section__buttons_sell_not_in_squad"
+              type="button"
+              value="All nicht im Squad verkaufen"
+              (click)="sellAllPlayersNotInSquad()"
+            />
+            <input
+              class="staff-section__buttons_reset"
+              type="button"
+              value="Alle Verkäufe zurücksetzen"
+              (click)="resetAllSellingCandidates()"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="money-section">
+    <table class="money-section__table">
+      <thead>
+        <th>Titel</th>
+        <th>Value</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aktuelle Teamvalue</td>
+          <td class="money-column">
+            {{ leagueService.getLeagueInformation().teamValue | moneyPipe }}
+          </td>
+        </tr>
+        <tr>
+          <td>Aktueller Kontostand</td>
+          <td class="money-column">
+            {{ leagueService.getLeagueInformation().budget | moneyPipe }}
+          </td>
+        </tr>
+        <tr>
+          <td>Summer aller Verkäufe</td>
+          <td class="money-column">{{ sumOfSoldPlayers() | moneyPipe }}</td>
+        </tr>
+        <tr>
+          <td>Summer aller Einkäufe</td>
+          <td class="money-column">{{ sumOfBuyingPlayer() | moneyPipe }}</td>
+        </tr>
+        <tr>
+          <td>Finaler Kontostand</td>
+          <td class="money-column">{{ finalAccountBalance() | moneyPipe }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="transfer-section">
+    <lib-transfer-market
+      (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
+    ></lib-transfer-market>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@kickbase/LoginManagement": ["libs/login-management/src/index.ts"],
+      "@kickbase/UserManagement": ["libs/user-management/src/index.ts"],
+      "@kickbase/definitions": ["libs/definitions/src/index.ts"],
+      "@kickbase/login": ["libs/login/src/index.ts"],
+      "@kickbase/persistence-management": [
+        "libs/persistence-management/src/index.ts"
+      ],
+      "@kickbase/staff-planing": ["libs/staff-planing/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
