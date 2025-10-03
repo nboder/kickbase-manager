@@ -15,4 +15,8 @@
   &__buttons {
     text-align: right;
   }
+
+  tr:nth-child(even) {
+    background: #f0f0f0;
+  }
 }

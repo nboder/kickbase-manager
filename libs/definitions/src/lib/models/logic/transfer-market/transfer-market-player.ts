@@ -11,8 +11,12 @@ export class TransferMarketPlayer extends BasicPlayer {
     this.transferExpiringSeconds = responseData.exs;
   }
 
+  transferExpirationInDays(): number {
+    return this.transferExpirationInHours() / 24;
+  }
+
   transferExpirationInHours(): number {
-    return this.transferExpiringSeconds / 60 / 60;
+    return this.transferExpirationInMinutes() / 60;
   }
 
   transferExpirationInMinutes(): number {

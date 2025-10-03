@@ -24,15 +24,20 @@
           {{ transferMarketPlayer.marketValue | moneyPipe }}
         </td>
         @let hours = transferMarketPlayer.transferExpirationInHours(); @if
-        (hours > 1.0) {
+        (hours < showHoursThreshold) {
+        <td class="text-right">
+          {{ transferMarketPlayer.transferExpirationInMinutes() | expirationTime
+          }} min
+        </td>
+        } @else if (hours > showHoursThreshold && hours < showDaysThreshold) {
         <td class="text-right">
           {{ transferMarketPlayer.transferExpirationInHours() | expirationTime
           }} h
         </td>
         } @else {
         <td class="text-right">
-          {{ transferMarketPlayer.transferExpirationInMinutes() | expirationTime
-          }} min
+          {{ transferMarketPlayer.transferExpirationInDays() | expirationTime }}
+          Days
         </td>
         }
         <td class="transfer-market-section__selection-column">

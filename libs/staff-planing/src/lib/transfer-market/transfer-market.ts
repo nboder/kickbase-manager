@@ -31,6 +31,8 @@ export class TransferMarket implements OnInit {
   sumOfBuyingPlayers = output<number>();
 
   transferMarket = signal<TransferMarketPlayer[]>([]);
+  readonly showHoursThreshold = 1.0;
+  readonly showDaysThreshold = 48.0;
 
   @ViewChildren('overpayment')
   private readonly overPayments: QueryList<ElementRef> | undefined;
