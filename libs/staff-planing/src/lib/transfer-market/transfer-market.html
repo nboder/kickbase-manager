@@ -5,9 +5,11 @@
       <th>Position</th>
       <th>Name</th>
       <th>Market Value</th>
-      <th>Expiring hours</th>
+      <th>Team Name</th>
+      <th>24h Trend</th>
       <th>Want to Buy?</th>
       <th>Payment</th>
+      <th>Expiring hours</th>
     </thead>
     <tbody>
       @for (transferMarketPlayer of transferMarket(); track
@@ -22,6 +24,25 @@
         </td>
         <td class="money-column">
           {{ transferMarketPlayer.marketValue | moneyPipe }}
+        </td>
+        <td>{{ transferMarketPlayer.teamName }}</td>
+        <td class="money-column">
+          {{ transferMarketPlayer.twentyForHoursTrend | moneyPipe }}
+        </td>
+        <td class="transfer-market-section__selection-column">
+          <input
+            type="checkbox"
+            (change)="togglePlayerForBuying(transferMarketPlayer, $event)"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            class="transfer-market-section__overpayment"
+            [attr.id]="transferMarketPlayer.playerId"
+            #overpayment
+            [disabled]="isNotPlayerMarkedForBuying(transferMarketPlayer)"
+          />
         </td>
         @let hours = transferMarketPlayer.transferExpirationInHours(); @if
         (hours < showHoursThreshold) {
@@ -40,26 +61,11 @@
           Days
         </td>
         }
-        <td class="transfer-market-section__selection-column">
-          <input
-            type="checkbox"
-            (change)="togglePlayerForBuying(transferMarketPlayer, $event)"
-          />
-        </td>
-        <td>
-          <input
-            type="number"
-            class="transfer-market-section__overpayment"
-            [attr.id]="transferMarketPlayer.playerId"
-            #overpayment
-            [disabled]="isNotPlayerMarkedForBuying(transferMarketPlayer)"
-          />
-        </td>
       </tr>
       }
 
       <tr>
-        <td colspan="7" class="transfer-market-section__buttons">
+        <td colspan="9" class="transfer-market-section__buttons">
           <input
             type="button"
             value="Set Buy-Orders"

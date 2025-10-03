@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   KickbaseApi,
-  MarketInformationResponse,
   PlayerResponseInformation,
   SquadResponseStaff,
 } from '@kickbase/definitions';
@@ -17,15 +16,6 @@ export class StaffPlaningService {
   fetchMyTeam(leagueId: string): Observable<SquadResponseStaff> {
     return this.httpClient.get<SquadResponseStaff>(
       KickbaseApi.mySquadUrl(leagueId)
-    );
-  }
-
-  fetchPlayerDetails(
-    leagueId: string,
-    playerId: string
-  ): Observable<PlayerResponseInformation> {
-    return this.httpClient.get<PlayerResponseInformation>(
-      KickbaseApi.playerInformationUrl(leagueId, playerId)
     );
   }
 }

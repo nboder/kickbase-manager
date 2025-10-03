@@ -1,4 +1,4 @@
-import { StaffResponsePlayer } from '../../api/staff/staff-response-player';
+import { SquadResponsePlayer } from '../../api/squad/squad-response-player';
 import { BasicPlayer } from '../basic-player';
 
 export class Player extends BasicPlayer {
@@ -6,7 +6,7 @@ export class Player extends BasicPlayer {
   readonly twentyForHoursDevelopment: number;
   readonly isInSquad: boolean;
 
-  constructor(responseData: StaffResponsePlayer) {
+  constructor(responseData: SquadResponsePlayer) {
     super(responseData.i, responseData.n, responseData.mv, responseData.pos);
     this.sevenDayPrediction = responseData.sdmvt;
     this.twentyForHoursDevelopment = responseData.tfhmvt;

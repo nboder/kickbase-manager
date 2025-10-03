@@ -57,6 +57,7 @@ export class TransferMarket implements OnInit {
               transferPlayer.playerId,
               transferPlayer
             );
+            this.fetchDetailOfPlayer(transferPlayer.playerId);
             return transferPlayer;
           });
           this.transferMarket.set(
@@ -107,6 +108,27 @@ export class TransferMarket implements OnInit {
       }
     });
     this.sumOfBuyingPlayers.emit(resultValueOfBuyingPlayers);
+  }
+
+  private fetchDetailOfPlayer(playerId: string): void {
+    this.transferMarketService
+      .fetchPlayerDetails(
+        KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID,
+        playerId
+      )
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          const currentPlayer = this.transfermarketLookup.get(playerId);
+          if (currentPlayer) {
+            currentPlayer.teamName = data.tn;
+            currentPlayer.twentyForHoursTrend = data.tfhmvt;
+          }
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 
   private findInputElementForPlayer(playerId: string): ElementRef | undefined {

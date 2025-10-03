@@ -4,6 +4,8 @@ import { MarketInformationPlayerResponse } from '../../api/transfer-market/marke
 export class TransferMarketPlayer extends BasicPlayer {
   readonly firstName: string;
   readonly transferExpiringSeconds: number;
+  twentyForHoursTrend = 0;
+  teamName = '';
 
   constructor(responseData: MarketInformationPlayerResponse) {
     super(responseData.i, responseData.n, responseData.mv, responseData.pos);
