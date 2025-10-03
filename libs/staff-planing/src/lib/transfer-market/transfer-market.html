@@ -14,7 +14,9 @@
     <tbody>
       @for (transferMarketPlayer of transferMarket(); track
       transferMarketPlayer.playerId) {
-      <tr>
+      <tr
+        [class.transfer-market-section__gold-digger]="shouldShowGoldDigger(transferMarketPlayer)"
+      >
         <td>{{ $index + 1 }}</td>
         <td [ngClass]="positionCssClassName(transferMarketPlayer.position)">
           {{ kickbasePositionToString(transferMarketPlayer.position) }}
@@ -66,11 +68,18 @@
 
       <tr>
         <td colspan="9" class="transfer-market-section__buttons">
-          <input
-            type="button"
-            value="Set Buy-Orders"
-            (click)="acceptBuyingOrders()"
-          />
+          <div class="container">
+            <mat-slide-toggle
+              [checked]="showGoldDiggers()"
+              (change)="showGoldDiggers.set($event.checked)"
+              >Gold digger!</mat-slide-toggle
+            >
+            <input
+              type="button"
+              value="Set Buy-Orders"
+              (click)="acceptBuyingOrders()"
+            />
+          </div>
         </td>
       </tr>
     </tbody>

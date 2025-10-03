@@ -1,6 +1,7 @@
 export * from './lib/app-route-definitions';
 export * from './lib/Money-pipe';
 export * from './lib/expiration-time-pipe';
+export * from './lib/transfer-market-definitions';
 
 export * from './lib/kickbase-api';
 export * from './lib/kickbase-league-constants';

@@ -2,6 +2,7 @@
   &__table {
     border: 1px solid #ddd;
     border-spacing: 6px;
+    border-collapse: separate;
   }
 
   &__selection-column {
@@ -13,7 +14,19 @@
   }
 
   &__buttons {
+    background: white !important;
     text-align: right;
+  }
+
+  &__buttons .container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    justify-content: end;
+  }
+
+  &__gold-digger > td {
+    border: 2px solid green !important;
   }
 
   tr:nth-child(even) {

@@ -1,6 +1,5 @@
 import {
   Component,
-  computed,
   ElementRef,
   inject,
   OnInit,
@@ -15,14 +14,16 @@ import {
   kickbasePositionToString,
   KickbaseStaffPosition,
   MoneyPipe,
+  TransferMarketDefinitions,
   TransferMarketPlayer,
 } from '@kickbase/definitions';
 import { TransferMarketService } from '../service/transfer-market-service';
 import { DecimalPipe, NgClass } from '@angular/common';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'lib-transfer-market',
-  imports: [MoneyPipe, ExpirationTimePipe, NgClass],
+  imports: [MoneyPipe, ExpirationTimePipe, NgClass, MatSlideToggle],
   providers: [DecimalPipe, MoneyPipe],
   templateUrl: './transfer-market.html',
   styleUrls: ['./transfer-market.scss', '../shared.scss'],
@@ -31,18 +32,18 @@ export class TransferMarket implements OnInit {
   sumOfBuyingPlayers = output<number>();
 
   transferMarket = signal<TransferMarketPlayer[]>([]);
-  readonly showHoursThreshold = 1.0;
-  readonly showDaysThreshold = 48.0;
 
   @ViewChildren('overpayment')
   private readonly overPayments: QueryList<ElementRef> | undefined;
+  private readonly transferMarketService = inject(TransferMarketService);
+  showGoldDiggers = signal<boolean>(false);
+
+  readonly showHoursThreshold = 1.0;
+  readonly showDaysThreshold = 48.0;
+  private readonly playersMarkedForBuying = new Set<string>([]);
   private readonly transfermarketLookup = new Map<string, TransferMarketPlayer>(
     []
   );
-
-  private readonly transferMarketService = inject(TransferMarketService);
-  private readonly moneyPipe = inject(MoneyPipe);
-  private readonly playersMarkedForBuying = new Set<string>([]);
 
   ngOnInit(): void {
     this.transferMarketService
@@ -129,6 +130,14 @@ export class TransferMarket implements OnInit {
           console.error(err);
         },
       });
+  }
+
+  shouldShowGoldDigger(player: TransferMarketPlayer): boolean {
+    return (
+      this.showGoldDiggers() &&
+      player.twentyForHoursTrend >
+        TransferMarketDefinitions.GoldDiggerThresholdInEuro
+    );
   }
 
   private findInputElementForPlayer(playerId: string): ElementRef | undefined {
