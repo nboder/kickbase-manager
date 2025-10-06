@@ -29,24 +29,24 @@ export class StaffPlaning implements OnInit {
   );
   private readonly staffService = inject(StaffPlaningService);
 
-  private readonly tfhTrendColumnName = '24h Trend';
-  showTfhTrendColumn = signal(false);
-  private readonly columns = [
-    '#',
-    'Position',
-    'Name',
-    'Market Value',
-    this.tfhTrendColumnName,
-    'Want to sell?',
-  ];
+  // private readonly tfhTrendColumnName = '24h Trend';
+  // showTfhTrendColumn = signal(false);
+  // private readonly columns = [
+  //   '#',
+  //   'Position',
+  //   'Name',
+  //   'Market Value',
+  //   this.tfhTrendColumnName,
+  //   'Want to sell?',
+  // ];
 
-  visibleColumns = computed(() => {
-    if (this.showTfhTrendColumn()) {
-      return this.columns;
-    } else {
-      return this.columns.filter((col) => col !== this.tfhTrendColumnName);
-    }
-  });
+  // visibleColumns = computed(() => {
+  //   if (this.showTfhTrendColumn()) {
+  //     return this.columns;
+  //   } else {
+  //     return this.columns.filter((col) => col !== this.tfhTrendColumnName);
+  //   }
+  // });
 
   mySquad = signal<Player[]>([]);
   sumOfSoldPlayers = computed(() => {
@@ -61,6 +61,14 @@ export class StaffPlaning implements OnInit {
   });
 
   sumOfBuyingPlayer = signal<number>(0);
+
+  twentyFourHourMarketValuePredictions = computed(() => {
+    return this.mySquad().map((value) => value.twentyForHoursDevelopment);
+  });
+
+  sevenDayMarketValuePredictions = computed(() => {
+    return this.mySquad().map((value) => value.sevenDayPrediction);
+  });
 
   ngOnInit(): void {
     this.storageManager.loadPlayersToSell();

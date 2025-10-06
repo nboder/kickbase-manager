@@ -8,10 +8,11 @@ import {
 } from '@angular/core';
 import { KickbaseLeagueConstants, MoneyPipe } from '@kickbase/definitions';
 import { ManagerService } from '../service/manager-service';
+import { MarketValueTrend } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-money-overview',
-  imports: [MoneyPipe],
+  imports: [MoneyPipe, MarketValueTrend],
   templateUrl: './MoneyOverview.html',
   styleUrls: ['./MoneyOverview.scss', '../shared.scss'],
 })
@@ -21,10 +22,20 @@ export class MoneyOverview implements OnInit {
   teamValue = signal<number>(0);
   profit = signal<number>(0);
   budget = signal<number>(0);
+  twentyFourHourPredictions = input.required<number[]>();
+  sevenDayPredictions = input.required<number[]>();
 
   finalAccountBalance = computed(() => {
     return this.budget() + this.sumOfSoldPlayers() - this.sumOfBuyingPlayer();
   });
+
+  twentyFourHourPrediction(): number {
+    return this.twentyFourHourPredictions().reduce((a, b) => a + b, 0);
+  }
+
+  sevenDayPrediction(): number {
+    return this.sevenDayPredictions().reduce((a, b) => a + b, 0);
+  }
 
   private readonly managerService = inject(ManagerService);
 

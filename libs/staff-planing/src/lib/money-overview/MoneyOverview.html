@@ -30,3 +30,37 @@
     </tr>
   </tbody>
 </table>
+
+<table class="prediction-section__table">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th class="text-right">Expected Profit</th>
+      <th>Expected Cash</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>in 24 h</td>
+      <td class="money-column">
+        <lib-market-value-trend
+          [marketValueTrend]="twentyFourHourPrediction()"
+        ></lib-market-value-trend>
+      </td>
+      <td class="money-column">
+        {{ finalAccountBalance() + twentyFourHourPrediction() | moneyPipe }}
+      </td>
+    </tr>
+    <tr>
+      <td>in 7 D</td>
+      <td class="money-column">
+        <lib-market-value-trend
+          [marketValueTrend]="sevenDayPrediction()"
+        ></lib-market-value-trend>
+      </td>
+      <td class="money-column">
+        {{ finalAccountBalance() + sevenDayPrediction() | moneyPipe }}
+      </td>
+    </tr>
+  </tbody>
+</table>

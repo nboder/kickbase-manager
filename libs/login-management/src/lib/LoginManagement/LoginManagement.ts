@@ -12,11 +12,12 @@ import {
   LeagueManagementService,
   UserManagementService,
 } from '@kickbase/UserManagement';
+import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'lib-login-management',
-  imports: [FormsModule, MatInput, MatFormField, MatLabel],
+  imports: [FormsModule, MatInput, MatFormField, MatLabel, MatButton],
   templateUrl: './LoginManagement.html',
   styleUrl: './LoginManagement.scss',
 })

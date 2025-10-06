@@ -1,5 +1,13 @@
 .money-section {
   &__table {
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    -webkit-border-horizontal-spacing: 10px;
+  }
+}
+
+.prediction-section {
+  &__table {
     border: 1px solid #ddd;
     -webkit-border-horizontal-spacing: 10px;
   }
