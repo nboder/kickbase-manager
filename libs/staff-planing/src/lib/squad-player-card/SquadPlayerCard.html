@@ -1,19 +1,17 @@
 <mat-card appearance="outlined" class="squad_play_card">
-  <mat-card-content>
-    <div class="squad_play_card__content">
-      <lib-position-marker [position]="position()"></lib-position-marker>
-      <lib-player-name-and-value
-        [playerLastName]="playerName()"
-        [marketValue]="marketValue()"
-      ></lib-player-name-and-value>
-      <div class="squad_play_card__sell_section">
-        <lib-market-value-trend
-          [marketValueTrend]="marketValueTrend()"
-        ></lib-market-value-trend>
-        <mat-checkbox class="squad_play_card__selling_action"
-          >Sell?</mat-checkbox
-        >
-      </div>
+  <div class="squad_play_card__content">
+    <lib-position-marker [position]="position()"></lib-position-marker>
+    <lib-player-name-and-value
+      [playerLastName]="playerName()"
+      [marketValue]="marketValue()"
+    ></lib-player-name-and-value>
+    <div class="squad_play_card__sell_section">
+      <lib-market-value-trend
+        [marketValueTrend]="marketValueTrend()"
+      ></lib-market-value-trend>
+      <mat-checkbox class="squad_play_card__selling_action"
+        >Sell?
+      </mat-checkbox>
     </div>
-  </mat-card-content>
+  </div>
 </mat-card>

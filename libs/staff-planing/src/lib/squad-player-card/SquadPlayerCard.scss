@@ -1,15 +1,12 @@
 @use '@angular/material' as mat;
 
 .squad_play_card {
-  //@include mat.card-overrides((
-  //  outlined-outline-color: red,
-  //));
-
   &__content {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 6px;
+    padding: 2px 4px;
   }
 
   &__sell_section {
@@ -19,11 +16,10 @@
   }
 
   &__selling_action {
-    @include mat.slide-toggle-overrides(
+    @include mat.checkbox-overrides(
       (
-        handle-height: 10px,
-        //track-height: 1.25rem,
-        label-text-line-height: 24px,
+        label-text-size: 1rem,
+        state-layer-size: 0.75rem,
       )
     );
   }
