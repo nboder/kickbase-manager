@@ -2,33 +2,22 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { StaffPlaningService } from '../service/staff-planing-service';
 import {
   KickbaseLeagueConstants,
-  MoneyPipe,
   Player,
   SquadResponseStaff,
 } from '@kickbase/definitions';
-import { CurrencyPipe, NgClass } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import {
   LocalStoragePersistenceManager,
   PersistenceManager,
   SellingPlayer,
 } from '@kickbase/persistence-management';
 import { TransferMarket } from '../transfer-market/transfer-market';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
-import { MatButton } from '@angular/material/button';
-import { PositionMarker } from '@kickbase/PositionMarker';
+import { SquadPlayerCard } from '../squad-player-card/SquadPlayerCard';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [
-    NgClass,
-    TransferMarket,
-    MoneyPipe,
-    MatSlideToggle,
-    MoneyOverview,
-    MatButton,
-    PositionMarker,
-  ],
+  imports: [TransferMarket, MoneyOverview, SquadPlayerCard],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],

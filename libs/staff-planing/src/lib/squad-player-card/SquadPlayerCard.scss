@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+
+.squad_play_card {
+  //@include mat.card-overrides((
+  //  outlined-outline-color: red,
+  //));
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__sell_section {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  &__selling_action {
+    @include mat.slide-toggle-overrides(
+      (
+        handle-height: 10px,
+        //track-height: 1.25rem,
+        label-text-line-height: 24px,
+      )
+    );
+  }
+}

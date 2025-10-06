@@ -1,16 +1,19 @@
-<mat-card>
-  <mat-card-header>
-    <lib-position-marker [position]="position()"></lib-position-marker>
-    <mat-card-title>{{ playerName() }}</mat-card-title>
-    <mat-card-subtitle>{{ marketValue() | moneyPipe }}</mat-card-subtitle>
-  </mat-card-header>
-
+<mat-card appearance="outlined" class="squad_play_card">
   <mat-card-content>
-    This is the Content
+    <div class="squad_play_card__content">
+      <lib-position-marker [position]="position()"></lib-position-marker>
+      <lib-player-name-and-value
+        [playerLastName]="playerName()"
+        [marketValue]="marketValue()"
+      ></lib-player-name-and-value>
+      <div class="squad_play_card__sell_section">
+        <lib-market-value-trend
+          [marketValueTrend]="marketValueTrend()"
+        ></lib-market-value-trend>
+        <mat-checkbox class="squad_play_card__selling_action"
+          >Sell?</mat-checkbox
+        >
+      </div>
+    </div>
   </mat-card-content>
-
-  <mat-card-footer>
-    This is the Footer
-  </mat-card-footer>
-
 </mat-card>

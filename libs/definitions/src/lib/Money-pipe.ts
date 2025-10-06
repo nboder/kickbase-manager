@@ -7,7 +7,10 @@ import { CurrencyPipe } from '@angular/common';
 export class MoneyPipe implements PipeTransform {
   private currencyPipe = inject(CurrencyPipe);
 
-  transform(value: number | string, ...args: unknown[]): unknown {
+  transform(value: number | string | undefined, ...args: unknown[]): unknown {
+    if (value === undefined) {
+      return '- €';
+    }
     return this.currencyPipe.transform(value, 'EUR', 'symbol', '1.0-0');
   }
 }
