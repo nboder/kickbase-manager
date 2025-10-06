@@ -9,6 +9,8 @@ export class KickbaseApi {
   private static readonly MARKET_PATH = 'market';
   private static readonly MANAGERS_PATH = 'managers';
   private static readonly DASHBOARD_PATH = 'dashboard';
+  private static readonly ME_PATH = 'me';
+  private static readonly BUDGET_PATH = 'budget';
 
   static loginUrl(): string {
     return this.buildApiUrl([this.USER_PATH, this.LOGIN_PATH]);
@@ -38,6 +40,15 @@ export class KickbaseApi {
       this.MANAGERS_PATH,
       managerId,
       this.DASHBOARD_PATH,
+    ]);
+  }
+
+  static managerBudgetUrl(managerId: string): string {
+    return this.buildApiUrl([
+      this.LEAGUES_PATH,
+      managerId,
+      this.ME_PATH,
+      this.BUDGET_PATH,
     ]);
   }
 

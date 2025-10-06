@@ -8,7 +8,6 @@ import {
   Player,
   SquadResponseStaff,
 } from '@kickbase/definitions';
-import { LeagueManagementService } from '@kickbase/UserManagement';
 import { CurrencyPipe, NgClass } from '@angular/common';
 import {
   LocalStoragePersistenceManager,
@@ -17,11 +16,11 @@ import {
 } from '@kickbase/persistence-management';
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { ManagerService } from '../service/manager-service';
+import { MoneyOverview } from '../money-overview/MoneyOverview';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [NgClass, TransferMarket, MoneyPipe, MatSlideToggle],
+  imports: [NgClass, TransferMarket, MoneyPipe, MatSlideToggle, MoneyOverview],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],
@@ -31,8 +30,6 @@ export class StaffPlaning implements OnInit {
     LocalStoragePersistenceManager
   );
   private readonly staffService = inject(StaffPlaningService);
-  readonly leagueService = inject(LeagueManagementService);
-  readonly managerService = inject(ManagerService);
 
   private readonly tfhTrendColumnName = '24h Trend';
   showTfhTrendColumn = signal(false);
@@ -66,14 +63,6 @@ export class StaffPlaning implements OnInit {
   });
 
   sumOfBuyingPlayer = signal<number>(0);
-
-  finalAccountBalance = computed(() => {
-    return (
-      this.leagueService.getLeagueInformation().budget +
-      this.sumOfSoldPlayers() -
-      this.sumOfBuyingPlayer()
-    );
-  });
 
   ngOnInit(): void {
     this.storageManager.loadPlayersToSell();

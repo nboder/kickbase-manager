@@ -19,6 +19,7 @@ export * from './lib/models/api/transfer-market/market-information-response';
 export * from './lib/models/api/transfer-market/market-information-player-response';
 
 export * from './lib/models/api/manager/manager-response';
+export * from './lib/models/api/manager/budget-response';
 
 export * from './lib/models/kickbase-staff-position';
 

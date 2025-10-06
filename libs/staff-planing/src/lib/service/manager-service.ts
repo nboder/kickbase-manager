@@ -1,7 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { KickbaseApi, ManagerResponse } from '@kickbase/definitions';
+import {
+  BudgetResponse,
+  KickbaseApi,
+  ManagerResponse,
+} from '@kickbase/definitions';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +19,12 @@ export class ManagerService {
   ): Observable<ManagerResponse> {
     return this.httpClient.get<ManagerResponse>(
       KickbaseApi.managerDashboardUrl(leagueId, managerId)
+    );
+  }
+
+  fetchBudgetInformation(leagueId: string): Observable<BudgetResponse> {
+    return this.httpClient.get<BudgetResponse>(
+      KickbaseApi.managerBudgetUrl(leagueId)
     );
   }
 }

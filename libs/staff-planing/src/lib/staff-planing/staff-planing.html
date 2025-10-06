@@ -3,97 +3,67 @@
     <table class="staff-section__table">
       <thead>
         @for (column of visibleColumns(); track column) {
-        <th>{{ column }}</th>
+          <th>{{ column }}</th>
         }
       </thead>
       <tbody>
         @for (player of mySquad(); track player.playerId) {
-        <tr>
-          <td>{{ $index + 1 }}</td>
-          <td [ngClass]="positionCssClassName(player.position)">
-            {{ kickbasePositionToString(player.position) }}
-          </td>
-          <td
-            [ngClass]="{'staff-section__squad-member': player.isInSquad, 'staff-section__selling-candidate': isPlayerMarkForSelling(player)}"
-          >
-            {{ player.name }}
-          </td>
-          <td class="money-column">{{ player.marketValue | moneyPipe }}</td>
-          @if (showTfhTrendColumn()) {
-          <td class="money-column">
-            {{ player.twentyForHoursDevelopment | moneyPipe }}
-          </td>
-          }
-          <td class="staff-section__action_column">
-            <input
-              type="checkbox"
-              (click)="setPlayerAsSellingCandidate(player, $event)"
-              [checked]="isPlayerMarkForSelling(player)"
-            />
-          </td>
-        </tr>
-        }
-        <tr>
-          <td
-            class="staff-section__buttons"
-            [attr.colspan]="visibleColumns().length"
-          >
-            <mat-slide-toggle
-              [checked]="showTfhTrendColumn()"
-              (change)="showTfhTrendColumn.set(!showTfhTrendColumn())"
+          <tr>
+            <td>{{ $index + 1 }}</td>
+            <td [ngClass]="positionCssClassName(player.position)">
+              {{ kickbasePositionToString(player.position) }}
+            </td>
+            <td
+              [ngClass]="{'staff-section__squad-member': player.isInSquad, 'staff-section__selling-candidate': isPlayerMarkForSelling(player)}"
             >
-              24h Trend
-            </mat-slide-toggle>
-            <input
-              class="staff-section__buttons_sell_not_in_squad"
-              type="button"
-              value="All nicht im Squad verkaufen"
-              (click)="sellAllPlayersNotInSquad()"
-            />
-            <input
-              class="staff-section__buttons_reset"
-              type="button"
-              value="Alle Verkäufe zurücksetzen"
-              (click)="resetAllSellingCandidates()"
-            />
-          </td>
-        </tr>
+              {{ player.name }}
+            </td>
+            <td class="money-column">{{ player.marketValue | moneyPipe }}</td>
+            @if (showTfhTrendColumn()) {
+              <td class="money-column">
+                {{ player.twentyForHoursDevelopment | moneyPipe }}
+              </td>
+            }
+            <td class="staff-section__action_column">
+              <input
+                type="checkbox"
+                (click)="setPlayerAsSellingCandidate(player, $event)"
+                [checked]="isPlayerMarkForSelling(player)"
+              />
+            </td>
+          </tr>
+        }
+      <tr>
+        <td
+          class="staff-section__buttons"
+          [attr.colspan]="visibleColumns().length"
+        >
+          <mat-slide-toggle
+            [checked]="showTfhTrendColumn()"
+            (change)="showTfhTrendColumn.set(!showTfhTrendColumn())"
+          >
+            24h Trend
+          </mat-slide-toggle>
+          <input
+            class="staff-section__buttons_sell_not_in_squad"
+            type="button"
+            value="All nicht im Squad verkaufen"
+            (click)="sellAllPlayersNotInSquad()"
+          />
+          <input
+            class="staff-section__buttons_reset"
+            type="button"
+            value="Alle Verkäufe zurücksetzen"
+            (click)="resetAllSellingCandidates()"
+          />
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
   <div class="money-section">
-    <table class="money-section__table">
-      <thead>
-        <th>Titel</th>
-        <th>Value</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Aktuelle Teamvalue</td>
-          <td class="money-column">
-            {{ leagueService.getLeagueInformation().teamValue | moneyPipe }}
-          </td>
-        </tr>
-        <tr>
-          <td>Aktueller Kontostand</td>
-          <td class="money-column">
-            {{ leagueService.getLeagueInformation().budget | moneyPipe }}
-          </td>
-        </tr>
-        <tr>
-          <td>Summer aller Verkäufe</td>
-          <td class="money-column">{{ sumOfSoldPlayers() | moneyPipe }}</td>
-        </tr>
-        <tr>
-          <td>Summer aller Einkäufe</td>
-          <td class="money-column">{{ sumOfBuyingPlayer() | moneyPipe }}</td>
-        </tr>
-        <tr>
-          <td>Finaler Kontostand</td>
-          <td class="money-column">{{ finalAccountBalance() | moneyPipe }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <lib-money-overview [sumOfSoldPlayers]="sumOfSoldPlayers()"
+                        [sumOfBuyingPlayer]="sumOfBuyingPlayer()"></lib-money-overview>
   </div>
   <div class="transfer-section">
     <lib-transfer-market

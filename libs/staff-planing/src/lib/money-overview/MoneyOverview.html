@@ -1,0 +1,38 @@
+<table class="money-section__table">
+  <thead>
+  <th>Titel</th>
+  <th>Value</th>
+  </thead>
+  <tbody>
+  <tr>
+    <td>Aktueller Teamvalue</td>
+    <td class="money-column">
+      {{ teamValue() | moneyPipe }}
+    </td>
+  </tr>
+  <tr>
+    <td>Profit</td>
+    <td class="money-column">
+      {{ profit() | moneyPipe }}
+    </td>
+  </tr>
+  <tr>
+    <td>Aktueller Kontostand</td>
+    <td class="money-column">
+      {{ budget() | moneyPipe }}
+    </td>
+  </tr>
+  <tr>
+    <td>Summer aller Verkäufe</td>
+    <td class="money-column">{{ sumOfSoldPlayers() | moneyPipe }}</td>
+  </tr>
+  <tr>
+    <td>Summer aller Einkäufe</td>
+    <td class="money-column">{{ sumOfBuyingPlayer() | moneyPipe }}</td>
+  </tr>
+  <tr>
+    <td>Finaler Kontostand</td>
+    <td class="money-column">{{ finalAccountBalance() | moneyPipe }}</td>
+  </tr>
+  </tbody>
+</table>
