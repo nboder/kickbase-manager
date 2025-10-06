@@ -15,29 +15,45 @@
     );
   }
 
+  &__isBeingSold {
+    @include mat.card-overrides(
+      (
+        outlined-container-color: var(--mat-sys-tertiary-container),
+        //outlined-container-color: #ffcccc,
+      )
+    );
+  }
+
   &__content {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 2px 4px;
     gap: 1em;
-  }
 
-  &__sell_section {
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: end;
-    height: 100%;
-    gap: 1em;
-  }
+    &__meta_information {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: stretch;
+      gap: 2px;
+    }
 
-  &__selling_action {
-    @include mat.checkbox-overrides(
-      (
-        label-text-size: 1rem,
-        state-layer-size: 0.75rem,
-      )
-    );
+    &__meta_information_listing {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+      gap: 2px;
+    }
+
+    &__sell_section {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: end;
+      height: 100%;
+      gap: 1em;
+    }
   }
 }

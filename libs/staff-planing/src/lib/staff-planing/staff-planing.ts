@@ -14,10 +14,11 @@ import {
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
 import { SquadPlayerCard } from '../squad-player-card/SquadPlayerCard';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [TransferMarket, MoneyOverview, SquadPlayerCard],
+  imports: [TransferMarket, MoneyOverview, SquadPlayerCard, MatButton],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],
@@ -77,20 +78,15 @@ export class StaffPlaning implements OnInit {
       });
   }
 
-  isPlayerMarkForSelling(player: Player): boolean {
+  isPlayerMarkedForSelling(player: Player): boolean {
     return this.storageManager.containedInPlayersToSell(player.playerId);
   }
 
-  setPlayerAsSellingCandidate(player: Player, event: Event) {
-    const element = event.target as HTMLInputElement;
-    if (element.checked) {
-      this.storageManager.storeSellablePlayer(
-        new SellingPlayer(player.playerId)
-      );
+  playerToggleSellStatus(playerId: string, shouldBeSold: boolean) {
+    if (shouldBeSold) {
+      this.storageManager.storeSellablePlayer(new SellingPlayer(playerId));
     } else {
-      this.storageManager.removeSellablePlayer(
-        new SellingPlayer(player.playerId)
-      );
+      this.storageManager.removeSellablePlayer(new SellingPlayer(playerId));
     }
   }
 
