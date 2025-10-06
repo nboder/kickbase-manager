@@ -2,8 +2,6 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { StaffPlaningService } from '../service/staff-planing-service';
 import {
   KickbaseLeagueConstants,
-  kickbasePositionToString,
-  KickbaseStaffPosition,
   MoneyPipe,
   Player,
   SquadResponseStaff,
@@ -18,6 +16,7 @@ import { TransferMarket } from '../transfer-market/transfer-market';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
 import { MatButton } from '@angular/material/button';
+import { PositionMarker } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-staff-planing',
@@ -28,6 +27,7 @@ import { MatButton } from '@angular/material/button';
     MatSlideToggle,
     MoneyOverview,
     MatButton,
+    PositionMarker,
   ],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
@@ -116,10 +116,4 @@ export class StaffPlaning implements OnInit {
   resetAllSellingCandidates() {
     this.storageManager.clearAllSellablePlayers();
   }
-
-  positionCssClassName(position: KickbaseStaffPosition): string {
-    return 'position__' + kickbasePositionToString(position);
-  }
-
-  protected readonly kickbasePositionToString = kickbasePositionToString;
 }

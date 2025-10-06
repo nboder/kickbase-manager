@@ -18,8 +18,10 @@
         [class.transfer-market-section__gold-digger]="shouldShowGoldDiggerOrPositiveMarketValueTrend(transferMarketPlayer)"
       >
         <td>{{ $index + 1 }}</td>
-        <td [ngClass]="positionCssClassName(transferMarketPlayer.position)">
-          {{ kickbasePositionToString(transferMarketPlayer.position) }}
+        <td>
+          <lib-position-marker
+            [position]="transferMarketPlayer.position"
+          ></lib-position-marker>
         </td>
         <td>
           {{ transferMarketPlayer.firstName + ' ' + transferMarketPlayer.name }}

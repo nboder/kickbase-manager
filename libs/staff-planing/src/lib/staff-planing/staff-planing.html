@@ -10,8 +10,10 @@
         @for (player of mySquad(); track player.playerId) {
         <tr>
           <td>{{ $index + 1 }}</td>
-          <td [ngClass]="positionCssClassName(player.position)">
-            {{ kickbasePositionToString(player.position) }}
+          <td>
+            <lib-position-marker
+              [position]="player.position"
+            ></lib-position-marker>
           </td>
           <td
             [ngClass]="{'staff-section__squad-member': player.isInSquad, 'staff-section__selling-candidate': isPlayerMarkForSelling(player)}"

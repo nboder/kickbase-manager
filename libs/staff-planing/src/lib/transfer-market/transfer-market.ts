@@ -12,20 +12,25 @@ import {
 import {
   ExpirationTimePipe,
   KickbaseLeagueConstants,
-  kickbasePositionToString,
-  KickbaseStaffPosition,
   MoneyPipe,
   TransferMarketDefinitions,
   TransferMarketPlayer,
 } from '@kickbase/definitions';
 import { TransferMarketService } from '../service/transfer-market-service';
-import { DecimalPipe, NgClass } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatButton } from '@angular/material/button';
+import { PositionMarker } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-transfer-market',
-  imports: [MoneyPipe, ExpirationTimePipe, NgClass, MatSlideToggle, MatButton],
+  imports: [
+    MoneyPipe,
+    ExpirationTimePipe,
+    MatSlideToggle,
+    MatButton,
+    PositionMarker,
+  ],
   providers: [DecimalPipe, MoneyPipe],
   templateUrl: './transfer-market.html',
   styleUrls: ['./transfer-market.scss', '../shared.scss'],
@@ -107,12 +112,6 @@ export class TransferMarket implements OnInit {
   isNotPlayerMarkedForBuying(player: TransferMarketPlayer): boolean {
     return !this.playersMarkedForBuying.has(player.playerId);
   }
-
-  positionCssClassName(position: KickbaseStaffPosition): string {
-    return 'position__' + kickbasePositionToString(position);
-  }
-
-  protected readonly kickbasePositionToString = kickbasePositionToString;
 
   acceptBuyingOrders() {
     let resultValueOfBuyingPlayers = 0;

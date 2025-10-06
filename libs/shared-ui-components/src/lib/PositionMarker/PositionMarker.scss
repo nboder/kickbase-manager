@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+
+@mixin position-marker($color) {
+  @include mat.chips-overrides(
+    (
+      outline-color: $color,
+      label-text-color: $color,
+    )
+  );
+}
+
+.position {
+  &__GK {
+    @include position-marker(green);
+  }
+
+  &__DEF {
+    @include position-marker(blue);
+  }
+
+  &__MF {
+    @include position-marker(orange);
+  }
+
+  &__FW {
+    @include position-marker(lightgreen);
+  }
+}
