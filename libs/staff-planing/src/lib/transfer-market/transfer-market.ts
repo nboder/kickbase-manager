@@ -21,10 +21,11 @@ import {
 import { TransferMarketService } from '../service/transfer-market-service';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'lib-transfer-market',
-  imports: [MoneyPipe, ExpirationTimePipe, NgClass, MatSlideToggle],
+  imports: [MoneyPipe, ExpirationTimePipe, NgClass, MatSlideToggle, MatButton],
   providers: [DecimalPipe, MoneyPipe],
   templateUrl: './transfer-market.html',
   styleUrls: ['./transfer-market.scss', '../shared.scss'],
@@ -134,7 +135,6 @@ export class TransferMarket implements OnInit {
       )
       .subscribe({
         next: (data) => {
-          console.log(data);
           const currentPlayer = this.transfermarketLookup.get(playerId);
           if (currentPlayer) {
             currentPlayer.teamName = data.tn;

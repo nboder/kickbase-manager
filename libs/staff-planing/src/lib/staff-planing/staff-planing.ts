@@ -17,10 +17,18 @@ import {
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [NgClass, TransferMarket, MoneyPipe, MatSlideToggle, MoneyOverview],
+  imports: [
+    NgClass,
+    TransferMarket,
+    MoneyPipe,
+    MatSlideToggle,
+    MoneyOverview,
+    MatButton,
+  ],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],
