@@ -1,0 +1,17 @@
+<div class="selling-indicator">
+  @if (showSelling()) {
+  <img
+    ngSrc="assets/selling.svg"
+    alt=""
+    height="{{ size() }}"
+    width="{{ size() }}"
+  />
+  } @else {
+  <img
+    ngSrc="assets/not_selling.svg"
+    alt=""
+    height="{{ size() }}"
+    width="{{ size() }}"
+  />
+  }
+</div>

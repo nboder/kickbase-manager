@@ -1,61 +1,84 @@
 <div class="container">
   <div class="staff-section">
-    <table class="staff-section__table">
-      <thead>
-        @for (column of visibleColumns(); track column) {
-        <th>{{ column }}</th>
-        }
-      </thead>
-      <tbody>
-        @for (player of mySquad(); track player.playerId) {
-        <tr>
-          <td>{{ $index + 1 }}</td>
-          <td>
-            <lib-position-marker
-              [position]="player.position"
-            ></lib-position-marker>
-          </td>
-          <td
-            [ngClass]="{'staff-section__squad-member': player.isInSquad, 'staff-section__selling-candidate': isPlayerMarkForSelling(player)}"
-          >
-            {{ player.name }}
-          </td>
-          <td class="money-column">{{ player.marketValue | moneyPipe }}</td>
-          @if (showTfhTrendColumn()) {
-          <td class="money-column">
-            {{ player.twentyForHoursDevelopment | moneyPipe }}
-          </td>
-          }
-          <td class="staff-section__action_column">
-            <input
-              type="checkbox"
-              (click)="setPlayerAsSellingCandidate(player, $event)"
-              [checked]="isPlayerMarkForSelling(player)"
-            />
-          </td>
-        </tr>
-        }
-        <tr>
-          <td
-            class="staff-section__buttons"
-            [attr.colspan]="visibleColumns().length"
-          >
-            <mat-slide-toggle
-              [checked]="showTfhTrendColumn()"
-              (change)="showTfhTrendColumn.set(!showTfhTrendColumn())"
-            >
-              24h Trend
-            </mat-slide-toggle>
-            <button matButton="tonal" (click)="sellAllPlayersNotInSquad()">
-              Sell not in Squad
-            </button>
-            <button matButton="tonal" (click)="resetAllSellingCandidates()">
-              Reset all Sales
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <!--    <table class="staff-section__table">-->
+    <!--      <thead>-->
+    <!--        @for (column of visibleColumns(); track column) {-->
+    <!--        <th>{{ column }}</th>-->
+    <!--        }-->
+    <!--      </thead>-->
+    <!--      <tbody>-->
+    <!--        @for (player of mySquad(); track player.playerId) {-->
+    <!--        <tr>-->
+    <!--          <td>{{ $index + 1 }}</td>-->
+    <!--          <td>-->
+    <!--            <lib-position-marker-->
+    <!--              [position]="player.position"-->
+    <!--            ></lib-position-marker>-->
+    <!--          </td>-->
+    <!--          <td-->
+    <!--            [ngClass]="{'staff-section__squad-member': player.isInSquad, 'staff-section__selling-candidate': isPlayerMarkForSelling(player)}"-->
+    <!--          >-->
+    <!--            {{ player.name }}-->
+    <!--          </td>-->
+    <!--          <td class="money-column">{{ player.marketValue | moneyPipe }}</td>-->
+    <!--          @if (showTfhTrendColumn()) {-->
+    <!--          <td class="money-column">-->
+    <!--            {{ player.twentyForHoursDevelopment | moneyPipe }}-->
+    <!--          </td>-->
+    <!--          }-->
+    <!--          <td class="staff-section__action_column">-->
+    <!--            <input-->
+    <!--              type="checkbox"-->
+    <!--              (click)="setPlayerAsSellingCandidate(player, $event)"-->
+    <!--              [checked]="isPlayerMarkForSelling(player)"-->
+    <!--            />-->
+    <!--          </td>-->
+    <!--        </tr>-->
+    <!--        }-->
+    <!--        <tr>-->
+    <!--          <td-->
+    <!--            class="staff-section__buttons"-->
+    <!--            [attr.colspan]="visibleColumns().length"-->
+    <!--          >-->
+    <!--            <mat-slide-toggle-->
+    <!--              [checked]="showTfhTrendColumn()"-->
+    <!--              (change)="showTfhTrendColumn.set(!showTfhTrendColumn())"-->
+    <!--            >-->
+    <!--              24h Trend-->
+    <!--            </mat-slide-toggle>-->
+    <!--            <button matButton="tonal" (click)="sellAllPlayersNotInSquad()">-->
+    <!--              Sell not in Squad-->
+    <!--            </button>-->
+    <!--            <button matButton="tonal" (click)="resetAllSellingCandidates()">-->
+    <!--              Reset all Sales-->
+    <!--            </button>-->
+    <!--          </td>-->
+    <!--        </tr>-->
+    <!--      </tbody>-->
+    <!--    </table>-->
+    <div class="staff-card-section">
+      @for (player of mySquad(); track player.playerId) {
+      <lib-squad-player-card
+        [numberOfPlayer]="$index + 1"
+        [playerId]="player.playerId"
+        [playerName]="player.name"
+        [marketValue]="player.marketValue"
+        [marketValueTrend]="player.twentyForHoursDevelopment"
+        [position]="player.position"
+        [isInSquad]="player.isInSquad"
+        [isBeingSold]="isPlayerMarkedForSelling(player)"
+        (playerShouldBeSold)="playerToggleSellStatus(player.playerId, $event)"
+      ></lib-squad-player-card>
+      }
+      <div class="staff-card-section__buttons">
+        <button matButton="tonal" (click)="sellAllPlayersNotInSquad()">
+          Sell not in Squad
+        </button>
+        <button matButton="tonal" (click)="resetAllSellingCandidates()">
+          Reset all Sales
+        </button>
+      </div>
+    </div>
   </div>
   <div class="money-section">
     <lib-money-overview

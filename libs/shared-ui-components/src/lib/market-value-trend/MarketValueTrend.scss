@@ -1,0 +1,23 @@
+@mixin trend($color) {
+  font-size: 0.9rem;
+  color: $color;
+}
+
+.market_value_trend {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  align-items: center;
+
+  &__up {
+    @include trend(green);
+  }
+
+  &__down {
+    @include trend(red);
+  }
+
+  &__neutral {
+    @include trend(black);
+  }
+}

@@ -36,6 +36,18 @@
   }
 }
 
+.staff-card-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  min-width: 250px;
+
+  &__buttons {
+    display: flex;
+    gap: 0.2em;
+  }
+}
+
 th,
 td {
   padding: 2px;

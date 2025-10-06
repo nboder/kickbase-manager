@@ -1,0 +1,16 @@
+.player_name_and_value {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &__name {
+    font-size: 1.15rem;
+    font-weight: bold;
+  }
+
+  &__value_money_section {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}

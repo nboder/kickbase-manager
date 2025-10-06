@@ -5,17 +5,19 @@
     (
       outline-color: $color,
       label-text-color: $color,
+      elevated-container-color: #404040,
+      container-height: 1.25em,
     )
   );
 }
 
 .position {
   &__GK {
-    @include position-marker(green);
+    @include position-marker(#f2f2f2);
   }
 
   &__DEF {
-    @include position-marker(blue);
+    @include position-marker(#80bfff);
   }
 
   &__MF {

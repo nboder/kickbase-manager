@@ -1,1 +1,26 @@
-<p>SquadPlayerCard works!</p>
+<mat-card
+  appearance="outlined"
+  class="squad_play_card"
+  [class.squad_play_card__inSquad]="isInSquad()"
+  [class.squad_play_card__isBeingSold]="isBeingSold()"
+  (click)="playerShouldBeSold.emit(!isBeingSold())"
+>
+  <div class="squad_play_card__content">
+    <div class="squad_play_card__content__meta_information">
+      <lib-position-marker [position]="position()"></lib-position-marker>
+      <div class="squad_play_card__content__meta_information_listing">
+        #{{ numberOfPlayer() }} -
+        <lib-selling-indicator
+          [showSelling]="isBeingSold()"
+        ></lib-selling-indicator>
+      </div>
+    </div>
+    <lib-player-name-and-value
+      [playerLastName]="playerName()"
+      [marketValueTrend]="marketValueTrend()"
+    ></lib-player-name-and-value>
+    <div class="squad_play_card__content__sell_section">
+      <span>{{ marketValue() | moneyPipe }}</span>
+    </div>
+  </div>
+</mat-card>

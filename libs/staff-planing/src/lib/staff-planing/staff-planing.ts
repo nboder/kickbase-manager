@@ -2,33 +2,23 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { StaffPlaningService } from '../service/staff-planing-service';
 import {
   KickbaseLeagueConstants,
-  MoneyPipe,
   Player,
   SquadResponseStaff,
 } from '@kickbase/definitions';
-import { CurrencyPipe, NgClass } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import {
   LocalStoragePersistenceManager,
   PersistenceManager,
   SellingPlayer,
 } from '@kickbase/persistence-management';
 import { TransferMarket } from '../transfer-market/transfer-market';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
+import { SquadPlayerCard } from '../squad-player-card/SquadPlayerCard';
 import { MatButton } from '@angular/material/button';
-import { PositionMarker } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [
-    NgClass,
-    TransferMarket,
-    MoneyPipe,
-    MatSlideToggle,
-    MoneyOverview,
-    MatButton,
-    PositionMarker,
-  ],
+  imports: [TransferMarket, MoneyOverview, SquadPlayerCard, MatButton],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],
@@ -88,20 +78,15 @@ export class StaffPlaning implements OnInit {
       });
   }
 
-  isPlayerMarkForSelling(player: Player): boolean {
+  isPlayerMarkedForSelling(player: Player): boolean {
     return this.storageManager.containedInPlayersToSell(player.playerId);
   }
 
-  setPlayerAsSellingCandidate(player: Player, event: Event) {
-    const element = event.target as HTMLInputElement;
-    if (element.checked) {
-      this.storageManager.storeSellablePlayer(
-        new SellingPlayer(player.playerId)
-      );
+  playerToggleSellStatus(playerId: string, shouldBeSold: boolean) {
+    if (shouldBeSold) {
+      this.storageManager.storeSellablePlayer(new SellingPlayer(playerId));
     } else {
-      this.storageManager.removeSellablePlayer(
-        new SellingPlayer(player.playerId)
-      );
+      this.storageManager.removeSellablePlayer(new SellingPlayer(playerId));
     }
   }
 

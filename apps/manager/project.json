@@ -19,6 +19,11 @@
           {
             "glob": "**/*",
             "input": "apps/manager/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/shared-ui-components/src/assets/",
+            "output": "assets/"
           }
         ],
         "styles": ["apps/manager/src/styles.scss"]
