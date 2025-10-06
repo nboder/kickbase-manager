@@ -1,22 +1,18 @@
 <div class="market_value_trend">
   @switch (determineMarketValueTrend()) { @case (MarketValueTrendEnum.UP) {
-  <img
-    class="market_value_trend__up"
-    ngSrc="assets/trending_up.svg"
-    alt=""
-    height="24"
-    width="24"
-  />
+  <img ngSrc="assets/trending_up.svg" alt="" height="20" width="20" />
   <span class="market_value_trend__up"
     >{{ marketValueTrend() | moneyPipe }}</span
   >
   } @case (MarketValueTrendEnum.DOWN) {
-  <img ngSrc="assets/trending_down.svg" alt="" height="24" width="24" />
+  <img alt="" height="24" width="24" />
   <span class="market_value_trend__down"
     >{{ marketValueTrend() | moneyPipe }}</span
   >
   } @default {
   <img ngSrc="assets/trending_neutral.svg" alt="" height="24" width="24" />
-  <span>{{ marketValueTrend() | moneyPipe }}</span>
+  <span class="market_value_trend__neutral"
+    >{{ marketValueTrend() | moneyPipe }}</span
+  >
   } }
 </div>

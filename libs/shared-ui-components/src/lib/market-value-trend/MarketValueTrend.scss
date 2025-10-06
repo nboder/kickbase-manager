@@ -1,3 +1,8 @@
+@mixin trend($color) {
+  font-size: 0.9rem;
+  color: $color;
+}
+
 .market_value_trend {
   display: flex;
   flex-direction: row;
@@ -5,10 +10,14 @@
   align-items: center;
 
   &__up {
-    color: green;
+    @include trend(green);
   }
 
   &__down {
-    color: red;
+    @include trend(red);
+  }
+
+  &__neutral {
+    @include trend(black);
   }
 }

@@ -1,18 +1,35 @@
 @use '@angular/material' as mat;
 
 .squad_play_card {
+  @include mat.card-overrides(
+    (
+      outlined-outline-width: 2px,
+    )
+  );
+
+  &__inSquad {
+    @include mat.card-overrides(
+      (
+        outlined-outline-color: green,
+      )
+    );
+  }
+
   &__content {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 6px;
     padding: 2px 4px;
+    gap: 1em;
   }
 
   &__sell_section {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: start;
     align-items: end;
+    height: 100%;
+    gap: 1em;
   }
 
   &__selling_action {
