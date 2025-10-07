@@ -3,39 +3,6 @@
   gap: 1em;
 }
 
-.staff-section {
-  margin-bottom: 1rem;
-
-  &__table {
-    border: 1px solid #ddd;
-    border-spacing: 6px;
-  }
-
-  &__selling-candidate {
-    background: lightcoral !important;
-  }
-
-  &__squad-member {
-    background: lightgreen;
-  }
-
-  &__action_column {
-    text-align: center;
-  }
-
-  &__buttons {
-    text-align: right;
-
-    &_reset {
-      margin-left: 0.5rem;
-    }
-
-    &_sell_not_in_squad {
-      margin-left: 0.5rem;
-    }
-  }
-}
-
 .staff-card-section {
   display: flex;
   flex-direction: column;
