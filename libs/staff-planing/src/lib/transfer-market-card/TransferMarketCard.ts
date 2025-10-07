@@ -24,4 +24,15 @@ export class TransferMarketCard {
 
   readonly showHoursThreshold = 1.0;
   readonly showDaysThreshold = 48.0;
+
+  overpayment(): number {
+    return (
+      this.transferMarketPlayer().currentBid -
+      this.transferMarketPlayer().marketValue
+    );
+  }
+
+  showSellingDialog() {
+    console.log('MOEP');
+  }
 }

@@ -15,12 +15,14 @@
         ></lib-selling-indicator>
       </div>
     </div>
-    <lib-player-name-and-value
-      [playerLastName]="playerName()"
-      [marketValueTrend]="marketValueTrend()"
-    ></lib-player-name-and-value>
+    <div class="squad_play_card__content__player_listing">
+      <lib-player-name-and-value
+        [playerLastName]="playerName()"
+        [marketValueTrend]="marketValueTrend()"
+      ></lib-player-name-and-value>
+    </div>
     <div class="squad_play_card__content__sell_section">
-      <span>{{ marketValue() | moneyPipe }}</span>
+      <div class="money-column">{{ marketValue() | moneyPipe }}</div>
     </div>
   </div>
 </mat-card>

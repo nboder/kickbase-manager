@@ -131,6 +131,7 @@ export class TransferMarket implements OnInit {
           if (currentPlayer) {
             currentPlayer.teamName = data.tn;
             currentPlayer.twentyForHoursTrend = data.tfhmvt;
+            currentPlayer.currentBid = 5670000;
           }
         },
         error: (err) => {
