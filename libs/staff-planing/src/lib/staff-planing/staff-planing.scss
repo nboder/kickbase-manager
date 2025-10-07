@@ -3,11 +3,18 @@
   gap: 1em;
 }
 
-.staff-card-section {
+.staff-section {
   display: flex;
   flex-direction: column;
-  gap: 0.4em;
-  min-width: 250px;
+  gap: 0.2em;
+
+  &__card-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    min-width: 250px;
+    overflow-y: scroll;
+  }
 
   &__buttons {
     display: flex;
@@ -15,10 +22,8 @@
   }
 }
 
-th,
-td {
-  padding: 2px;
+.money-section {
 }
 
-.money-section {
+.transfer-section {
 }
