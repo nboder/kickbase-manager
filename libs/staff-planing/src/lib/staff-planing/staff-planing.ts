@@ -29,25 +29,6 @@ export class StaffPlaning implements OnInit {
   );
   private readonly staffService = inject(StaffPlaningService);
 
-  // private readonly tfhTrendColumnName = '24h Trend';
-  // showTfhTrendColumn = signal(false);
-  // private readonly columns = [
-  //   '#',
-  //   'Position',
-  //   'Name',
-  //   'Market Value',
-  //   this.tfhTrendColumnName,
-  //   'Want to sell?',
-  // ];
-
-  // visibleColumns = computed(() => {
-  //   if (this.showTfhTrendColumn()) {
-  //     return this.columns;
-  //   } else {
-  //     return this.columns.filter((col) => col !== this.tfhTrendColumnName);
-  //   }
-  // });
-
   mySquad = signal<Player[]>([]);
   sumOfSoldPlayers = computed(() => {
     const soldPlayer = this.mySquad().filter((mySquadPlayer) =>
