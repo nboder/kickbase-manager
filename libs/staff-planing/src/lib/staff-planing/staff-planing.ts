@@ -63,11 +63,15 @@ export class StaffPlaning implements OnInit {
   sumOfBuyingPlayer = signal<number>(0);
 
   twentyFourHourMarketValuePredictions = computed(() => {
-    return this.mySquad().map((value) => value.twentyForHoursDevelopment);
+    return this.mySquad()
+      .filter((mySquadPlayer) => !this.isPlayerMarkedForSelling(mySquadPlayer))
+      .map((value) => value.twentyForHoursDevelopment);
   });
 
   sevenDayMarketValuePredictions = computed(() => {
-    return this.mySquad().map((value) => value.sevenDayPrediction);
+    return this.mySquad()
+      .filter((mySquadPlayer) => !this.isPlayerMarkedForSelling(mySquadPlayer))
+      .map((value) => value.sevenDayPrediction);
   });
 
   ngOnInit(): void {

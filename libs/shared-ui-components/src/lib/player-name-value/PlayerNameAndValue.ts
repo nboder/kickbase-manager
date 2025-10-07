@@ -1,10 +1,9 @@
 import { Component, input } from '@angular/core';
-import { MoneyPipe } from '@kickbase/definitions';
 import { MarketValueTrend } from '../market-value-trend/MarketValueTrend';
 
 @Component({
   selector: 'lib-player-name-and-value',
-  imports: [MoneyPipe, MarketValueTrend],
+  imports: [MarketValueTrend],
   templateUrl: './PlayerNameAndValue.html',
   styleUrl: './PlayerNameAndValue.scss',
 })
