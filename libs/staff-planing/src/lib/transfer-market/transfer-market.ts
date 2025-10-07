@@ -10,7 +10,6 @@ import {
   ViewChildren,
 } from '@angular/core';
 import {
-  ExpirationTimePipe,
   KickbaseLeagueConstants,
   MoneyPipe,
   TransferMarketDefinitions,
@@ -20,17 +19,11 @@ import { TransferMarketService } from '../service/transfer-market-service';
 import { DecimalPipe } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatButton } from '@angular/material/button';
-import { PositionMarker } from '@kickbase/PositionMarker';
+import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
 
 @Component({
   selector: 'lib-transfer-market',
-  imports: [
-    MoneyPipe,
-    ExpirationTimePipe,
-    MatSlideToggle,
-    MatButton,
-    PositionMarker,
-  ],
+  imports: [MatSlideToggle, MatButton, TransferMarketCard],
   providers: [DecimalPipe, MoneyPipe],
   templateUrl: './transfer-market.html',
   styleUrls: ['./transfer-market.scss', '../shared.scss'],
@@ -138,7 +131,6 @@ export class TransferMarket implements OnInit {
           if (currentPlayer) {
             currentPlayer.teamName = data.tn;
             currentPlayer.twentyForHoursTrend = data.tfhmvt;
-            currentPlayer.averagePoints = data.ap;
           }
         },
         error: (err) => {

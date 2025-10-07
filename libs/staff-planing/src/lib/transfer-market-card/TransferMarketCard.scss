@@ -1,0 +1,32 @@
+.transfer-market-card {
+  min-height: 65px;
+  min-width: 150px;
+
+  &__content {
+    display: flex;
+    padding: 2px 4px;
+
+    &__meta-information {
+      flex-direction: column;
+      justify-content: center;
+      //background: blue;
+      min-width: 75px;
+    }
+
+    &__player-information {
+      flex-direction: column;
+      //background: yellow;
+      flex-grow: 1;
+    }
+
+    &__money-information {
+      flex-direction: column;
+      //background: green;
+      flex-grow: 0.25;
+    }
+  }
+}
+
+.centered-content {
+  text-align: center;
+}

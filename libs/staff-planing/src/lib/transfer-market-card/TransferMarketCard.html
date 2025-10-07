@@ -1,0 +1,42 @@
+<mat-card appearance="outlined" class="transfer-market-card">
+  <div class="transfer-market-card__content">
+    <div class="transfer-market-card__content__meta-information">
+      <div class="centered-content">
+        <lib-position-marker
+          [position]="transferMarketPlayer().position"
+        ></lib-position-marker>
+      </div>
+      <div class="centered-content">
+        {{ transferMarketPlayer().averagePoints }} avg
+      </div>
+      <div class="centered-content">
+        @let hours = transferMarketPlayer().transferExpirationInHours(); @if
+        (hours < showHoursThreshold) { {{
+        transferMarketPlayer().transferExpirationInMinutes() | expirationTime }}
+        min } @else if (hours > showHoursThreshold && hours < showDaysThreshold)
+        { {{ transferMarketPlayer().transferExpirationInHours() | expirationTime
+        }} h } @else { {{ transferMarketPlayer().transferExpirationInDays() |
+        expirationTime }} Days }
+      </div>
+    </div>
+    <div class="transfer-market-card__content__player-information">
+      <div>
+        <lib-player-name-and-value
+          [playerFirstName]="transferMarketPlayer().firstName"
+          [playerLastName]="transferMarketPlayer().name"
+          [marketValueTrend]="transferMarketPlayer().twentyForHoursTrend"
+        ></lib-player-name-and-value>
+      </div>
+      <div>{{ transferMarketPlayer().teamName }}</div>
+    </div>
+    <div class="transfer-market-card__content__money-information">
+      <div class="money-column">
+        {{ transferMarketPlayer().marketValue | moneyPipe }}
+      </div>
+      @if (transferMarketPlayer().currentBid > 0) {
+      <div class="money-column">2</div>
+      <div class="money-column">3</div>
+      }
+    </div>
+  </div>
+</mat-card>

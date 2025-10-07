@@ -14,57 +14,64 @@
     <tbody>
       @for (transferMarketPlayer of shownTransferMarketPlayers(); track
       transferMarketPlayer.playerId) {
-      <tr
-        [class.transfer-market-section__gold-digger]="shouldShowGoldDiggerOrPositiveMarketValueTrend(transferMarketPlayer)"
-      >
-        <td>{{ $index + 1 }}</td>
-        <td>
-          <lib-position-marker
-            [position]="transferMarketPlayer.position"
-          ></lib-position-marker>
+      <!--      <tr-->
+      <!--        [class.transfer-market-section__gold-digger]="shouldShowGoldDiggerOrPositiveMarketValueTrend(transferMarketPlayer)"-->
+      <!--      >-->
+      <!--        <td>{{ $index + 1 }}</td>-->
+      <!--        <td>-->
+      <!--          <lib-position-marker-->
+      <!--            [position]="transferMarketPlayer.position"-->
+      <!--          ></lib-position-marker>-->
+      <!--        </td>-->
+      <!--        <td>-->
+      <!--          {{ transferMarketPlayer.firstName + ' ' + transferMarketPlayer.name }}-->
+      <!--        </td>-->
+      <!--        <td class="money-column">-->
+      <!--          {{ transferMarketPlayer.marketValue | moneyPipe }}-->
+      <!--        </td>-->
+      <!--        <td>{{ transferMarketPlayer.teamName }}</td>-->
+      <!--        <td class="money-column">-->
+      <!--          {{ transferMarketPlayer.twentyForHoursTrend | moneyPipe }}-->
+      <!--        </td>-->
+      <!--        <td class="transfer-market-section__selection-column">-->
+      <!--          <input-->
+      <!--            type="checkbox"-->
+      <!--            (change)="togglePlayerForBuying(transferMarketPlayer, $event)"-->
+      <!--          />-->
+      <!--        </td>-->
+      <!--        <td>-->
+      <!--          <input-->
+      <!--            type="number"-->
+      <!--            class="transfer-market-section__overpayment"-->
+      <!--            [attr.id]="transferMarketPlayer.playerId"-->
+      <!--            #overpayment-->
+      <!--            [disabled]="isNotPlayerMarkedForBuying(transferMarketPlayer)"-->
+      <!--          />-->
+      <!--        </td>-->
+      <!--        @let hours = transferMarketPlayer.transferExpirationInHours(); @if-->
+      <!--        (hours < showHoursThreshold) {-->
+      <!--        <td class="text-right">-->
+      <!--          {{ transferMarketPlayer.transferExpirationInMinutes() | expirationTime-->
+      <!--          }} min-->
+      <!--        </td>-->
+      <!--        } @else if (hours > showHoursThreshold && hours < showDaysThreshold) {-->
+      <!--        <td class="text-right">-->
+      <!--          {{ transferMarketPlayer.transferExpirationInHours() | expirationTime-->
+      <!--          }} h-->
+      <!--        </td>-->
+      <!--        } @else {-->
+      <!--        <td class="text-right">-->
+      <!--          {{ transferMarketPlayer.transferExpirationInDays() | expirationTime }}-->
+      <!--          Days-->
+      <!--        </td>-->
+      <!--        }-->
+      <!--      </tr>-->
+      <tr>
+        <td colspan="9">
+          <lib-transfer-market-card
+            [transferMarketPlayer]="transferMarketPlayer"
+          ></lib-transfer-market-card>
         </td>
-        <td>
-          {{ transferMarketPlayer.firstName + ' ' + transferMarketPlayer.name }}
-        </td>
-        <td class="money-column">
-          {{ transferMarketPlayer.marketValue | moneyPipe }}
-        </td>
-        <td>{{ transferMarketPlayer.teamName }}</td>
-        <td class="money-column">
-          {{ transferMarketPlayer.twentyForHoursTrend | moneyPipe }}
-        </td>
-        <td class="transfer-market-section__selection-column">
-          <input
-            type="checkbox"
-            (change)="togglePlayerForBuying(transferMarketPlayer, $event)"
-          />
-        </td>
-        <td>
-          <input
-            type="number"
-            class="transfer-market-section__overpayment"
-            [attr.id]="transferMarketPlayer.playerId"
-            #overpayment
-            [disabled]="isNotPlayerMarkedForBuying(transferMarketPlayer)"
-          />
-        </td>
-        @let hours = transferMarketPlayer.transferExpirationInHours(); @if
-        (hours < showHoursThreshold) {
-        <td class="text-right">
-          {{ transferMarketPlayer.transferExpirationInMinutes() | expirationTime
-          }} min
-        </td>
-        } @else if (hours > showHoursThreshold && hours < showDaysThreshold) {
-        <td class="text-right">
-          {{ transferMarketPlayer.transferExpirationInHours() | expirationTime
-          }} h
-        </td>
-        } @else {
-        <td class="text-right">
-          {{ transferMarketPlayer.transferExpirationInDays() | expirationTime }}
-          Days
-        </td>
-        }
       </tr>
       }
 

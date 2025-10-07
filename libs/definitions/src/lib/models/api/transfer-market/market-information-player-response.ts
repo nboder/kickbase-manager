@@ -7,6 +7,8 @@ export interface MarketInformationPlayerResponse {
   readonly st: number;
   readonly mvt: number;
   readonly mv: number;
+  readonly p: number;
+  readonly ap: number;
   readonly ofc: number;
   readonly exs: number;
   readonly prc: number;
@@ -14,5 +16,5 @@ export interface MarketInformationPlayerResponse {
   readonly iposl: boolean;
   readonly dt: string; // DateTime
   readonly pim: string; // Player Image
-  readonly prob: number; // Popularity on the market
+  readonly prob: number;
 }
