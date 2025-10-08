@@ -2,6 +2,9 @@
   <div class="transfer-market-section__player-cards">
     @for (transferMarketPlayer of shownTransferMarketPlayers(); track
     transferMarketPlayer.playerId) {
+    <!--      @if (shouldShowMarketValueUpdateBeforePlayer(transferMarketPlayer)) {-->
+    <!--        &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; MV Update &#45;&#45;&#45;&#45;&#45;&#45;-->
+    <!--      }-->
     <lib-transfer-market-card
       [transferMarketPlayer]="transferMarketPlayer"
       (sold)="acceptBuyingOrders()"

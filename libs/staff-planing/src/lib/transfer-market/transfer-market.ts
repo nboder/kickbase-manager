@@ -48,6 +48,9 @@ export class TransferMarket implements OnInit {
     []
   );
 
+  private marketValueUpdateAlreadyShown = signal<boolean>(false);
+  private nextMarketValueUpdate: Date | undefined;
+
   ngOnInit(): void {
     this.transferMarketService
       .fetchTransferMarketInformation(
@@ -64,6 +67,7 @@ export class TransferMarket implements OnInit {
             this.fetchDetailOfPlayer(transferPlayer.playerId);
             return transferPlayer;
           });
+          this.nextMarketValueUpdate = new Date(data.mvud);
           this.transferMarket.set(
             transferData.sort(
               (a, b) => a.transferExpiringSeconds - b.transferExpiringSeconds
@@ -82,6 +86,20 @@ export class TransferMarket implements OnInit {
     }, 0);
     this.sumOfBuyingPlayers.emit(buyingValue);
   }
+
+  // shouldShowMarketValueUpdateBeforePlayer(
+  //   nextPlayer: TransferMarketPlayer
+  // ): boolean {
+  //   let showMarketValueUpdate = false;
+  //   if (!this.marketValueUpdateAlreadyShown() && this.nextMarketValueUpdate) {
+  //     const expiration =
+  //       (Date.now() / 1000) + nextPlayer.transferExpiringSeconds;
+  //     const marketValueUpdate = this.nextMarketValueUpdate.valueOf() / 1000;
+  //     showMarketValueUpdate = marketValueUpdate < expiration;
+  //     this.marketValueUpdateAlreadyShown.set(showMarketValueUpdate);
+  //   }
+  //   return showMarketValueUpdate;
+  // }
 
   private fetchDetailOfPlayer(playerId: string): void {
     this.transferMarketService
