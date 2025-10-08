@@ -4,6 +4,7 @@
     transferMarketPlayer.playerId) {
     <lib-transfer-market-card
       [transferMarketPlayer]="transferMarketPlayer"
+      (sold)="acceptBuyingOrders()"
     ></lib-transfer-market-card>
     }
   </div>
@@ -14,20 +15,5 @@
     >
       Pointing Machines
     </mat-slide-toggle>
-    <mat-slide-toggle
-      [checked]="showPositiveMarketValueTrends()"
-      (change)="showPositiveMarketValueTrends.set($event.checked)"
-    >
-      MV +
-    </mat-slide-toggle>
-    <mat-slide-toggle
-      [checked]="showGoldDiggers()"
-      (change)="showGoldDiggers.set($event.checked)"
-    >
-      Gold digger!
-    </mat-slide-toggle>
-    <button matButton="tonal" (click)="acceptBuyingOrders()">
-      Set Buy-Orders
-    </button>
   </div>
 </div>
