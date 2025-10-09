@@ -1,4 +1,10 @@
 .transfer-market-section {
+  &__player-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+  }
+
   &__table {
     border: 1px solid #ddd;
     border-spacing: 6px;
@@ -23,13 +29,5 @@
     flex-direction: row;
     gap: 0.5em;
     justify-content: end;
-  }
-
-  &__gold-digger > td {
-    border: 2px solid green !important;
-  }
-
-  tr:nth-child(even) {
-    background: #f0f0f0;
   }
 }

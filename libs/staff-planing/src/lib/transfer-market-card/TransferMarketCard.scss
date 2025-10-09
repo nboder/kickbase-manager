@@ -1,0 +1,49 @@
+.transfer-market-card {
+  min-height: 65px;
+  min-width: 320px;
+  max-width: 400px;
+
+  &__content {
+    display: flex;
+    padding: 2px 4px;
+
+    &__meta-information {
+      display: inherit;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+      //background: blue;
+      min-width: 75px;
+    }
+
+    &__player-information {
+      display: inherit;
+      flex-direction: column;
+      justify-content: center;
+      //background: yellow;
+      flex-grow: 1;
+    }
+
+    &__money-information {
+      display: inherit;
+      flex-direction: column;
+      align-items: end;
+      justify-content: center;
+      gap: 2px;
+      flex-grow: 0.25;
+      //background: green;
+    }
+  }
+}
+
+.centered-content {
+  text-align: center;
+}
+
+.bid-value {
+  color: green;
+}
+
+.overpay-value {
+  color: red;
+}

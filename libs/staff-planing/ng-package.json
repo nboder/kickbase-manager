@@ -3,5 +3,6 @@
   "dest": "../../dist/libs/staff-planing",
   "lib": {
     "entryFile": "src/index.ts"
-  }
+  },
+  "assets": ["./src/assets"]
 }

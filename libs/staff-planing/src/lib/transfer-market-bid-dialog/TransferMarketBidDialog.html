@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Bid for {{ data.playerName }}</h2>
+<mat-dialog-content>
+  <div>
+    <div class="market-value">
+      Current MV: {{ data.marketValue | moneyPipe }}
+    </div>
+    <mat-form-field class="bid">
+      <mat-label>Your Bid</mat-label>
+      <input matInput [(ngModel)]="currentBid" type="number" />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton="outlined" (click)="cancelDialog()">Cancel</button>
+  <button matButton="outlined" (click)="clearBidDialog()">Clear Bid</button>
+  <button matButton="filled" cdkFocusInitial (click)="acceptBid()">
+    Set Bid
+  </button>
+</mat-dialog-actions>

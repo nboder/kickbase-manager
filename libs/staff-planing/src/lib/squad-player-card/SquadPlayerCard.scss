@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 
 .squad_play_card {
+  padding: 2px 4px;
   @include mat.card-overrides(
     (
       outlined-outline-width: 2px,
@@ -19,7 +20,6 @@
     @include mat.card-overrides(
       (
         outlined-container-color: var(--mat-sys-tertiary-container),
-        //outlined-container-color: #ffcccc,
       )
     );
   }
@@ -27,15 +27,15 @@
   &__content {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    padding: 2px 4px;
     gap: 1em;
+
+    &__player_listing {
+      flex-grow: 1;
+    }
 
     &__meta_information {
       display: flex;
       flex-direction: column;
-      align-items: start;
-      justify-content: stretch;
       gap: 2px;
     }
 
@@ -49,10 +49,8 @@
 
     &__sell_section {
       display: flex;
+      align-items: center;
       flex-direction: row;
-      justify-content: start;
-      align-items: end;
-      height: 100%;
       gap: 1em;
     }
   }

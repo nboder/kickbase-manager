@@ -1,16 +1,12 @@
 import {
   Component,
   computed,
-  ElementRef,
   inject,
   OnInit,
   output,
-  QueryList,
   signal,
-  ViewChildren,
 } from '@angular/core';
 import {
-  ExpirationTimePipe,
   KickbaseLeagueConstants,
   MoneyPipe,
   TransferMarketDefinitions,
@@ -19,18 +15,11 @@ import {
 import { TransferMarketService } from '../service/transfer-market-service';
 import { DecimalPipe } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { MatButton } from '@angular/material/button';
-import { PositionMarker } from '@kickbase/PositionMarker';
+import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
 
 @Component({
   selector: 'lib-transfer-market',
-  imports: [
-    MoneyPipe,
-    ExpirationTimePipe,
-    MatSlideToggle,
-    MatButton,
-    PositionMarker,
-  ],
+  imports: [MatSlideToggle, TransferMarketCard],
   providers: [DecimalPipe, MoneyPipe],
   templateUrl: './transfer-market.html',
   styleUrls: ['./transfer-market.scss', '../shared.scss'],
@@ -52,19 +41,15 @@ export class TransferMarket implements OnInit {
     }
   });
 
-  @ViewChildren('overpayment')
-  private readonly overPayments: QueryList<ElementRef> | undefined;
   private readonly transferMarketService = inject(TransferMarketService);
-  showGoldDiggers = signal<boolean>(false);
-  showPositiveMarketValueTrends = signal<boolean>(true);
   showOnlyPointMachines = signal<boolean>(false);
 
-  readonly showHoursThreshold = 1.0;
-  readonly showDaysThreshold = 48.0;
-  private readonly playersMarkedForBuying = new Set<string>([]);
-  private readonly transfermarketLookup = new Map<string, TransferMarketPlayer>(
+  private readonly transferMarketLookup = new Map<string, TransferMarketPlayer>(
     []
   );
+
+  private marketValueUpdateAlreadyShown = signal<boolean>(false);
+  private nextMarketValueUpdate: Date | undefined;
 
   ngOnInit(): void {
     this.transferMarketService
@@ -75,13 +60,14 @@ export class TransferMarket implements OnInit {
         next: (data) => {
           const transferData = data.it.map((data) => {
             const transferPlayer = new TransferMarketPlayer(data);
-            this.transfermarketLookup.set(
+            this.transferMarketLookup.set(
               transferPlayer.playerId,
               transferPlayer
             );
             this.fetchDetailOfPlayer(transferPlayer.playerId);
             return transferPlayer;
           });
+          this.nextMarketValueUpdate = new Date(data.mvud);
           this.transferMarket.set(
             transferData.sort(
               (a, b) => a.transferExpiringSeconds - b.transferExpiringSeconds
@@ -94,37 +80,26 @@ export class TransferMarket implements OnInit {
       });
   }
 
-  togglePlayerForBuying(transferredPlayer: TransferMarketPlayer, event: Event) {
-    const element = event.target as HTMLInputElement;
-    if (element.checked) {
-      this.playersMarkedForBuying.add(transferredPlayer.playerId);
-    } else {
-      this.playersMarkedForBuying.delete(transferredPlayer.playerId);
-    }
-    const input = this.findInputElementForPlayer(transferredPlayer.playerId);
-    if (input) {
-      input.nativeElement.value = element.checked
-        ? transferredPlayer.marketValue
-        : '';
-    }
-  }
-
-  isNotPlayerMarkedForBuying(player: TransferMarketPlayer): boolean {
-    return !this.playersMarkedForBuying.has(player.playerId);
-  }
-
   acceptBuyingOrders() {
-    let resultValueOfBuyingPlayers = 0;
-    this.playersMarkedForBuying.forEach((playerId) => {
-      const paymentForPlayer = this.findInputElementForPlayer(playerId);
-      if (paymentForPlayer) {
-        resultValueOfBuyingPlayers += parseInt(
-          paymentForPlayer.nativeElement.value
-        );
-      }
-    });
-    this.sumOfBuyingPlayers.emit(resultValueOfBuyingPlayers);
+    const buyingValue = this.transferMarket().reduce((a, b) => {
+      return a + b.currentBid;
+    }, 0);
+    this.sumOfBuyingPlayers.emit(buyingValue);
   }
+
+  // shouldShowMarketValueUpdateBeforePlayer(
+  //   nextPlayer: TransferMarketPlayer
+  // ): boolean {
+  //   let showMarketValueUpdate = false;
+  //   if (!this.marketValueUpdateAlreadyShown() && this.nextMarketValueUpdate) {
+  //     const expiration =
+  //       (Date.now() / 1000) + nextPlayer.transferExpiringSeconds;
+  //     const marketValueUpdate = this.nextMarketValueUpdate.valueOf() / 1000;
+  //     showMarketValueUpdate = marketValueUpdate < expiration;
+  //     this.marketValueUpdateAlreadyShown.set(showMarketValueUpdate);
+  //   }
+  //   return showMarketValueUpdate;
+  // }
 
   private fetchDetailOfPlayer(playerId: string): void {
     this.transferMarketService
@@ -134,37 +109,15 @@ export class TransferMarket implements OnInit {
       )
       .subscribe({
         next: (data) => {
-          const currentPlayer = this.transfermarketLookup.get(playerId);
+          const currentPlayer = this.transferMarketLookup.get(playerId);
           if (currentPlayer) {
             currentPlayer.teamName = data.tn;
             currentPlayer.twentyForHoursTrend = data.tfhmvt;
-            currentPlayer.averagePoints = data.ap;
           }
         },
         error: (err) => {
           console.error(err);
         },
       });
-  }
-
-  shouldShowGoldDiggerOrPositiveMarketValueTrend(
-    player: TransferMarketPlayer
-  ): boolean {
-    return (
-      (this.showGoldDiggers() &&
-        player.twentyForHoursTrend >
-          TransferMarketDefinitions.GoldDiggerThresholdInEuro) ||
-      (this.showPositiveMarketValueTrends() && player.twentyForHoursTrend > 0)
-    );
-  }
-
-  private findInputElementForPlayer(playerId: string): ElementRef | undefined {
-    if (this.overPayments) {
-      return this.overPayments.find((overpayment) => {
-        return overpayment.nativeElement.id === playerId;
-      });
-    } else {
-      return undefined;
-    }
   }
 }
