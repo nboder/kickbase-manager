@@ -11,9 +11,11 @@
   $topBottomPadding: 4px;
 
   &-tab_group {
-    @include mat.tabs-overrides((
-      container-height: $tabHeight,
-    ));
+    @include mat.tabs-overrides(
+      (
+        container-height: $tabHeight,
+      )
+    );
   }
 
   &-container {
