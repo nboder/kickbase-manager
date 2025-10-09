@@ -1,4 +1,11 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { SquadPlayerCard } from '../squad-player-card/SquadPlayerCard';
 import {
@@ -12,6 +19,7 @@ import {
   PersistenceManager,
   SellingPlayer,
 } from '@kickbase/persistence-management';
+import { ResponsiveView } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-sqaud-view',
@@ -19,7 +27,9 @@ import {
   templateUrl: './squad-view.component.html',
   styleUrl: './squad-view.component.scss',
 })
-export class SquadView implements OnInit {
+export class SquadView implements OnInit, ResponsiveView {
+  showMobileLayout = input<boolean>(false);
+
   sumOfSOldPlayers = computed(() => {
     const soldPlayer = this.mySquad().filter((mySquadPlayer) =>
       this.storageManager.containedInPlayersToSell(mySquadPlayer.playerId)

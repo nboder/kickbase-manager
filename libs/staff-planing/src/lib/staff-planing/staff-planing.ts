@@ -1,12 +1,15 @@
-import { Component, signal, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
 import { SquadView } from '../squad-view/squad-view.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { ViewPortService } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [TransferMarket, MoneyOverview, SquadView],
+  imports: [TransferMarket, MoneyOverview, SquadView, MatTabGroup, MatTab],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],
@@ -14,6 +17,8 @@ import { SquadView } from '../squad-view/squad-view.component';
 export class StaffPlaning {
   @ViewChild(SquadView)
   private squadView: SquadView | undefined;
+
+  viewPortService = inject(ViewPortService);
 
   sumOfBuyingPlayer = signal<number>(0);
 

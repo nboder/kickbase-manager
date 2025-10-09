@@ -1,18 +1,51 @@
+@if (viewPortService.isMobileLayout()) {
+<mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start">
+  <mat-tab label="Transfers">
+    <div class="mobile-container">
+      <lib-transfer-market
+        [showMobileLayout]="viewPortService.isMobileLayout()"
+        (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
+      ></lib-transfer-market>
+    </div>
+  </mat-tab>
+  <mat-tab label="Money">
+    <div class="mobile-container">
+      <lib-money-overview
+        [showMobileLayout]="viewPortService.isMobileLayout()"
+        [sumOfSoldPlayers]="sumOfSoldPlayers()"
+        [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
+        [twentyFourHourPredictions]="predictions24h()"
+        [sevenDayPredictions]="predictions7Days()"
+      ></lib-money-overview>
+    </div>
+  </mat-tab>
+  <mat-tab label="Squad">
+    <div class="mobile-container">
+      <lib-sqaud-view [showMobileLayout]="viewPortService.isMobileLayout()">
+      </lib-sqaud-view>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+} @else {
 <div class="container">
-  <div class="squad-section">
-    <lib-sqaud-view></lib-sqaud-view>
+  <div class="transfer-section">
+    <lib-transfer-market
+      [showMobileLayout]="viewPortService.isMobileLayout()"
+      (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
+    ></lib-transfer-market>
   </div>
   <div class="money-section">
     <lib-money-overview
+      [showMobileLayout]="viewPortService.isMobileLayout()"
       [sumOfSoldPlayers]="sumOfSoldPlayers()"
       [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
       [twentyFourHourPredictions]="predictions24h()"
       [sevenDayPredictions]="predictions7Days()"
     ></lib-money-overview>
   </div>
-  <div class="transfer-section">
-    <lib-transfer-market
-      (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
-    ></lib-transfer-market>
+  <div class="squad-section">
+    <lib-sqaud-view [showMobileLayout]="viewPortService.isMobileLayout()">
+    </lib-sqaud-view>
   </div>
 </div>
+}

@@ -4,27 +4,10 @@
   gap: 1em;
 }
 
-.staff-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2em;
-
-  &__card-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2em;
-    min-width: 250px;
-    overflow-y: scroll;
+.mobile {
+  &-container {
+    padding: 4px 2px 0;
+    justify-content: center;
+    align-items: center;
   }
-
-  &__buttons {
-    display: flex;
-    gap: 0.2em;
-  }
-}
-
-.money-section {
-}
-
-.transfer-section {
 }
