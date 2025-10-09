@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "nx": "nx",
-    "deploy-build": "nx run manager:build:production --output-path docs --base-href=/kickbase-manager"
+    "deploy-build": "nx run manager:build:production --output-path docs --base-href=/kickbase-manager/ --skip-nx-cache"
   },
   "private": true,
   "dependencies": {
