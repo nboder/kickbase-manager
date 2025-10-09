@@ -7,27 +7,30 @@ import { GeneralLeagueInformation } from './general-league-information';
 export class LeagueManagementService {
   private leagueInformation = GeneralLeagueInformation.noLeagueInformation();
   private LEAGUE_INFORMATION_KEY = 'leagueInformation';
+  private AVAILAVLE_LEAGUES_KEY = 'availableLeagues';
 
-  setLeagueInformation(
-    id: string,
-    name: string,
-    budget: number,
-    teamValue: number,
-    placement: number,
-    points: number
-  ) {
-    this.leagueInformation = new GeneralLeagueInformation(
-      id,
-      name,
-      budget,
-      teamValue,
-      placement,
-      points
-    );
-    localStorage.setItem(
-      this.LEAGUE_INFORMATION_KEY,
-      JSON.stringify(this.leagueInformation)
-    );
+  setAvailableLeagues(leagues: GeneralLeagueInformation[]) {
+    localStorage.setItem(this.AVAILAVLE_LEAGUES_KEY, JSON.stringify(leagues));
+  }
+
+  getAvailableLeagues(): GeneralLeagueInformation[] {
+    const leagueInformations = localStorage.getItem(this.AVAILAVLE_LEAGUES_KEY);
+    if (leagueInformations) {
+      const parsedLeagues: GeneralLeagueInformation[] =
+        JSON.parse(leagueInformations);
+      return parsedLeagues.map((value) => {
+        return new GeneralLeagueInformation(
+          value.id,
+          value.name,
+          value.budget,
+          value.teamValue,
+          value.placement,
+          value.points
+        );
+      });
+    } else {
+      return [];
+    }
   }
 
   getLeagueInformation(): GeneralLeagueInformation {

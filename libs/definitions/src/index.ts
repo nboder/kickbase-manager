@@ -4,7 +4,6 @@ export * from './lib/expiration-time-pipe';
 export * from './lib/transfer-market-definitions';
 
 export * from './lib/kickbase-api';
-export * from './lib/kickbase-league-constants';
 
 export * from './lib/models/api/login/login-request';
 export * from './lib/models/api/login/login-response';

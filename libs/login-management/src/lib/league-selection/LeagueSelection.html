@@ -1,19 +1,21 @@
 <div class="league-selection__container">
+  <h2>Select your League!</h2>
+  @for (league of availableLeagues(); track league.id) {
   <mat-card class="league-selection__league">
     <mat-card-header>
-      <mat-card-title>{{ currentLeague().name }}</mat-card-title>
+      <mat-card-title>{{ league.name }}</mat-card-title>
       <mat-card-subtitle
-        >#{{ currentLeague().placement }} - {{ currentLeague().points }}
-        Pts</mat-card-subtitle
-      >
+        >#{{ league.placement }} - {{ league.points }} Pts
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions align="end">
       <a
         matButton
         [routerLink]="['/', AppRouteDefinitions.STAFF_MANAGEMENT]"
-        [queryParams]="{leagueId: currentLeague().id}"
+        [queryParams]="{leagueId: league.id}"
         >Select League</a
       >
     </mat-card-actions>
   </mat-card>
+  }
 </div>

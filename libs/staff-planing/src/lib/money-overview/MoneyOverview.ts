@@ -6,9 +6,10 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { KickbaseLeagueConstants, MoneyPipe } from '@kickbase/definitions';
+import { MoneyPipe } from '@kickbase/definitions';
 import { ManagerService } from '../service/manager-service';
 import { MarketValueTrend, ResponsiveView } from '@kickbase/PositionMarker';
+import { UserManagementService } from '@kickbase/UserManagement';
 
 @Component({
   selector: 'lib-money-overview',
@@ -32,6 +33,8 @@ export class MoneyOverview implements OnInit, ResponsiveView {
     return this.budget() + this.sumOfSoldPlayers() - this.sumOfBuyingPlayer();
   });
 
+  private userService = inject(UserManagementService);
+
   twentyFourHourPrediction(): number {
     return this.twentyFourHourPredictions().reduce((a, b) => a + b, 0);
   }
@@ -46,7 +49,7 @@ export class MoneyOverview implements OnInit, ResponsiveView {
     this.managerService
       .fetchManagerInformation(
         this.selectedLeagueId(),
-        KickbaseLeagueConstants.BOB_USER_ID
+        this.userService.getCurrentUser().id
       )
       .subscribe({
         next: (data) => {

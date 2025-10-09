@@ -8,7 +8,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  KickbaseLeagueConstants,
   MoneyPipe,
   TransferMarketDefinitions,
   TransferMarketPlayer,

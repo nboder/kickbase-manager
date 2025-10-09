@@ -1,14 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { KickbaseLoginService } from '../management/kickbase-login-service';
-import {
-  AppRouteDefinitions,
-  KickbaseLeagueConstants,
-  LoginResponse,
-} from '@kickbase/definitions';
+import { AppRouteDefinitions, LoginResponse } from '@kickbase/definitions';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import {
   CurrentUser,
+  GeneralLeagueInformation,
   LeagueManagementService,
   UserManagementService,
 } from '@kickbase/UserManagement';
@@ -21,7 +18,7 @@ import { Router } from '@angular/router';
   templateUrl: './LoginManagement.html',
   styleUrl: './LoginManagement.scss',
 })
-export class LoginManagement {
+export class LoginManagement implements OnInit {
   username = signal<string>('');
   password = signal<string>('');
 
@@ -29,6 +26,12 @@ export class LoginManagement {
   private readonly userService = inject(UserManagementService);
   private readonly leagueService = inject(LeagueManagementService);
   private readonly router = inject(Router);
+
+  ngOnInit(): void {
+    if (this.userService.isUserLoggedIn()) {
+      this.navigateAfterSuccessFullLogin();
+    }
+  }
 
   loginUser() {
     this.loginService.login(this.username(), this.password()).subscribe({
@@ -41,27 +44,28 @@ export class LoginManagement {
             loginResponse.tknex
           )
         );
-        const currentLeague = loginResponse.srvl.find(
-          (value) =>
-            value.id == KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID
+        const leagues = loginResponse.srvl;
+        this.leagueService.setAvailableLeagues(
+          leagues.map((value) => {
+            return new GeneralLeagueInformation(
+              value.id,
+              value.name,
+              value.lm.budget,
+              value.lm.teamValue,
+              value.lm.placement,
+              value.lm.points
+            );
+          })
         );
-        if (currentLeague) {
-          this.leagueService.setLeagueInformation(
-            currentLeague.id,
-            currentLeague.name,
-            currentLeague.lm.budget,
-            currentLeague.lm.teamValue,
-            currentLeague.lm.placement,
-            currentLeague.lm.points
-          );
-        } else {
-          console.error("League wasn't found. It is hardcoded!");
-        }
-        this.router.navigateByUrl(AppRouteDefinitions.LEAGUE_SELECTION);
+        this.navigateAfterSuccessFullLogin();
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+
+  private navigateAfterSuccessFullLogin() {
+    this.router.navigateByUrl(AppRouteDefinitions.LEAGUE_SELECTION);
   }
 }

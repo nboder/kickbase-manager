@@ -33,5 +33,9 @@ export class LeagueSelection {
     return this.leagueManagementService.getLeagueInformation();
   });
 
+  availableLeagues = computed(() => {
+    return this.leagueManagementService.getAvailableLeagues();
+  });
+
   protected readonly AppRouteDefinitions = AppRouteDefinitions;
 }

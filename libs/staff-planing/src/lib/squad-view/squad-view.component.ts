@@ -8,11 +8,7 @@ import {
 } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { SquadPlayerCard } from '../squad-player-card/SquadPlayerCard';
-import {
-  KickbaseLeagueConstants,
-  Player,
-  SquadResponseStaff,
-} from '@kickbase/definitions';
+import { Player, SquadResponseStaff } from '@kickbase/definitions';
 import { StaffPlaningService } from '../service/staff-planing-service';
 import {
   LocalStoragePersistenceManager,
