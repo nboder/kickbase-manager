@@ -1,35 +1,13 @@
 <div class="container">
-  <div class="staff-section">
-    <div class="staff-section__card-section">
-      @for (player of mySquad(); track player.playerId) {
-      <lib-squad-player-card
-        [numberOfPlayer]="$index + 1"
-        [playerId]="player.playerId"
-        [playerName]="player.name"
-        [marketValue]="player.marketValue"
-        [marketValueTrend]="player.twentyForHoursDevelopment"
-        [position]="player.position"
-        [isInSquad]="player.isInSquad"
-        [isBeingSold]="isPlayerMarkedForSelling(player)"
-        (playerShouldBeSold)="playerToggleSellStatus(player.playerId, $event)"
-      ></lib-squad-player-card>
-      }
-    </div>
-    <div class="staff-section__buttons">
-      <button matButton="tonal" (click)="sellAllPlayersNotInSquad()">
-        Sell not in Squad
-      </button>
-      <button matButton="tonal" (click)="resetAllSellingCandidates()">
-        Reset all Sales
-      </button>
-    </div>
+  <div class="squad-section">
+    <lib-sqaud-view></lib-sqaud-view>
   </div>
   <div class="money-section">
     <lib-money-overview
       [sumOfSoldPlayers]="sumOfSoldPlayers()"
       [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
-      [twentyFourHourPredictions]="twentyFourHourMarketValuePredictions()"
-      [sevenDayPredictions]="sevenDayMarketValuePredictions()"
+      [twentyFourHourPredictions]="predictions24h()"
+      [sevenDayPredictions]="predictions7Days()"
     ></lib-money-overview>
   </div>
   <div class="transfer-section">

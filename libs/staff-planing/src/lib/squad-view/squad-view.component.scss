@@ -1,10 +1,4 @@
-.container {
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
-}
-
-.staff-section {
+.squad-section {
   display: flex;
   flex-direction: column;
   gap: 0.2em;
@@ -14,17 +8,10 @@
     flex-direction: column;
     gap: 0.2em;
     min-width: 250px;
-    overflow-y: scroll;
   }
 
   &__buttons {
     display: flex;
     gap: 0.2em;
   }
-}
-
-.money-section {
-}
-
-.transfer-section {
 }
