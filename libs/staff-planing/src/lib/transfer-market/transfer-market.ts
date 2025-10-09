@@ -2,6 +2,7 @@ import {
   Component,
   computed,
   inject,
+  input,
   OnInit,
   output,
   signal,
@@ -16,6 +17,7 @@ import { TransferMarketService } from '../service/transfer-market-service';
 import { DecimalPipe } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
+import { ResponsiveView } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-transfer-market',
@@ -24,7 +26,9 @@ import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
   templateUrl: './transfer-market.html',
   styleUrls: ['./transfer-market.scss', '../shared.scss'],
 })
-export class TransferMarket implements OnInit {
+export class TransferMarket implements OnInit, ResponsiveView {
+  showMobileLayout = input<boolean>(false);
+
   sumOfBuyingPlayers = output<number>();
 
   private transferMarket = signal<TransferMarketPlayer[]>([]);

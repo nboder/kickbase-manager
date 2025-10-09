@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { KickbaseLeagueConstants, MoneyPipe } from '@kickbase/definitions';
 import { ManagerService } from '../service/manager-service';
-import { MarketValueTrend } from '@kickbase/PositionMarker';
+import { MarketValueTrend, ResponsiveView } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-money-overview',
@@ -16,7 +16,9 @@ import { MarketValueTrend } from '@kickbase/PositionMarker';
   templateUrl: './MoneyOverview.html',
   styleUrls: ['./MoneyOverview.scss', '../shared.scss'],
 })
-export class MoneyOverview implements OnInit {
+export class MoneyOverview implements OnInit, ResponsiveView {
+  showMobileLayout = input<boolean>(false);
+
   sumOfSoldPlayers = input.required<number>();
   sumOfBuyingPlayer = input.required<number>();
   teamValue = signal<number>(0);

@@ -1,29 +1,27 @@
+@use '@angular/material' as mat;
+
 .container {
   display: flex;
+  flex-direction: row;
   gap: 1em;
 }
 
-.staff-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2em;
+.mobile {
+  $tabHeight: 3.5em;
+  $topBottomPadding: 4px;
 
-  &__card-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2em;
-    min-width: 250px;
-    overflow-y: scroll;
+  &-tab_group {
+    @include mat.tabs-overrides(
+      (
+        container-height: $tabHeight,
+      )
+    );
   }
 
-  &__buttons {
-    display: flex;
-    gap: 0.2em;
+  &-container {
+    padding: 4px 2px 0;
+    justify-content: center;
+    align-items: center;
+    height: calc(100dvh - #{$tabHeight} - calc(3 * $topBottomPadding));
   }
-}
-
-.money-section {
-}
-
-.transfer-section {
 }

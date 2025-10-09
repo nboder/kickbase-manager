@@ -1,97 +1,48 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { StaffPlaningService } from '../service/staff-planing-service';
-import {
-  KickbaseLeagueConstants,
-  Player,
-  SquadResponseStaff,
-} from '@kickbase/definitions';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import {
-  LocalStoragePersistenceManager,
-  PersistenceManager,
-  SellingPlayer,
-} from '@kickbase/persistence-management';
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
-import { SquadPlayerCard } from '../squad-player-card/SquadPlayerCard';
-import { MatButton } from '@angular/material/button';
+import { SquadView } from '../squad-view/squad-view.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { ViewPortService } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [TransferMarket, MoneyOverview, SquadPlayerCard, MatButton],
+  imports: [TransferMarket, MoneyOverview, SquadView, MatTabGroup, MatTab],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],
 })
-export class StaffPlaning implements OnInit {
-  private readonly storageManager: PersistenceManager = inject(
-    LocalStoragePersistenceManager
-  );
-  private readonly staffService = inject(StaffPlaningService);
+export class StaffPlaning {
+  @ViewChild(SquadView)
+  private squadView: SquadView | undefined;
 
-  mySquad = signal<Player[]>([]);
-  sumOfSoldPlayers = computed(() => {
-    const soldPlayer = this.mySquad().filter((mySquadPlayer) =>
-      this.storageManager.containedInPlayersToSell(mySquadPlayer.playerId)
-    );
-    let sumOfSellingPlayers = 0;
-    soldPlayer.forEach((player) => {
-      sumOfSellingPlayers += player.marketValue;
-    });
-    return sumOfSellingPlayers;
-  });
+  viewPortService = inject(ViewPortService);
 
   sumOfBuyingPlayer = signal<number>(0);
 
-  twentyFourHourMarketValuePredictions = computed(() => {
-    return this.mySquad()
-      .filter((mySquadPlayer) => !this.isPlayerMarkedForSelling(mySquadPlayer))
-      .map((value) => value.twentyForHoursDevelopment);
-  });
-
-  sevenDayMarketValuePredictions = computed(() => {
-    return this.mySquad()
-      .filter((mySquadPlayer) => !this.isPlayerMarkedForSelling(mySquadPlayer))
-      .map((value) => value.sevenDayPrediction);
-  });
-
-  ngOnInit(): void {
-    this.storageManager.loadPlayersToSell();
-    this.staffService
-      .fetchMyTeam(KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID.toString())
-      .subscribe({
-        next: (data: SquadResponseStaff) => {
-          const players = data.it.map((value) => new Player(value));
-          const sortedPlayers = players.sort((a, b) => a.position - b.position);
-          this.mySquad.set(sortedPlayers);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-  }
-
-  isPlayerMarkedForSelling(player: Player): boolean {
-    return this.storageManager.containedInPlayersToSell(player.playerId);
-  }
-
-  playerToggleSellStatus(playerId: string, shouldBeSold: boolean) {
-    if (shouldBeSold) {
-      this.storageManager.storeSellablePlayer(new SellingPlayer(playerId));
+  sumOfSoldPlayers(): number {
+    if (this.squadView) {
+      return this.squadView.sumOfSOldPlayers();
     } else {
-      this.storageManager.removeSellablePlayer(new SellingPlayer(playerId));
+      return 0;
     }
   }
 
-  sellAllPlayersNotInSquad() {
-    this.mySquad().forEach((player) => {
-      if (!player.isInSquad) {
-        this.storageManager.storeSellablePlayer(player);
-      }
-    });
+  predictions24h(): number[] {
+    if (this.squadView) {
+      return this.squadView.twentyFourHourMarketValuePredictions();
+    } else {
+      return [];
+    }
   }
 
-  resetAllSellingCandidates() {
-    this.storageManager.clearAllSellablePlayers();
+  predictions7Days(): number[] {
+    if (this.squadView) {
+      return this.squadView.sevenDayMarketValuePredictions();
+    } else {
+      return [];
+    }
   }
 }

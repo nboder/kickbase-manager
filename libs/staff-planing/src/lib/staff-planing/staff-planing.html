@@ -1,40 +1,55 @@
+@if (viewPortService.isMobileLayout()) {
+<mat-tab-group
+  class="mobile-tab_group"
+  mat-stretch-tabs="true"
+  mat-align-tabs="start"
+>
+  <mat-tab label="Transfers">
+    <div class="mobile-container">
+      <lib-transfer-market
+        [showMobileLayout]="viewPortService.isMobileLayout()"
+        (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
+      ></lib-transfer-market>
+    </div>
+  </mat-tab>
+  <mat-tab label="Money">
+    <div class="mobile-container">
+      <lib-money-overview
+        [showMobileLayout]="viewPortService.isMobileLayout()"
+        [sumOfSoldPlayers]="sumOfSoldPlayers()"
+        [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
+        [twentyFourHourPredictions]="predictions24h()"
+        [sevenDayPredictions]="predictions7Days()"
+      ></lib-money-overview>
+    </div>
+  </mat-tab>
+  <mat-tab label="Squad">
+    <div class="mobile-container">
+      <lib-sqaud-view [showMobileLayout]="viewPortService.isMobileLayout()">
+      </lib-sqaud-view>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+} @else {
 <div class="container">
-  <div class="staff-section">
-    <div class="staff-section__card-section">
-      @for (player of mySquad(); track player.playerId) {
-      <lib-squad-player-card
-        [numberOfPlayer]="$index + 1"
-        [playerId]="player.playerId"
-        [playerName]="player.name"
-        [marketValue]="player.marketValue"
-        [marketValueTrend]="player.twentyForHoursDevelopment"
-        [position]="player.position"
-        [isInSquad]="player.isInSquad"
-        [isBeingSold]="isPlayerMarkedForSelling(player)"
-        (playerShouldBeSold)="playerToggleSellStatus(player.playerId, $event)"
-      ></lib-squad-player-card>
-      }
-    </div>
-    <div class="staff-section__buttons">
-      <button matButton="tonal" (click)="sellAllPlayersNotInSquad()">
-        Sell not in Squad
-      </button>
-      <button matButton="tonal" (click)="resetAllSellingCandidates()">
-        Reset all Sales
-      </button>
-    </div>
-  </div>
-  <div class="money-section">
-    <lib-money-overview
-      [sumOfSoldPlayers]="sumOfSoldPlayers()"
-      [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
-      [twentyFourHourPredictions]="twentyFourHourMarketValuePredictions()"
-      [sevenDayPredictions]="sevenDayMarketValuePredictions()"
-    ></lib-money-overview>
-  </div>
   <div class="transfer-section">
     <lib-transfer-market
+      [showMobileLayout]="viewPortService.isMobileLayout()"
       (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
     ></lib-transfer-market>
   </div>
+  <div class="money-section">
+    <lib-money-overview
+      [showMobileLayout]="viewPortService.isMobileLayout()"
+      [sumOfSoldPlayers]="sumOfSoldPlayers()"
+      [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
+      [twentyFourHourPredictions]="predictions24h()"
+      [sevenDayPredictions]="predictions7Days()"
+    ></lib-money-overview>
+  </div>
+  <div class="squad-section">
+    <lib-sqaud-view [showMobileLayout]="viewPortService.isMobileLayout()">
+    </lib-sqaud-view>
+  </div>
 </div>
+}
