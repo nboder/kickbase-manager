@@ -1,0 +1,14 @@
+.league-selection {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    min-width: 30%;
+    max-width: 500px;
+    margin: 5% auto;
+  }
+
+  &__league {
+    margin-bottom: 1em;
+  }
+}

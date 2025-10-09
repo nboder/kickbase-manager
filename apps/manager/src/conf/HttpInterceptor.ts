@@ -18,7 +18,7 @@ export const headerInterceptor: HttpInterceptorFn = (
     const userService = inject(UserManagementService);
     modifiedHeaders = modifiedHeaders.set(
       'Authorization',
-      `Bearer ${sessionStorage.getItem(userService.TOKEN_SESSION_KEY)}`
+      `Bearer ${userService.getUserAccessToken()}`
     );
   }
   const modifiedReq = req.clone({

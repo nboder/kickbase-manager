@@ -1,4 +1,4 @@
-@if (viewPortService.isMobileLayout()) {
+@if (selectedLeaguedId()) { @if (viewPortService.isMobileLayout()) {
 <mat-tab-group
   class="mobile-tab_group"
   mat-stretch-tabs="true"
@@ -7,6 +7,7 @@
   <mat-tab label="Transfers">
     <div class="mobile-container">
       <lib-transfer-market
+        [selectedLeagueId]="selectedLeaguedId()"
         [showMobileLayout]="viewPortService.isMobileLayout()"
         (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
       ></lib-transfer-market>
@@ -15,6 +16,7 @@
   <mat-tab label="Money">
     <div class="mobile-container">
       <lib-money-overview
+        [selectedLeagueId]="selectedLeaguedId()"
         [showMobileLayout]="viewPortService.isMobileLayout()"
         [sumOfSoldPlayers]="sumOfSoldPlayers()"
         [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
@@ -25,7 +27,10 @@
   </mat-tab>
   <mat-tab label="Squad">
     <div class="mobile-container">
-      <lib-sqaud-view [showMobileLayout]="viewPortService.isMobileLayout()">
+      <lib-sqaud-view
+        [selectedLeagueId]="selectedLeaguedId()"
+        [showMobileLayout]="viewPortService.isMobileLayout()"
+      >
       </lib-sqaud-view>
     </div>
   </mat-tab>
@@ -34,12 +39,14 @@
 <div class="container">
   <div class="transfer-section">
     <lib-transfer-market
+      [selectedLeagueId]="selectedLeaguedId()"
       [showMobileLayout]="viewPortService.isMobileLayout()"
       (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
     ></lib-transfer-market>
   </div>
   <div class="money-section">
     <lib-money-overview
+      [selectedLeagueId]="selectedLeaguedId()"
       [showMobileLayout]="viewPortService.isMobileLayout()"
       [sumOfSoldPlayers]="sumOfSoldPlayers()"
       [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
@@ -48,8 +55,13 @@
     ></lib-money-overview>
   </div>
   <div class="squad-section">
-    <lib-sqaud-view [showMobileLayout]="viewPortService.isMobileLayout()">
+    <lib-sqaud-view
+      [selectedLeagueId]="selectedLeaguedId()"
+      [showMobileLayout]="viewPortService.isMobileLayout()"
+    >
     </lib-sqaud-view>
   </div>
 </div>
+} } @else {
+<div>You did something you shouldn't do - nanana</div>
 }

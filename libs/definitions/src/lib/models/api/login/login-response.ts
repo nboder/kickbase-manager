@@ -5,4 +5,5 @@ export interface LoginResponse {
   readonly u: LoginResponseUser;
   readonly srvl: [LoginResponseLeague];
   readonly tkn: string;
+  readonly tknex: string;
 }

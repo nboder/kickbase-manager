@@ -6,9 +6,10 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { KickbaseLeagueConstants, MoneyPipe } from '@kickbase/definitions';
+import { MoneyPipe } from '@kickbase/definitions';
 import { ManagerService } from '../service/manager-service';
 import { MarketValueTrend, ResponsiveView } from '@kickbase/PositionMarker';
+import { UserManagementService } from '@kickbase/UserManagement';
 
 @Component({
   selector: 'lib-money-overview',
@@ -18,18 +19,21 @@ import { MarketValueTrend, ResponsiveView } from '@kickbase/PositionMarker';
 })
 export class MoneyOverview implements OnInit, ResponsiveView {
   showMobileLayout = input<boolean>(false);
-
+  selectedLeagueId = input.required<string>();
   sumOfSoldPlayers = input.required<number>();
   sumOfBuyingPlayer = input.required<number>();
+  twentyFourHourPredictions = input.required<number[]>();
+  sevenDayPredictions = input.required<number[]>();
+
   teamValue = signal<number>(0);
   profit = signal<number>(0);
   budget = signal<number>(0);
-  twentyFourHourPredictions = input.required<number[]>();
-  sevenDayPredictions = input.required<number[]>();
 
   finalAccountBalance = computed(() => {
     return this.budget() + this.sumOfSoldPlayers() - this.sumOfBuyingPlayer();
   });
+
+  private userService = inject(UserManagementService);
 
   twentyFourHourPrediction(): number {
     return this.twentyFourHourPredictions().reduce((a, b) => a + b, 0);
@@ -44,8 +48,8 @@ export class MoneyOverview implements OnInit, ResponsiveView {
   ngOnInit(): void {
     this.managerService
       .fetchManagerInformation(
-        KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID,
-        KickbaseLeagueConstants.BOB_USER_ID
+        this.selectedLeagueId(),
+        this.userService.getCurrentUser().id
       )
       .subscribe({
         next: (data) => {
@@ -56,7 +60,7 @@ export class MoneyOverview implements OnInit, ResponsiveView {
       });
 
     this.managerService
-      .fetchBudgetInformation(KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID)
+      .fetchBudgetInformation(this.selectedLeagueId())
       .subscribe({
         next: (data) => {
           this.budget.set(data.b);

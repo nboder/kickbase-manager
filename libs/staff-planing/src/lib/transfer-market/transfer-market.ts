@@ -8,26 +8,25 @@ import {
   signal,
 } from '@angular/core';
 import {
-  KickbaseLeagueConstants,
   MoneyPipe,
   TransferMarketDefinitions,
   TransferMarketPlayer,
 } from '@kickbase/definitions';
 import { TransferMarketService } from '../service/transfer-market-service';
 import { DecimalPipe } from '@angular/common';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
 import { ResponsiveView } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-transfer-market',
-  imports: [MatSlideToggle, TransferMarketCard],
+  imports: [TransferMarketCard],
   providers: [DecimalPipe, MoneyPipe],
   templateUrl: './transfer-market.html',
   styleUrls: ['./transfer-market.scss', '../shared.scss'],
 })
 export class TransferMarket implements OnInit, ResponsiveView {
   showMobileLayout = input<boolean>(false);
+  selectedLeagueId = input.required<string>();
 
   sumOfBuyingPlayers = output<number>();
 
@@ -57,9 +56,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
 
   ngOnInit(): void {
     this.transferMarketService
-      .fetchTransferMarketInformation(
-        KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID
-      )
+      .fetchTransferMarketInformation(this.selectedLeagueId())
       .subscribe({
         next: (data) => {
           const transferData = data.it.map((data) => {
@@ -107,10 +104,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
 
   private fetchDetailOfPlayer(playerId: string): void {
     this.transferMarketService
-      .fetchPlayerDetails(
-        KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID,
-        playerId
-      )
+      .fetchPlayerDetails(this.selectedLeagueId(), playerId)
       .subscribe({
         next: (data) => {
           const currentPlayer = this.transferMarketLookup.get(playerId);
