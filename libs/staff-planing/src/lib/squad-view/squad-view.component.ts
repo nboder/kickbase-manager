@@ -50,6 +50,26 @@ export class SquadView implements OnInit, ResponsiveView {
       .map((value) => value.sevenDayPrediction);
   });
 
+  twentyFourHourMarketValuePredictionsOnlyBenchPlayer = computed(() => {
+    return this.mySquad()
+      .filter(
+        (mySquadPlayer) =>
+          !this.isPlayerMarkedForSelling(mySquadPlayer) &&
+          !mySquadPlayer.isInSquad
+      )
+      .map((value) => value.twentyForHoursDevelopment);
+  });
+
+  sevenDayMarketValuePredictionsOnlyBenchPlayer = computed(() => {
+    return this.mySquad()
+      .filter(
+        (mySquadPlayer) =>
+          !this.isPlayerMarkedForSelling(mySquadPlayer) &&
+          !mySquadPlayer.isInSquad
+      )
+      .map((value) => value.sevenDayPrediction);
+  });
+
   private readonly storageManager: PersistenceManager = inject(
     LocalStoragePersistenceManager
   );

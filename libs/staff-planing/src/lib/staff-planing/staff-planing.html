@@ -6,62 +6,61 @@
 >
   <mat-tab label="Transfers">
     <div class="mobile-container">
-      <lib-transfer-market
-        [selectedLeagueId]="selectedLeaguedId()"
-        [showMobileLayout]="viewPortService.isMobileLayout()"
-        (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
-      ></lib-transfer-market>
+      <ng-container *ngTemplateOutlet="transferMarket" />
     </div>
   </mat-tab>
   <mat-tab label="Money">
     <div class="mobile-container">
-      <lib-money-overview
-        [selectedLeagueId]="selectedLeaguedId()"
-        [showMobileLayout]="viewPortService.isMobileLayout()"
-        [sumOfSoldPlayers]="sumOfSoldPlayers()"
-        [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
-        [twentyFourHourPredictions]="predictions24h()"
-        [sevenDayPredictions]="predictions7Days()"
-      ></lib-money-overview>
+      <ng-container *ngTemplateOutlet="moneyOverview" />
     </div>
   </mat-tab>
   <mat-tab label="Squad">
     <div class="mobile-container">
-      <lib-sqaud-view
-        [selectedLeagueId]="selectedLeaguedId()"
-        [showMobileLayout]="viewPortService.isMobileLayout()"
-      >
-      </lib-sqaud-view>
+      <ng-container *ngTemplateOutlet="squadView" />
     </div>
   </mat-tab>
 </mat-tab-group>
 } @else {
 <div class="container">
   <div class="transfer-section">
-    <lib-transfer-market
-      [selectedLeagueId]="selectedLeaguedId()"
-      [showMobileLayout]="viewPortService.isMobileLayout()"
-      (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
-    ></lib-transfer-market>
+    <ng-container *ngTemplateOutlet="transferMarket" />
   </div>
   <div class="money-section">
-    <lib-money-overview
-      [selectedLeagueId]="selectedLeaguedId()"
-      [showMobileLayout]="viewPortService.isMobileLayout()"
-      [sumOfSoldPlayers]="sumOfSoldPlayers()"
-      [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
-      [twentyFourHourPredictions]="predictions24h()"
-      [sevenDayPredictions]="predictions7Days()"
-    ></lib-money-overview>
+    <ng-container *ngTemplateOutlet="moneyOverview" />
   </div>
   <div class="squad-section">
-    <lib-sqaud-view
-      [selectedLeagueId]="selectedLeaguedId()"
-      [showMobileLayout]="viewPortService.isMobileLayout()"
-    >
-    </lib-sqaud-view>
+    <ng-container *ngTemplateOutlet="squadView" />
   </div>
 </div>
 } } @else {
 <div>You did something you shouldn't do - nanana</div>
 }
+
+<ng-template #transferMarket>
+  <lib-transfer-market
+    [selectedLeagueId]="selectedLeaguedId()"
+    [showMobileLayout]="viewPortService.isMobileLayout()"
+    (sumOfBuyingPlayers)="sumOfBuyingPlayer.set($event)"
+  ></lib-transfer-market>
+</ng-template>
+
+<ng-template #moneyOverview>
+  <lib-money-overview
+    [selectedLeagueId]="selectedLeaguedId()"
+    [showMobileLayout]="viewPortService.isMobileLayout()"
+    [sumOfSoldPlayers]="sumOfSoldPlayers()"
+    [sumOfBuyingPlayer]="sumOfBuyingPlayer()"
+    [twentyFourHourPredictions]="predictions24h()"
+    [twentyFourHourPredictionsOnlyBenchPlayer]="predictions24hOnlyBenchPlayer()"
+    [sevenDayPredictions]="predictions7Days()"
+    [sevenDayPredictionsOnlyBenchPlayer]="predictions7DaysOnlyBenchPlayer()"
+  ></lib-money-overview>
+</ng-template>
+
+<ng-template #squadView>
+  <lib-sqaud-view
+    [selectedLeagueId]="selectedLeaguedId()"
+    [showMobileLayout]="viewPortService.isMobileLayout()"
+  >
+  </lib-sqaud-view>
+</ng-template>

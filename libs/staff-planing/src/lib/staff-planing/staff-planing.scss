@@ -25,3 +25,7 @@
     height: calc(100dvh - #{$tabHeight} - calc(3 * $topBottomPadding));
   }
 }
+
+.money-section {
+  min-width: 300px;
+}

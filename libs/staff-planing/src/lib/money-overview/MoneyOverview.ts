@@ -10,10 +10,11 @@ import { MoneyPipe } from '@kickbase/definitions';
 import { ManagerService } from '../service/manager-service';
 import { MarketValueTrend, ResponsiveView } from '@kickbase/PositionMarker';
 import { UserManagementService } from '@kickbase/UserManagement';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'lib-money-overview',
-  imports: [MoneyPipe, MarketValueTrend],
+  imports: [MoneyPipe, MarketValueTrend, MatDivider],
   templateUrl: './MoneyOverview.html',
   styleUrls: ['./MoneyOverview.scss', '../shared.scss'],
 })
@@ -23,7 +24,9 @@ export class MoneyOverview implements OnInit, ResponsiveView {
   sumOfSoldPlayers = input.required<number>();
   sumOfBuyingPlayer = input.required<number>();
   twentyFourHourPredictions = input.required<number[]>();
+  twentyFourHourPredictionsOnlyBenchPlayer = input.required<number[]>();
   sevenDayPredictions = input.required<number[]>();
+  sevenDayPredictionsOnlyBenchPlayer = input.required<number[]>();
 
   teamValue = signal<number>(0);
   profit = signal<number>(0);
@@ -39,8 +42,19 @@ export class MoneyOverview implements OnInit, ResponsiveView {
     return this.twentyFourHourPredictions().reduce((a, b) => a + b, 0);
   }
 
+  twentyFourHourPredictionOnlyBenchPlayer(): number {
+    return this.twentyFourHourPredictionsOnlyBenchPlayer().reduce(
+      (a, b) => a + b,
+      0
+    );
+  }
+
   sevenDayPrediction(): number {
     return this.sevenDayPredictions().reduce((a, b) => a + b, 0);
+  }
+
+  sevenDayPredictionOnlyBenchPlayer(): number {
+    return this.sevenDayPredictionsOnlyBenchPlayer().reduce((a, b) => a + b, 0);
   }
 
   private readonly managerService = inject(ManagerService);

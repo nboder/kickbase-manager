@@ -6,7 +6,7 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgTemplateOutlet } from '@angular/common';
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
 import { SquadView } from '../squad-view/squad-view.component';
@@ -19,7 +19,14 @@ import { AppRouteDefinitions } from '@kickbase/definitions';
 
 @Component({
   selector: 'lib-staff-planing',
-  imports: [TransferMarket, MoneyOverview, SquadView, MatTabGroup, MatTab],
+  imports: [
+    TransferMarket,
+    MoneyOverview,
+    SquadView,
+    MatTabGroup,
+    MatTab,
+    NgTemplateOutlet,
+  ],
   providers: [CurrencyPipe],
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],
@@ -62,10 +69,25 @@ export class StaffPlaning implements OnInit {
       return [];
     }
   }
+  predictions24hOnlyBenchPlayer(): number[] {
+    if (this.squadView) {
+      return this.squadView.twentyFourHourMarketValuePredictionsOnlyBenchPlayer();
+    } else {
+      return [];
+    }
+  }
 
   predictions7Days(): number[] {
     if (this.squadView) {
       return this.squadView.sevenDayMarketValuePredictions();
+    } else {
+      return [];
+    }
+  }
+
+  predictions7DaysOnlyBenchPlayer(): number[] {
+    if (this.squadView) {
+      return this.squadView.sevenDayMarketValuePredictionsOnlyBenchPlayer();
     } else {
       return [];
     }

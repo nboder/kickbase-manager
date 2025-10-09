@@ -1,66 +1,118 @@
-<table class="money-section__table">
-  <thead>
-    <th>Titel</th>
-    <th>Value</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Aktueller Teamvalue</td>
-      <td class="money-column">{{ teamValue() | moneyPipe }}</td>
-    </tr>
-    <tr>
-      <td>Profit</td>
-      <td class="money-column">{{ profit() | moneyPipe }}</td>
-    </tr>
-    <tr>
-      <td>Aktueller Kontostand</td>
-      <td class="money-column">{{ budget() | moneyPipe }}</td>
-    </tr>
-    <tr>
-      <td>Summer aller Verkäufe</td>
-      <td class="money-column">{{ sumOfSoldPlayers() | moneyPipe }}</td>
-    </tr>
-    <tr>
-      <td>Summer aller Einkäufe</td>
-      <td class="money-column">{{ sumOfBuyingPlayer() | moneyPipe }}</td>
-    </tr>
-    <tr>
-      <td>Finaler Kontostand</td>
-      <td class="money-column">{{ finalAccountBalance() | moneyPipe }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="money-section">
+  <div class="heading">Gesamt Übersicht</div>
+  <div class="money-section-overview">
+    <div class="money-section-entry">
+      <span class="money-section-entry__title">Aktueller Teamvalue</span>
+      <span class="money-section-entry__value"
+        >{{ teamValue() | moneyPipe }}</span
+      >
+    </div>
+    <div class="money-section-entry">
+      <span class="money-section-entry__title">Profit</span>
+      <span class="money-section-entry__value">{{ profit() | moneyPipe }}</span>
+    </div>
+    <div class="money-section-entry">
+      <span class="money-section-entry__title">Aktueller Kontostand</span>
+      <span class="money-section-entry__value">{{ budget() | moneyPipe }}</span>
+    </div>
+    <div class="money-section-entry">
+      <span class="money-section-entry__title">Summer aller Verkäufe</span>
+      <span class="money-section-entry__value"
+        >{{ sumOfSoldPlayers() | moneyPipe }}</span
+      >
+    </div>
+    <div class="money-section-entry">
+      <span class="money-section-entry__title">Summer aller Einkäufe</span>
+      <span class="money-section-entry__value"
+        >{{ sumOfBuyingPlayer() | moneyPipe }}</span
+      >
+    </div>
+    <mat-divider></mat-divider>
+    <div class="money-section-entry">
+      <span class="money-section-entry__title">Finaler Kontostand</span>
+      <span class="money-section-entry__value emphasized"
+        >{{ finalAccountBalance() | moneyPipe }}</span
+      >
+    </div>
+  </div>
+</div>
 
-<table class="prediction-section__table">
-  <thead>
-    <tr>
-      <th>Time</th>
-      <th class="text-right">Expected Profit</th>
-      <th>Expected Cash</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>in 24 h</td>
-      <td class="money-column">
+<div class="prediction-section">
+  <div class="prediction-section-bench">
+    <div class="heading">
+      Predictions Bench Player ( {{
+      twentyFourHourPredictionsOnlyBenchPlayer().length }}Players )
+    </div>
+    <div class="prediction-section-entry">
+      <span class="prediction-section-entry__title"></span>
+      <span class="prediction-section-entry__value emphasized">
+        Expected Profit</span
+      >
+      <span class="prediction-section-entry__total emphasized"
+        >Expected Cash</span
+      >
+    </div>
+    <div class="prediction-section-entry">
+      <span class="prediction-section-entry__title">24h</span>
+      <span class="prediction-section-entry__value">
+        <lib-market-value-trend
+          [marketValueTrend]="twentyFourHourPredictionOnlyBenchPlayer()"
+        ></lib-market-value-trend
+      ></span>
+      <span class="prediction-section-entry__total"
+        >{{ finalAccountBalance() + twentyFourHourPrediction() | moneyPipe
+        }}</span
+      >
+    </div>
+    <div class="prediction-section-entry">
+      <span class="prediction-section-entry__title">7 days</span>
+      <span class="prediction-section-entry__value">
+        <lib-market-value-trend
+          [marketValueTrend]="sevenDayPredictionOnlyBenchPlayer()"
+        ></lib-market-value-trend
+      ></span>
+      <span class="prediction-section-entry__total"
+        >{{ finalAccountBalance() + sevenDayPrediction() | moneyPipe }}</span
+      >
+    </div>
+  </div>
+
+  <div class="prediction-section-team">
+    <div class="heading">
+      Predictions Complete Team ( {{ twentyFourHourPredictions().length }}
+      Players )
+    </div>
+    <div class="prediction-section-entry">
+      <span class="prediction-section-entry__title"></span>
+      <span class="prediction-section-entry__value emphasized">
+        Expected Profit</span
+      >
+      <span class="prediction-section-entry__total emphasized"
+        >Expected Cash</span
+      >
+    </div>
+    <div class="prediction-section-entry">
+      <span class="prediction-section-entry__title">24h</span>
+      <span class="prediction-section-entry__value">
         <lib-market-value-trend
           [marketValueTrend]="twentyFourHourPrediction()"
-        ></lib-market-value-trend>
-      </td>
-      <td class="money-column">
-        {{ finalAccountBalance() + twentyFourHourPrediction() | moneyPipe }}
-      </td>
-    </tr>
-    <tr>
-      <td>in 7 D</td>
-      <td class="money-column">
+        ></lib-market-value-trend
+      ></span>
+      <span class="prediction-section-entry__total"
+        >{{ finalAccountBalance() + twentyFourHourPrediction() | moneyPipe
+        }}</span
+      >
+    </div>
+    <div class="prediction-section-entry">
+      <span class="prediction-section-entry__title">7 days</span>
+      <span class="prediction-section-entry__value">
         <lib-market-value-trend
           [marketValueTrend]="sevenDayPrediction()"
-        ></lib-market-value-trend>
-      </td>
-      <td class="money-column">
-        {{ finalAccountBalance() + sevenDayPrediction() | moneyPipe }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+        ></lib-market-value-trend
+      ></span>
+      <span class="prediction-section-entry__total"
+        >{{ finalAccountBalance() + sevenDayPrediction() | moneyPipe }}</span
+      >
+    </div>
+  </div>
+</div>

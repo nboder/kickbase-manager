@@ -1,14 +1,62 @@
 .money-section {
-  &__table {
-    margin-bottom: 1em;
-    border: 1px solid #ddd;
-    -webkit-border-horizontal-spacing: 10px;
+  border: 1px solid #ddd;
+  padding: 2px;
+  margin-bottom: 1em;
+
+  &-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+  }
+
+  &-entry {
+    display: flex;
+    flex-direction: row;
+
+    &__title {
+      flex: 1;
+    }
+
+    &__value {
+      text-align: right;
+    }
   }
 }
 
 .prediction-section {
-  &__table {
-    border: 1px solid #ddd;
-    -webkit-border-horizontal-spacing: 10px;
+  &-team,
+  &-bench {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    margin-bottom: 1em;
   }
+
+  &-entry {
+    display: flex;
+    flex-direction: row;
+
+    &__title {
+      flex: 0.3;
+    }
+
+    &__value {
+      flex: 0.5;
+    }
+
+    &__total {
+      text-align: right;
+      flex: 0.5;
+    }
+  }
+}
+
+.emphasized {
+  font-weight: bold;
+}
+
+.heading {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
