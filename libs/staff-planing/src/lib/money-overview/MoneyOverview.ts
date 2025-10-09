@@ -18,14 +18,15 @@ import { MarketValueTrend, ResponsiveView } from '@kickbase/PositionMarker';
 })
 export class MoneyOverview implements OnInit, ResponsiveView {
   showMobileLayout = input<boolean>(false);
-
+  selectedLeagueId = input.required<string>();
   sumOfSoldPlayers = input.required<number>();
   sumOfBuyingPlayer = input.required<number>();
+  twentyFourHourPredictions = input.required<number[]>();
+  sevenDayPredictions = input.required<number[]>();
+
   teamValue = signal<number>(0);
   profit = signal<number>(0);
   budget = signal<number>(0);
-  twentyFourHourPredictions = input.required<number[]>();
-  sevenDayPredictions = input.required<number[]>();
 
   finalAccountBalance = computed(() => {
     return this.budget() + this.sumOfSoldPlayers() - this.sumOfBuyingPlayer();
@@ -44,7 +45,7 @@ export class MoneyOverview implements OnInit, ResponsiveView {
   ngOnInit(): void {
     this.managerService
       .fetchManagerInformation(
-        KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID,
+        this.selectedLeagueId(),
         KickbaseLeagueConstants.BOB_USER_ID
       )
       .subscribe({
@@ -56,7 +57,7 @@ export class MoneyOverview implements OnInit, ResponsiveView {
       });
 
     this.managerService
-      .fetchBudgetInformation(KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID)
+      .fetchBudgetInformation(this.selectedLeagueId())
       .subscribe({
         next: (data) => {
           this.budget.set(data.b);

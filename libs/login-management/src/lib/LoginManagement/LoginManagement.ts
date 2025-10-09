@@ -37,7 +37,8 @@ export class LoginManagement {
           new CurrentUser(
             loginResponse.u.email,
             loginResponse.u.id,
-            loginResponse.tkn
+            loginResponse.tkn,
+            loginResponse.tknex
           )
         );
         const currentLeague = loginResponse.srvl.find(
@@ -46,6 +47,8 @@ export class LoginManagement {
         );
         if (currentLeague) {
           this.leagueService.setLeagueInformation(
+            currentLeague.id,
+            currentLeague.name,
             currentLeague.lm.budget,
             currentLeague.lm.teamValue,
             currentLeague.lm.placement,
@@ -54,7 +57,7 @@ export class LoginManagement {
         } else {
           console.error("League wasn't found. It is hardcoded!");
         }
-        this.router.navigateByUrl(AppRouteDefinitions.STAFF_MANAGEMENT);
+        this.router.navigateByUrl(AppRouteDefinitions.LEAGUE_SELECTION);
       },
       error: (err) => {
         console.log(err);

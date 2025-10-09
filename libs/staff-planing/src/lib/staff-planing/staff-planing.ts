@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
@@ -6,6 +13,9 @@ import { SquadView } from '../squad-view/squad-view.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { ViewPortService } from '@kickbase/PositionMarker';
+import { LeagueManagementService } from '@kickbase/UserManagement';
+import { ActivatedRoute } from '@angular/router';
+import { AppRouteDefinitions } from '@kickbase/definitions';
 
 @Component({
   selector: 'lib-staff-planing',
@@ -14,13 +24,28 @@ import { ViewPortService } from '@kickbase/PositionMarker';
   templateUrl: './staff-planing.html',
   styleUrls: ['./staff-planing.scss', '../shared.scss'],
 })
-export class StaffPlaning {
+export class StaffPlaning implements OnInit {
   @ViewChild(SquadView)
   private squadView: SquadView | undefined;
 
   viewPortService = inject(ViewPortService);
+  activatedRoute = inject(ActivatedRoute);
 
   sumOfBuyingPlayer = signal<number>(0);
+  selectedLeaguedId = signal<string>('');
+
+  ngOnInit(): void {
+    const leagueId = this.activatedRoute.snapshot.queryParamMap.get(
+      AppRouteDefinitions.QUERY_PARAM_LEAGUE_ID
+    );
+    if (leagueId) {
+      this.selectedLeaguedId.set(leagueId);
+    } else {
+      console.log(
+        'URL has been modified. This will result in an error Page in the near future.'
+      );
+    }
+  }
 
   sumOfSoldPlayers(): number {
     if (this.squadView) {

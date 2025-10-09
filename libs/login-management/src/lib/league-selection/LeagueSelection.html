@@ -1,0 +1,19 @@
+<div class="league-selection__container">
+  <mat-card class="league-selection__league">
+    <mat-card-header>
+      <mat-card-title>{{ currentLeague().name }}</mat-card-title>
+      <mat-card-subtitle
+        >#{{ currentLeague().placement }} - {{ currentLeague().points }}
+        Pts</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-actions align="end">
+      <a
+        matButton
+        [routerLink]="['/', AppRouteDefinitions.STAFF_MANAGEMENT]"
+        [queryParams]="{leagueId: currentLeague().id}"
+        >Select League</a
+      >
+    </mat-card-actions>
+  </mat-card>
+</div>

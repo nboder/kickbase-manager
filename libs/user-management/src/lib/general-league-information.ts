@@ -1,15 +1,21 @@
 export class GeneralLeagueInformation {
+  readonly id: string;
+  readonly name: string;
   readonly budget: number;
   readonly teamValue: number;
   readonly placement: number;
   readonly points: number;
 
   constructor(
+    id: string,
+    name: string,
     budget: number,
     teamValue: number,
     placement: number,
     points: number
   ) {
+    this.id = id;
+    this.name = name;
     this.budget = budget;
     this.teamValue = teamValue;
     this.placement = placement;
@@ -17,6 +23,6 @@ export class GeneralLeagueInformation {
   }
 
   static noLeagueInformation(): GeneralLeagueInformation {
-    return new GeneralLeagueInformation(0, 0, 0, 0);
+    return new GeneralLeagueInformation('', '', 0, 0, 0, 0);
   }
 }

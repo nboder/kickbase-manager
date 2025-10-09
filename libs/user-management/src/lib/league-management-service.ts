@@ -9,12 +9,16 @@ export class LeagueManagementService {
   private LEAGUE_INFORMATION_KEY = 'leagueInformation';
 
   setLeagueInformation(
+    id: string,
+    name: string,
     budget: number,
     teamValue: number,
     placement: number,
     points: number
   ) {
     this.leagueInformation = new GeneralLeagueInformation(
+      id,
+      name,
       budget,
       teamValue,
       placement,
@@ -27,11 +31,14 @@ export class LeagueManagementService {
   }
 
   getLeagueInformation(): GeneralLeagueInformation {
+    console.log(this.leagueInformation);
     const leagueInformation = localStorage.getItem(this.LEAGUE_INFORMATION_KEY);
     if (leagueInformation) {
       const parsedItem: GeneralLeagueInformation =
         JSON.parse(leagueInformation);
       return new GeneralLeagueInformation(
+        parsedItem.id,
+        parsedItem.name,
         parsedItem.budget,
         parsedItem.teamValue,
         parsedItem.placement,

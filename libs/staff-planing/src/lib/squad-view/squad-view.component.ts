@@ -28,6 +28,7 @@ import { ResponsiveView } from '@kickbase/PositionMarker';
   styleUrl: './squad-view.component.scss',
 })
 export class SquadView implements OnInit, ResponsiveView {
+  selectedLeagueId = input.required<string>();
   showMobileLayout = input<boolean>(false);
 
   sumOfSOldPlayers = computed(() => {
@@ -61,18 +62,16 @@ export class SquadView implements OnInit, ResponsiveView {
 
   ngOnInit(): void {
     this.storageManager.loadPlayersToSell();
-    this.staffService
-      .fetchMyTeam(KickbaseLeagueConstants.STROHGAEU_BUBEN_LEAGUE_ID.toString())
-      .subscribe({
-        next: (data: SquadResponseStaff) => {
-          const players = data.it.map((value) => new Player(value));
-          const sortedPlayers = players.sort((a, b) => a.position - b.position);
-          this.mySquad.set(sortedPlayers);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+    this.staffService.fetchMyTeam(this.selectedLeagueId()).subscribe({
+      next: (data: SquadResponseStaff) => {
+        const players = data.it.map((value) => new Player(value));
+        const sortedPlayers = players.sort((a, b) => a.position - b.position);
+        this.mySquad.set(sortedPlayers);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   isPlayerMarkedForSelling(player: Player): boolean {
