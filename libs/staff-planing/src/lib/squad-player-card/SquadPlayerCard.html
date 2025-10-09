@@ -9,10 +9,9 @@
     <div class="squad_play_card__content__meta_information">
       <lib-position-marker [position]="position()"></lib-position-marker>
       <div class="squad_play_card__content__meta_information_listing">
-        #{{ numberOfPlayer() }} -
-        <lib-selling-indicator
-          [showSelling]="isBeingSold()"
-        ></lib-selling-indicator>
+        #{{ numberOfPlayer() }} @if (isInSquad()) { -
+        <img ngSrc="assets/squad_member.svg" alt="" width="20" height="20" />
+        }
       </div>
     </div>
     <div class="squad_play_card__content__player_listing">

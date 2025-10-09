@@ -24,6 +24,11 @@
             "glob": "**/*",
             "input": "libs/shared-ui-components/src/assets/",
             "output": "assets/"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/staff-planing/src/assets/",
+            "output": "assets/"
           }
         ],
         "styles": ["apps/manager/src/styles.scss"]
