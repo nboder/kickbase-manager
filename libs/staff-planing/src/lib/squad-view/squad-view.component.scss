@@ -1,17 +1,50 @@
-.squad-section {
+@mixin container() {
   display: flex;
   flex-direction: column;
   gap: 0.2em;
+}
+
+@mixin squad_section() {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
+@mixin button_section() {
+  display: flex;
+  gap: 0.2em;
+}
+
+.squad-section {
+  @include container();
 
   &__card-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2em;
+    @include squad_section();
     min-width: 250px;
   }
 
   &__buttons {
-    display: flex;
-    gap: 0.2em;
+    @include button_section();
   }
 }
+
+.mobile {
+  &-container {
+    @include container;
+    height: 100%;
+  }
+
+  &__section_squad {
+    @include squad_section();
+    overflow-y: auto;
+    padding-bottom: 8px;
+  }
+
+  &__section-buttons {
+    @include button_section();
+    padding-top: 2px;
+    justify-content: center;
+    box-shadow: 0px -5px 5px -5px rgba(0, 0, 0, 0.4);
+  }
+}
+

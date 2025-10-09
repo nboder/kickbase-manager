@@ -1,5 +1,11 @@
 @if (viewPortService.isMobileLayout()) {
-<mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start">
+<mat-tab-group class="mobile-tab_group" mat-stretch-tabs="true" mat-align-tabs="start">
+  <mat-tab label="Squad">
+    <div class="mobile-container">
+      <lib-sqaud-view [showMobileLayout]="viewPortService.isMobileLayout()">
+      </lib-sqaud-view>
+    </div>
+  </mat-tab>
   <mat-tab label="Transfers">
     <div class="mobile-container">
       <lib-transfer-market
@@ -19,12 +25,7 @@
       ></lib-money-overview>
     </div>
   </mat-tab>
-  <mat-tab label="Squad">
-    <div class="mobile-container">
-      <lib-sqaud-view [showMobileLayout]="viewPortService.isMobileLayout()">
-      </lib-sqaud-view>
-    </div>
-  </mat-tab>
+
 </mat-tab-group>
 } @else {
 <div class="container">
