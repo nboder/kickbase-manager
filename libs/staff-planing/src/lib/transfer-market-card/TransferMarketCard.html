@@ -36,9 +36,9 @@
       <div class="money-column">
         {{ transferMarketPlayer().marketValue | moneyPipe }}
       </div>
-      @if (transferMarketPlayer().currentBid > 0) {
+      @if (transferMarketPlayer().currentOffer.offer > 0) {
       <div class="money-column bid-value">
-        {{ transferMarketPlayer().currentBid | moneyPipe }}
+        {{ transferMarketPlayer().currentOffer.offer | moneyPipe }}
       </div>
       <div class="money-column overpay-value">
         {{ overpayment() | moneyPipe }}

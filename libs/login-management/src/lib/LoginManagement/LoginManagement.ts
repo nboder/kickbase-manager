@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { KickbaseLoginService } from '../management/kickbase-login-service';
 import { AppRouteDefinitions, LoginResponse } from '@kickbase/definitions';
@@ -11,25 +17,49 @@ import {
 } from '@kickbase/UserManagement';
 import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { MatCheckbox } from '@angular/material/checkbox';
+import {
+  LocalStoragePersistenceManager,
+  PersistenceManager,
+} from '@kickbase/persistence-management';
 
 @Component({
   selector: 'lib-login-management',
-  imports: [FormsModule, MatInput, MatFormField, MatLabel, MatButton],
+  imports: [
+    FormsModule,
+    MatInput,
+    MatFormField,
+    MatLabel,
+    MatButton,
+    MatCheckbox,
+  ],
   templateUrl: './LoginManagement.html',
   styleUrl: './LoginManagement.scss',
 })
-export class LoginManagement implements OnInit {
+export class LoginManagement implements OnInit, AfterViewInit {
   username = signal<string>('');
   password = signal<string>('');
+
+  saveUserName = signal<boolean>(true);
 
   private readonly loginService = inject(KickbaseLoginService);
   private readonly userService = inject(UserManagementService);
   private readonly leagueService = inject(LeagueManagementService);
   private readonly router = inject(Router);
+  private readonly persistence: PersistenceManager = inject(
+    LocalStoragePersistenceManager
+  );
 
   ngOnInit(): void {
     if (this.userService.isUserLoggedIn()) {
       this.navigateAfterSuccessFullLogin();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    const lastLoggedInUser = this.persistence.getLastLoggedInUsername();
+    if (lastLoggedInUser) {
+      this.username.set(lastLoggedInUser);
     }
   }
 
@@ -57,6 +87,11 @@ export class LoginManagement implements OnInit {
             );
           })
         );
+        if (this.saveUserName()) {
+          this.persistence.saveLastLoggedInUsername(this.username());
+        } else {
+          this.persistence.removeLastLoggedInUsername();
+        }
         this.navigateAfterSuccessFullLogin();
       },
       error: (err) => {

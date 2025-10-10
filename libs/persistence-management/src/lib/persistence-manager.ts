@@ -13,4 +13,10 @@ export interface PersistenceManager {
   removeSellablePlayer(player: SellingPlayer): void;
 
   clearAllSellablePlayers(): void;
+
+  saveLastLoggedInUsername(username: string): void;
+
+  getLastLoggedInUsername(): string | null;
+
+  removeLastLoggedInUsername(): void;
 }

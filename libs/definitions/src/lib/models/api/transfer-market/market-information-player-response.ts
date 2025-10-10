@@ -10,6 +10,8 @@ export interface MarketInformationPlayerResponse {
   readonly p: number;
   readonly ap: number;
   readonly ofc: number;
+  readonly uop: number; // User offer Price
+  readonly uoid: string; // User offer ID
   readonly exs: number;
   readonly prc: number;
   readonly isn: boolean;

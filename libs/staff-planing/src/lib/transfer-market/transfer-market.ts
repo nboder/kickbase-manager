@@ -81,11 +81,45 @@ export class TransferMarket implements OnInit, ResponsiveView {
       });
   }
 
-  acceptBuyingOrders() {
+  private acceptBuyingOrders() {
     const buyingValue = this.transferMarket().reduce((a, b) => {
-      return a + b.currentBid;
+      return a + b.currentOffer.offer;
     }, 0);
     this.sumOfBuyingPlayers.emit(buyingValue);
+  }
+
+  offerPlaced(player: TransferMarketPlayer) {
+    this.transferMarketService
+      .placeOffer(
+        this.selectedLeagueId(),
+        player.playerId,
+        player.currentOffer.offer
+      )
+      .subscribe({
+        next: (data) => {
+          player.currentOffer.offerId = data.ofi;
+        },
+      });
+    this.acceptBuyingOrders();
+  }
+
+  offerWithDrawn(player: TransferMarketPlayer) {
+    if (player.currentOffer.offerId != undefined) {
+      this.transferMarketService
+        .withdrawPlayerOffer(
+          this.selectedLeagueId(),
+          player.playerId,
+          player.currentOffer.offerId
+        )
+        .subscribe({
+          next: (data) => {
+            console.log('Offer has been whithdrawn');
+          },
+        });
+      this.acceptBuyingOrders();
+    } else {
+      console.error("Offer couldn't be whithdrawn");
+    }
   }
 
   // shouldShowMarketValueUpdateBeforePlayer(
