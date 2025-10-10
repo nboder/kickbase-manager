@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { AppRouteDefinitions } from '@kickbase/definitions';
 import { isLoggedInGuard } from '../guard/is-logged-in-guard';
+import { PageNotFound } from '../page-not-found/PageNotFound';
 
 export const appRoutes: Route[] = [
   {
@@ -24,5 +25,9 @@ export const appRoutes: Route[] = [
     loadComponent: () =>
       import('@kickbase/staff-planing').then((comp) => comp.StaffPlaning),
     canActivate: [isLoggedInGuard],
+  },
+  {
+    path: '**',
+    loadComponent: () => PageNotFound,
   },
 ];
