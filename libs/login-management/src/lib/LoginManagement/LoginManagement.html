@@ -9,5 +9,9 @@
     <input matInput type="password" [(ngModel)]="password" />
   </mat-form-field>
 
+  <div class="login__container__save_username">
+    <mat-checkbox [(ngModel)]="saveUserName">Remember Username</mat-checkbox>
+  </div>
+
   <button matButton="filled" (click)="loginUser()">Login</button>
 </div>

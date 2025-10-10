@@ -7,6 +7,7 @@ import { SellingPlayer } from './model/selling-player';
 })
 export class LocalStoragePersistenceManager implements PersistenceManager {
   private readonly STORAGE_KEY = 'playersToSell';
+  private readonly USERNAME_STORAGE_KEY = 'lastLoggedInUser';
   private savedPlayersToSell = signal<SellingPlayer[]>([]);
   private lookupPlayersToSell: Signal<Set<string>> = computed(
     () => new Set(this.savedPlayersToSell().map((p) => p.playerId))
@@ -52,6 +53,18 @@ export class LocalStoragePersistenceManager implements PersistenceManager {
       this.updatePlayersToSell(currentPlayers);
       return currentPlayers;
     });
+  }
+
+  getLastLoggedInUsername(): string | null {
+    return localStorage.getItem(this.USERNAME_STORAGE_KEY);
+  }
+
+  saveLastLoggedInUsername(username: string): void {
+    localStorage.setItem(this.USERNAME_STORAGE_KEY, username);
+  }
+
+  removeLastLoggedInUsername(): void {
+    localStorage.removeItem(this.USERNAME_STORAGE_KEY);
   }
 
   private updatePlayersToSell(playersToSell: SellingPlayer[]) {

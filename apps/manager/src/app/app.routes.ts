@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { AppRouteDefinitions } from '@kickbase/definitions';
-import { LeagueSelection } from '../../../../libs/login-management/src/lib/league-selection/LeagueSelection';
+import { isLoggedInGuard } from '../guard/is-logged-in-guard';
 
 export const appRoutes: Route[] = [
   {
@@ -17,10 +17,12 @@ export const appRoutes: Route[] = [
     path: AppRouteDefinitions.LEAGUE_SELECTION,
     loadComponent: () =>
       import('@kickbase/LoginManagement').then((comp) => comp.LeagueSelection),
+    canActivate: [isLoggedInGuard],
   },
   {
     path: AppRouteDefinitions.STAFF_MANAGEMENT,
     loadComponent: () =>
       import('@kickbase/staff-planing').then((comp) => comp.StaffPlaning),
+    canActivate: [isLoggedInGuard],
   },
 ];
