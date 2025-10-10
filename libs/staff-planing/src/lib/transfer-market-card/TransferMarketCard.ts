@@ -27,7 +27,8 @@ import {
 })
 export class TransferMarketCard {
   transferMarketPlayer = input.required<TransferMarketPlayer>();
-  sold = output();
+  offerWithdrawn = output<TransferMarketPlayer>();
+  offerPlaced = output<TransferMarketPlayer>();
 
   private readonly dialog = inject(MatDialog);
   readonly showHoursThreshold = 1.0;
@@ -35,7 +36,7 @@ export class TransferMarketCard {
 
   overpayment(): number {
     return (
-      this.transferMarketPlayer().currentBid -
+      this.transferMarketPlayer().currentOffer.offer -
       this.transferMarketPlayer().marketValue
     );
   }
@@ -46,22 +47,23 @@ export class TransferMarketCard {
         playerName: this.transferMarketPlayer().name,
         marketValue: this.transferMarketPlayer().marketValue,
         currentBid:
-          this.transferMarketPlayer().currentBid === 0
+          this.transferMarketPlayer().currentOffer.offer === 0
             ? this.transferMarketPlayer().marketValue
-            : this.transferMarketPlayer().currentBid,
+            : this.transferMarketPlayer().currentOffer.offer,
       },
     });
     dialogRef.afterClosed().subscribe((result: TransferMarketOutputBidData) => {
       switch (result.status) {
         case TransferMarketBidDialogStatus.CLEAR:
-          this.transferMarketPlayer().currentBid = 0;
-          this.sold.emit();
+          this.transferMarketPlayer().currentOffer.offer = 0;
+          // this.sold.emit();
+          this.offerWithdrawn.emit(this.transferMarketPlayer());
           break;
         case TransferMarketBidDialogStatus.CANCEL:
           break;
         case TransferMarketBidDialogStatus.ACCEPT:
-          this.transferMarketPlayer().currentBid = result.currentBid;
-          this.sold.emit();
+          this.transferMarketPlayer().currentOffer.offer = result.currentBid;
+          this.offerPlaced.emit(this.transferMarketPlayer());
           break;
       }
     });

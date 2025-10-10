@@ -16,6 +16,7 @@ export * from './lib/models/api/players/player-detail-response';
 
 export * from './lib/models/api/transfer-market/market-information-response';
 export * from './lib/models/api/transfer-market/market-information-player-response';
+export * from './lib/models/api/transfer-market/placer-offer-response';
 
 export * from './lib/models/api/manager/manager-response';
 export * from './lib/models/api/manager/budget-response';

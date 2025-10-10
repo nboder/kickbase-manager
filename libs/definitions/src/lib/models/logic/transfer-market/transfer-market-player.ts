@@ -1,5 +1,6 @@
 import { BasicPlayer } from '../basic-player';
 import { MarketInformationPlayerResponse } from '../../api/transfer-market/market-information-player-response';
+import { TransferMarketPlayerOffer } from './transfer-market-player-offer';
 
 export class TransferMarketPlayer extends BasicPlayer {
   readonly firstName: string;
@@ -8,7 +9,7 @@ export class TransferMarketPlayer extends BasicPlayer {
   readonly totalPoints: number;
   twentyForHoursTrend = 0;
   teamName = '';
-  currentBid = 0;
+  currentOffer = TransferMarketPlayerOffer.noOffer();
 
   constructor(responseData: MarketInformationPlayerResponse) {
     super(responseData.i, responseData.n, responseData.mv, responseData.pos);
@@ -16,6 +17,10 @@ export class TransferMarketPlayer extends BasicPlayer {
     this.transferExpiringSeconds = responseData.exs;
     this.averagePoints = responseData.ap == undefined ? 0 : responseData.ap;
     this.totalPoints = responseData.p;
+    this.currentOffer = new TransferMarketPlayerOffer(
+      responseData.uop,
+      responseData.uoid
+    );
   }
 
   transferExpirationInDays(): number {

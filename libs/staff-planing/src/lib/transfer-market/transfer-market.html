@@ -7,7 +7,8 @@
     <!--      }-->
     <lib-transfer-market-card
       [transferMarketPlayer]="transferMarketPlayer"
-      (sold)="acceptBuyingOrders()"
+      (offerPlaced)="offerPlaced($event)"
+      (offerWithdrawn)="offerWithDrawn($event)"
     ></lib-transfer-market-card>
     }
   </div>

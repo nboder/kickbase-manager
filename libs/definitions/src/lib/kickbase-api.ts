@@ -11,6 +11,7 @@ export class KickbaseApi {
   private static readonly DASHBOARD_PATH = 'dashboard';
   private static readonly ME_PATH = 'me';
   private static readonly BUDGET_PATH = 'budget';
+  private static readonly OFFERS_PATH = 'offers';
 
   static loginUrl(): string {
     return this.buildApiUrl([this.USER_PATH, this.LOGIN_PATH]);
@@ -30,6 +31,31 @@ export class KickbaseApi {
       leagueId,
       this.PLAYERS_PATH,
       playerId,
+    ]);
+  }
+
+  static placeOfferUrl(leagueId: string, playerId: string): string {
+    return this.buildApiUrl([
+      this.LEAGUES_PATH,
+      leagueId,
+      this.MARKET_PATH,
+      playerId,
+      this.OFFERS_PATH,
+    ]);
+  }
+
+  static withDrawOfferUrl(
+    leagueId: string,
+    playerId: string,
+    offerId: string
+  ): string {
+    return this.buildApiUrl([
+      this.LEAGUES_PATH,
+      leagueId,
+      this.MARKET_PATH,
+      playerId,
+      this.OFFERS_PATH,
+      offerId,
     ]);
   }
 
