@@ -2,7 +2,10 @@
   "name": "@kickbase/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "nx": "nx",
+    "deploy-build": "nx run manager:build:production --output-path docs --base-href=/kickbase-manager/"
+  },
   "private": true,
   "dependencies": {
     "@angular/cdk": "~20.2.0",
