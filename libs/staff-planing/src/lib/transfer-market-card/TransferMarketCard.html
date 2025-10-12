@@ -38,7 +38,7 @@
       (click)="showSellingDialog()"
     >
       <div class="money-column">
-        {{ transferMarketPlayer().marketValue | moneyPipe }}
+        {{ transferMarketPlayer().price | moneyPipe }}
       </div>
       @if (transferMarketPlayer().currentOffer.offer > 0) {
       <div class="money-column bid-value">
@@ -46,6 +46,13 @@
       </div>
       <div class="money-column overpay-value">
         {{ overpayment() | moneyPipe }}
+      </div>
+      } @else if (shouldShowMarketValueDiffToPrice()) {
+      <div class="money-column bid-value">
+        MV: {{ transferMarketPlayer().marketValue | moneyPipe }}
+      </div>
+      <div class="money-column overpay-value">
+        {{ priceDifferenceToMarketValue() | moneyPipe }}
       </div>
       }
     </div>

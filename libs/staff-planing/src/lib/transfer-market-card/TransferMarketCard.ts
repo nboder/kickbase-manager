@@ -68,4 +68,19 @@ export class TransferMarketCard {
       }
     });
   }
+
+  shouldShowMarketValueDiffToPrice(): boolean {
+    return (
+      !this.transferMarketPlayer().hasAnOffer() &&
+      this.transferMarketPlayer().price >
+        this.transferMarketPlayer().marketValue
+    );
+  }
+
+  priceDifferenceToMarketValue(): number {
+    return (
+      this.transferMarketPlayer().price -
+      this.transferMarketPlayer().marketValue
+    );
+  }
 }
