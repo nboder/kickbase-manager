@@ -5,7 +5,7 @@
   "scripts": {
     "nx": "nx",
     "deploy-build": "nx run manager:build:production --output-path docs --base-href=/kickbase-manager/",
-    "format": "nx format:write --uncomitted=true"
+    "format": "nx format:write --uncomitted=true --libs-and-apps=true"
   },
   "private": true,
   "dependencies": {
