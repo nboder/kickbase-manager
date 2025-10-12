@@ -1,19 +1,10 @@
-import {
-  Component,
-  computed,
-  inject,
-  OnInit,
-  signal,
-  ViewChild,
-} from '@angular/core';
+import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { CurrencyPipe, NgTemplateOutlet } from '@angular/common';
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
 import { SquadView } from '../squad-view/squad-view.component';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { ViewPortService } from '@kickbase/PositionMarker';
-import { LeagueManagementService } from '@kickbase/UserManagement';
 import { ActivatedRoute } from '@angular/router';
 import { AppRouteDefinitions } from '@kickbase/definitions';
 
