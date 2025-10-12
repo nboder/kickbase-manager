@@ -1,4 +1,8 @@
-<mat-card appearance="outlined" class="transfer-market-card">
+<mat-card
+  appearance="outlined"
+  class="transfer-market-card"
+  [class.transfer-market-card__isBeingBought]="transferMarketPlayer().hasAnOffer()"
+>
   <div class="transfer-market-card__content">
     <div class="transfer-market-card__content__meta-information">
       <div class="centered-content">

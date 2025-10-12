@@ -1,7 +1,17 @@
+@use '@angular/material' as mat;
+
 .transfer-market-card {
   min-height: 65px;
   min-width: 320px;
   max-width: 400px;
+
+  &__isBeingBought {
+    @include mat.card-overrides(
+      (
+        outlined-container-color: var(--mat-sys-tertiary-container),
+      )
+    );
+  }
 
   &__content {
     display: flex;

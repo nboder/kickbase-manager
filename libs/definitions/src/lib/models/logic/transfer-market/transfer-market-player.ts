@@ -23,6 +23,12 @@ export class TransferMarketPlayer extends BasicPlayer {
     );
   }
 
+  hasAnOffer(): boolean {
+    return (
+      this.currentOffer.offer > 0 && this.currentOffer.offerId != undefined
+    );
+  }
+
   transferExpirationInDays(): number {
     return this.transferExpirationInHours() / 24;
   }

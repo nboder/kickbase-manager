@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   computed,
   inject,
@@ -8,11 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import {
-  MoneyPipe,
-  TransferMarketDefinitions,
-  TransferMarketPlayer,
-} from '@kickbase/definitions';
+import { MoneyPipe, TransferMarketPlayer } from '@kickbase/definitions';
 import { TransferMarketService } from '../service/transfer-market-service';
 import { DecimalPipe } from '@angular/common';
 import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
@@ -33,20 +28,10 @@ export class TransferMarket implements OnInit, ResponsiveView {
 
   private transferMarket = signal<TransferMarketPlayer[]>([]);
   shownTransferMarketPlayers = computed(() => {
-    if (this.showOnlyPointMachines()) {
-      return this.transferMarket().filter((player) => {
-        return (
-          player.averagePoints >=
-          TransferMarketDefinitions.PointingMachineThreshold
-        );
-      });
-    } else {
-      return this.transferMarket();
-    }
+    return this.transferMarket();
   });
 
   private readonly transferMarketService = inject(TransferMarketService);
-  showOnlyPointMachines = signal<boolean>(false);
 
   private readonly transferMarketLookup = new Map<string, TransferMarketPlayer>(
     []
@@ -75,7 +60,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
               (a, b) => a.transferExpiringSeconds - b.transferExpiringSeconds
             )
           );
-          this.acceptBuyingOrders()
+          this.acceptBuyingOrders();
         },
         error: (err) => {
           console.error(err);
