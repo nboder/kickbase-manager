@@ -16,10 +16,11 @@ import {
   SellingPlayer,
 } from '@kickbase/persistence-management';
 import { ResponsiveView } from '@kickbase/PositionMarker';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
-  selector: 'lib-sqaud-view',
-  imports: [MatButton, SquadPlayerCard],
+  selector: 'lib-squad-view',
+  imports: [MatButton, SquadPlayerCard, NgTemplateOutlet],
   templateUrl: './squad-view.component.html',
   styleUrl: './squad-view.component.scss',
 })
