@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   computed,
   inject,
@@ -74,6 +75,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
               (a, b) => a.transferExpiringSeconds - b.transferExpiringSeconds
             )
           );
+          this.acceptBuyingOrders()
         },
         error: (err) => {
           console.error(err);
