@@ -2,17 +2,10 @@
 <div class="mobile-container">
   <div class="mobile__section_squad">
     @for (player of mySquad(); track player.playerId) {
-    <lib-squad-player-card
-      [numberOfPlayer]="$index + 1"
-      [playerId]="player.playerId"
-      [playerName]="player.name"
-      [marketValue]="player.marketValue"
-      [marketValueTrend]="player.twentyForHoursDevelopment"
-      [position]="player.position"
-      [isInSquad]="player.isInSquad"
-      [isBeingSold]="isPlayerMarkedForSelling(player)"
-      (playerShouldBeSold)="playerToggleSellStatus(player.playerId, $event)"
-    ></lib-squad-player-card>
+    <ng-template
+      [ngTemplateOutlet]="squadPlayerCard"
+      [ngTemplateOutletContext]="{ player: player, index: $index }"
+    ></ng-template>
     }
   </div>
   <div class="mobile__section-buttons">
@@ -28,17 +21,10 @@
 <div class="squad-section">
   <div class="squad-section__card-section">
     @for (player of mySquad(); track player.playerId) {
-    <lib-squad-player-card
-      [numberOfPlayer]="$index + 1"
-      [playerId]="player.playerId"
-      [playerName]="player.name"
-      [marketValue]="player.marketValue"
-      [marketValueTrend]="player.twentyForHoursDevelopment"
-      [position]="player.position"
-      [isInSquad]="player.isInSquad"
-      [isBeingSold]="isPlayerMarkedForSelling(player)"
-      (playerShouldBeSold)="playerToggleSellStatus(player.playerId, $event)"
-    ></lib-squad-player-card>
+    <ng-template
+      [ngTemplateOutlet]="squadPlayerCard"
+      [ngTemplateOutletContext]="{ player: player, index: $index }"
+    ></ng-template>
     }
   </div>
   <div class="squad-section__buttons">
@@ -51,3 +37,18 @@
   </div>
 </div>
 }
+
+<ng-template #squadPlayerCard let-player="player" let-index="index">
+  <lib-squad-player-card
+    [numberOfPlayer]="index + 1"
+    [playerId]="player.playerId"
+    [playerName]="player.name"
+    [marketValue]="player.marketValue"
+    [marketValueTrend]="player.twentyForHoursDevelopment"
+    [marketValueWinOrLoss]="player.marketValueWinOrLoss"
+    [position]="player.position"
+    [isInSquad]="player.isInSquad"
+    [isBeingSold]="isPlayerMarkedForSelling(player)"
+    (playerShouldBeSold)="playerToggleSellStatus(player.playerId, $event)"
+  ></lib-squad-player-card>
+</ng-template>

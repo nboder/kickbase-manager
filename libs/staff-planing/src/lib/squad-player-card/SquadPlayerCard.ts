@@ -2,7 +2,7 @@ import { Component, input, output } from '@angular/core';
 import { MatCard } from '@angular/material/card';
 import { PlayerNameAndValue, PositionMarker } from '@kickbase/PositionMarker';
 import { KickbaseStaffPosition, MoneyPipe } from '@kickbase/definitions';
-import { NgOptimizedImage } from '@angular/common';
+import { NgClass, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'lib-squad-player-card',
@@ -12,6 +12,7 @@ import { NgOptimizedImage } from '@angular/common';
     PlayerNameAndValue,
     MoneyPipe,
     NgOptimizedImage,
+    NgClass,
   ],
   templateUrl: './SquadPlayerCard.html',
   styleUrl: './SquadPlayerCard.scss',
@@ -21,7 +22,8 @@ export class SquadPlayerCard {
   playerId = input.required<string>();
   playerName = input.required<string>();
   marketValue = input.required<number>();
-  marketValueTrend = input<number>();
+  marketValueTrend = input.required<number>();
+  marketValueWinOrLoss = input.required<number>();
   position = input.required<KickbaseStaffPosition>();
   isInSquad = input.required<boolean>();
   isBeingSold = input.required<boolean>();

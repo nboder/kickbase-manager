@@ -35,6 +35,9 @@ export class StaffPlaning implements OnInit {
   @ViewChild(SquadView)
   private squadView: SquadView | undefined;
 
+  @ViewChild(TransferMarket)
+  private transferMarket: TransferMarket | undefined;
+
   viewPortService = inject(ViewPortService);
   activatedRoute = inject(ActivatedRoute);
 
