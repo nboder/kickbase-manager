@@ -7,6 +7,7 @@ export class TransferMarketPlayer extends BasicPlayer {
   readonly transferExpiringSeconds: number;
   readonly averagePoints: number;
   readonly totalPoints: number;
+  readonly price: number;
   twentyForHoursTrend = 0;
   teamName = '';
   currentOffer = TransferMarketPlayerOffer.noOffer();
@@ -21,6 +22,7 @@ export class TransferMarketPlayer extends BasicPlayer {
       responseData.uop,
       responseData.uoid
     );
+    this.price = responseData.prc;
   }
 
   hasAnOffer(): boolean {
