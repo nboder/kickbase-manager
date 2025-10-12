@@ -49,9 +49,24 @@
 
     &__sell_section {
       display: flex;
-      align-items: center;
-      flex-direction: row;
-      gap: 1em;
+      align-items: end;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.15em;
+
+      .positive {
+        font-size: small;
+        color: green;
+      }
+
+      .positive::before {
+        content: '+';
+      }
+
+      .negative {
+        font-size: small;
+        color: red;
+      }
     }
   }
 }

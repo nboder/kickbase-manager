@@ -22,6 +22,9 @@
     </div>
     <div class="squad_play_card__content__sell_section">
       <div class="money-column">{{ marketValue() | moneyPipe }}</div>
+      <div [ngClass]="marketValueWinOrLoss() > 0 ? 'positive' : 'negative'">
+        {{ marketValueWinOrLoss() | moneyPipe }}
+      </div>
     </div>
   </div>
 </mat-card>
