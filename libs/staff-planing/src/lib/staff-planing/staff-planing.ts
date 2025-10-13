@@ -1,4 +1,12 @@
-import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  Signal,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { CurrencyPipe, NgTemplateOutlet } from '@angular/common';
 import { TransferMarket } from '../transfer-market/transfer-market';
 import { MoneyOverview } from '../money-overview/MoneyOverview';
@@ -7,6 +15,9 @@ import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { ViewPortService } from '@kickbase/PositionMarker';
 import { ActivatedRoute } from '@angular/router';
 import { AppRouteDefinitions } from '@kickbase/definitions';
+import { StaffPlanningController } from './controller/staff-planning-controller';
+import { StaffPlanningMobileController } from './controller/staff-planning-mobile-controller';
+import { StaffPlanningWebController } from './controller/staff-planning-web-controller';
 
 @Component({
   selector: 'lib-staff-planing',
@@ -26,11 +37,16 @@ export class StaffPlaning implements OnInit {
   @ViewChild(SquadView)
   private squadView: SquadView | undefined;
 
-  @ViewChild(TransferMarket)
-  private transferMarket: TransferMarket | undefined;
-
   viewPortService = inject(ViewPortService);
   activatedRoute = inject(ActivatedRoute);
+
+  controller: Signal<StaffPlanningController> = computed(() => {
+    if (this.viewPortService.isMobileLayout()) {
+      return new StaffPlanningMobileController();
+    } else {
+      return new StaffPlanningWebController();
+    }
+  });
 
   sumOfBuyingPlayer = signal<number>(0);
   selectedLeaguedId = signal<string>('');
