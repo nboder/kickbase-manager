@@ -47,12 +47,14 @@ export class LocalStoragePersistenceManager implements PersistenceManager {
   }
 
   storeSellablePlayer(player: SellingPlayer): void {
-    this.savedPlayersToSell.update((currentValue) => {
-      const currentPlayers = [...currentValue];
-      currentPlayers.push(player);
-      this.updatePlayersToSell(currentPlayers);
-      return currentPlayers;
-    });
+    if (!this.lookupPlayersToSell().has(player.playerId)) {
+      this.savedPlayersToSell.update((currentValue) => {
+        const currentPlayers = [...currentValue];
+        currentPlayers.push(player);
+        this.updatePlayersToSell(currentPlayers);
+        return currentPlayers;
+      });
+    }
   }
 
   getLastLoggedInUsername(): string | null {

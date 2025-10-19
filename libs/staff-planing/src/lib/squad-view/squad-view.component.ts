@@ -81,7 +81,15 @@ export class SquadView implements OnInit, ResponsiveView {
     this.storageManager.loadPlayersToSell();
     this.staffService.fetchMyTeam(this.selectedLeagueId()).subscribe({
       next: (data: SquadResponseStaff) => {
-        const players = data.it.map((value) => new Player(value));
+        const players = data.it.map((value) => {
+          const player = new Player(value);
+          if (player.isOnTransferMarket) {
+            this.storageManager.storeSellablePlayer(
+              new SellingPlayer(player.playerId)
+            );
+          }
+          return player;
+        });
         const sortedPlayers = players.sort((a, b) => a.position - b.position);
         this.mySquad.set(sortedPlayers);
       },
@@ -106,7 +114,9 @@ export class SquadView implements OnInit, ResponsiveView {
   sellAllPlayersNotInSquad() {
     this.mySquad().forEach((player) => {
       if (!player.isInSquad) {
-        this.storageManager.storeSellablePlayer(player);
+        this.storageManager.storeSellablePlayer(
+          new SellingPlayer(player.playerId)
+        );
       }
     });
   }

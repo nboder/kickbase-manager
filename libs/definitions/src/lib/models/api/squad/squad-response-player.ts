@@ -5,4 +5,5 @@ export interface SquadResponsePlayer extends BasicPlayerResponse {
   readonly n: string; // Name
   readonly sdmvt: number; // 7 Day Prediction
   readonly lo: number | undefined; // is in Squad, Value is the position on the filed.
+  readonly iotm: boolean;
 }
