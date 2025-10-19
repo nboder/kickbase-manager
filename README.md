@@ -8,7 +8,7 @@ Thanks to the guys from te [Kickbase API v4 Documentation](https://github.com/ke
 
 In General it allows you to simulate some transfers without actually putting the Players onto the Transfer-Market. Just mark them for selling and place some offers and see in Realtime what your balance looks like, if every Transfer would be made.
 
-The UI is kept simple and support a mobile (phone) Layout and a "Web" Layout. The focus wasn't to have the most beautiful App, but a functional one with disrespcting sytle. :)
+The UI is kept simple but beautiful and support a mobile (phone) Layout and a "Web" Layout. The focus wasn't to have the most beautiful App, but a functional one without disrespcting sytle. :)
 
 You are really want to use the last cents of your Balance and calculate with the Market trend? See what you will earn in 24hours or even 7 Days.
 
