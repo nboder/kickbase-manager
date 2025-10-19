@@ -7,7 +7,7 @@
 @mixin squad_section() {
   display: flex;
   flex-direction: column;
-  gap: 0.2em;
+  gap: 0.5em;
 }
 
 @mixin button_section() {

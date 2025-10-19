@@ -9,12 +9,8 @@
     }
   </div>
   <div class="mobile__section-buttons">
-    <button matButton="tonal" (click)="sellAllPlayersNotInSquad()">
-      Sell not in Squad
-    </button>
-    <button matButton="tonal" (click)="resetAllSellingCandidates()">
-      Reset all Sales
-    </button>
+    <ng-template [ngTemplateOutlet]="sellAllButton"></ng-template>
+    <ng-template [ngTemplateOutlet]="resetSales"></ng-template>
   </div>
 </div>
 } @else {
@@ -28,12 +24,8 @@
     }
   </div>
   <div class="squad-section__buttons">
-    <button matButton="tonal" (click)="sellAllPlayersNotInSquad()">
-      Sell not in Squad
-    </button>
-    <button matButton="tonal" (click)="resetAllSellingCandidates()">
-      Reset all Sales
-    </button>
+    <ng-template [ngTemplateOutlet]="sellAllButton"></ng-template>
+    <ng-template [ngTemplateOutlet]="resetSales"></ng-template>
   </div>
 </div>
 }
@@ -51,4 +43,16 @@
     [isBeingSold]="isPlayerMarkedForSelling(player)"
     (playerShouldBeSold)="playerToggleSellStatus(player.playerId, $event)"
   ></lib-squad-player-card>
+</ng-template>
+
+<ng-template #sellAllButton>
+  <button matButton="tonal" (click)="sellAllPlayersNotInSquad()">
+    Mark all Bench
+  </button>
+</ng-template>
+
+<ng-template #resetSales>
+  <button matButton="tonal" (click)="resetAllSellingCandidates()">
+    Reset all Sales
+  </button>
 </ng-template>

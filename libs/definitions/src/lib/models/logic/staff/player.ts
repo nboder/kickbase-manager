@@ -6,6 +6,7 @@ export class Player extends BasicPlayer {
   readonly twentyForHoursDevelopment: number;
   readonly isInSquad: boolean;
   readonly marketValueWinOrLoss: number;
+  readonly isOnTransferMarket: boolean;
 
   constructor(responseData: SquadResponsePlayer) {
     super(responseData.i, responseData.n, responseData.mv, responseData.pos);
@@ -13,5 +14,6 @@ export class Player extends BasicPlayer {
     this.twentyForHoursDevelopment = responseData.tfhmvt;
     this.isInSquad = responseData.lo != undefined;
     this.marketValueWinOrLoss = responseData.mvgl;
+    this.isOnTransferMarket = responseData.iotm;
   }
 }
