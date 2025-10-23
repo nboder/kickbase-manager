@@ -28,14 +28,19 @@ $content_point_height: 1rem;
         display: inherit;
         flex-direction: column;
         justify-content: start;
-        gap: 8px;
+        gap: 2px;
         min-width: 75px;
+
+        &__expand {
+          height: 12px;
+        }
       }
 
       &__player-information {
         display: inherit;
         flex-direction: column;
         justify-content: center;
+        gap: 0.2rem;
         flex-grow: 1;
       }
 

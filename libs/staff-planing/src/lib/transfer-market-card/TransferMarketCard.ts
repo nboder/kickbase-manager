@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { MatCard } from '@angular/material/card';
 import {
   ExpirationTimePipe,
@@ -41,6 +41,7 @@ export class TransferMarketCard {
   private readonly dialog = inject(MatDialog);
   readonly showHoursThreshold = 1.0;
   readonly showDaysThreshold = 48.0;
+  showDetailedPoints = signal<boolean>(false);
 
   overpayment(): number {
     return (
@@ -90,6 +91,10 @@ export class TransferMarketCard {
       this.transferMarketPlayer().price -
       this.transferMarketPlayer().marketValue
     );
+  }
+
+  togglePointDetails() {
+    this.showDetailedPoints.set(!this.showDetailedPoints());
   }
 
   protected readonly PointIndication = PointIndication;

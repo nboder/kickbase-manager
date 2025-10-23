@@ -5,7 +5,10 @@
 >
   <div class="transfer-market-card__content">
     <div class="transfer-market-card__content__main">
-      <div class="transfer-market-card__content__main__meta-information">
+      <div
+        class="transfer-market-card__content__main__meta-information"
+        (click)="togglePointDetails()"
+      >
         <div class="centered-content">
           <lib-position-marker
             [position]="transferMarketPlayer().position"
@@ -20,6 +23,14 @@
           transferMarketPlayer().transferExpirationInHours() | expirationTime }}
           h } @else { {{ transferMarketPlayer().transferExpirationInDays() |
           expirationTime }} Days }
+        </div>
+        <div class="centered-content">
+          {{ transferMarketPlayer().averagePoints }} avg
+        </div>
+        <div
+          class="transfer-market-card__content__main__meta-information__expand centered-content"
+        >
+          <img src="assets/arrow_down.svg" alt="" />
         </div>
       </div>
       <div class="transfer-market-card__content__main__player-information">
@@ -56,9 +67,10 @@
         }
       </div>
     </div>
+    @if (showDetailedPoints()) {
     <mat-divider></mat-divider>
     <div class="transfer-market-card__content__points">
-      <div>{{ transferMarketPlayer().averagePoints }} avg</div>
+      <div>{{ transferMarketPlayer().totalPoints }} Pkt</div>
       @let countOfGreatGames = transferMarketPlayer().countOfGreatGames();
       <lib-point-indicator-view
         [pointIndication]="PointIndication.GREAT"
@@ -97,5 +109,6 @@
         >
       </div>
     </div>
+    }
   </div>
 </mat-card>

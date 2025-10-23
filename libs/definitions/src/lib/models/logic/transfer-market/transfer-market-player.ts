@@ -20,7 +20,7 @@ export class TransferMarketPlayer extends BasicPlayer {
     this.firstName = responseData.fn;
     this.transferExpiringSeconds = responseData.exs;
     this.averagePoints = responseData.ap == undefined ? 0 : responseData.ap;
-    this.totalPoints = responseData.p;
+    this.totalPoints = responseData.p == undefined ? 0 : responseData.p;
     this.currentOffer = new TransferMarketPlayerOffer(
       responseData.uop,
       responseData.uoid
