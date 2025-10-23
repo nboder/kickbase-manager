@@ -4,6 +4,8 @@ This project does not aim to replace the usage of the Kickbase App. It is inspir
 
 Thanks to the guys from te [Kickbase API v4 Documentation](https://github.com/kevinskyba/kickbase-api-doc)-Team. With the API-Knowledge it was easy to start getting the proper data.
 
+See and visit the App: [Advanced Kickbase Manager](https://nboder.github.io/kickbase-manager/)
+
 ## General Information
 
 In General it allows you to simulate some transfers without actually putting the Players onto the Transfer-Market. Just mark them for selling and place some offers and see in Realtime what your balance looks like, if every Transfer would be made.
@@ -13,7 +15,7 @@ The UI is kept simple but beautiful and support a mobile (phone) Layout and a "W
 You are really want to use the last cents of your Balance and calculate with the Market trend? See what you will earn in 24hours or even 7 Days.
 
 > [!Note]
-> The App is only tested with an Account and the Member-Access. It might be that there will be support for non members in the future. Could be, that there are some Issues
+> Amateur Subscription will greatly benefit from that App as it shows you all the information, which is normally accessible after many clicks. For example Market-Value Trend of a Player and the History.
 
 > [!Warning]
 > Even tough Challenges are listed after the Login, there is no support for Challenges. The App is only made for Leagues.
@@ -28,8 +30,9 @@ You are really want to use the last cents of your Balance and calculate with the
   - Market value
   - Current value trend
   - Check if the player is on the Bench or in the Squad
+  - See how your player has been developed by money. If the Player created + oder -.
 - Simulate to sell a player, just by clicking on the tile (currently only MV Selling is supported). This will not put te Player onto the market, but let you see how it affects your Balance.
-- Convenience: Sell all benched players
+- Convenience: Sell all benched players to see the change
 - Reset all "Selling" players
 
 ### Transfer Market
@@ -43,6 +46,7 @@ You are really want to use the last cents of your Balance and calculate with the
   - 24h Trend
   - Average points made
   - Expiration Time on the Market
+  - See the Performance of the Player, including the Total Points and how many orange (400+), dark green(200+), green(100+) or orange(<100) bars has been achieved.
 - Place an offer by just clicking on the Market value. => This will really place the offer in Kickbase and can be seen in the App.
 - Withdraw you offer the same way this will also be reflected in the Kickbase App.
 
