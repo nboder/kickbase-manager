@@ -1,5 +1,7 @@
 @use '@angular/material' as mat;
 
+$content_point_height: 1rem;
+
 .transfer-market-card {
   min-height: 65px;
   min-width: 320px;
@@ -15,33 +17,69 @@
 
   &__content {
     display: flex;
-    padding: 2px 4px;
+    flex-direction: column;
+    gap: 0.2em;
 
-    &__meta-information {
-      display: inherit;
-      flex-direction: column;
-      justify-content: center;
-      gap: 2px;
-      //background: blue;
-      min-width: 75px;
+    &__main {
+      display: flex;
+      padding: 2px 4px;
+
+      &__meta-information {
+        display: inherit;
+        flex-direction: column;
+        justify-content: start;
+        gap: 2px;
+        min-width: 75px;
+
+        &__expand {
+          height: 12px;
+        }
+      }
+
+      &__player-information {
+        display: inherit;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.2rem;
+        flex-grow: 1;
+      }
+
+      &__money-information {
+        display: inherit;
+        flex-direction: column;
+        align-items: end;
+        justify-content: center;
+        gap: 2px;
+        flex-grow: 0.25;
+      }
     }
 
-    &__player-information {
-      display: inherit;
-      flex-direction: column;
-      justify-content: center;
-      //background: yellow;
-      flex-grow: 1;
-    }
+    &__points {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-bottom: 2px;
+      gap: 1.2rem;
+      min-height: $content_point_height;
+      max-height: $content_point_height;
 
-    &__money-information {
-      display: inherit;
-      flex-direction: column;
-      align-items: end;
-      justify-content: center;
-      gap: 2px;
-      flex-grow: 0.25;
-      //background: green;
+      &__point-indication {
+        height: $content_point_height;
+        width: calc($content_point_height / 1.5);
+      }
+
+      &__total-games {
+        height: $content_point_height;
+        width: calc($content_point_height * 4);
+
+        > img {
+          height: $content_point_height;
+          width: $content_point_height;
+        }
+      }
     }
   }
 }
@@ -56,4 +94,12 @@
 
 .overpay-value {
   color: red;
+}
+
+.moep {
+  align-items: center;
+  justify-content: center;
+  min-width: 12px;
+  max-width: 18px;
+  min-height: 12px;
 }

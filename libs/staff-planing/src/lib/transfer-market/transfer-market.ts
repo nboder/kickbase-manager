@@ -7,7 +7,11 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { MoneyPipe, TransferMarketPlayer } from '@kickbase/definitions';
+import {
+  MoneyPipe,
+  PointHistory,
+  TransferMarketPlayer,
+} from '@kickbase/definitions';
 import { TransferMarketService } from '../service/transfer-market-service';
 import { DecimalPipe } from '@angular/common';
 import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
@@ -132,6 +136,9 @@ export class TransferMarket implements OnInit, ResponsiveView {
           if (currentPlayer) {
             currentPlayer.teamName = data.tn;
             currentPlayer.twentyForHoursTrend = data.tfhmvt;
+            currentPlayer.pointHistory = data.ph.map(
+              (value) => new PointHistory(value)
+            );
           }
         },
         error: (err) => {

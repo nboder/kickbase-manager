@@ -4,57 +4,111 @@
   [class.transfer-market-card__isBeingBought]="transferMarketPlayer().hasAnOffer()"
 >
   <div class="transfer-market-card__content">
-    <div class="transfer-market-card__content__meta-information">
-      <div class="centered-content">
-        <lib-position-marker
-          [position]="transferMarketPlayer().position"
-        ></lib-position-marker>
+    <div class="transfer-market-card__content__main">
+      <div
+        class="transfer-market-card__content__main__meta-information"
+        (click)="togglePointDetails()"
+      >
+        <div class="centered-content">
+          <lib-position-marker
+            [position]="transferMarketPlayer().position"
+          ></lib-position-marker>
+        </div>
+        <div class="centered-content">
+          @let hours = transferMarketPlayer().transferExpirationInHours(); @if
+          (hours < showHoursThreshold) { {{
+          transferMarketPlayer().transferExpirationInMinutes() | expirationTime
+          }} min } @else if (hours > showHoursThreshold && hours <
+          showDaysThreshold) { {{
+          transferMarketPlayer().transferExpirationInHours() | expirationTime }}
+          h } @else { {{ transferMarketPlayer().transferExpirationInDays() |
+          expirationTime }} Days }
+        </div>
+        <div class="centered-content">
+          {{ transferMarketPlayer().averagePoints }} avg
+        </div>
+        <div
+          class="transfer-market-card__content__main__meta-information__expand centered-content"
+        >
+          <img src="assets/arrow_down.svg" alt="" />
+        </div>
       </div>
-      <div class="centered-content">
-        @let hours = transferMarketPlayer().transferExpirationInHours(); @if
-        (hours < showHoursThreshold) { {{
-        transferMarketPlayer().transferExpirationInMinutes() | expirationTime }}
-        min } @else if (hours > showHoursThreshold && hours < showDaysThreshold)
-        { {{ transferMarketPlayer().transferExpirationInHours() | expirationTime
-        }} h } @else { {{ transferMarketPlayer().transferExpirationInDays() |
-        expirationTime }} Days }
+      <div class="transfer-market-card__content__main__player-information">
+        <div>
+          <lib-player-name-and-value
+            [playerFirstName]="transferMarketPlayer().firstName"
+            [playerLastName]="transferMarketPlayer().name"
+            [marketValueTrend]="transferMarketPlayer().twentyForHoursTrend"
+          ></lib-player-name-and-value>
+        </div>
+        <div>{{ transferMarketPlayer().teamName }}</div>
       </div>
-      <div class="centered-content">
-        {{ transferMarketPlayer().averagePoints }} avg
+      <div
+        class="transfer-market-card__content__main__money-information"
+        (click)="showSellingDialog()"
+      >
+        <div class="money-column">
+          {{ transferMarketPlayer().price | moneyPipe }}
+        </div>
+        @if (transferMarketPlayer().currentOffer.offer > 0) {
+        <div class="money-column bid-value">
+          {{ transferMarketPlayer().currentOffer.offer | moneyPipe }}
+        </div>
+        <div class="money-column overpay-value">
+          {{ overpayment() | moneyPipe }}
+        </div>
+        } @else if (shouldShowMarketValueDiffToPrice()) {
+        <div class="money-column bid-value">
+          MV: {{ transferMarketPlayer().marketValue | moneyPipe }}
+        </div>
+        <div class="money-column overpay-value">
+          {{ priceDifferenceToMarketValue() | moneyPipe }}
+        </div>
+        }
       </div>
     </div>
-    <div class="transfer-market-card__content__player-information">
-      <div>
-        <lib-player-name-and-value
-          [playerFirstName]="transferMarketPlayer().firstName"
-          [playerLastName]="transferMarketPlayer().name"
-          [marketValueTrend]="transferMarketPlayer().twentyForHoursTrend"
-        ></lib-player-name-and-value>
+    @if (showDetailedPoints()) {
+    <mat-divider></mat-divider>
+    <div class="transfer-market-card__content__points">
+      <div>{{ transferMarketPlayer().totalPoints }} Pkt</div>
+      @let countOfGreatGames = transferMarketPlayer().countOfGreatGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.GREAT"
+        [countOfIndications]="countOfGreatGames"
+        class="transfer-market-card__content__points__point-indication"
+      ></lib-point-indicator-view>
+      @let countOfVeryGoodtGames =
+      transferMarketPlayer().countOfVeryGoodGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.VERY_GOOD"
+        [countOfIndications]="countOfVeryGoodtGames"
+        class="transfer-market-card__content__points__point-indication"
+      ></lib-point-indicator-view>
+      @let countOfGoodGames = transferMarketPlayer().countOfGoodGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.GOOD"
+        [countOfIndications]="countOfGoodGames"
+        class="transfer-market-card__content__points__point-indication"
+      ></lib-point-indicator-view>
+      @let countOfBadGames = transferMarketPlayer().countOfBadGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.JUST_A_PLAYER"
+        [countOfIndications]="countOfBadGames"
+        class="transfer-market-card__content__points__point-indication"
+      ></lib-point-indicator-view>
+      @let countOfUnPlayedGames =
+      transferMarketPlayer().countOfNotPlayedGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.NOT_PLAYED"
+        [countOfIndications]="countOfUnPlayedGames"
+        class="transfer-market-card__content__points__point-indication"
+      ></lib-point-indicator-view>
+      <div class="transfer-market-card__content__points__total-games">
+        <img src="assets/soccer.svg" alt="" /><span
+          >: {{ transferMarketPlayer().countOfGames() }}</span
+        >
       </div>
-      <div>{{ transferMarketPlayer().teamName }}</div>
     </div>
-    <div
-      class="transfer-market-card__content__money-information"
-      (click)="showSellingDialog()"
-    >
-      <div class="money-column">
-        {{ transferMarketPlayer().price | moneyPipe }}
-      </div>
-      @if (transferMarketPlayer().currentOffer.offer > 0) {
-      <div class="money-column bid-value">
-        {{ transferMarketPlayer().currentOffer.offer | moneyPipe }}
-      </div>
-      <div class="money-column overpay-value">
-        {{ overpayment() | moneyPipe }}
-      </div>
-      } @else if (shouldShowMarketValueDiffToPrice()) {
-      <div class="money-column bid-value">
-        MV: {{ transferMarketPlayer().marketValue | moneyPipe }}
-      </div>
-      <div class="money-column overpay-value">
-        {{ priceDifferenceToMarketValue() | moneyPipe }}
-      </div>
-      }
-    </div>
+    }
   </div>
 </mat-card>

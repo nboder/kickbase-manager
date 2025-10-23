@@ -13,6 +13,7 @@ export * from './lib/models/api/login/login-response-user';
 
 export * from './lib/models/api/players/player-response-information';
 export * from './lib/models/api/players/player-detail-response';
+export * from './lib/models/api/players/point-history-response';
 
 export * from './lib/models/api/transfer-market/market-information-response';
 export * from './lib/models/api/transfer-market/market-information-player-response';
@@ -29,3 +30,4 @@ export * from './lib/models/api/squad/squad-response-player';
 export * from './lib/models/logic/basic-player';
 export * from './lib/models/logic/staff/player';
 export * from './lib/models/logic/transfer-market/transfer-market-player';
+export * from './lib/models/logic/transfer-market/point-history';

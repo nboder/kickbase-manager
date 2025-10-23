@@ -1,17 +1,23 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { MatCard } from '@angular/material/card';
 import {
   ExpirationTimePipe,
   MoneyPipe,
   TransferMarketPlayer,
 } from '@kickbase/definitions';
-import { PlayerNameAndValue, PositionMarker } from '@kickbase/PositionMarker';
+import {
+  PlayerNameAndValue,
+  PointIndication,
+  PointIndicatorView,
+  PositionMarker,
+} from '@kickbase/PositionMarker';
 import { MatDialog } from '@angular/material/dialog';
 import {
   TransferMarketBidDialog,
   TransferMarketBidDialogStatus,
   TransferMarketOutputBidData,
 } from '../transfer-market-bid-dialog/TransferMarketBidDialog';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'lib-transfer-market-card',
@@ -21,6 +27,8 @@ import {
     ExpirationTimePipe,
     PlayerNameAndValue,
     MoneyPipe,
+    MatDivider,
+    PointIndicatorView,
   ],
   templateUrl: './TransferMarketCard.html',
   styleUrls: ['./TransferMarketCard.scss', '../shared.scss'],
@@ -33,6 +41,7 @@ export class TransferMarketCard {
   private readonly dialog = inject(MatDialog);
   readonly showHoursThreshold = 1.0;
   readonly showDaysThreshold = 48.0;
+  showDetailedPoints = signal<boolean>(false);
 
   overpayment(): number {
     return (
@@ -83,4 +92,10 @@ export class TransferMarketCard {
       this.transferMarketPlayer().marketValue
     );
   }
+
+  togglePointDetails() {
+    this.showDetailedPoints.set(!this.showDetailedPoints());
+  }
+
+  protected readonly PointIndication = PointIndication;
 }
