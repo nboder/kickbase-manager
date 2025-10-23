@@ -1,0 +1,22 @@
+@mixin point-indicator-view($color) {
+  width: 100%;
+  height: 100%;
+}
+
+.point-indicator-view {
+  &__great {
+    @include point-indicator-view(#ffc506);
+  }
+
+  &__very_good {
+    @include point-indicator-view(#03e17f);
+  }
+
+  &__good {
+    @include point-indicator-view(#91e10f);
+  }
+
+  &__bad {
+    @include point-indicator-view(#e1850b);
+  }
+}
