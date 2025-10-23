@@ -1,5 +1,9 @@
 @use '@angular/material' as mat;
 
+:root {
+  --kickbase-toolbar-height: 48px;
+}
+
 html {
   color-scheme: light;
   @include mat.theme(

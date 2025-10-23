@@ -11,8 +11,7 @@
     <mat-card-actions align="end">
       <a
         matButton
-        [routerLink]="['/', AppRouteDefinitions.STAFF_MANAGEMENT]"
-        [queryParams]="{leagueId: league.id}"
+        [routerLink]="['/', AppRouteDefinitions.MANAGEMENT, league.id]"
         >Select League</a
       >
     </mat-card-actions>
