@@ -1,0 +1,21 @@
+<div class="side-bar-navigation">
+  @for (sideBarItem of sidebarItems(); track sideBarItem) {
+    @if (!$last) {
+      <mat-card class="side-bar-navigation__element" [class.side-bar-navigation__first-element]="$first"
+                appearance="raised" (click)="sideBarElementClicked(sideBarItem)">
+        <mat-card-content>
+          {{ sideBarItem }}
+        </mat-card-content>
+      </mat-card>
+    }
+    @if ($last) {
+      <span class="side-bar-navigation__filler"></span>
+      <mat-divider class="side-bar-navigation__divider"></mat-divider>
+      <mat-card (click)="sideBarElementClicked(sideBarItem)" class="side-bar-navigation__element side-bar-navigation__last-element" appearance="raised">
+        <mat-card-content>
+          {{ sideBarItem }}
+        </mat-card-content>
+      </mat-card>
+    }
+  }
+</div>

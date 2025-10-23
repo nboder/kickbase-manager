@@ -28,6 +28,11 @@ export class UserManagementService {
     return this.currentUser;
   }
 
+  logoutCurrentUser() {
+    this.currentUser = CurrentUser.noUser();
+    sessionStorage.removeItem(this.CURRENT_USER_KEY);
+  }
+
   getUserAccessToken(): string | null {
     return this.getCurrentUser().token;
   }

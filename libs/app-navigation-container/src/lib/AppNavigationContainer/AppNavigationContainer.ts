@@ -8,6 +8,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatToolbar } from '@angular/material/toolbar';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { AppRouteDefinitions } from 'libs/definitions/src';
+import { SideBarNavigation } from '../side-bar-navigation/SideBarNavigation';
 
 @Component({
   selector: 'lib-app-navigation-container',
@@ -18,6 +19,7 @@ import { AppRouteDefinitions } from 'libs/definitions/src';
     MatSidenavContainer,
     MatSidenav,
     MatSidenavContent,
+    SideBarNavigation,
   ],
   templateUrl: './AppNavigationContainer.html',
   styleUrl: './AppNavigationContainer.css',
