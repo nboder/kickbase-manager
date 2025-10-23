@@ -34,7 +34,6 @@ export class LeagueManagementService {
   }
 
   getLeagueInformation(): GeneralLeagueInformation {
-    console.log(this.leagueInformation);
     const leagueInformation = localStorage.getItem(this.LEAGUE_INFORMATION_KEY);
     if (leagueInformation) {
       const parsedItem: GeneralLeagueInformation =

@@ -15,15 +15,28 @@ export const appRoutes: Route[] = [
       import('@kickbase/LoginManagement').then((comp) => comp.LoginManagement),
   },
   {
+    path:
+      AppRouteDefinitions.MANAGEMENT +
+      '/:' +
+      AppRouteDefinitions.PATH_PARAM_LEAGUE_ID,
+    loadComponent: () =>
+      import('@kickbase/AppNavigationContainer').then(
+        (comp) => comp.AppNavigationContainer
+      ),
+    canActivate: [isLoggedInGuard],
+    children: [
+      {
+        path: AppRouteDefinitions.STAFF_MANAGEMENT,
+        loadComponent: () =>
+          import('@kickbase/staff-planing').then((comp) => comp.StaffPlaning),
+        canActivate: [isLoggedInGuard],
+      },
+    ],
+  },
+  {
     path: AppRouteDefinitions.LEAGUE_SELECTION,
     loadComponent: () =>
       import('@kickbase/LoginManagement').then((comp) => comp.LeagueSelection),
-    canActivate: [isLoggedInGuard],
-  },
-  {
-    path: AppRouteDefinitions.STAFF_MANAGEMENT,
-    loadComponent: () =>
-      import('@kickbase/staff-planing').then((comp) => comp.StaffPlaning),
     canActivate: [isLoggedInGuard],
   },
   {

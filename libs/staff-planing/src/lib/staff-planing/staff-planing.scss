@@ -7,7 +7,7 @@
 }
 
 .mobile {
-  $tabHeight: 3.5em;
+  $tabHeight: 3em;
   $topBottomPadding: 4px;
 
   &-tab_group {
@@ -22,7 +22,9 @@
     padding: 4px 2px 0;
     justify-content: center;
     align-items: center;
-    height: calc(100dvh - #{$tabHeight} - calc(3 * $topBottomPadding));
+    height: calc(
+      100dvh - #{$tabHeight} - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0)
+    );
   }
 }
 

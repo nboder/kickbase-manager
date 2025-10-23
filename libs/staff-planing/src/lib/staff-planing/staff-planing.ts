@@ -52,8 +52,8 @@ export class StaffPlaning implements OnInit {
   selectedLeaguedId = signal<string>('');
 
   ngOnInit(): void {
-    const leagueId = this.activatedRoute.snapshot.queryParamMap.get(
-      AppRouteDefinitions.QUERY_PARAM_LEAGUE_ID
+    const leagueId = this.activatedRoute.parent?.snapshot.paramMap.get(
+      AppRouteDefinitions.PATH_PARAM_LEAGUE_ID
     );
     if (leagueId) {
       this.selectedLeaguedId.set(leagueId);

@@ -1,0 +1,10 @@
+@use '@angular/material' as mat;
+
+.app-toolbar {
+  @include mat.toolbar-overrides(
+    (
+      standard-height: var(--kickbase-toolbar-height),
+      mobile-height: var(--kickbase-toolbar-height),
+    )
+  );
+}
