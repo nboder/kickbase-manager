@@ -1,6 +1,6 @@
 {
   "name": "AppNavigationContainer",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/app-navigation-container/AppNavigationContainer/src",
   "prefix": "lib",
   "projectType": "library",

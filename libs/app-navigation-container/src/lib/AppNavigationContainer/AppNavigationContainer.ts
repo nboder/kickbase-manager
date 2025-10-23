@@ -7,7 +7,7 @@ import {
 import { MatIconButton } from '@angular/material/button';
 import { MatToolbar } from '@angular/material/toolbar';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { AppRouteDefinitions } from '@kickbase/definitions';
+import { AppRouteDefinitions } from 'libs/definitions/src';
 
 @Component({
   selector: 'lib-app-navigation-container',

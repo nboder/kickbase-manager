@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@kickbase/AppNavigationContainer": [
-        "libs/app-navigation-container/AppNavigationContainer/src/index.ts"
+        "libs/app-navigation-container/src/index.ts"
       ],
       "@kickbase/LoginManagement": ["libs/login-management/src/index.ts"],
       "@kickbase/PositionMarker": ["libs/shared-ui-components/src/index.ts"],
