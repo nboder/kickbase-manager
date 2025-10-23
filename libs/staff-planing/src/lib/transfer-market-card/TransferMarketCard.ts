@@ -37,6 +37,7 @@ export class TransferMarketCard {
   transferMarketPlayer = input.required<TransferMarketPlayer>();
   offerWithdrawn = output<TransferMarketPlayer>();
   offerPlaced = output<TransferMarketPlayer>();
+  shouldLoadPerformance = output<TransferMarketPlayer>();
 
   private readonly dialog = inject(MatDialog);
   readonly showHoursThreshold = 1.0;
@@ -94,6 +95,12 @@ export class TransferMarketCard {
   }
 
   togglePointDetails() {
+    if (
+      !this.showDetailedPoints() &&
+      this.transferMarketPlayer().pointHistory.length == 0
+    ) {
+      this.shouldLoadPerformance.emit(this.transferMarketPlayer());
+    }
     this.showDetailedPoints.set(!this.showDetailedPoints());
   }
 

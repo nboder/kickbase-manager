@@ -2,8 +2,7 @@ export default {
   displayName: 'AppNavigationContainer',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory:
-    '../../coverage/libs/app-navigation-container',
+  coverageDirectory: '../../coverage/libs/app-navigation-container',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

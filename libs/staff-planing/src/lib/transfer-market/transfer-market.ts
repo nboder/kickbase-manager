@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import {
+  KickbaseApi,
   MoneyPipe,
   PointHistory,
   TransferMarketPlayer,
@@ -113,6 +114,36 @@ export class TransferMarket implements OnInit, ResponsiveView {
     }
   }
 
+  shouldLoadPerformanceOfPlayer(player: TransferMarketPlayer) {
+    this.transferMarketService
+      .fetchPlayerPerformance(this.selectedLeagueId(), player.playerId)
+      .subscribe({
+        next: (data) => {
+          const currentSeason = data.it.find(
+            (value) => value.ti === KickbaseApi.CURRENT_SEASON_PERFORMANCE_NAME
+          );
+          if (currentSeason) {
+            const currentPlayer = this.transferMarketLookup.get(
+              player.playerId
+            );
+            if (currentPlayer) {
+              currentPlayer.pointHistory = currentSeason.ph
+                .filter((pointHistory) => pointHistory.mp != undefined)
+                .map((playedGame) => new PointHistory(playedGame));
+            }
+          } else {
+            console.log(
+              'Could not find current Season in Data: ' +
+                KickbaseApi.CURRENT_SEASON_PERFORMANCE_NAME
+            );
+          }
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+  }
+
   // shouldShowMarketValueUpdateBeforePlayer(
   //   nextPlayer: TransferMarketPlayer
   // ): boolean {
@@ -136,9 +167,6 @@ export class TransferMarket implements OnInit, ResponsiveView {
           if (currentPlayer) {
             currentPlayer.teamName = data.tn;
             currentPlayer.twentyForHoursTrend = data.tfhmvt;
-            currentPlayer.pointHistory = data.ph.map(
-              (value) => new PointHistory(value)
-            );
           }
         },
         error: (err) => {

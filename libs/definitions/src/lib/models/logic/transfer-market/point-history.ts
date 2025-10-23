@@ -1,11 +1,11 @@
-import { PointHistoryResponse } from '../../api/players/point-history-response';
+import { PlayerPerformancePointHistoryResponse } from '../../api/players/player-performance-point-history-response';
 
 export class PointHistory {
   readonly hasPlayed: boolean;
   readonly points: number | undefined;
 
-  constructor(pointHistory: PointHistoryResponse) {
-    this.hasPlayed = pointHistory.hp;
-    this.points = pointHistory.p;
+  constructor(performanceResponse: PlayerPerformancePointHistoryResponse) {
+    this.hasPlayed = performanceResponse.p != undefined;
+    this.points = performanceResponse.p;
   }
 }
