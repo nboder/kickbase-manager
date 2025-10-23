@@ -1,9 +1,20 @@
-@switch (pointIndication()) { @case (PointIndication.GREAT) {
-<div class="point-indicator-view__great"></div>
-} @case (PointIndication.VERY_GOOD) {
-<div class="point-indicator-view__very_good"></div>
-} @case (PointIndication.GOOD) {
-<div class="point-indicator-view__good"></div>
-} @case (PointIndication.JUST_A_PLAYER) {
-<div class="point-indicator-view__bad"></div>
-} }
+<div class="point-indicator-view">
+  @switch (pointIndication()) { @case (PointIndication.GREAT) {
+  <div class="point-indicator-view__great"></div>
+  <div class="number">{{ countOfIndications() }}</div>
+  } @case (PointIndication.VERY_GOOD) {
+  <div class="point-indicator-view__very_good"></div>
+  <div class="number">{{ countOfIndications() }}</div>
+  } @case (PointIndication.GOOD) {
+  <div class="point-indicator-view__good"></div>
+  <div class="number">{{ countOfIndications() }}</div>
+  } @case (PointIndication.JUST_A_PLAYER) {
+  <div class="point-indicator-view__bad"></div>
+  <div class="number">{{ countOfIndications() }}</div>
+  } @case (PointIndication.NOT_PLAYED) {
+  <div class="point-indicator-view__not-played">
+    <img ngSrc="assets/cross.svg" alt="" width="10" height="10" />
+  </div>
+  <div class="number">{{ countOfIndications() }}</div>
+  } }
+</div>

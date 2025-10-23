@@ -5,13 +5,19 @@ import {
   MoneyPipe,
   TransferMarketPlayer,
 } from '@kickbase/definitions';
-import { PlayerNameAndValue, PositionMarker } from '@kickbase/PositionMarker';
+import {
+  PlayerNameAndValue,
+  PointIndication,
+  PointIndicatorView,
+  PositionMarker,
+} from '@kickbase/PositionMarker';
 import { MatDialog } from '@angular/material/dialog';
 import {
   TransferMarketBidDialog,
   TransferMarketBidDialogStatus,
   TransferMarketOutputBidData,
 } from '../transfer-market-bid-dialog/TransferMarketBidDialog';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
   selector: 'lib-transfer-market-card',
@@ -21,6 +27,8 @@ import {
     ExpirationTimePipe,
     PlayerNameAndValue,
     MoneyPipe,
+    MatDivider,
+    PointIndicatorView,
   ],
   templateUrl: './TransferMarketCard.html',
   styleUrls: ['./TransferMarketCard.scss', '../shared.scss'],
@@ -83,4 +91,6 @@ export class TransferMarketCard {
       this.transferMarketPlayer().marketValue
     );
   }
+
+  protected readonly PointIndication = PointIndication;
 }

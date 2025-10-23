@@ -3,4 +3,5 @@ export enum PointIndication {
   VERY_GOOD,
   GOOD,
   JUST_A_PLAYER,
+  NOT_PLAYED,
 }
