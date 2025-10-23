@@ -5,6 +5,7 @@ import {
   MarketInformationResponse,
   PlacerOfferResponse,
   PlayerDetailResponse,
+  PlayerPerformanceResponse,
 } from '@kickbase/definitions';
 import { HttpClient } from '@angular/common/http';
 
@@ -28,6 +29,15 @@ export class TransferMarketService {
   ): Observable<PlayerDetailResponse> {
     return this.httpClient.get<PlayerDetailResponse>(
       KickbaseApi.playerInformationUrl(leagueId, playerId)
+    );
+  }
+
+  fetchPlayerPerformance(
+    leagueId: string,
+    playerId: string
+  ): Observable<PlayerPerformanceResponse> {
+    return this.httpClient.get<PlayerPerformanceResponse>(
+      KickbaseApi.playerPerformanceUrl(leagueId, playerId)
     );
   }
 

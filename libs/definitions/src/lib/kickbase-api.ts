@@ -9,9 +9,12 @@ export class KickbaseApi {
   private static readonly MARKET_PATH = 'market';
   private static readonly MANAGERS_PATH = 'managers';
   private static readonly DASHBOARD_PATH = 'dashboard';
+  private static readonly PERFORMANCE_PATH = 'performance';
   private static readonly ME_PATH = 'me';
   private static readonly BUDGET_PATH = 'budget';
   private static readonly OFFERS_PATH = 'offers';
+
+  static readonly CURRENT_SEASON_PERFORMANCE_NAME = '2025/2026';
 
   static loginUrl(): string {
     return this.buildApiUrl([this.USER_PATH, this.LOGIN_PATH]);
@@ -31,6 +34,16 @@ export class KickbaseApi {
       leagueId,
       this.PLAYERS_PATH,
       playerId,
+    ]);
+  }
+
+  static playerPerformanceUrl(leagueId: string, playerId: string): string {
+    return this.buildApiUrl([
+      this.LEAGUES_PATH,
+      leagueId,
+      this.PLAYERS_PATH,
+      playerId,
+      this.PERFORMANCE_PATH,
     ]);
   }
 

@@ -13,7 +13,9 @@ export * from './lib/models/api/login/login-response-user';
 
 export * from './lib/models/api/players/player-response-information';
 export * from './lib/models/api/players/player-detail-response';
-export * from './lib/models/api/players/point-history-response';
+export * from './lib/models/api/players/player-performance-response';
+export * from './lib/models/api/players/player-performance-point-history-response';
+export * from './lib/models/api/players/player-performance-season-response';
 
 export * from './lib/models/api/transfer-market/market-information-response';
 export * from './lib/models/api/transfer-market/market-information-player-response';
