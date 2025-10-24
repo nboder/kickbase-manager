@@ -24,6 +24,9 @@
       "@kickbase/api-services": ["libs/api-services/src/index.ts"],
       "@kickbase/definitions": ["libs/definitions/src/index.ts"],
       "@kickbase/login": ["libs/login/src/index.ts"],
+      "@kickbase/manager-average-point-fun-facts": [
+        "libs/manager-average-point-fun-facts/src/index.ts"
+      ],
       "@kickbase/persistence-management": [
         "libs/persistence-management/src/index.ts"
       ],

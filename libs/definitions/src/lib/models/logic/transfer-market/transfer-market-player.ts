@@ -7,7 +7,6 @@ import { PlayerPerformanceLogic } from '../commoon/player-performance-logic';
 export class TransferMarketPlayer extends BasicPlayer {
   readonly firstName: string;
   readonly transferExpiringSeconds: number;
-  readonly averagePoints: number;
   readonly totalPoints: number;
   readonly price: number;
   twentyForHoursTrend = 0;
@@ -16,10 +15,15 @@ export class TransferMarketPlayer extends BasicPlayer {
   pointHistory: PointHistory[] = [];
 
   constructor(responseData: MarketInformationPlayerResponse) {
-    super(responseData.i, responseData.n, responseData.mv, responseData.pos);
+    super(
+      responseData.i,
+      responseData.n,
+      responseData.mv,
+      responseData.ap,
+      responseData.pos
+    );
     this.firstName = responseData.fn;
     this.transferExpiringSeconds = responseData.exs;
-    this.averagePoints = responseData.ap == undefined ? 0 : responseData.ap;
     this.totalPoints = responseData.p == undefined ? 0 : responseData.p;
     this.currentOffer = new TransferMarketPlayerOffer(
       responseData.uop,

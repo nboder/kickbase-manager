@@ -82,7 +82,7 @@ export class SquadView implements OnInit, ResponsiveView {
     this.staffService.fetchMyTeam(this.selectedLeagueId()).subscribe({
       next: (data: SquadResponseStaff) => {
         const players = data.it.map((value) => {
-          const player = new Player(value);
+          const player = Player.playerFromSquadResponsePlayer(value);
           if (player.isOnTransferMarket) {
             this.storageManager.storeSellablePlayer(
               new SellingPlayer(player.playerId)

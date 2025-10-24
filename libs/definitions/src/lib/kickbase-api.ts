@@ -28,6 +28,16 @@ export class KickbaseApi {
     return this.buildApiUrl([this.LEAGUES_PATH, leagueId, this.SQUAD_PATH]);
   }
 
+  static managerSquadUrl(leagueId: string, managerId: string): string {
+    return this.buildApiUrl([
+      this.LEAGUES_PATH,
+      leagueId,
+      this.MANAGERS_PATH,
+      managerId,
+      this.SQUAD_PATH,
+    ]);
+  }
+
   static marketUrl(leagueId: string): string {
     return this.buildApiUrl([this.LEAGUES_PATH, leagueId, this.MARKET_PATH]);
   }

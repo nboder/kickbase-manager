@@ -6,6 +6,7 @@ import {
   KickbaseApi,
   LeagueOverviewResponse,
   ManagerResponse,
+  ManagerSquadResponse,
 } from '@kickbase/definitions';
 
 @Injectable({
@@ -39,6 +40,15 @@ export class ManagerService {
       {
         params: params,
       }
+    );
+  }
+
+  fetchManagerSquad(
+    leagueId: string,
+    managerId: string
+  ): Observable<ManagerSquadResponse> {
+    return this.httpClient.get<ManagerSquadResponse>(
+      KickbaseApi.managerSquadUrl(leagueId, managerId)
     );
   }
 }

@@ -26,6 +26,8 @@ export * from './lib/models/api/transfer-market/placer-offer-response';
 
 export * from './lib/models/api/manager/manager-response';
 export * from './lib/models/api/manager/budget-response';
+export * from './lib/models/api/manager/manager-squad-response';
+export * from './lib/models/api/manager/manager-squad-player-response';
 
 export * from './lib/models/kickbase-staff-position';
 
