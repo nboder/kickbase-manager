@@ -15,7 +15,7 @@ export class SideBarNavigation {
   readonly sidebarItems = signal<SideBarItem[]>([
     SideBarItem.LEAGUE_SELECTION,
     // SideBarItem.STAFF_MANAGEMENT,
-    // SideBarItem.FUN_STATS,
+    SideBarItem.FUN_STATS,
     SideBarItem.LOGOUT,
   ]);
 

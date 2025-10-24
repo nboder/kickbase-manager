@@ -21,6 +21,7 @@
       "@kickbase/LoginManagement": ["libs/login-management/src/index.ts"],
       "@kickbase/PositionMarker": ["libs/shared-ui-components/src/index.ts"],
       "@kickbase/UserManagement": ["libs/user-management/src/index.ts"],
+      "@kickbase/api-services": ["libs/api-services/src/index.ts"],
       "@kickbase/definitions": ["libs/definitions/src/index.ts"],
       "@kickbase/login": ["libs/login/src/index.ts"],
       "@kickbase/persistence-management": [

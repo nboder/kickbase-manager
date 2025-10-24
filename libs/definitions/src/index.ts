@@ -11,6 +11,9 @@ export * from './lib/models/api/login/login-response-league';
 export * from './lib/models/api/login/login-response-league-manager';
 export * from './lib/models/api/login/login-response-user';
 
+export * from './lib/models/api/leagues/league-overview-response';
+export * from './lib/models/api/leagues/league-overview-user-response';
+
 export * from './lib/models/api/players/player-response-information';
 export * from './lib/models/api/players/player-detail-response';
 export * from './lib/models/api/players/player-performance-response';

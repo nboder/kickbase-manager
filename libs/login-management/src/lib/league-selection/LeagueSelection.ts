@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { LeagueManagementService } from '@kickbase/UserManagement';
 import {
   MatCard,
@@ -25,7 +25,7 @@ import { AppRouteDefinitions } from '@kickbase/definitions';
   templateUrl: './LeagueSelection.html',
   styleUrl: './LeagueSelection.scss',
 })
-export class LeagueSelection {
+export class LeagueSelection implements OnInit {
   private readonly router = inject(Router);
   private readonly leagueManagementService = inject(LeagueManagementService);
 
@@ -36,6 +36,10 @@ export class LeagueSelection {
   availableLeagues = computed(() => {
     return this.leagueManagementService.getAvailableLeagues();
   });
+
+  ngOnInit(): void {
+    console.log('moep');
+  }
 
   protected readonly AppRouteDefinitions = AppRouteDefinitions;
 }

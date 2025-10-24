@@ -9,7 +9,7 @@ import {
 import { MatButton } from '@angular/material/button';
 import { SquadPlayerCard } from '../squad-player-card/SquadPlayerCard';
 import { Player, SquadResponseStaff } from '@kickbase/definitions';
-import { StaffPlaningService } from '../service/staff-planing-service';
+import { StaffPlaningService } from '@kickbase/api-services';
 import {
   LocalStoragePersistenceManager,
   PersistenceManager,
