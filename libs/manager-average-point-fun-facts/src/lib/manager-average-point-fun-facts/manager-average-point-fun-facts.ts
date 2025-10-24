@@ -12,7 +12,7 @@ import { KeyValuePipe } from '@angular/common';
   selector: 'lib-manager-average-point-fun-facts',
   imports: [KeyValuePipe],
   templateUrl: './manager-average-point-fun-facts.html',
-  styleUrl: './manager-average-point-fun-facts.css',
+  styleUrl: './manager-average-point-fun-facts.scss',
 })
 export class ManagerAveragePointFunFacts implements OnInit {
   private readonly managerService = inject(ManagerService);
@@ -77,7 +77,6 @@ export class ManagerAveragePointFunFacts implements OnInit {
                 Player.playerFromManagerPlayerResponse(value)
               )
             );
-            console.log(data);
           },
           error: (err) => {
             console.error(err);
