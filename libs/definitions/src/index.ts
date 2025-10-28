@@ -11,6 +11,9 @@ export * from './lib/models/api/login/login-response-league';
 export * from './lib/models/api/login/login-response-league-manager';
 export * from './lib/models/api/login/login-response-user';
 
+export * from './lib/models/api/leagues/league-overview-response';
+export * from './lib/models/api/leagues/league-overview-user-response';
+
 export * from './lib/models/api/players/player-response-information';
 export * from './lib/models/api/players/player-detail-response';
 export * from './lib/models/api/players/player-performance-response';
@@ -23,6 +26,8 @@ export * from './lib/models/api/transfer-market/placer-offer-response';
 
 export * from './lib/models/api/manager/manager-response';
 export * from './lib/models/api/manager/budget-response';
+export * from './lib/models/api/manager/manager-squad-response';
+export * from './lib/models/api/manager/manager-squad-player-response';
 
 export * from './lib/models/kickbase-staff-position';
 
@@ -33,3 +38,4 @@ export * from './lib/models/logic/basic-player';
 export * from './lib/models/logic/staff/player';
 export * from './lib/models/logic/transfer-market/transfer-market-player';
 export * from './lib/models/logic/transfer-market/point-history';
+export * from './lib/models/logic/commoon/manager-team';

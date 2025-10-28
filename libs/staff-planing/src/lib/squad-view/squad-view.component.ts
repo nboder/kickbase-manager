@@ -9,7 +9,7 @@ import {
 import { MatButton } from '@angular/material/button';
 import { SquadPlayerCard } from '../squad-player-card/SquadPlayerCard';
 import { Player, SquadResponseStaff } from '@kickbase/definitions';
-import { StaffPlaningService } from '../service/staff-planing-service';
+import { StaffPlaningService } from '@kickbase/api-services';
 import {
   LocalStoragePersistenceManager,
   PersistenceManager,
@@ -82,7 +82,7 @@ export class SquadView implements OnInit, ResponsiveView {
     this.staffService.fetchMyTeam(this.selectedLeagueId()).subscribe({
       next: (data: SquadResponseStaff) => {
         const players = data.it.map((value) => {
-          const player = new Player(value);
+          const player = Player.playerFromSquadResponsePlayer(value);
           if (player.isOnTransferMarket) {
             this.storageManager.storeSellablePlayer(
               new SellingPlayer(player.playerId)

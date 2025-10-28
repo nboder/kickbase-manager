@@ -6,7 +6,9 @@
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sideNav mode="over"
-    ><lib-side-bar-navigation></lib-side-bar-navigation
+    ><lib-side-bar-navigation
+      (sideBarItemClicked)="handleSidebarItemClicked($event)"
+    ></lib-side-bar-navigation
   ></mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>

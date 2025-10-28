@@ -24,12 +24,19 @@ export const appRoutes: Route[] = [
         (comp) => comp.AppNavigationContainer
       ),
     canActivate: [isLoggedInGuard],
+    canActivateChild: [isLoggedInGuard],
     children: [
       {
         path: AppRouteDefinitions.STAFF_MANAGEMENT,
         loadComponent: () =>
           import('@kickbase/staff-planing').then((comp) => comp.StaffPlaning),
-        canActivate: [isLoggedInGuard],
+      },
+      {
+        path: AppRouteDefinitions.MANAGER_AVG_POINTS_FUN,
+        loadComponent: () =>
+          import('@kickbase/manager-average-point-fun-facts').then(
+            (comp) => comp.ManagerAveragePointFunFacts
+          ),
       },
     ],
   },

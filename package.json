@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "nx": "nx",
+    "release": "nx release version",
     "deploy-build": "nx run manager:build:production --output-path docs --base-href=/kickbase-manager/",
     "format": "nx format:write --uncomitted=true --libs-and-apps=true"
   },
@@ -18,6 +19,7 @@
     "@angular/platform-browser": "~20.2.0",
     "@angular/platform-browser-dynamic": "~20.2.0",
     "@angular/router": "~20.2.0",
+    "chart.js": "^4.5.1",
     "rxjs": "~7.8.0",
     "zone.js": "~0.15.0"
   },

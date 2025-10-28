@@ -13,7 +13,7 @@ import {
   PointHistory,
   TransferMarketPlayer,
 } from '@kickbase/definitions';
-import { TransferMarketService } from '../service/transfer-market-service';
+import { TransferMarketService } from '@kickbase/api-services';
 import { DecimalPipe } from '@angular/common';
 import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
 import { ResponsiveView } from '@kickbase/PositionMarker';
@@ -105,7 +105,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
         )
         .subscribe({
           next: (data) => {
-            console.log('Offer has been whithdrawn');
+            console.log(`Offer has been whithdrawn ${data}`);
           },
         });
       this.acceptBuyingOrders();

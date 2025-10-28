@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { MoneyPipe } from '@kickbase/definitions';
-import { ManagerService } from '../service/manager-service';
+import { ManagerService } from '@kickbase/api-services';
 import { MarketValueTrend, ResponsiveView } from '@kickbase/PositionMarker';
 import { UserManagementService } from '@kickbase/UserManagement';
 import { MatDivider } from '@angular/material/divider';
