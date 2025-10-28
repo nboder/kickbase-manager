@@ -22,6 +22,8 @@ You are really want to use the last cents of your Balance and calculate with the
 
 ## Features
 
+For all full set of Features and changes, see the Changelog in the Releases.
+
 ### Squad
 
 - See you Squad with all the necessary information.
