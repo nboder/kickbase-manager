@@ -21,6 +21,7 @@ import {
 import { Chart, registerables } from 'chart.js';
 import { ChartDataProvider } from '../data-provider/chart-data-provider';
 import { TotalStateDataProvider } from '../data-provider/total-state-data-provider';
+import { PositionBasedDataProvider } from '../data-provider/position-based-data-provider';
 
 @Component({
   selector: 'lib-manager-average-point-fun-facts',
@@ -34,6 +35,8 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
   private selectedLeaguedId = signal<string>('');
   @ViewChild('totalStats')
   private totalStatsCanvas: ElementRef<HTMLCanvasElement> | undefined;
+  @ViewChild('positionStats')
+  private positionStatsCanvas: ElementRef<HTMLCanvasElement> | undefined;
   squadPerManager = signal<ManagerTeam[]>([]);
   private leagueOverview = signal<LeagueOverviewResponse | undefined>(
     undefined
@@ -50,6 +53,7 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
     effect(() => {
       if (this.canRenderCharts()) {
         this.setupTotalAverageChart();
+        this.setupPositionBasedChart();
       }
     });
   }
@@ -79,6 +83,39 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.hasViewBeenInitialized.set(true);
+  }
+
+  private setupPositionBasedChart() {
+    if (this.canRenderCharts()) {
+      const positionBasedProvider: ChartDataProvider =
+        new PositionBasedDataProvider(this.squadPerManager());
+
+      const context = this.positionStatsCanvas?.nativeElement.getContext('2d');
+      if (context) {
+        const chart = new Chart(context, {
+          type: positionBasedProvider.chartType,
+          data: {
+            labels: positionBasedProvider.labels,
+            datasets: positionBasedProvider.datasets,
+          },
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: {
+                beginAtZero: true,
+              },
+              y: {
+                ticks: {
+                  callback: function (index) {
+                    return positionBasedProvider.labelAtIndex(index as number);
+                  },
+                },
+              },
+            },
+          },
+        });
+      }
+    }
   }
 
   private setupTotalAverageChart() {
