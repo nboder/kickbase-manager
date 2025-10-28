@@ -1,16 +1,7 @@
 <div class="manager-average-point-container">
-  <canvas class="canvas" #totalStats></canvas>
-  <!--  @for (manager of squadPerManager() | keyvalue; track manager.key) {-->
-  <!--  <div>-->
-  <!--    <div>{{ manager.key }}</div>-->
-  <!--    <div>-->
-  <!--      Average Points in Squad: {{ averagePointsForSquadForManager(manager.key)-->
-  <!--      }}-->
-  <!--    </div>-->
-  <!--    <div>-->
-  <!--      Average Points on Bench: {{ averagePointsForBenchForManager(manager.key)-->
-  <!--      }}-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--  }-->
+  <div class="manager-average-point-container__total_average">
+    <canvas #totalStats></canvas>
+  </div>
+  @for (team of squadPerManager(); track team.) { }
+  <div></div>
 </div>

@@ -34,7 +34,7 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
   private selectedLeaguedId = signal<string>('');
   @ViewChild('totalStats')
   private totalStatsCanvas: ElementRef<HTMLCanvasElement> | undefined;
-  squadPerManager = signal<Map<string, Player[]>>(new Map<string, Player[]>());
+  squadPerManager = signal<ManagerTeam[]>([]);
   private leagueOverview = signal<LeagueOverviewResponse | undefined>(
     undefined
   );
@@ -42,14 +42,14 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
   private canRenderCharts = computed(() => {
     return (
       this.hasViewBeenInitialized() &&
-      this.squadPerManager().size === this.leagueOverview()?.us.length
+      this.squadPerManager().length === this.leagueOverview()?.us.length
     );
   });
 
   constructor() {
     effect(() => {
       if (this.canRenderCharts()) {
-        this.setupBarChart();
+        this.setupTotalAverageChart();
       }
     });
   }
@@ -81,36 +81,10 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
     this.hasViewBeenInitialized.set(true);
   }
 
-  averagePointsForSquadForManager(managerId: string): number {
-    const squadForManager = this.squadPerManager().get(managerId);
-    if (squadForManager) {
-      return squadForManager
-        .filter((player) => player.isInSquad)
-        .reduce((a, b) => a + b.averagePoints, 0);
-    } else {
-      return -1;
-    }
-  }
-
-  averagePointsForBenchForManager(managerId: string): number {
-    const squadForManager = this.squadPerManager().get(managerId);
-    if (squadForManager) {
-      return squadForManager
-        .filter((player) => !player.isInSquad)
-        .reduce((a, b) => a + b.averagePoints, 0);
-    } else {
-      return -1;
-    }
-  }
-
-  private setupBarChart() {
+  private setupTotalAverageChart() {
     if (this.canRenderCharts()) {
-      const managerTeams: ManagerTeam[] = [];
-      for (const [key, value] of this.squadPerManager()) {
-        managerTeams.push(new ManagerTeam(key, value));
-      }
       const totalStatsProvider: ChartDataProvider = new TotalStateDataProvider(
-        managerTeams
+        this.squadPerManager()
       );
       const context = this.totalStatsCanvas?.nativeElement.getContext('2d');
       if (context) {
@@ -155,14 +129,16 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
         .subscribe({
           next: (data) => {
             this.squadPerManager.update((value) => {
-              const newMap = new Map(value);
-              newMap.set(
-                user.n,
-                data.it.map((value) =>
-                  Player.playerFromManagerPlayerResponse(value)
+              const teamsArray = [...value];
+              teamsArray.push(
+                new ManagerTeam(
+                  user.n,
+                  data.it.map((value) =>
+                    Player.playerFromManagerPlayerResponse(value)
+                  )
                 )
               );
-              return newMap;
+              return teamsArray;
             });
           },
           error: (err) => {
