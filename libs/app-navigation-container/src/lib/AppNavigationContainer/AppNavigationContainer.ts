@@ -37,7 +37,7 @@ export class AppNavigationContainer implements OnInit {
   private readonly sideNavigation: MatSidenav | undefined;
 
   ngOnInit(): void {
-    this.router.navigate(['./' + AppRouteDefinitions.STAFF_MANAGEMENT], {
+    this.router.navigate(['./' + AppRouteDefinitions.MANAGER_AVG_POINTS_FUN], {
       relativeTo: this.activatedRoute,
     });
   }

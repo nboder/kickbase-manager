@@ -38,3 +38,4 @@ export * from './lib/models/logic/basic-player';
 export * from './lib/models/logic/staff/player';
 export * from './lib/models/logic/transfer-market/transfer-market-player';
 export * from './lib/models/logic/transfer-market/point-history';
+export * from './lib/models/logic/commoon/manager-team';
