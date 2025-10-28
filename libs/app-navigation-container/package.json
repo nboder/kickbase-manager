@@ -1,12 +1,12 @@
 {
   "name": "@kickbase/AppNavigationContainer",
-  "version": "0.0.1",
+  "version": "1.3.0",
   "peerDependencies": {
     "@angular/material": "^20.2.0",
     "@angular/core": "^20.2.0",
     "@angular/router": "^20.2.0",
-    "@kickbase/UserManagement": "^0.0.1",
-    "@kickbase/definitions": "^0.0.1"
+    "@kickbase/UserManagement": "^1.3.0",
+    "@kickbase/definitions": "^1.3.0"
   },
   "sideEffects": false
 }
