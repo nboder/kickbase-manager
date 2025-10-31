@@ -1,10 +1,12 @@
 <div class="transfer-market-section">
   <div class="transfer-market-section__player-cards">
     @for (transferMarketPlayer of shownTransferMarketPlayers(); track
-    transferMarketPlayer.playerId) {
-    <!--      @if (shouldShowMarketValueUpdateBeforePlayer(transferMarketPlayer)) {-->
-    <!--        &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; MV Update &#45;&#45;&#45;&#45;&#45;&#45;-->
-    <!--      }-->
+    transferMarketPlayer.playerId) { @if (shouldShowMarketValueUpdate($index,
+    $first)) {
+    <lib-divider text="Market Value Update"></lib-divider>
+    } @if (shouldShowMatchDayDivider($index, $first)) {
+    <lib-divider text="Matchday {{ matchDay }}"></lib-divider>
+    }
     <lib-transfer-market-card
       [transferMarketPlayer]="transferMarketPlayer"
       (offerPlaced)="offerPlaced($event)"
