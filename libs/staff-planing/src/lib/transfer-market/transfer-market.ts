@@ -16,11 +16,11 @@ import {
 import { TransferMarketService } from '@kickbase/api-services';
 import { DecimalPipe } from '@angular/common';
 import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
-import { ResponsiveView } from '@kickbase/PositionMarker';
+import { Divider, ResponsiveView } from '@kickbase/PositionMarker';
 
 @Component({
   selector: 'lib-transfer-market',
-  imports: [TransferMarketCard],
+  imports: [TransferMarketCard, Divider],
   providers: [DecimalPipe, MoneyPipe],
   templateUrl: './transfer-market.html',
   styleUrls: ['./transfer-market.scss', '../shared.scss'],
@@ -42,8 +42,9 @@ export class TransferMarket implements OnInit, ResponsiveView {
     []
   );
 
-  private marketValueUpdateAlreadyShown = signal<boolean>(false);
   private nextMarketValueUpdate: Date | undefined;
+  private matchDayDate: Date | undefined;
+  matchDay: number | undefined;
 
   ngOnInit(): void {
     this.transferMarketService
@@ -60,6 +61,8 @@ export class TransferMarket implements OnInit, ResponsiveView {
             return transferPlayer;
           });
           this.nextMarketValueUpdate = new Date(data.mvud);
+          this.matchDayDate = new Date(data.dt);
+          this.matchDay = data.day;
           this.transferMarket.set(
             transferData.sort(
               (a, b) => a.transferExpiringSeconds - b.transferExpiringSeconds
@@ -144,19 +147,50 @@ export class TransferMarket implements OnInit, ResponsiveView {
       });
   }
 
-  // shouldShowMarketValueUpdateBeforePlayer(
-  //   nextPlayer: TransferMarketPlayer
-  // ): boolean {
-  //   let showMarketValueUpdate = false;
-  //   if (!this.marketValueUpdateAlreadyShown() && this.nextMarketValueUpdate) {
-  //     const expiration =
-  //       (Date.now() / 1000) + nextPlayer.transferExpiringSeconds;
-  //     const marketValueUpdate = this.nextMarketValueUpdate.valueOf() / 1000;
-  //     showMarketValueUpdate = marketValueUpdate < expiration;
-  //     this.marketValueUpdateAlreadyShown.set(showMarketValueUpdate);
-  //   }
-  //   return showMarketValueUpdate;
-  // }
+  shouldShowMarketValueUpdate(index: number, isFirstElement: boolean): boolean {
+    if (this.nextMarketValueUpdate) {
+      return this.shouldShowDividerBetweenPlayers(
+        index,
+        isFirstElement,
+        this.nextMarketValueUpdate
+      );
+    }
+    return false;
+  }
+
+  shouldShowMatchDayDivider(index: number, isFirstElement: boolean): boolean {
+    if (this.matchDayDate && this.matchDay) {
+      return this.shouldShowDividerBetweenPlayers(
+        index,
+        isFirstElement,
+        this.matchDayDate
+      );
+    }
+    return false;
+  }
+
+  private shouldShowDividerBetweenPlayers(
+    index: number,
+    isFirstElement: boolean,
+    dividerDate: Date
+  ): boolean {
+    const expirationOfCurrentPlayer =
+      Date.now() / 1000 +
+      this.shownTransferMarketPlayers()[index].transferExpiringSeconds;
+    const updateValue = dividerDate.valueOf() / 1000;
+    if (isFirstElement) {
+      return updateValue < expirationOfCurrentPlayer;
+    } else {
+      const expirationOfPreviousPlayer =
+        Date.now() / 1000 +
+        this.shownTransferMarketPlayers()[index - 1].transferExpiringSeconds;
+
+      return (
+        updateValue > expirationOfPreviousPlayer &&
+        updateValue < expirationOfCurrentPlayer
+      );
+    }
+  }
 
   private fetchDetailOfPlayer(playerId: string): void {
     this.transferMarketService
