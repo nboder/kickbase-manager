@@ -3,9 +3,15 @@
     @for (transferMarketPlayer of shownTransferMarketPlayers(); track
     transferMarketPlayer.playerId) { @if (shouldShowMarketValueUpdate($index,
     $first)) {
-    <lib-divider text="Market Value Update"></lib-divider>
+    <lib-divider
+      class="transfer-market-section__divider"
+      text="Market Value Update"
+    ></lib-divider>
     } @if (shouldShowMatchDayDivider($index, $first)) {
-    <lib-divider text="Matchday {{ matchDay }}"></lib-divider>
+    <lib-divider
+      class="transfer-market-section__divider"
+      text="Matchday {{ matchDay }}"
+    ></lib-divider>
     }
     <lib-transfer-market-card
       [transferMarketPlayer]="transferMarketPlayer"
