@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-npm run release
+#npm run release
 npm run deploy-build
 
 mv ./docs/browser/* ./docs/
