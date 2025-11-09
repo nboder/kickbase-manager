@@ -4,17 +4,24 @@
   display: flex;
   flex-direction: column;
   gap: 0.2em;
+  height: 100%;
 }
 
 @mixin squad_section() {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  overflow-y: auto;
+  padding-bottom: 4px;
 }
 
 @mixin button_section() {
   display: flex;
   gap: 0.2em;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  justify-content: center;
+  box-shadow: 0px -5px 5px -5px rgba(0, 0, 0, 0.4);
   @include mat.button-overrides(
     (
       tonal-container-height: 2em,
@@ -27,7 +34,6 @@
 
   &__card-section {
     @include squad_section();
-    min-width: 250px;
   }
 
   &__buttons {
@@ -38,19 +44,13 @@
 .mobile {
   &-container {
     @include container;
-    height: 100%;
   }
 
   &__section_squad {
     @include squad_section();
-    overflow-y: auto;
-    padding-bottom: 8px;
   }
 
   &__section-buttons {
     @include button_section();
-    padding-top: 2px;
-    justify-content: center;
-    box-shadow: 0px -5px 5px -5px rgba(0, 0, 0, 0.4);
   }
 }

@@ -90,9 +90,15 @@
         [countOfIndications]="countOfGoodGames"
         class="transfer-market-card__content__points__point-indication"
       ></lib-point-indicator-view>
-      @let countOfBadGames = transferMarketPlayer().countOfBadGames();
+      @let countOfNormalGames = transferMarketPlayer().countOfNormalGames();
       <lib-point-indicator-view
         [pointIndication]="PointIndication.JUST_A_PLAYER"
+        [countOfIndications]="countOfNormalGames"
+        class="transfer-market-card__content__points__point-indication"
+      ></lib-point-indicator-view>
+      @let countOfBadGames = transferMarketPlayer().countOfBadGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.BAD_GAME"
         [countOfIndications]="countOfBadGames"
         class="transfer-market-card__content__points__point-indication"
       ></lib-point-indicator-view>
@@ -104,9 +110,9 @@
         class="transfer-market-card__content__points__point-indication"
       ></lib-point-indicator-view>
       <div class="transfer-market-card__content__points__total-games">
-        <img src="assets/soccer.svg" alt="" /><span
-          >: {{ transferMarketPlayer().countOfGames() }}</span
-        >
+        - {{ transferMarketPlayer().countOfGames() -
+        transferMarketPlayer().countOfNotPlayedGames() }}/{{
+        transferMarketPlayer().countOfGames() }}
       </div>
     </div>
     }

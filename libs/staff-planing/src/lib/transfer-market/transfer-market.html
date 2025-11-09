@@ -3,9 +3,15 @@
     @for (transferMarketPlayer of shownTransferMarketPlayers(); track
     transferMarketPlayer.playerId) { @if (shouldShowMarketValueUpdate($index,
     $first)) {
-    <lib-divider text="Market Value Update"></lib-divider>
+    <lib-divider
+      class="transfer-market-section__divider"
+      text="Market Value Update"
+    ></lib-divider>
     } @if (shouldShowMatchDayDivider($index, $first)) {
-    <lib-divider text="Matchday {{ matchDay }}"></lib-divider>
+    <lib-divider
+      class="transfer-market-section__divider"
+      text="Matchday {{ matchDay }}"
+    ></lib-divider>
     }
     <lib-transfer-market-card
       [transferMarketPlayer]="transferMarketPlayer"
@@ -14,5 +20,21 @@
       (shouldLoadPerformance)="shouldLoadPerformanceOfPlayer($event)"
     ></lib-transfer-market-card>
     }
+  </div>
+  <div class="transfer-market-section__button-section">
+    <mat-button-toggle-group
+      (change)="updateFilter($event)"
+      name="filters"
+      aria-label="Filters"
+      [hideMultipleSelectionIndicator]="true"
+      multiple
+    >
+      <mat-button-toggle value="{{ TransferMarketFilter.CASH_COW }}"
+        >Cash Cow</mat-button-toggle
+      >
+      <mat-button-toggle value="{{ TransferMarketFilter.POINTING_MACHINES }}"
+        >Pointing Machines</mat-button-toggle
+      >
+    </mat-button-toggle-group>
   </div>
 </div>

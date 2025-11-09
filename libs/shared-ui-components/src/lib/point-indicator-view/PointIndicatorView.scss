@@ -25,9 +25,14 @@
     height: 80%;
   }
 
-  &__bad {
+  &__normal-game {
     @include point-indicator-view(#e19860);
     height: 70%;
+  }
+
+  &__bad-game {
+    @include point-indicator-view(#ff0000);
+    height: 50%;
   }
 
   &__not-played {

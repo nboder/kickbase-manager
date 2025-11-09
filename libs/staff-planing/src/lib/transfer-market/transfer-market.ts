@@ -17,10 +17,16 @@ import { TransferMarketService } from '@kickbase/api-services';
 import { DecimalPipe } from '@angular/common';
 import { TransferMarketCard } from '../transfer-market-card/TransferMarketCard';
 import { Divider, ResponsiveView } from '@kickbase/PositionMarker';
+import {
+  MatButtonToggle,
+  MatButtonToggleChange,
+  MatButtonToggleGroup,
+} from '@angular/material/button-toggle';
+import { TransferMarketFilter } from './transfer-market-filter';
 
 @Component({
   selector: 'lib-transfer-market',
-  imports: [TransferMarketCard, Divider],
+  imports: [TransferMarketCard, Divider, MatButtonToggleGroup, MatButtonToggle],
   providers: [DecimalPipe, MoneyPipe],
   templateUrl: './transfer-market.html',
   styleUrls: ['./transfer-market.scss', '../shared.scss'],
@@ -33,8 +39,24 @@ export class TransferMarket implements OnInit, ResponsiveView {
 
   private transferMarket = signal<TransferMarketPlayer[]>([]);
   shownTransferMarketPlayers = computed(() => {
-    return this.transferMarket();
+    const cashFilter = this.filters().find(
+      (value) => value == TransferMarketFilter.CASH_COW
+    );
+    const pointFilter = this.filters().find(
+      (value) => value == TransferMarketFilter.POINTING_MACHINES
+    );
+    let players = this.transferMarket();
+    if (cashFilter) {
+      players = players.filter((value) => value.twentyForHoursTrend > 100000);
+    }
+
+    if (pointFilter) {
+      players = players.filter((value) => value.averagePoints > 100);
+    }
+    return players;
   });
+
+  private filters = signal<TransferMarketFilter[]>([]);
 
   private readonly transferMarketService = inject(TransferMarketService);
 
@@ -169,6 +191,12 @@ export class TransferMarket implements OnInit, ResponsiveView {
     return false;
   }
 
+  updateFilter(event: MatButtonToggleChange) {
+    this.filters.update((value) => {
+      return event.value;
+    });
+  }
+
   private shouldShowDividerBetweenPlayers(
     index: number,
     isFirstElement: boolean,
@@ -208,4 +236,6 @@ export class TransferMarket implements OnInit, ResponsiveView {
         },
       });
   }
+
+  protected readonly TransferMarketFilter = TransferMarketFilter;
 }
