@@ -21,4 +21,20 @@
     ></lib-transfer-market-card>
     }
   </div>
+  <div class="transfer-market-section__button-section">
+    <mat-button-toggle-group
+      (change)="updateFilter($event)"
+      name="filters"
+      aria-label="Filters"
+      [hideMultipleSelectionIndicator]="true"
+      multiple
+    >
+      <mat-button-toggle value="{{ TransferMarketFilter.CASH_COW }}"
+        >Cash Cow</mat-button-toggle
+      >
+      <mat-button-toggle value="{{ TransferMarketFilter.POINTING_MACHINES }}"
+        >Pointing Machines</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </div>
 </div>

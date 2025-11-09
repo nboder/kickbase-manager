@@ -1,14 +1,28 @@
 @use '@angular/material' as mat;
+$topBottomPadding: 4px;
 
-.container {
+.transfer-market-container {
   display: flex;
   flex-direction: row;
   gap: 1em;
+  height: calc(
+    100dvh - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0) -
+      12px
+  );
+
+  &__transfer-section {
+  }
+
+  &__money-section {
+    min-width: 300px;
+  }
+
+  &__squad-section {
+  }
 }
 
 .mobile {
   $tabHeight: 3em;
-  $topBottomPadding: 4px;
 
   &-tab_group {
     @include mat.tabs-overrides(
@@ -26,8 +40,4 @@
       100dvh - #{$tabHeight} - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0)
     );
   }
-}
-
-.money-section {
-  min-width: 300px;
 }
