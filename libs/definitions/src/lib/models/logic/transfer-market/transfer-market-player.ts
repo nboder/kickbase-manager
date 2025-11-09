@@ -75,6 +75,14 @@ export class TransferMarketPlayer extends BasicPlayer {
     }, 0);
   }
 
+  countOfNormalGames(): number {
+    return this.pointHistory.reduce((acc: number, currentValue) => {
+      return (
+        acc + (PlayerPerformanceLogic.isNormalGame(currentValue.points) ? 1 : 0)
+      );
+    }, 0);
+  }
+
   countOfBadGames(): number {
     return this.pointHistory.reduce((acc: number, currentValue) => {
       return (

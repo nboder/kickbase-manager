@@ -9,7 +9,10 @@
   <div class="point-indicator-view__good"></div>
   <div class="number">{{ countOfIndications() }}</div>
   } @case (PointIndication.JUST_A_PLAYER) {
-  <div class="point-indicator-view__bad"></div>
+  <div class="point-indicator-view__normal-game"></div>
+  <div class="number">{{ countOfIndications() }}</div>
+  }@case (PointIndication.BAD_GAME) {
+  <div class="point-indicator-view__bad-game"></div>
   <div class="number">{{ countOfIndications() }}</div>
   } @case (PointIndication.NOT_PLAYED) {
   <div class="point-indicator-view__not-played">

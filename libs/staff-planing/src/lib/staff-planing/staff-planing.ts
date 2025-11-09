@@ -66,7 +66,7 @@ export class StaffPlaning implements OnInit {
 
   sumOfSoldPlayers(): number {
     if (this.squadView) {
-      return this.squadView.sumOfSOldPlayers();
+      return this.squadView.sumOfSoldPlayers();
     } else {
       return 0;
     }
