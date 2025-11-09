@@ -28,7 +28,7 @@ export class SquadView implements OnInit, ResponsiveView {
   selectedLeagueId = input.required<string>();
   showMobileLayout = input<boolean>(false);
 
-  sumOfSOldPlayers = computed(() => {
+  sumOfSoldPlayers = computed(() => {
     const soldPlayer = this.mySquad().filter((mySquadPlayer) =>
       this.storageManager.containedInPlayersToSell(mySquadPlayer.playerId)
     );
@@ -122,6 +122,12 @@ export class SquadView implements OnInit, ResponsiveView {
   }
 
   resetAllSellingCandidates() {
-    this.storageManager.clearAllSellablePlayers();
+    this.mySquad().forEach((player) => {
+      if (!player.isOnTransferMarket) {
+        this.storageManager.removeSellablePlayer(
+          new SellingPlayer(player.playerId)
+        );
+      }
+    });
   }
 }
