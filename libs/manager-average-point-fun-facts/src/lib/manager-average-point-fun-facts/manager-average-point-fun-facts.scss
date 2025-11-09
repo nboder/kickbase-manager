@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
   gap: 1em;
+
+  &__explanation-text {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
   &__total_average {
   }
 }
