@@ -45,6 +45,10 @@
       align-items: center;
       justify-content: start;
       gap: 2px;
+
+      > svg path {
+        fill: var(--mat-sys-on-surface);
+      }
     }
 
     &__sell_section {
