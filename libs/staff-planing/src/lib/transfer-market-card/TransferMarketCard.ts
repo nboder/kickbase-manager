@@ -18,6 +18,7 @@ import {
   TransferMarketOutputBidData,
 } from '../transfer-market-bid-dialog/TransferMarketBidDialog';
 import { MatDivider } from '@angular/material/divider';
+import { ContentDeliveryService } from '@kickbase/api-services';
 
 @Component({
   selector: 'lib-transfer-market-card',
@@ -40,6 +41,7 @@ export class TransferMarketCard {
   shouldLoadPerformance = output<TransferMarketPlayer>();
 
   private readonly dialog = inject(MatDialog);
+  readonly cdnService = inject(ContentDeliveryService);
   readonly showHoursThreshold = 1.0;
   readonly showDaysThreshold = 48.0;
   showDetailedPoints = signal<boolean>(false);

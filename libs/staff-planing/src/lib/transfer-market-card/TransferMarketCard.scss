@@ -6,6 +6,7 @@ $content_point_height: 1rem;
   min-height: 65px;
   min-width: 320px;
   max-width: 400px;
+  padding-top: 0.4em;
 
   &__isBeingBought {
     @include mat.card-overrides(
@@ -22,7 +23,6 @@ $content_point_height: 1rem;
 
     &__main {
       display: flex;
-      padding: 2px 4px;
 
       &__meta-information {
         display: inherit;
@@ -32,7 +32,10 @@ $content_point_height: 1rem;
         min-width: 75px;
 
         &__expand {
-          height: 12px;
+          > svg {
+            height: 12px;
+            fill: var(--mat-sys-on-surface);
+          }
         }
       }
 
@@ -42,6 +45,15 @@ $content_point_height: 1rem;
         justify-content: center;
         gap: 0.2rem;
         flex-grow: 1;
+
+        &__team-section {
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          > img {
+            max-height: 24px;
+          }
+        }
       }
 
       &__money-information {

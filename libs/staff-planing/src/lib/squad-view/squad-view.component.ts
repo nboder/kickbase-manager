@@ -8,19 +8,23 @@ import {
 } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { SquadPlayerCard } from '../squad-player-card/SquadPlayerCard';
-import { Player, SquadResponseStaff } from '@kickbase/definitions';
+import {
+  kickbasePositionToExtendedString,
+  Player,
+  SquadResponseStaff,
+} from '@kickbase/definitions';
 import { StaffPlaningService } from '@kickbase/api-services';
 import {
   LocalStoragePersistenceManager,
   PersistenceManager,
   SellingPlayer,
 } from '@kickbase/persistence-management';
-import { ResponsiveView } from '@kickbase/PositionMarker';
+import { Divider, DividerSize, ResponsiveView } from '@kickbase/PositionMarker';
 import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'lib-squad-view',
-  imports: [MatButton, SquadPlayerCard, NgTemplateOutlet],
+  imports: [MatButton, SquadPlayerCard, NgTemplateOutlet, Divider],
   templateUrl: './squad-view.component.html',
   styleUrl: './squad-view.component.scss',
 })
@@ -130,4 +134,23 @@ export class SquadView implements OnInit, ResponsiveView {
       }
     });
   }
+
+  shouldShowPositionSeparator(currentIndex: number, isFirst: boolean): boolean {
+    if (isFirst) {
+      return true;
+    } else {
+      if (
+        this.mySquad()[currentIndex - 1].position !=
+        this.mySquad()[currentIndex].position
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  protected readonly kickbasePositionToExtendedString =
+    kickbasePositionToExtendedString;
+  protected readonly DividerSize = DividerSize;
 }

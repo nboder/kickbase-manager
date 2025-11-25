@@ -34,3 +34,18 @@ export function kickbasePositionToString(pos: number): string {
       return 'Unknown';
   }
 }
+
+export function kickbasePositionToExtendedString(pos: number): string {
+  switch (pos) {
+    case KickbaseStaffPosition.GK:
+      return 'Goalkeeper';
+    case KickbaseStaffPosition.DEF:
+      return 'Defender';
+    case KickbaseStaffPosition.MID:
+      return 'Midfielder';
+    case KickbaseStaffPosition.FWD:
+      return 'Forward';
+    default:
+      return 'Unknown';
+  }
+}

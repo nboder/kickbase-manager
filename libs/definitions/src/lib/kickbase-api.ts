@@ -1,5 +1,6 @@
 export class KickbaseApi {
   private static readonly KICKBASE_API_URL = 'https://api.kickbase.com/v4';
+  static readonly KICKBASE_CONTENT_URL = 'https://kickbase.b-cdn.net/';
   private static readonly PATH_DELIMITER = '/';
   private static readonly USER_PATH = 'user';
   private static readonly LOGIN_PATH = 'login';

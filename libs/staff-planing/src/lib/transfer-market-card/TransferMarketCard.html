@@ -30,7 +30,14 @@
         <div
           class="transfer-market-card__content__main__meta-information__expand centered-content"
         >
-          <img src="assets/arrow_down.svg" alt="" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="12px"
+            viewBox="0 -960 960 960"
+            width="12px"
+          >
+            <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+          </svg>
         </div>
       </div>
       <div class="transfer-market-card__content__main__player-information">
@@ -41,7 +48,14 @@
             [marketValueTrend]="transferMarketPlayer().twentyForHoursTrend"
           ></lib-player-name-and-value>
         </div>
-        <div>{{ transferMarketPlayer().teamName }}</div>
+        <div
+          class="transfer-market-card__content__main__player-information__team-section"
+        >
+          <img
+            src="{{ cdnService.cdnUrl(transferMarketPlayer().teamImageUrl) }}"
+            alt="{{ transferMarketPlayer().teamName }}"
+          />{{ transferMarketPlayer().teamName }}
+        </div>
       </div>
       <div
         class="transfer-market-card__content__main__money-information"

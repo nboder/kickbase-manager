@@ -1,7 +1,13 @@
 @if (showMobileLayout()) {
 <div class="mobile-container">
   <div class="mobile__section_squad">
-    @for (player of mySquad(); track player.playerId) {
+    @for (player of mySquad(); track player.playerId) { @if
+    (shouldShowPositionSeparator($index, $first)) {
+    <lib-divider
+      text="{{ kickbasePositionToExtendedString(player.position) }}"
+      [size]="DividerSize.LARGE"
+    ></lib-divider>
+    }
     <ng-template
       [ngTemplateOutlet]="squadPlayerCard"
       [ngTemplateOutletContext]="{ player: player, index: $index }"
