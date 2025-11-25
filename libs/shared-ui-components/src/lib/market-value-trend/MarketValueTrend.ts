@@ -1,10 +1,9 @@
 import { Component, input } from '@angular/core';
 import { MoneyPipe } from '@kickbase/definitions';
-import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'lib-market-value-trend',
-  imports: [MoneyPipe, NgOptimizedImage],
+  imports: [MoneyPipe],
   templateUrl: './MarketValueTrend.html',
   styleUrl: './MarketValueTrend.scss',
 })
