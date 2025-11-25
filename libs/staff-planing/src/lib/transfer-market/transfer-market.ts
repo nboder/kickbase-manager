@@ -229,6 +229,8 @@ export class TransferMarket implements OnInit, ResponsiveView {
           if (currentPlayer) {
             currentPlayer.teamName = data.tn;
             currentPlayer.twentyForHoursTrend = data.tfhmvt;
+            currentPlayer.teamImageUrl = data.tim;
+            currentPlayer.playerImageUrl = data.pim;
           }
         },
         error: (err) => {

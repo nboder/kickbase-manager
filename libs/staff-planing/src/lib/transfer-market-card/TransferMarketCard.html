@@ -41,7 +41,14 @@
             [marketValueTrend]="transferMarketPlayer().twentyForHoursTrend"
           ></lib-player-name-and-value>
         </div>
-        <div>{{ transferMarketPlayer().teamName }}</div>
+        <div
+          class="transfer-market-card__content__main__player-information__team-section"
+        >
+          <img
+            src="{{ cdnService.cdnUrl(transferMarketPlayer().teamImageUrl) }}"
+            alt="{{ transferMarketPlayer().teamName }}"
+          />{{ transferMarketPlayer().teamName }}
+        </div>
       </div>
       <div
         class="transfer-market-card__content__main__money-information"

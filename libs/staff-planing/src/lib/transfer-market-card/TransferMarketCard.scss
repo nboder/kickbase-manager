@@ -42,6 +42,15 @@ $content_point_height: 1rem;
         justify-content: center;
         gap: 0.2rem;
         flex-grow: 1;
+
+        &__team-section {
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          > img {
+            max-height: 24px;
+          }
+        }
       }
 
       &__money-information {

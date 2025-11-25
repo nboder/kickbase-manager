@@ -1,7 +1,13 @@
+$topBottomPadding: 4px;
+
 .manager-average-point-container {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  height: calc(
+    100dvh - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0) -
+      12px
+  );
 
   &__explanation-text {
     margin-left: 1em;

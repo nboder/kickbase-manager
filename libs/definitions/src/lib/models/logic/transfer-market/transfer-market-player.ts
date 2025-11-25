@@ -13,6 +13,8 @@ export class TransferMarketPlayer extends BasicPlayer {
   teamName = '';
   currentOffer = TransferMarketPlayerOffer.noOffer();
   pointHistory: PointHistory[] = [];
+  teamImageUrl = '';
+  playerImageUrl = '';
 
   constructor(responseData: MarketInformationPlayerResponse) {
     super(
