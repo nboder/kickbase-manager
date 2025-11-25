@@ -10,7 +10,7 @@
 @mixin squad_section() {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 0.7em;
   overflow-y: auto;
   padding-bottom: 4px;
 }

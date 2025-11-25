@@ -2,18 +2,11 @@ import { Component, input, output } from '@angular/core';
 import { MatCard } from '@angular/material/card';
 import { PlayerNameAndValue, PositionMarker } from '@kickbase/PositionMarker';
 import { KickbaseStaffPosition, MoneyPipe } from '@kickbase/definitions';
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'lib-squad-player-card',
-  imports: [
-    MatCard,
-    PositionMarker,
-    PlayerNameAndValue,
-    MoneyPipe,
-    NgOptimizedImage,
-    NgClass,
-  ],
+  imports: [MatCard, PositionMarker, PlayerNameAndValue, MoneyPipe, NgClass],
   templateUrl: './SquadPlayerCard.html',
   styleUrl: './SquadPlayerCard.scss',
 })

@@ -1,7 +1,16 @@
 <div class="divider-container">
   @if (text()) {
   <mat-divider class="divider-container__line"></mat-divider>
-  <div class="divider-container__text">{{ text() }}</div>
+  <div
+    class="divider-container__text"
+    [ngClass]="{
+       'small': size() === DividerSize.SMALL,
+       'medium': size() === DividerSize.LARGE,
+       'large': size() === DividerSize.LARGE,
+     }"
+  >
+    {{ text() }}
+  </div>
   <mat-divider class="divider-container__line"></mat-divider>
   } @else {
   <mat-divider class="divider-container__line"></mat-divider>
