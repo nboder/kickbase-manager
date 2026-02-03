@@ -1,5 +1,8 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { LeagueManagementService } from '@kickbase/UserManagement';
+import {
+  GeneralLeagueInformation,
+  LeagueManagementService,
+} from '@kickbase/UserManagement';
 import {
   MatCard,
   MatCardActions,
@@ -9,7 +12,8 @@ import {
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
-import { AppRouteDefinitions } from '@kickbase/definitions';
+import { AppRouteDefinitions, CompetitionTable } from '@kickbase/definitions';
+import { CompetitionManagementService } from '@kickbase/CompetitionManagement';
 
 @Component({
   selector: 'lib-league-selection',
@@ -25,9 +29,12 @@ import { AppRouteDefinitions } from '@kickbase/definitions';
   templateUrl: './LeagueSelection.html',
   styleUrl: './LeagueSelection.scss',
 })
-export class LeagueSelection implements OnInit {
+export class LeagueSelection {
   private readonly router = inject(Router);
   private readonly leagueManagementService = inject(LeagueManagementService);
+  private readonly competitionTableService = inject(
+    CompetitionManagementService
+  );
 
   currentLeague = computed(() => {
     return this.leagueManagementService.getLeagueInformation();
@@ -37,8 +44,20 @@ export class LeagueSelection implements OnInit {
     return this.leagueManagementService.getAvailableLeagues();
   });
 
-  ngOnInit(): void {
-    console.log('moep');
+  selectLeague(league: GeneralLeagueInformation) {
+    this.competitionTableService
+      .fetchCompetitionTable(league.competitionId)
+      .subscribe({
+        next: (result) => {
+          this.competitionTableService.saveCurrentTable(
+            CompetitionTable.createFromApi(result)
+          );
+          this.router.navigate([AppRouteDefinitions.MANAGEMENT, league.id]);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 
   protected readonly AppRouteDefinitions = AppRouteDefinitions;

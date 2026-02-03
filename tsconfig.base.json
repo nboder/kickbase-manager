@@ -18,6 +18,9 @@
       "@kickbase/AppNavigationContainer": [
         "libs/app-navigation-container/src/index.ts"
       ],
+      "@kickbase/CompetitionManagement": [
+        "libs/competition-management/src/index.ts"
+      ],
       "@kickbase/LoginManagement": ["libs/login-management/src/index.ts"],
       "@kickbase/PositionMarker": ["libs/shared-ui-components/src/index.ts"],
       "@kickbase/UserManagement": ["libs/user-management/src/index.ts"],

@@ -1,6 +1,7 @@
 export class GeneralLeagueInformation {
   readonly id: string;
   readonly name: string;
+  readonly competitionId: string;
   readonly budget: number;
   readonly teamValue: number;
   readonly placement: number;
@@ -9,6 +10,7 @@ export class GeneralLeagueInformation {
   constructor(
     id: string,
     name: string,
+    competitionId: string,
     budget: number,
     teamValue: number,
     placement: number,
@@ -16,6 +18,7 @@ export class GeneralLeagueInformation {
   ) {
     this.id = id;
     this.name = name;
+    this.competitionId = competitionId;
     this.budget = budget;
     this.teamValue = teamValue;
     this.placement = placement;
@@ -23,6 +26,6 @@ export class GeneralLeagueInformation {
   }
 
   static noLeagueInformation(): GeneralLeagueInformation {
-    return new GeneralLeagueInformation('', '', 0, 0, 0, 0);
+    return new GeneralLeagueInformation('', '', '0', 0, 0, 0, 0);
   }
 }

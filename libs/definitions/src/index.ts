@@ -29,13 +29,18 @@ export * from './lib/models/api/manager/budget-response';
 export * from './lib/models/api/manager/manager-squad-response';
 export * from './lib/models/api/manager/manager-squad-player-response';
 
-export * from './lib/models/kickbase-staff-position';
-
 export * from './lib/models/api/squad/squad-response-staff';
 export * from './lib/models/api/squad/squad-response-player';
+
+export * from './lib/models/api/competition/competition-table-response';
+export * from './lib/models/api/competition/competition-table-entry-response';
 
 export * from './lib/models/logic/basic-player';
 export * from './lib/models/logic/staff/player';
 export * from './lib/models/logic/transfer-market/transfer-market-player';
 export * from './lib/models/logic/transfer-market/point-history';
 export * from './lib/models/logic/commoon/manager-team';
+export * from './lib/models/logic/competition/competition-table';
+export * from './lib/models/logic/competition/competition-table-entry';
+
+export * from './lib/models/kickbase-staff-position';

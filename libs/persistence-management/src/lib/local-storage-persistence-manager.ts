@@ -1,6 +1,7 @@
 import { PersistenceManager } from './persistence-manager';
 import { computed, Injectable, signal, Signal } from '@angular/core';
 import { SellingPlayer } from './model/selling-player';
+import { CompetitionTable } from '@kickbase/definitions';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ import { SellingPlayer } from './model/selling-player';
 export class LocalStoragePersistenceManager implements PersistenceManager {
   private readonly STORAGE_KEY = 'playersToSell';
   private readonly USERNAME_STORAGE_KEY = 'lastLoggedInUser';
+  private readonly COMPETITION_TABLE_STORAGE_KEY = 'competitionTable';
   private savedPlayersToSell = signal<SellingPlayer[]>([]);
   private lookupPlayersToSell: Signal<Set<string>> = computed(
     () => new Set(this.savedPlayersToSell().map((p) => p.playerId))
@@ -67,6 +69,14 @@ export class LocalStoragePersistenceManager implements PersistenceManager {
 
   removeLastLoggedInUsername(): void {
     localStorage.removeItem(this.USERNAME_STORAGE_KEY);
+  }
+
+  saveCompetitionTable(competitionTable: CompetitionTable): void {
+    localStorage.removeItem(this.COMPETITION_TABLE_STORAGE_KEY);
+    localStorage.setItem(
+      this.COMPETITION_TABLE_STORAGE_KEY,
+      JSON.stringify(competitionTable)
+    );
   }
 
   private updatePlayersToSell(playersToSell: SellingPlayer[]) {

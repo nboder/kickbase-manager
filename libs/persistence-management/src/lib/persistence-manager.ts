@@ -1,5 +1,6 @@
 import { SellingPlayer } from './model/selling-player';
 import { Signal } from '@angular/core';
+import { CompetitionTable } from '@kickbase/definitions';
 
 export interface PersistenceManager {
   playersToSell: Signal<SellingPlayer[]>;
@@ -19,4 +20,6 @@ export interface PersistenceManager {
   getLastLoggedInUsername(): string | null;
 
   removeLastLoggedInUsername(): void;
+
+  saveCompetitionTable(competitionTable: CompetitionTable): void;
 }

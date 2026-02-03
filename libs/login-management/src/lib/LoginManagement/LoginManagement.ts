@@ -80,6 +80,7 @@ export class LoginManagement implements OnInit, AfterViewInit {
             return new GeneralLeagueInformation(
               value.id,
               value.name,
+              value.cpi,
               value.lm.budget,
               value.lm.teamValue,
               value.lm.placement,

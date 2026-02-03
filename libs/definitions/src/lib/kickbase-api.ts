@@ -15,6 +15,8 @@ export class KickbaseApi {
   private static readonly ME_PATH = 'me';
   private static readonly BUDGET_PATH = 'budget';
   private static readonly OFFERS_PATH = 'offers';
+  private static readonly COMPETITIONS_PATH = 'competitions';
+  private static readonly TABLE_PATH = 'table';
 
   static readonly INCLUDE_MANAGERS_AND_BATTLES_QUERY_PARAM =
     'includeManagersAndBattles';
@@ -108,6 +110,14 @@ export class KickbaseApi {
 
   static leagueOverviewUrl(leagueId: string): string {
     return this.buildApiUrl([this.LEAGUES_PATH, leagueId, this.OVERVIEW_PATH]);
+  }
+
+  static competitionTableUrl(competitionId: string): string {
+    return this.buildApiUrl([
+      this.COMPETITIONS_PATH,
+      competitionId,
+      this.TABLE_PATH,
+    ]);
   }
 
   private static buildApiUrl(paths: string[]): string {

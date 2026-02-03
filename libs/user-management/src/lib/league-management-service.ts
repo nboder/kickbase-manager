@@ -22,6 +22,7 @@ export class LeagueManagementService {
         return new GeneralLeagueInformation(
           value.id,
           value.name,
+          value.competitionId,
           value.budget,
           value.teamValue,
           value.placement,
@@ -41,6 +42,7 @@ export class LeagueManagementService {
       return new GeneralLeagueInformation(
         parsedItem.id,
         parsedItem.name,
+        parsedItem.competitionId,
         parsedItem.budget,
         parsedItem.teamValue,
         parsedItem.placement,
