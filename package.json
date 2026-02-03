@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "nx": "nx",
+    "nxMigration": "nx migrate --run-migrations",
     "release": "nx release version",
     "deploy-build": "nx run manager:build:production --skipNxCache --output-path=docs --base-href=/kickbase-manager/",
     "format": "nx format:write --uncomitted=true --libs-and-apps=true"
