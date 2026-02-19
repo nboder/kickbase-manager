@@ -12,7 +12,7 @@ export class LocalStoragePersistenceManager implements PersistenceManager {
   private readonly COMPETITION_TABLE_STORAGE_KEY = 'competitionTable';
   private savedPlayersToSell = signal<SellingPlayer[]>([]);
   private lookupPlayersToSell: Signal<Set<string>> = computed(
-    () => new Set(this.savedPlayersToSell().map((p) => p.playerId))
+    () => new Set(this.savedPlayersToSell().map((p) => p.playerId)),
   );
   playersToSell = this.savedPlayersToSell.asReadonly();
 
@@ -21,7 +21,7 @@ export class LocalStoragePersistenceManager implements PersistenceManager {
     if (loadedPLayers) {
       const players: SellingPlayer[] = JSON.parse(loadedPLayers);
       this.savedPlayersToSell.set(
-        players.map((p) => new SellingPlayer(p.playerId))
+        players.map((p) => new SellingPlayer(p.playerId)),
       );
     } else {
       this.savedPlayersToSell.set([]);
@@ -41,7 +41,7 @@ export class LocalStoragePersistenceManager implements PersistenceManager {
     this.savedPlayersToSell.update((currentValue) => {
       const currentPlayers = [...currentValue];
       const updatedPlayers = currentPlayers.filter(
-        (value) => value.playerId != player.playerId
+        (value) => value.playerId != player.playerId,
       );
       this.updatePlayersToSell(updatedPlayers);
       return updatedPlayers;
@@ -75,7 +75,7 @@ export class LocalStoragePersistenceManager implements PersistenceManager {
     localStorage.removeItem(this.COMPETITION_TABLE_STORAGE_KEY);
     localStorage.setItem(
       this.COMPETITION_TABLE_STORAGE_KEY,
-      JSON.stringify(competitionTable)
+      JSON.stringify(competitionTable),
     );
   }
 

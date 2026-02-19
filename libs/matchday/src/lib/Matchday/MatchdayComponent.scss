@@ -1,0 +1,10 @@
+$topBottomPadding: 4px;
+
+.matchday-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(
+    100dvh - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0) -
+      12px
+  );
+}

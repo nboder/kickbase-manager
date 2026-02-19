@@ -33,7 +33,7 @@ export class LeagueSelection {
   private readonly router = inject(Router);
   private readonly leagueManagementService = inject(LeagueManagementService);
   private readonly competitionTableService = inject(
-    CompetitionManagementService
+    CompetitionManagementService,
   );
 
   currentLeague = computed(() => {
@@ -45,12 +45,13 @@ export class LeagueSelection {
   });
 
   selectLeague(league: GeneralLeagueInformation) {
+    this.leagueManagementService.setCurrentLeague(league);
     this.competitionTableService
       .fetchCompetitionTable(league.competitionId)
       .subscribe({
         next: (result) => {
           this.competitionTableService.saveCurrentTable(
-            CompetitionTable.createFromApi(result)
+            CompetitionTable.createFromApi(result),
           );
           this.router.navigate([AppRouteDefinitions.MANAGEMENT, league.id]);
         },

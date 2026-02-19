@@ -17,38 +17,38 @@ export class ManagerService {
 
   fetchManagerInformation(
     leagueId: string,
-    managerId: string
+    managerId: string,
   ): Observable<ManagerResponse> {
     return this.httpClient.get<ManagerResponse>(
-      KickbaseApi.managerDashboardUrl(leagueId, managerId)
+      KickbaseApi.managerDashboardUrl(leagueId, managerId),
     );
   }
 
   fetchBudgetInformation(leagueId: string): Observable<BudgetResponse> {
     return this.httpClient.get<BudgetResponse>(
-      KickbaseApi.managerBudgetUrl(leagueId)
+      KickbaseApi.managerBudgetUrl(leagueId),
     );
   }
 
   fetchLeagueOverview(leagueId: string): Observable<LeagueOverviewResponse> {
     const params = new HttpParams().set(
       KickbaseApi.INCLUDE_MANAGERS_AND_BATTLES_QUERY_PARAM,
-      true
+      true,
     );
     return this.httpClient.get<LeagueOverviewResponse>(
       KickbaseApi.leagueOverviewUrl(leagueId),
       {
         params: params,
-      }
+      },
     );
   }
 
   fetchManagerSquad(
     leagueId: string,
-    managerId: string
+    managerId: string,
   ): Observable<ManagerSquadResponse> {
     return this.httpClient.get<ManagerSquadResponse>(
-      KickbaseApi.managerSquadUrl(leagueId, managerId)
+      KickbaseApi.managerSquadUrl(leagueId, managerId),
     );
   }
 }

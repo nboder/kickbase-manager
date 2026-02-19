@@ -53,13 +53,13 @@ export class StaffPlaning implements OnInit {
 
   ngOnInit(): void {
     const leagueId = this.activatedRoute.parent?.snapshot.paramMap.get(
-      AppRouteDefinitions.PATH_PARAM_LEAGUE_ID
+      AppRouteDefinitions.PATH_PARAM_LEAGUE_ID,
     );
     if (leagueId) {
       this.selectedLeaguedId.set(leagueId);
     } else {
       console.log(
-        'URL has been modified. This will result in an error Page in the near future.'
+        'URL has been modified. This will result in an error Page in the near future.',
       );
     }
   }

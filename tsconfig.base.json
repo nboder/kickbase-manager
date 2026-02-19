@@ -33,7 +33,8 @@
       "@kickbase/persistence-management": [
         "libs/persistence-management/src/index.ts"
       ],
-      "@kickbase/staff-planing": ["libs/staff-planing/src/index.ts"]
+      "@kickbase/staff-planing": ["libs/staff-planing/src/index.ts"],
+      "@kickbase/Matchday": ["libs/matchday/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

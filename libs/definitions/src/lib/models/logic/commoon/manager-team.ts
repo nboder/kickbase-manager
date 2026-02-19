@@ -16,28 +16,28 @@ export class ManagerTeam {
   readonly averageOfGk = computed(() => {
     return this.filterPlayersForPosition(
       KickbaseStaffPosition.GK,
-      this.squadPlayer()
+      this.squadPlayer(),
     ).reduce((a, b) => a + b.averagePoints, 0);
   });
 
   readonly averageOfDef = computed(() => {
     return this.filterPlayersForPosition(
       KickbaseStaffPosition.DEF,
-      this.squadPlayer()
+      this.squadPlayer(),
     ).reduce((a, b) => a + b.averagePoints, 0);
   });
 
   readonly averageOfMf = computed(() => {
     return this.filterPlayersForPosition(
       KickbaseStaffPosition.MID,
-      this.squadPlayer()
+      this.squadPlayer(),
     ).reduce((a, b) => a + b.averagePoints, 0);
   });
 
   readonly averageOfFwd = computed(() => {
     return this.filterPlayersForPosition(
       KickbaseStaffPosition.FWD,
-      this.squadPlayer()
+      this.squadPlayer(),
     ).reduce((a, b) => a + b.averagePoints, 0);
   });
 
@@ -61,7 +61,7 @@ export class ManagerTeam {
 
   private filterPlayersForPosition(
     position: KickbaseStaffPosition,
-    players: Player[]
+    players: Player[],
   ): Player[] {
     return players.filter((player: Player) => {
       return player.position === position;

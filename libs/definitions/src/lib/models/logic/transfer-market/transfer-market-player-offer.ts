@@ -4,7 +4,7 @@ export class TransferMarketPlayerOffer {
 
   constructor(
     currentOffer: number | undefined,
-    currentOfferId: string | undefined
+    currentOfferId: string | undefined,
   ) {
     this.offer = currentOffer === undefined ? 0 : currentOffer;
     this.offerId = currentOfferId;

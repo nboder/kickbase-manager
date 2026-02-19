@@ -37,7 +37,11 @@ $topBottomPadding: 4px;
     justify-content: center;
     align-items: center;
     height: calc(
-      100dvh - #{$tabHeight} - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0)
+      100dvh -
+        #{$tabHeight} - calc(3 * $topBottomPadding) - var(
+          --kickbase-toolbar-height,
+          0
+        )
     );
   }
 }

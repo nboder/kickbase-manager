@@ -47,7 +47,7 @@ export class LoginManagement implements OnInit, AfterViewInit {
   private readonly leagueService = inject(LeagueManagementService);
   private readonly router = inject(Router);
   private readonly persistence: PersistenceManager = inject(
-    LocalStoragePersistenceManager
+    LocalStoragePersistenceManager,
   );
 
   ngOnInit(): void {
@@ -71,8 +71,8 @@ export class LoginManagement implements OnInit, AfterViewInit {
             loginResponse.u.email,
             loginResponse.u.id,
             loginResponse.tkn,
-            loginResponse.tknex
-          )
+            loginResponse.tknex,
+          ),
         );
         const leagues = loginResponse.srvl;
         this.leagueService.setAvailableLeagues(
@@ -84,9 +84,9 @@ export class LoginManagement implements OnInit, AfterViewInit {
               value.lm.budget,
               value.lm.teamValue,
               value.lm.placement,
-              value.lm.points
+              value.lm.points,
             );
-          })
+          }),
         );
         if (this.saveUserName()) {
           this.persistence.saveLastLoggedInUsername(this.username());

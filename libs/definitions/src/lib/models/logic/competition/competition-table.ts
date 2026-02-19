@@ -9,12 +9,18 @@ export class CompetitionTable {
   }
 
   static createFromApi(
-    competitionTable: CompetitionTableResponse
+    competitionTable: CompetitionTableResponse,
   ): CompetitionTable {
     return new CompetitionTable(
       competitionTable.it.map((data) => {
-        return new CompetitionTableEntry(data.tn, data.mc, data.cp, data.cpl);
-      })
+        return new CompetitionTableEntry(
+          data.tid,
+          data.tn,
+          data.mc,
+          data.cp,
+          data.cpl,
+        );
+      }),
     );
   }
 }

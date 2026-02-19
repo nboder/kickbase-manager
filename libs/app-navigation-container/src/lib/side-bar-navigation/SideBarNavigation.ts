@@ -17,6 +17,7 @@ export class SideBarNavigation {
   readonly sidebarItems = signal<SideBarItem[]>([
     SideBarItem.LEAGUE_SELECTION,
     SideBarItem.STAFF_MANAGEMENT,
+    SideBarItem.MATCH_UPS,
     SideBarItem.FUN_STATS,
     SideBarItem.LOGOUT,
   ]);
@@ -29,6 +30,7 @@ export class SideBarNavigation {
 export enum SideBarItem {
   LEAGUE_SELECTION = 'League Selection',
   STAFF_MANAGEMENT = 'Staff Management',
+  MATCH_UPS = 'Match Ups',
   FUN_STATS = 'Fun Stats',
   LOGOUT = 'Logout',
 }

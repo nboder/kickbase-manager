@@ -1,39 +1,39 @@
 @if (showMobileLayout()) {
-<div class="mobile-container">
-  <div class="mobile__section_squad">
-    @for (player of mySquad(); track player.playerId) { @if
-    (shouldShowPositionSeparator($index, $first)) {
-    <lib-divider
-      text="{{ kickbasePositionToExtendedString(player.position) }}"
-      [size]="DividerSize.LARGE"
-    ></lib-divider>
-    }
-    <ng-template
-      [ngTemplateOutlet]="squadPlayerCard"
-      [ngTemplateOutletContext]="{ player: player, index: $index }"
-    ></ng-template>
-    }
+  <div class="mobile-container">
+    <div class="mobile__section_squad">
+      @for (player of mySquad(); track player.playerId) {
+        @if (shouldShowPositionSeparator($index, $first)) {
+          <lib-divider
+            text="{{ kickbasePositionToExtendedString(player.position) }}"
+            [size]="DividerSize.LARGE"
+          ></lib-divider>
+        }
+        <ng-template
+          [ngTemplateOutlet]="squadPlayerCard"
+          [ngTemplateOutletContext]="{ player: player, index: $index }"
+        ></ng-template>
+      }
+    </div>
+    <div class="mobile__section-buttons">
+      <ng-template [ngTemplateOutlet]="sellAllButton"></ng-template>
+      <ng-template [ngTemplateOutlet]="resetSales"></ng-template>
+    </div>
   </div>
-  <div class="mobile__section-buttons">
-    <ng-template [ngTemplateOutlet]="sellAllButton"></ng-template>
-    <ng-template [ngTemplateOutlet]="resetSales"></ng-template>
-  </div>
-</div>
 } @else {
-<div class="squad-section">
-  <div class="squad-section__card-section">
-    @for (player of mySquad(); track player.playerId) {
-    <ng-template
-      [ngTemplateOutlet]="squadPlayerCard"
-      [ngTemplateOutletContext]="{ player: player, index: $index }"
-    ></ng-template>
-    }
+  <div class="squad-section">
+    <div class="squad-section__card-section">
+      @for (player of mySquad(); track player.playerId) {
+        <ng-template
+          [ngTemplateOutlet]="squadPlayerCard"
+          [ngTemplateOutletContext]="{ player: player, index: $index }"
+        ></ng-template>
+      }
+    </div>
+    <div class="squad-section__buttons">
+      <ng-template [ngTemplateOutlet]="sellAllButton"></ng-template>
+      <ng-template [ngTemplateOutlet]="resetSales"></ng-template>
+    </div>
   </div>
-  <div class="squad-section__buttons">
-    <ng-template [ngTemplateOutlet]="sellAllButton"></ng-template>
-    <ng-template [ngTemplateOutlet]="resetSales"></ng-template>
-  </div>
-</div>
 }
 
 <ng-template #squadPlayerCard let-player="player" let-index="index">

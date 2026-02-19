@@ -22,14 +22,14 @@ export class TransferMarketPlayer extends BasicPlayer {
       responseData.n,
       responseData.mv,
       responseData.ap,
-      responseData.pos
+      responseData.pos,
     );
     this.firstName = responseData.fn;
     this.transferExpiringSeconds = responseData.exs;
     this.totalPoints = responseData.p == undefined ? 0 : responseData.p;
     this.currentOffer = new TransferMarketPlayerOffer(
       responseData.uop,
-      responseData.uoid
+      responseData.uoid,
     );
     this.price = responseData.prc;
   }

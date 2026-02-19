@@ -19,7 +19,7 @@ export class Player extends BasicPlayer {
     twentyForHoursDevelopment: number,
     isInSquad: boolean,
     marketValueWinOrLoss: number,
-    isOnTransferMarket: boolean
+    isOnTransferMarket: boolean,
   ) {
     super(playerId, name, marketValue, averagePoints, position);
     this.sevenDayPrediction = sevenDayPrediction;
@@ -30,7 +30,7 @@ export class Player extends BasicPlayer {
   }
 
   static playerFromSquadResponsePlayer(
-    squadResponsePlayer: SquadResponsePlayer
+    squadResponsePlayer: SquadResponsePlayer,
   ): Player {
     return new Player(
       squadResponsePlayer.i,
@@ -42,12 +42,12 @@ export class Player extends BasicPlayer {
       squadResponsePlayer.tfhmvt,
       squadResponsePlayer.lo != undefined,
       squadResponsePlayer.mvgl,
-      squadResponsePlayer.iotm
+      squadResponsePlayer.iotm,
     );
   }
 
   static playerFromManagerPlayerResponse(
-    playerResponse: ManagerSquadPlayerResponse
+    playerResponse: ManagerSquadPlayerResponse,
   ): Player {
     return new Player(
       playerResponse.pi,
@@ -59,7 +59,7 @@ export class Player extends BasicPlayer {
       playerResponse.tfhmv,
       playerResponse.lo != undefined,
       playerResponse.mvgl,
-      playerResponse.iotm
+      playerResponse.iotm,
     );
   }
 }

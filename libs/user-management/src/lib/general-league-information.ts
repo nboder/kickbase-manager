@@ -14,7 +14,7 @@ export class GeneralLeagueInformation {
     budget: number,
     teamValue: number,
     placement: number,
-    points: number
+    points: number,
   ) {
     this.id = id;
     this.name = name;

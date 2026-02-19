@@ -11,7 +11,7 @@ export class StaffPlaningService {
 
   fetchMyTeam(leagueId: string): Observable<SquadResponseStaff> {
     return this.httpClient.get<SquadResponseStaff>(
-      KickbaseApi.mySquadUrl(leagueId)
+      KickbaseApi.mySquadUrl(leagueId),
     );
   }
 }

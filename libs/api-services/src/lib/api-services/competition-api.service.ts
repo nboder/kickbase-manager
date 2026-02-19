@@ -10,10 +10,10 @@ export class CompetitionApiService {
   private readonly httpClient = inject(HttpClient);
 
   fetchTableOfCompetition(
-    competitionId: string
+    competitionId: string,
   ): Observable<CompetitionTableResponse> {
     return this.httpClient.get<CompetitionTableResponse>(
-      KickbaseApi.competitionTableUrl(competitionId)
+      KickbaseApi.competitionTableUrl(competitionId),
     );
   }
 }

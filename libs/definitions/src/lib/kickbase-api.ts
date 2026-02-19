@@ -17,6 +17,7 @@ export class KickbaseApi {
   private static readonly OFFERS_PATH = 'offers';
   private static readonly COMPETITIONS_PATH = 'competitions';
   private static readonly TABLE_PATH = 'table';
+  private static readonly MATCHDAYS_PATH = 'matchdays';
 
   static readonly INCLUDE_MANAGERS_AND_BATTLES_QUERY_PARAM =
     'includeManagersAndBattles';
@@ -77,7 +78,7 @@ export class KickbaseApi {
   static withDrawOfferUrl(
     leagueId: string,
     playerId: string,
-    offerId: string
+    offerId: string,
   ): string {
     return this.buildApiUrl([
       this.LEAGUES_PATH,
@@ -117,6 +118,14 @@ export class KickbaseApi {
       this.COMPETITIONS_PATH,
       competitionId,
       this.TABLE_PATH,
+    ]);
+  }
+
+  static matchDayUrl(competitionId: string): string {
+    return this.buildApiUrl([
+      this.COMPETITIONS_PATH,
+      competitionId,
+      this.MATCHDAYS_PATH,
     ]);
   }
 

@@ -45,7 +45,7 @@ export class MoneyOverview implements OnInit, ResponsiveView {
   twentyFourHourPredictionOnlyBenchPlayer(): number {
     return this.twentyFourHourPredictionsOnlyBenchPlayer().reduce(
       (a, b) => a + b,
-      0
+      0,
     );
   }
 
@@ -63,7 +63,7 @@ export class MoneyOverview implements OnInit, ResponsiveView {
     this.managerService
       .fetchManagerInformation(
         this.selectedLeagueId(),
-        this.userService.getCurrentUser().id
+        this.userService.getCurrentUser().id,
       )
       .subscribe({
         next: (data) => {

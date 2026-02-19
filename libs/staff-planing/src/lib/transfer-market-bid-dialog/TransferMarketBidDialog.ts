@@ -33,7 +33,7 @@ import { FormsModule } from '@angular/forms';
 export class TransferMarketBidDialog {
   data: TransferMarketInputBidData = inject(MAT_DIALOG_DATA);
   dialogRef: MatDialogRef<TransferMarketBidDialog> = inject(
-    MatDialogRef<TransferMarketBidDialog>
+    MatDialogRef<TransferMarketBidDialog>,
   );
 
   currentBid = this.data.currentBid;

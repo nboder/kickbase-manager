@@ -16,7 +16,7 @@ export class KickbaseLoginService {
   login(username: string, password: string): Observable<LoginResponse> {
     return this.httpClient.post<LoginResponse>(
       KickbaseApi.loginUrl(),
-      new LoginRequest(username, password)
+      new LoginRequest(username, password),
     );
   }
 }

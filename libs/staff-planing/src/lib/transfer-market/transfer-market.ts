@@ -40,10 +40,10 @@ export class TransferMarket implements OnInit, ResponsiveView {
   private transferMarket = signal<TransferMarketPlayer[]>([]);
   shownTransferMarketPlayers = computed(() => {
     const cashFilter = this.filters().find(
-      (value) => value == TransferMarketFilter.CASH_COW
+      (value) => value == TransferMarketFilter.CASH_COW,
     );
     const pointFilter = this.filters().find(
-      (value) => value == TransferMarketFilter.POINTING_MACHINES
+      (value) => value == TransferMarketFilter.POINTING_MACHINES,
     );
     let players = this.transferMarket();
     if (cashFilter) {
@@ -61,7 +61,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
   private readonly transferMarketService = inject(TransferMarketService);
 
   private readonly transferMarketLookup = new Map<string, TransferMarketPlayer>(
-    []
+    [],
   );
 
   private nextMarketValueUpdate: Date | undefined;
@@ -77,7 +77,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
             const transferPlayer = new TransferMarketPlayer(data);
             this.transferMarketLookup.set(
               transferPlayer.playerId,
-              transferPlayer
+              transferPlayer,
             );
             this.fetchDetailOfPlayer(transferPlayer.playerId);
             return transferPlayer;
@@ -87,8 +87,8 @@ export class TransferMarket implements OnInit, ResponsiveView {
           this.matchDay = data.day;
           this.transferMarket.set(
             transferData.sort(
-              (a, b) => a.transferExpiringSeconds - b.transferExpiringSeconds
-            )
+              (a, b) => a.transferExpiringSeconds - b.transferExpiringSeconds,
+            ),
           );
           this.acceptBuyingOrders();
         },
@@ -110,7 +110,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
       .placeOffer(
         this.selectedLeagueId(),
         player.playerId,
-        player.currentOffer.offer
+        player.currentOffer.offer,
       )
       .subscribe({
         next: (data) => {
@@ -126,7 +126,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
         .withdrawPlayerOffer(
           this.selectedLeagueId(),
           player.playerId,
-          player.currentOffer.offerId
+          player.currentOffer.offerId,
         )
         .subscribe({
           next: (data) => {
@@ -145,11 +145,11 @@ export class TransferMarket implements OnInit, ResponsiveView {
       .subscribe({
         next: (data) => {
           const currentSeason = data.it.find(
-            (value) => value.ti === KickbaseApi.CURRENT_SEASON_PERFORMANCE_NAME
+            (value) => value.ti === KickbaseApi.CURRENT_SEASON_PERFORMANCE_NAME,
           );
           if (currentSeason) {
             const currentPlayer = this.transferMarketLookup.get(
-              player.playerId
+              player.playerId,
             );
             if (currentPlayer) {
               currentPlayer.pointHistory = currentSeason.ph
@@ -159,7 +159,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
           } else {
             console.log(
               'Could not find current Season in Data: ' +
-                KickbaseApi.CURRENT_SEASON_PERFORMANCE_NAME
+                KickbaseApi.CURRENT_SEASON_PERFORMANCE_NAME,
             );
           }
         },
@@ -174,7 +174,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
       return this.shouldShowDividerBetweenPlayers(
         index,
         isFirstElement,
-        this.nextMarketValueUpdate
+        this.nextMarketValueUpdate,
       );
     }
     return false;
@@ -185,7 +185,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
       return this.shouldShowDividerBetweenPlayers(
         index,
         isFirstElement,
-        this.matchDayDate
+        this.matchDayDate,
       );
     }
     return false;
@@ -200,7 +200,7 @@ export class TransferMarket implements OnInit, ResponsiveView {
   private shouldShowDividerBetweenPlayers(
     index: number,
     isFirstElement: boolean,
-    dividerDate: Date
+    dividerDate: Date,
   ): boolean {
     const expirationOfCurrentPlayer =
       Date.now() / 1000 +

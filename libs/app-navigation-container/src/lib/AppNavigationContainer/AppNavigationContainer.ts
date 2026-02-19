@@ -58,6 +58,11 @@ export class AppNavigationContainer implements OnInit {
           relativeTo: this.activatedRoute,
         });
         break;
+      case SideBarItem.MATCH_UPS:
+        this.router.navigate([AppRouteDefinitions.MATCHUPS], {
+          relativeTo: this.activatedRoute,
+        });
+        break;
       case SideBarItem.LOGOUT:
         this.userService.logoutCurrentUser();
         this.router.navigateByUrl(AppRouteDefinitions.LOGIN);

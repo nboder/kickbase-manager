@@ -39,7 +39,7 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
   private positionStatsCanvas: ElementRef<HTMLCanvasElement> | undefined;
   squadPerManager = signal<ManagerTeam[]>([]);
   private leagueOverview = signal<LeagueOverviewResponse | undefined>(
-    undefined
+    undefined,
   );
   private hasViewBeenInitialized = signal(false);
   private canRenderCharts = computed(() => {
@@ -61,7 +61,7 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
   ngOnInit(): void {
     Chart.register(...registerables);
     const leagueId = this.activatedRoute.parent?.snapshot.paramMap.get(
-      AppRouteDefinitions.PATH_PARAM_LEAGUE_ID
+      AppRouteDefinitions.PATH_PARAM_LEAGUE_ID,
     );
     if (leagueId) {
       this.selectedLeaguedId.set(leagueId);
@@ -76,7 +76,7 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
       });
     } else {
       console.log(
-        'URL has been modified. This will result in an error Page in the near future.'
+        'URL has been modified. This will result in an error Page in the near future.',
       );
     }
   }
@@ -121,7 +121,7 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
   private setupTotalAverageChart() {
     if (this.canRenderCharts()) {
       const totalStatsProvider: ChartDataProvider = new TotalStateDataProvider(
-        this.squadPerManager()
+        this.squadPerManager(),
       );
       const context = this.totalStatsCanvas?.nativeElement.getContext('2d');
       if (context) {
@@ -141,7 +141,7 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
                 ticks: {
                   callback: function (index) {
                     const currentLabel = totalStatsProvider.labelAtIndex(
-                      index as number
+                      index as number,
                     );
 
                     return currentLabel;
@@ -158,7 +158,7 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
   }
 
   private fetchSquadForAllManagers(
-    managers: LeagueOverviewUserResponse[]
+    managers: LeagueOverviewUserResponse[],
   ): void {
     managers.forEach((user) => {
       this.managerService
@@ -171,9 +171,9 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
                 new ManagerTeam(
                   user.n,
                   data.it.map((value) =>
-                    Player.playerFromManagerPlayerResponse(value)
-                  )
-                )
+                    Player.playerFromManagerPlayerResponse(value),
+                  ),
+                ),
               );
               return teamsArray;
             });

@@ -21,7 +21,7 @@ export const appRoutes: Route[] = [
       AppRouteDefinitions.PATH_PARAM_LEAGUE_ID,
     loadComponent: () =>
       import('@kickbase/AppNavigationContainer').then(
-        (comp) => comp.AppNavigationContainer
+        (comp) => comp.AppNavigationContainer,
       ),
     canActivate: [isLoggedInGuard],
     canActivateChild: [isLoggedInGuard],
@@ -35,8 +35,13 @@ export const appRoutes: Route[] = [
         path: AppRouteDefinitions.MANAGER_AVG_POINTS_FUN,
         loadComponent: () =>
           import('@kickbase/manager-average-point-fun-facts').then(
-            (comp) => comp.ManagerAveragePointFunFacts
+            (comp) => comp.ManagerAveragePointFunFacts,
           ),
+      },
+      {
+        path: AppRouteDefinitions.MATCHUPS,
+        loadComponent: () =>
+          import('@kickbase/Matchday').then((comp) => comp.MatchdayComponent),
       },
     ],
   },

@@ -26,12 +26,16 @@ export class LeagueManagementService {
           value.budget,
           value.teamValue,
           value.placement,
-          value.points
+          value.points,
         );
       });
     } else {
       return [];
     }
+  }
+
+  setCurrentLeague(league: GeneralLeagueInformation) {
+    localStorage.setItem(this.LEAGUE_INFORMATION_KEY, JSON.stringify(league));
   }
 
   getLeagueInformation(): GeneralLeagueInformation {
@@ -46,7 +50,7 @@ export class LeagueManagementService {
         parsedItem.budget,
         parsedItem.teamValue,
         parsedItem.placement,
-        parsedItem.points
+        parsedItem.points,
       );
     } else {
       return GeneralLeagueInformation.noLeagueInformation();

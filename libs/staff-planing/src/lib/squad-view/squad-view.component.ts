@@ -34,7 +34,7 @@ export class SquadView implements OnInit, ResponsiveView {
 
   sumOfSoldPlayers = computed(() => {
     const soldPlayer = this.mySquad().filter((mySquadPlayer) =>
-      this.storageManager.containedInPlayersToSell(mySquadPlayer.playerId)
+      this.storageManager.containedInPlayersToSell(mySquadPlayer.playerId),
     );
     let sumOfSellingPlayers = 0;
     soldPlayer.forEach((player) => {
@@ -60,7 +60,7 @@ export class SquadView implements OnInit, ResponsiveView {
       .filter(
         (mySquadPlayer) =>
           !this.isPlayerMarkedForSelling(mySquadPlayer) &&
-          !mySquadPlayer.isInSquad
+          !mySquadPlayer.isInSquad,
       )
       .map((value) => value.twentyForHoursDevelopment);
   });
@@ -70,13 +70,13 @@ export class SquadView implements OnInit, ResponsiveView {
       .filter(
         (mySquadPlayer) =>
           !this.isPlayerMarkedForSelling(mySquadPlayer) &&
-          !mySquadPlayer.isInSquad
+          !mySquadPlayer.isInSquad,
       )
       .map((value) => value.sevenDayPrediction);
   });
 
   private readonly storageManager: PersistenceManager = inject(
-    LocalStoragePersistenceManager
+    LocalStoragePersistenceManager,
   );
   private readonly staffService = inject(StaffPlaningService);
   mySquad = signal<Player[]>([]);
@@ -89,7 +89,7 @@ export class SquadView implements OnInit, ResponsiveView {
           const player = Player.playerFromSquadResponsePlayer(value);
           if (player.isOnTransferMarket) {
             this.storageManager.storeSellablePlayer(
-              new SellingPlayer(player.playerId)
+              new SellingPlayer(player.playerId),
             );
           }
           return player;
@@ -119,7 +119,7 @@ export class SquadView implements OnInit, ResponsiveView {
     this.mySquad().forEach((player) => {
       if (!player.isInSquad) {
         this.storageManager.storeSellablePlayer(
-          new SellingPlayer(player.playerId)
+          new SellingPlayer(player.playerId),
         );
       }
     });
@@ -129,7 +129,7 @@ export class SquadView implements OnInit, ResponsiveView {
     this.mySquad().forEach((player) => {
       if (!player.isOnTransferMarket) {
         this.storageManager.removeSellablePlayer(
-          new SellingPlayer(player.playerId)
+          new SellingPlayer(player.playerId),
         );
       }
     });

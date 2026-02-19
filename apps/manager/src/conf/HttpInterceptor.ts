@@ -9,7 +9,7 @@ import { UserManagementService } from '@kickbase/UserManagement';
 
 export const headerInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
-  next: HttpHandlerFn
+  next: HttpHandlerFn,
 ) => {
   let modifiedHeaders = req.headers
     .set('Content-Type', `application/json`)
@@ -18,7 +18,7 @@ export const headerInterceptor: HttpInterceptorFn = (
     const userService = inject(UserManagementService);
     modifiedHeaders = modifiedHeaders.set(
       'Authorization',
-      `Bearer ${userService.getUserAccessToken()}`
+      `Bearer ${userService.getUserAccessToken()}`,
     );
   }
   const modifiedReq = req.clone({

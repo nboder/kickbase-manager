@@ -21,7 +21,7 @@ export class UserManagementService {
         parsedUser.username,
         parsedUser.id,
         parsedUser.token,
-        parsedUser.tokenExpiry.toString()
+        parsedUser.tokenExpiry.toString(),
       );
       return this.currentUser;
     }

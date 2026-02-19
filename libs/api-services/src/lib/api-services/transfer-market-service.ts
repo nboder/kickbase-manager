@@ -16,51 +16,51 @@ export class TransferMarketService {
   private readonly httpClient = inject(HttpClient);
 
   fetchTransferMarketInformation(
-    leagueId: string
+    leagueId: string,
   ): Observable<MarketInformationResponse> {
     return this.httpClient.get<MarketInformationResponse>(
-      KickbaseApi.marketUrl(leagueId)
+      KickbaseApi.marketUrl(leagueId),
     );
   }
 
   fetchPlayerDetails(
     leagueId: string,
-    playerId: string
+    playerId: string,
   ): Observable<PlayerDetailResponse> {
     return this.httpClient.get<PlayerDetailResponse>(
-      KickbaseApi.playerInformationUrl(leagueId, playerId)
+      KickbaseApi.playerInformationUrl(leagueId, playerId),
     );
   }
 
   fetchPlayerPerformance(
     leagueId: string,
-    playerId: string
+    playerId: string,
   ): Observable<PlayerPerformanceResponse> {
     return this.httpClient.get<PlayerPerformanceResponse>(
-      KickbaseApi.playerPerformanceUrl(leagueId, playerId)
+      KickbaseApi.playerPerformanceUrl(leagueId, playerId),
     );
   }
 
   placeOffer(
     leagueId: string,
     playerId: string,
-    offerPrice: number
+    offerPrice: number,
   ): Observable<PlacerOfferResponse> {
     return this.httpClient.post<PlacerOfferResponse>(
       KickbaseApi.placeOfferUrl(leagueId, playerId),
       {
         price: offerPrice,
-      }
+      },
     );
   }
 
   withdrawPlayerOffer(
     leagueId: string,
     playerId: string,
-    offerId: string
+    offerId: string,
   ): Observable<object> {
     return this.httpClient.delete(
-      KickbaseApi.withDrawOfferUrl(leagueId, playerId, offerId)
+      KickbaseApi.withDrawOfferUrl(leagueId, playerId, offerId),
     );
   }
 }

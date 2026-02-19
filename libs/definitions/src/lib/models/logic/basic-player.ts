@@ -15,7 +15,7 @@ export abstract class BasicPlayer {
     name: string,
     marketValue: number,
     averagePoints: number | undefined,
-    position: number
+    position: number,
   ) {
     this.playerId = playerId;
     this.name = name;

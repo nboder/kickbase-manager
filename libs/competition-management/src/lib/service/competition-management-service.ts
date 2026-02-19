@@ -16,11 +16,11 @@ import { Observable, of } from 'rxjs';
 export class CompetitionManagementService {
   private readonly competitionApiService = inject(CompetitionApiService);
   private readonly persistence: PersistenceManager = inject(
-    LocalStoragePersistenceManager
+    LocalStoragePersistenceManager,
   );
 
   fetchCompetitionTable(
-    competitionId: string
+    competitionId: string,
   ): Observable<CompetitionTableResponse> {
     return this.competitionApiService.fetchTableOfCompetition(competitionId);
   }

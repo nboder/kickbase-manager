@@ -5,7 +5,7 @@ describe('KickbaseApi', () => {
   });
   it('loginUrl should return proper url', () => {
     expect(KickbaseApi.loginUrl()).toEqual(
-      'https://api.kickbase.com/v4/user/login'
+      'https://api.kickbase.com/v4/user/login',
     );
   });
 });
