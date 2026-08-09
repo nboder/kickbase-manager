@@ -86,9 +86,21 @@ export class TransferMarket implements OnInit, ResponsiveView {
           this.matchDayDate = new Date(data.dt);
           this.matchDay = data.day;
           this.transferMarket.set(
-            transferData.sort(
-              (a, b) => a.transferExpiringSeconds - b.transferExpiringSeconds
-            )
+            transferData.sort((a, b) => {
+              if (
+                a.transferExpiringSeconds == undefined &&
+                b.transferExpiringSeconds == undefined
+              ) {
+                return 0;
+              }
+              if (a.transferExpiringSeconds == undefined) {
+                return 1;
+              }
+              if (b.transferExpiringSeconds == undefined) {
+                return -1;
+              }
+              return a.transferExpiringSeconds - b.transferExpiringSeconds;
+            })
           );
           this.acceptBuyingOrders();
         },
@@ -202,22 +214,29 @@ export class TransferMarket implements OnInit, ResponsiveView {
     isFirstElement: boolean,
     dividerDate: Date
   ): boolean {
-    const expirationOfCurrentPlayer =
-      Date.now() / 1000 +
-      this.shownTransferMarketPlayers()[index].transferExpiringSeconds;
+    const expirationOfCurrentPlayer = this.expirationTimestampOfPlayer(
+      this.shownTransferMarketPlayers()[index]
+    );
     const updateValue = dividerDate.valueOf() / 1000;
     if (isFirstElement) {
       return updateValue < expirationOfCurrentPlayer;
     } else {
-      const expirationOfPreviousPlayer =
-        Date.now() / 1000 +
-        this.shownTransferMarketPlayers()[index - 1].transferExpiringSeconds;
+      const expirationOfPreviousPlayer = this.expirationTimestampOfPlayer(
+        this.shownTransferMarketPlayers()[index - 1]
+      );
 
       return (
         updateValue > expirationOfPreviousPlayer &&
         updateValue < expirationOfCurrentPlayer
       );
     }
+  }
+
+  private expirationTimestampOfPlayer(player: TransferMarketPlayer): number {
+    if (player.transferExpiringSeconds == undefined) {
+      return Infinity;
+    }
+    return Date.now() / 1000 + player.transferExpiringSeconds;
   }
 
   private fetchDetailOfPlayer(playerId: string): void {

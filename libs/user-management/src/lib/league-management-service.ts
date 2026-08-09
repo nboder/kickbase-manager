@@ -33,11 +33,14 @@ export class LeagueManagementService {
     }
   }
 
+  setLeagueInformation(league: GeneralLeagueInformation) {
+    localStorage.setItem(this.LEAGUE_INFORMATION_KEY, JSON.stringify(league));
+  }
+
   getLeagueInformation(): GeneralLeagueInformation {
     const leagueInformation = localStorage.getItem(this.LEAGUE_INFORMATION_KEY);
     if (leagueInformation) {
-      const parsedItem: GeneralLeagueInformation =
-        JSON.parse(leagueInformation);
+      const parsedItem: GeneralLeagueInformation = JSON.parse(leagueInformation);
       return new GeneralLeagueInformation(
         parsedItem.id,
         parsedItem.name,

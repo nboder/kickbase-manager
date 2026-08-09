@@ -15,6 +15,7 @@
           ></lib-position-marker>
         </div>
         <div class="centered-content">
+          @if (!transferMarketPlayer().hasTransferExpiration()) { - } @else {
           @let hours = transferMarketPlayer().transferExpirationInHours(); @if
           (hours < showHoursThreshold) { {{
           transferMarketPlayer().transferExpirationInMinutes() | expirationTime
@@ -22,7 +23,7 @@
           showDaysThreshold) { {{
           transferMarketPlayer().transferExpirationInHours() | expirationTime }}
           h } @else { {{ transferMarketPlayer().transferExpirationInDays() |
-          expirationTime }} Days }
+          expirationTime }} Days } }
         </div>
         <div class="centered-content">
           {{ transferMarketPlayer().averagePoints }} avg

@@ -6,7 +6,13 @@
     </div>
     <mat-form-field class="bid">
       <mat-label>Your Bid</mat-label>
-      <input matInput [(ngModel)]="currentBid" type="number" />
+      <input
+        matInput
+        type="text"
+        inputmode="numeric"
+        [ngModel]="formattedBid"
+        (ngModelChange)="onBidInput($event)"
+      />
     </mat-form-field>
   </div>
 </mat-dialog-content>

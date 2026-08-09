@@ -8,7 +8,7 @@ import {
 } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 import { MoneyPipe } from '@kickbase/definitions';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
     MatInput,
     FormsModule,
   ],
-  providers: [CurrencyPipe],
+  providers: [CurrencyPipe, DecimalPipe],
   templateUrl: './TransferMarketBidDialog.html',
   styleUrl: './TransferMarketBidDialog.scss',
 })
@@ -35,8 +35,24 @@ export class TransferMarketBidDialog {
   dialogRef: MatDialogRef<TransferMarketBidDialog> = inject(
     MatDialogRef<TransferMarketBidDialog>
   );
+  private readonly decimalPipe = inject(DecimalPipe);
 
+  formattedBid = this.formatBid(this.data.currentBid);
   currentBid = this.data.currentBid;
+
+  onBidInput(value: string) {
+    this.currentBid = this.parseBid(value);
+    this.formattedBid = this.formatBid(this.currentBid);
+  }
+
+  private formatBid(value: number): string {
+    return this.decimalPipe.transform(value, '1.0-0') ?? '';
+  }
+
+  private parseBid(value: string): number {
+    const digitsOnly = value.replace(/\D/g, '');
+    return digitsOnly ? parseInt(digitsOnly, 10) : 0;
+  }
 
   clearBidDialog() {
     this.dialogRef.close({
