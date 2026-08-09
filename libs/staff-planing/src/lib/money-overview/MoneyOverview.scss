@@ -1,62 +1,118 @@
-.money-section {
-  border: 1px solid #ddd;
-  padding: 2px;
-  margin-bottom: 1em;
+.money-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
 
-  &-overview {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2em;
+.money-overview-card,
+.predictions-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.overview-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.overview-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+
+  &__label {
+    color: var(--mat-sys-on-surface-variant);
+    font-size: var(--mat-sys-body-medium);
   }
 
-  &-entry {
-    display: flex;
-    flex-direction: row;
+  &__value {
+    font-weight: 500;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
 
-    &__title {
-      flex: 1;
+  &--final {
+    margin-top: 0.5em;
+    padding-top: 0.5em;
+
+    .overview-item__label {
+      font-weight: bold;
+      color: var(--mat-sys-on-surface);
     }
 
-    &__value {
-      text-align: right;
+    .overview-item__value {
+      font-size: 1.15rem;
     }
   }
 }
 
-.prediction-section {
-  &-team,
-  &-bench {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2em;
-    margin-bottom: 1em;
-  }
+.overview-divider,
+.predictions-divider {
+  margin: 1em 0;
+}
 
-  &-entry {
-    display: flex;
-    flex-direction: row;
+.positive {
+  color: green;
+}
 
-    &__title {
-      flex: 0.3;
-    }
-
-    &__value {
-      flex: 0.5;
-    }
-
-    &__total {
-      text-align: right;
-      flex: 0.5;
-    }
-  }
+.negative {
+  color: red;
 }
 
 .emphasized {
   font-weight: bold;
 }
 
-.heading {
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 8px;
+.prediction-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--mat-sys-on-surface);
+    margin-bottom: 0.25em;
+  }
+}
+
+.prediction-row {
+  display: grid;
+  grid-template-columns: 3.5em 1fr 1fr;
+  gap: 0.5em;
+  align-items: center;
+  padding: 0.4em 0;
+
+  &--header {
+    font-weight: 500;
+    color: var(--mat-sys-on-surface-variant);
+    font-size: var(--mat-sys-body-small);
+    padding: 0.2em 0;
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+  }
+
+  &__label {
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__trend {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__total {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (max-width: 360px) {
+  .prediction-row {
+    grid-template-columns: 3em 1fr 1fr;
+    gap: 0.25em;
+  }
 }

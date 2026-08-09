@@ -11,10 +11,24 @@ import { ManagerService } from '@kickbase/api-services';
 import { MarketValueTrend, ResponsiveView } from '@kickbase/PositionMarker';
 import { UserManagementService } from '@kickbase/UserManagement';
 import { MatDivider } from '@angular/material/divider';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardHeader,
+  MatCardTitle,
+} from '@angular/material/card';
 
 @Component({
   selector: 'lib-money-overview',
-  imports: [MoneyPipe, MarketValueTrend, MatDivider],
+  imports: [
+    MoneyPipe,
+    MarketValueTrend,
+    MatDivider,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+  ],
   templateUrl: './MoneyOverview.html',
   styleUrls: ['./MoneyOverview.scss', '../shared.scss'],
 })
