@@ -6,15 +6,28 @@
   (click)="playerShouldBeSold.emit(!isBeingSold())"
 >
   <div class="squad_play_card__content">
-    <div class="squad_play_card__content__meta_information">
-      <lib-position-marker [position]="position()"></lib-position-marker>
-      <div class="squad_play_card__content__meta_information_listing">
-        #{{ numberOfPlayer() }} @if (isInSquad()) { -
+    <div class="squad_play_card__image-section">
+      @if (playerImageUrl()) {
+      <img
+        class="squad_play_card__player-image"
+        [src]="cdnService.cdnUrl(playerImageUrl())"
+        [alt]="playerName()"
+      />
+      } @else {
+      <div
+        class="squad_play_card__player-image squad_play_card__player-image--placeholder"
+      >
+        {{ playerImagePlaceholder() }}
+      </div>
+      }
+      <div class="squad_play_card__image-section__listing">
+        #{{ numberOfPlayer() }}
+        @if (isInSquad()) { -
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          height="24px"
+          height="12px"
           viewBox="0 -960 960 960"
-          width="24px"
+          width="12px"
         >
           <path
             d="M240-350q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T290-400q0 20-14.5 35T240-350Zm0-320q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T290-720q0 20-14.5 35T240-670Zm120 480q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T410-240q0 20-14.5 35T360-190Zm0-320q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T410-560q0 20-14.5 35T360-510Zm120 160q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T530-400q0 20-14.5 35T480-350Zm0-320q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T530-720q0 20-14.5 35T480-670Zm120 480q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T650-240q0 20-14.5 35T600-190Zm0-320q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T650-560q0 20-14.5 35T600-510Zm120 160q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T770-400q0 20-14.5 35T720-350Zm0-320q-20 0-35-15t-15-35q0-21 15-35.5t35-14.5q21 0 35.5 14.5T770-720q0 20-14.5 35T720-670Z"
@@ -23,11 +36,17 @@
         }
       </div>
     </div>
-    <div class="squad_play_card__content__player_listing">
-      <lib-player-name-and-value
-        [playerLastName]="playerName()"
+    <div class="squad_play_card__content__player_info">
+      <div class="squad_play_card__name-row">
+        <span class="squad_play_card__name">{{ playerName() }}</span>
+        <lib-position-marker
+          class="squad_play_card__position"
+          [position]="position()"
+        ></lib-position-marker>
+      </div>
+      <lib-market-value-trend
         [marketValueTrend]="marketValueTrend()"
-      ></lib-player-name-and-value>
+      ></lib-market-value-trend>
     </div>
     <div class="squad_play_card__content__sell_section">
       <div class="money-column">{{ marketValue() | moneyPipe }}</div>

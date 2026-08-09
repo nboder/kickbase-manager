@@ -7,4 +7,6 @@ export interface SquadResponsePlayer extends BasicPlayerResponse {
   readonly lo: number | undefined; // is in Squad, Value is the position on the filed.
   readonly iotm: boolean;
   readonly ap: number | undefined;
+  readonly pim?: string; // Player image Url
+  readonly tim?: string; // Team image Url
 }

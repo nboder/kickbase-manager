@@ -8,6 +8,8 @@ export class Player extends BasicPlayer {
   readonly isInSquad: boolean;
   readonly marketValueWinOrLoss: number;
   readonly isOnTransferMarket: boolean;
+  readonly playerImageUrl: string;
+  readonly teamImageUrl: string;
 
   constructor(
     playerId: string,
@@ -19,7 +21,9 @@ export class Player extends BasicPlayer {
     twentyForHoursDevelopment: number,
     isInSquad: boolean,
     marketValueWinOrLoss: number,
-    isOnTransferMarket: boolean
+    isOnTransferMarket: boolean,
+    playerImageUrl?: string,
+    teamImageUrl?: string
   ) {
     super(playerId, name, marketValue, averagePoints, position);
     this.sevenDayPrediction = sevenDayPrediction;
@@ -27,6 +31,8 @@ export class Player extends BasicPlayer {
     this.isInSquad = isInSquad;
     this.marketValueWinOrLoss = marketValueWinOrLoss;
     this.isOnTransferMarket = isOnTransferMarket;
+    this.playerImageUrl = playerImageUrl ?? '';
+    this.teamImageUrl = teamImageUrl ?? '';
   }
 
   static playerFromSquadResponsePlayer(
@@ -42,7 +48,9 @@ export class Player extends BasicPlayer {
       squadResponsePlayer.tfhmvt,
       squadResponsePlayer.lo != undefined,
       squadResponsePlayer.mvgl,
-      squadResponsePlayer.iotm
+      squadResponsePlayer.iotm,
+      squadResponsePlayer.pim,
+      squadResponsePlayer.tim
     );
   }
 
@@ -59,7 +67,9 @@ export class Player extends BasicPlayer {
       playerResponse.tfhmv,
       playerResponse.lo != undefined,
       playerResponse.mvgl,
-      playerResponse.iotm
+      playerResponse.iotm,
+      playerResponse.pim,
+      playerResponse.tim
     );
   }
 }

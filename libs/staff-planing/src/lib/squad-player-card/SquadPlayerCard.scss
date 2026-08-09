@@ -27,28 +27,16 @@
   &__content {
     display: flex;
     flex-direction: row;
-    gap: 1em;
+    align-items: center;
+    gap: 0.5em;
 
-    &__player_listing {
-      flex-grow: 1;
-    }
-
-    &__meta_information {
+    &__player_info {
       display: flex;
       flex-direction: column;
-      gap: 2px;
-    }
-
-    &__meta_information_listing {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: start;
-      gap: 2px;
-
-      > svg path {
-        fill: var(--mat-sys-on-surface);
-      }
+      justify-content: center;
+      gap: 0.15em;
+      flex-grow: 1;
+      min-width: 0;
     }
 
     &__sell_section {
@@ -57,6 +45,7 @@
       justify-content: center;
       flex-direction: column;
       gap: 0.15em;
+      flex-shrink: 0;
 
       .positive {
         font-size: small;
@@ -71,6 +60,87 @@
         font-size: small;
         color: red;
       }
+    }
+  }
+
+  &__image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+    width: 48px;
+
+    &__listing {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      font-size: 0.7rem;
+      color: var(--mat-sys-on-surface-variant);
+      white-space: nowrap;
+
+      > svg {
+        height: 12px;
+        width: 12px;
+
+        path {
+          fill: var(--mat-sys-on-surface);
+        }
+      }
+    }
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25em;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 1.05rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__position {
+    flex-shrink: 0;
+
+    ::ng-deep .mat-mdc-chip {
+      --mdc-chip-container-height: 1rem;
+      height: 1rem;
+      min-height: 1rem;
+      font-size: 0.6rem;
+      padding-inline: 4px;
+
+      .mat-mdc-chip-action-label,
+      .mdc-evolution-chip__text-label {
+        font-size: 0.6rem;
+      }
+    }
+  }
+
+  &__player-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+
+    &--placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--mat-sys-surface-container-highest);
+      color: var(--mat-sys-on-surface-variant);
+      font-weight: 500;
+      font-size: 1.2rem;
     }
   }
 }
