@@ -1,43 +1,35 @@
 @use '@angular/material' as mat;
-$topBottomPadding: 4px;
 
 .transfer-market-container {
   display: flex;
   flex-direction: row;
-  gap: 1em;
+  gap: var(--kb-spacer-md);
   height: calc(
-    100dvh - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0) -
-      12px
+    100dvh - calc(3 * var(--kb-spacer-3xs)) - var(--kickbase-toolbar-height, 0) -
+      var(--kb-spacer-sm)
   );
 
-  &__transfer-section {
-  }
-
   &__money-section {
-    min-width: 300px;
-  }
-
-  &__squad-section {
+    min-width: var(--kb-panel-min-width);
   }
 }
 
 .mobile {
-  $tabHeight: 3em;
-
   &-tab_group {
     @include mat.tabs-overrides(
       (
-        container-height: $tabHeight,
+        container-height: var(--kb-size-tab-height),
       )
     );
   }
 
   &-container {
-    padding: 4px 2px 0;
+    padding: var(--kb-spacer-3xs) var(--kb-spacer-4xs) 0;
     justify-content: center;
     align-items: center;
     height: calc(
-      100dvh - #{$tabHeight} - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0)
+      100dvh - var(--kb-size-tab-height) - calc(3 * var(--kb-spacer-3xs)) -
+        var(--kickbase-toolbar-height, 0)
     );
   }
 }

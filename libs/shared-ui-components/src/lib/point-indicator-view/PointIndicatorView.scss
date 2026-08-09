@@ -1,6 +1,6 @@
 @mixin point-indicator-view($color) {
   width: 100%;
-  min-width: 10px;
+  min-width: var(--kb-size-icon-2xs);
   background: $color;
 }
 
@@ -9,7 +9,7 @@
   flex-direction: row;
   align-items: end;
   height: 100%;
-  gap: 0.2em;
+  gap: var(--kb-spacer-3xs);
   &__great {
     @include point-indicator-view(#ffc506);
     height: 100%;

@@ -1,19 +1,31 @@
-$topBottomPadding: 4px;
-
 .manager-average-point-container {
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  height: calc(
-    100dvh - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0) -
-      12px
+  gap: var(--kb-spacer-md);
+  min-height: calc(
+    100dvh - calc(3 * var(--kb-spacer-3xs)) - var(--kickbase-toolbar-height, 0) -
+      var(--kb-spacer-sm)
   );
+  padding: var(--kb-spacer-3xs);
+  overflow-y: auto;
+  box-sizing: border-box;
 
   &__explanation-text {
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-left: var(--kb-spacer-md);
+    margin-right: var(--kb-spacer-md);
+    flex-shrink: 0;
   }
 
-  &__total_average {
+  &__total_average,
+  &__stats-per-position {
+    position: relative;
+    width: 100%;
+    min-height: var(--kb-chart-min-height);
+  }
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
   }
 }

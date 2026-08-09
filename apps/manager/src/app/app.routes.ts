@@ -38,6 +38,11 @@ export const appRoutes: Route[] = [
             (comp) => comp.ManagerAveragePointFunFacts
           ),
       },
+      {
+        path: AppRouteDefinitions.LINEUP_BUILDER,
+        loadComponent: () =>
+          import('@kickbase/staff-planing').then((comp) => comp.LineupBuilder),
+      },
     ],
   },
   {

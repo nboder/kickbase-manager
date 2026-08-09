@@ -2,7 +2,18 @@
   "name": "@kickbase/staff-planing",
   "version": "1.6.0",
   "peerDependencies": {
-    "@angular/core": "^20.2.0"
+    "@angular/common": "^20.2.0",
+    "@angular/core": "^20.2.0",
+    "@angular/forms": "^20.2.0",
+    "@angular/material": "^20.2.5",
+    "@angular/router": "^20.2.0",
+    "@angular/cdk": "~20.2.0",
+    "@kickbase/definitions": "^1.6.0",
+    "@kickbase/api-services": "^1.6.0",
+    "@kickbase/PositionMarker": "^1.6.0",
+    "@kickbase/UserManagement": "^1.6.0",
+    "@kickbase/persistence-management": "^1.6.0",
+    "rxjs": "~7.8.0"
   },
   "sideEffects": false
 }

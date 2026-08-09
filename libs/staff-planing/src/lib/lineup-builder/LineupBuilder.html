@@ -1,0 +1,167 @@
+<div class="lineup-builder-page">
+  @if (isLoading()) {
+    <div class="loading-indicator">Lade Kader, Transfermarkt und Budget...</div>
+  } @else {
+    <div cdkDropListGroup class="lineup-builder">
+      <div class="source-panel">
+        <div class="source-list">
+          <h3 class="source-title">Kader ({{ squadPlayers().length }})</h3>
+          <div
+            cdkDropList
+            id="squad-list"
+            [cdkDropListData]="squadPlayers()"
+            (cdkDropListDropped)="drop($event)"
+            class="drop-list"
+          >
+            @for (player of squadPlayers(); track player.id) {
+              <div
+                cdkDrag
+                [cdkDragData]="player"
+                class="player-chip"
+                [ngClass]="{ transfer: player.source === 'transfer' }"
+              >
+                @if (player.imageUrl) {
+                  <img
+                    [src]="player.imageUrl"
+                    alt=""
+                    class="player-image"
+                    (error)="$event.target.src = ''"
+                  />
+                }
+                <span class="player-info">
+                  <span class="player-name">{{ player.name }}</span>
+                  <span class="player-meta">{{ kickbasePositionToString(player.position) }}</span>
+                </span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <mat-divider class="source-divider"></mat-divider>
+
+        <div class="source-list">
+          <h3 class="source-title">Transfermarkt ({{ transferPlayers().length }})</h3>
+          <div
+            cdkDropList
+            id="transfer-list"
+            [cdkDropListData]="transferPlayers()"
+            (cdkDropListDropped)="drop($event)"
+            class="drop-list"
+          >
+            @for (player of transferPlayers(); track player.id) {
+              <div
+                cdkDrag
+                [cdkDragData]="player"
+                class="player-chip transfer"
+              >
+                @if (player.imageUrl) {
+                  <img
+                    [src]="player.imageUrl"
+                    alt=""
+                    class="player-image"
+                    (error)="$event.target.src = ''"
+                  />
+                }
+                <span class="player-info">
+                  <span class="player-name">{{ player.name }}</span>
+                  <span class="player-meta">{{ kickbasePositionToString(player.position) }} • {{ player.marketValue | moneyPipe }}</span>
+                </span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="field-panel">
+        <div class="pitch">
+          <div class="field-lines"></div>
+          <div class="penalty-box-top"></div>
+          <div class="penalty-box-bottom"></div>
+          <div class="center-circle"></div>
+
+          @for (slot of slots(); track slot.id) {
+            <div
+              cdkDropList
+              [id]="slot.id"
+              [cdkDropListData]="slot.players"
+              cdkDropListSortingDisabled
+              (cdkDropListDropped)="drop($event)"
+              class="field-slot"
+              [class.occupied]="slot.players.length > 0"
+              [style.top.%]="slot.top"
+              [style.left.%]="slot.left"
+            >
+              @if (slot.players.length === 0) {
+                <span class="slot-label">{{ slot.label }}</span>
+              }
+              @for (player of slot.players; track player.id) {
+                <div
+                  cdkDrag
+                  [cdkDragData]="player"
+                  class="player-chip on-field"
+                >
+                  <button
+                    type="button"
+                    class="remove-button"
+                    (click)="removePlayerFromSlot(slot); $event.stopPropagation();"
+                    aria-label="Spieler entfernen"
+                  >
+                    ×
+                  </button>
+                  @if (player.imageUrl) {
+                    <img
+                      [src]="player.imageUrl"
+                      alt=""
+                      class="player-image"
+                      (error)="$event.target.src = ''"
+                    />
+                  }
+                  <span class="player-info">
+                    <span class="player-name">{{ player.name }}</span>
+                    <span class="player-meta">
+                      {{ kickbasePositionToString(player.position) }}
+                      @if (player.source === 'transfer') {
+                        • {{ player.marketValue | moneyPipe }}
+                      }
+                    </span>
+                  </span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="balance-panel">
+          <mat-card appearance="outlined" class="balance-card">
+            <mat-card-header>
+              <mat-card-title>Kontostand</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="balance-row">
+                <span>Aktueller Kontostand</span>
+                <span>{{ budget() | moneyPipe }}</span>
+              </div>
+              <div class="balance-row">
+                <span>Transferkosten ({{ filledSlotCount() }}/11)</span>
+                <span>{{ transferCost() | moneyPipe }}</span>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="balance-row final">
+                <span>Neuer Kontostand</span>
+                <span [ngClass]="{ negative: updatedBalance() < 0 }">
+                  {{ updatedBalance() | moneyPipe }}
+                </span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <div class="actions">
+            <button mat-stroked-button type="button" (click)="clearField()">
+              Feld leeren
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

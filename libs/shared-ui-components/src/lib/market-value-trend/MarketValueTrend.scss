@@ -1,25 +1,23 @@
-$imgSize: 20px;
-
 @mixin trend($color) {
   display: flex;
-  gap: 0.3em;
+  gap: var(--kb-spacer-3xs);
   justify-content: start;
   align-items: center;
-  max-height: $imgSize;
+  max-height: var(--kb-size-icon-sm);
   font-size: var(--mat-sys-body-small);
   color: $color;
 
   > svg {
     fill: $color;
-    width: $imgSize;
-    height: $imgSize;
+    width: var(--kb-size-icon-sm);
+    height: var(--kb-size-icon-sm);
   }
 }
 
 .market_value_trend {
   display: flex;
   flex-direction: row;
-  gap: 2px;
+  gap: var(--kb-spacer-4xs);
   align-items: center;
 
   &__up {

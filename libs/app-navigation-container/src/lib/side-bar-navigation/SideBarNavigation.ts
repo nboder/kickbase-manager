@@ -18,6 +18,7 @@ export class SideBarNavigation {
     SideBarItem.LEAGUE_SELECTION,
     SideBarItem.STAFF_MANAGEMENT,
     SideBarItem.FUN_STATS,
+    SideBarItem.LINEUP_BUILDER,
     SideBarItem.LOGOUT,
   ]);
 
@@ -30,5 +31,6 @@ export enum SideBarItem {
   LEAGUE_SELECTION = 'League Selection',
   STAFF_MANAGEMENT = 'Staff Management',
   FUN_STATS = 'Fun Stats',
+  LINEUP_BUILDER = 'Lineup Builder',
   LOGOUT = 'Logout',
 }
