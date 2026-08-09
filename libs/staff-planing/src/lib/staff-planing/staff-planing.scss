@@ -21,6 +21,7 @@
         container-height: var(--kb-size-tab-height),
       )
     );
+    touch-action: pan-y;
   }
 
   &-container {
@@ -31,5 +32,6 @@
       100dvh - var(--kb-size-tab-height) - calc(3 * var(--kb-spacer-3xs)) -
         var(--kickbase-toolbar-height, 0)
     );
+    touch-action: pan-y;
   }
 }

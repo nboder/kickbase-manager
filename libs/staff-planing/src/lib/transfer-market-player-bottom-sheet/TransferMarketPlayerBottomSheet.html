@@ -1,0 +1,137 @@
+<div class="player-bottom-sheet">
+  <div class="player-bottom-sheet__header">
+    @if (player.playerImageUrl) {
+    <img
+      class="player-bottom-sheet__image"
+      [src]="cdnService.cdnUrl(player.playerImageUrl)"
+      [alt]="player.name"
+    />
+    } @else {
+    <div class="player-bottom-sheet__image player-bottom-sheet__image--placeholder">
+      {{ playerImagePlaceholder() }}
+    </div>
+    }
+    <div class="player-bottom-sheet__title">
+      <h2 class="player-bottom-sheet__name">
+        {{ player.firstName }} {{ player.name }}
+      </h2>
+      <lib-position-marker [position]="player.position"></lib-position-marker>
+    </div>
+    <button
+      type="button"
+      class="player-bottom-sheet__close"
+      (click)="close()"
+      aria-label="Schließen"
+    >
+      ✕
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="player-bottom-sheet__section">
+    <h3 class="player-bottom-sheet__section-title">Marktwert & Preis</h3>
+    <div class="player-bottom-sheet__grid">
+      <div class="player-bottom-sheet__stat">
+        <span class="player-bottom-sheet__stat-label">Marktwert</span>
+        <span class="player-bottom-sheet__stat-value">{{ player.marketValue | moneyPipe }}</span>
+      </div>
+      <div class="player-bottom-sheet__stat">
+        <span class="player-bottom-sheet__stat-label">Preis</span>
+        <span class="player-bottom-sheet__stat-value">{{ player.price | moneyPipe }}</span>
+      </div>
+      <div class="player-bottom-sheet__stat">
+        <span class="player-bottom-sheet__stat-label">Aktuelles Gebot</span>
+        <span class="player-bottom-sheet__stat-value">
+          @if (player.currentOffer.offer > 0) {
+            {{ player.currentOffer.offer | moneyPipe }}
+          } @else { - }
+        </span>
+      </div>
+      <div class="player-bottom-sheet__stat">
+        <span class="player-bottom-sheet__stat-label">Ablauf</span>
+        <span class="player-bottom-sheet__stat-value">
+          @if (!player.hasTransferExpiration()) { - } @else {
+          @let hours = player.transferExpirationInHours(); @if (hours <
+          showHoursThreshold) { {{ player.transferExpirationInMinutes() |
+          expirationTime }} min } @else if (hours > showHoursThreshold && hours
+          < showDaysThreshold) { {{ player.transferExpirationInHours() |
+          expirationTime }} h } @else { {{ player.transferExpirationInDays() |
+          expirationTime }} Tage } }
+        </span>
+      </div>
+    </div>
+    <div class="player-bottom-sheet__trend">
+      <lib-market-value-trend
+        [marketValueTrend]="player.twentyForHoursTrend"
+      ></lib-market-value-trend>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="player-bottom-sheet__section">
+    <h3 class="player-bottom-sheet__section-title">Punkte</h3>
+    <div class="player-bottom-sheet__grid">
+      <div class="player-bottom-sheet__stat">
+        <span class="player-bottom-sheet__stat-label">Ø Punkte</span>
+        <span class="player-bottom-sheet__stat-value">{{ player.averagePoints }}</span>
+      </div>
+      <div class="player-bottom-sheet__stat">
+        <span class="player-bottom-sheet__stat-label">Gesamtpunkte</span>
+        <span class="player-bottom-sheet__stat-value">{{ player.totalPoints }}</span>
+      </div>
+      <div class="player-bottom-sheet__stat">
+        <span class="player-bottom-sheet__stat-label">€ pro Punkt</span>
+        <span class="player-bottom-sheet__stat-value">
+          @if (player.averagePoints > 0) {
+            {{ pricePerPoint() | moneyPipe }} / pkt
+          } @else { - }
+        </span>
+      </div>
+      <div class="player-bottom-sheet__stat">
+        <span class="player-bottom-sheet__stat-label">Spiele</span>
+        <span class="player-bottom-sheet__stat-value">
+          {{ player.countOfGames() - player.countOfNotPlayedGames() }} / {{ player.countOfGames() }}
+        </span>
+      </div>
+    </div>
+
+    <div class="player-bottom-sheet__point-history">
+      @let countOfGreatGames = player.countOfGreatGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.GREAT"
+        [countOfIndications]="countOfGreatGames"
+      ></lib-point-indicator-view>
+      @let countOfVeryGoodtGames = player.countOfVeryGoodGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.VERY_GOOD"
+        [countOfIndications]="countOfVeryGoodtGames"
+      ></lib-point-indicator-view>
+      @let countOfGoodGames = player.countOfGoodGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.GOOD"
+        [countOfIndications]="countOfGoodGames"
+      ></lib-point-indicator-view>
+      @let countOfNormalGames = player.countOfNormalGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.JUST_A_PLAYER"
+        [countOfIndications]="countOfNormalGames"
+      ></lib-point-indicator-view>
+      @let countOfBadGames = player.countOfBadGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.BAD_GAME"
+        [countOfIndications]="countOfBadGames"
+      ></lib-point-indicator-view>
+      @let countOfUnPlayedGames = player.countOfNotPlayedGames();
+      <lib-point-indicator-view
+        [pointIndication]="PointIndication.NOT_PLAYED"
+        [countOfIndications]="countOfUnPlayedGames"
+      ></lib-point-indicator-view>
+    </div>
+  </div>
+
+  <div class="player-bottom-sheet__actions">
+    <button type="button" class="player-bottom-sheet__action-button" (click)="close()">Schließen</button>
+  </div>
+</div>

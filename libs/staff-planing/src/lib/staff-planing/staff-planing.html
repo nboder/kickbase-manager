@@ -1,8 +1,10 @@
 @if (selectedLeaguedId()) { @if (viewPortService.isMobileLayout()) {
 <mat-tab-group
   class="mobile-tab_group"
-  [selectedIndex]="controller().currentActiveViewIndex()"
-  (selectedIndexChange)="controller().activeViewHasChanged($event)"
+  [selectedIndex]="selectedTabIndex()"
+  (selectedIndexChange)="onTabChanged($event)"
+  (touchstart)="onTouchStart($event)"
+  (touchend)="onTouchEnd($event)"
   headerPosition="below"
   mat-stretch-tabs="true"
   mat-align-tabs="start"

@@ -6,17 +6,19 @@ import {
   TransferMarketPlayer,
 } from '@kickbase/definitions';
 import {
-  PlayerNameAndValue,
+  MarketValueTrend,
   PointIndication,
   PointIndicatorView,
   PositionMarker,
 } from '@kickbase/PositionMarker';
 import { MatDialog } from '@angular/material/dialog';
+import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import {
   TransferMarketBidDialog,
   TransferMarketBidDialogStatus,
   TransferMarketOutputBidData,
 } from '../transfer-market-bid-dialog/TransferMarketBidDialog';
+import { TransferMarketPlayerBottomSheet } from '../transfer-market-player-bottom-sheet/TransferMarketPlayerBottomSheet';
 import { MatDivider } from '@angular/material/divider';
 import { ContentDeliveryService } from '@kickbase/api-services';
 
@@ -26,10 +28,11 @@ import { ContentDeliveryService } from '@kickbase/api-services';
     MatCard,
     PositionMarker,
     ExpirationTimePipe,
-    PlayerNameAndValue,
+    MarketValueTrend,
     MoneyPipe,
     MatDivider,
     PointIndicatorView,
+    MatBottomSheetModule,
   ],
   templateUrl: './TransferMarketCard.html',
   styleUrls: ['./TransferMarketCard.scss', '../shared.scss'],
@@ -41,6 +44,7 @@ export class TransferMarketCard {
   shouldLoadPerformance = output<TransferMarketPlayer>();
 
   private readonly dialog = inject(MatDialog);
+  private readonly bottomSheet = inject(MatBottomSheet);
   readonly cdnService = inject(ContentDeliveryService);
   readonly showHoursThreshold = 1.0;
   readonly showDaysThreshold = 48.0;
@@ -53,8 +57,24 @@ export class TransferMarketCard {
     );
   }
 
+  pricePerPoint(): number {
+    const effectivePrice =
+      this.transferMarketPlayer().currentOffer.offer > 0
+        ? this.transferMarketPlayer().currentOffer.offer
+        : this.transferMarketPlayer().price;
+    return this.transferMarketPlayer().averagePoints > 0
+      ? effectivePrice / this.transferMarketPlayer().averagePoints
+      : 0;
+  }
+
+  playerImagePlaceholder(): string {
+    return this.transferMarketPlayer().name.charAt(0).toUpperCase();
+  }
+
   showSellingDialog() {
     const dialogRef = this.dialog.open(TransferMarketBidDialog, {
+      width: '340px',
+      maxWidth: '90vw',
       data: {
         playerName: this.transferMarketPlayer().name,
         marketValue: this.transferMarketPlayer().marketValue,
@@ -96,7 +116,19 @@ export class TransferMarketCard {
     );
   }
 
-  togglePointDetails() {
+  listMarketValueDifference(): number {
+    return this.transferMarketPlayer().hasAnOffer()
+      ? this.overpayment()
+      : this.priceDifferenceToMarketValue();
+  }
+
+  showListMarketValueDifference(): boolean {
+    const diff = this.listMarketValueDifference();
+    return diff !== 0 || this.transferMarketPlayer().hasAnOffer();
+  }
+
+  togglePointDetails(event?: Event) {
+    event?.stopPropagation();
     if (
       !this.showDetailedPoints() &&
       this.transferMarketPlayer().pointHistory.length == 0
@@ -104,6 +136,12 @@ export class TransferMarketCard {
       this.shouldLoadPerformance.emit(this.transferMarketPlayer());
     }
     this.showDetailedPoints.set(!this.showDetailedPoints());
+  }
+
+  openPlayerDetails(): void {
+    this.bottomSheet.open(TransferMarketPlayerBottomSheet, {
+      data: { player: this.transferMarketPlayer() },
+    });
   }
 
   protected readonly PointIndication = PointIndication;

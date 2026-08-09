@@ -50,6 +50,10 @@ export class StaffPlaning implements OnInit {
 
   sumOfBuyingPlayer = signal<number>(0);
   selectedLeaguedId = signal<string>('');
+  selectedTabIndex = signal<number>(0);
+
+  private touchStartX = 0;
+  private touchStartY = 0;
 
   ngOnInit(): void {
     const leagueId = this.activatedRoute.parent?.snapshot.paramMap.get(
@@ -57,11 +61,49 @@ export class StaffPlaning implements OnInit {
     );
     if (leagueId) {
       this.selectedLeaguedId.set(leagueId);
+      this.selectedTabIndex.set(this.controller().currentActiveViewIndex());
     } else {
       console.log(
         'URL has been modified. This will result in an error Page in the near future.'
       );
     }
+  }
+
+  onTabChanged(index: number): void {
+    this.selectedTabIndex.set(index);
+    this.controller().activeViewHasChanged(index);
+  }
+
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartX = event.touches[0].clientX;
+    this.touchStartY = event.touches[0].clientY;
+  }
+
+  onTouchEnd(event: TouchEvent): void {
+    const touchEndX = event.changedTouches[0].clientX;
+    const touchEndY = event.changedTouches[0].clientY;
+    const deltaX = touchEndX - this.touchStartX;
+    const deltaY = touchEndY - this.touchStartY;
+
+    if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        this.swipeToNextTab();
+      } else {
+        this.swipeToPreviousTab();
+      }
+    }
+  }
+
+  private swipeToNextTab(): void {
+    const nextIndex = Math.min(this.selectedTabIndex() + 1, 2);
+    this.selectedTabIndex.set(nextIndex);
+    this.controller().activeViewHasChanged(nextIndex);
+  }
+
+  private swipeToPreviousTab(): void {
+    const nextIndex = Math.max(this.selectedTabIndex() - 1, 0);
+    this.selectedTabIndex.set(nextIndex);
+    this.controller().activeViewHasChanged(nextIndex);
   }
 
   sumOfSoldPlayers(): number {
