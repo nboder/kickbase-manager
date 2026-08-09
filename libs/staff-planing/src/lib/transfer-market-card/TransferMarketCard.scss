@@ -78,25 +78,14 @@ $content_point_height: 1rem;
 
   &__name-section {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.25em;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1em;
     min-width: 0;
+  }
 
-    lib-position-marker {
-      ::ng-deep .mat-mdc-chip {
-        --mdc-chip-container-height: 1.2rem;
-        height: 1.2rem;
-        min-height: 1.2rem;
-        font-size: 0.75rem;
-        padding-inline: 6px;
-
-        .mat-mdc-chip-action-label,
-        .mdc-evolution-chip__text-label {
-          font-size: 0.75rem;
-        }
-      }
-    }
+  &__position-marker {
+    margin-bottom: 0.1em;
   }
 
   &__name {
@@ -120,6 +109,7 @@ $content_point_height: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.1em;
+    min-width: 0;
   }
 
   &__price {
@@ -127,14 +117,33 @@ $content_point_height: 1rem;
     font-size: 0.95rem;
   }
 
-  &__bid {
-    font-size: 0.8rem;
-    color: green;
+  &__bid-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4em;
+    min-width: 0;
   }
 
-  &__market-value {
+  &__bid {
     font-size: 0.8rem;
-    color: var(--mat-sys-on-surface-variant);
+    white-space: nowrap;
+  }
+
+  &__difference {
+    font-size: 0.75rem;
+    white-space: nowrap;
+
+    &--over {
+      color: red;
+
+      &::before {
+        content: '+';
+      }
+    }
+
+    &--under {
+      color: green;
+    }
   }
 
   &__expiration {

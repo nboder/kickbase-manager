@@ -73,6 +73,8 @@ export class TransferMarketCard {
 
   showSellingDialog() {
     const dialogRef = this.dialog.open(TransferMarketBidDialog, {
+      width: '340px',
+      maxWidth: '90vw',
       data: {
         playerName: this.transferMarketPlayer().name,
         marketValue: this.transferMarketPlayer().marketValue,
@@ -112,6 +114,17 @@ export class TransferMarketCard {
       this.transferMarketPlayer().price -
       this.transferMarketPlayer().marketValue
     );
+  }
+
+  listMarketValueDifference(): number {
+    return this.transferMarketPlayer().hasAnOffer()
+      ? this.overpayment()
+      : this.priceDifferenceToMarketValue();
+  }
+
+  showListMarketValueDifference(): boolean {
+    const diff = this.listMarketValueDifference();
+    return diff !== 0 || this.transferMarketPlayer().hasAnOffer();
   }
 
   togglePointDetails(event?: Event) {

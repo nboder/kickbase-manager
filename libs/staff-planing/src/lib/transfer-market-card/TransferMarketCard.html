@@ -42,14 +42,15 @@
               {{ transferMarketPlayer().firstName }}
               {{ transferMarketPlayer().name }}
             </span>
-            <lib-position-marker
-              [position]="transferMarketPlayer().position"
-            ></lib-position-marker>
             <lib-market-value-trend
               [marketValueTrend]="transferMarketPlayer().twentyForHoursTrend"
             ></lib-market-value-trend>
           </div>
           <div class="transfer-market-card__stats">
+            <lib-position-marker
+              class="transfer-market-card__position-marker"
+              [position]="transferMarketPlayer().position"
+            ></lib-position-marker>
             <div class="stat">
               <span class="stat__value">{{
                 transferMarketPlayer().averagePoints
@@ -76,13 +77,28 @@
             <span class="transfer-market-card__price">{{
               transferMarketPlayer().price | moneyPipe
             }}</span>
-            @if (transferMarketPlayer().currentOffer.offer > 0) {
-            <span class="transfer-market-card__bid">{{
-              transferMarketPlayer().currentOffer.offer | moneyPipe
-            }}</span>
-            } @else if (shouldShowMarketValueDiffToPrice()) {
-            <span class="transfer-market-card__market-value">
-              MV: {{ transferMarketPlayer().marketValue | moneyPipe }}
+            @if (transferMarketPlayer().hasAnOffer()) {
+            <div class="transfer-market-card__bid-row">
+              <span class="transfer-market-card__bid">{{
+                transferMarketPlayer().currentOffer.offer | moneyPipe
+              }}</span>
+              @if (showListMarketValueDifference()) {
+              <span
+                class="transfer-market-card__difference"
+                [class.transfer-market-card__difference--over]="listMarketValueDifference() > 0"
+                [class.transfer-market-card__difference--under]="listMarketValueDifference() < 0"
+              >
+                {{ listMarketValueDifference() | moneyPipe }}
+              </span>
+              }
+            </div>
+            } @else if (showListMarketValueDifference()) {
+            <span
+              class="transfer-market-card__difference"
+              [class.transfer-market-card__difference--over]="listMarketValueDifference() > 0"
+              [class.transfer-market-card__difference--under]="listMarketValueDifference() < 0"
+            >
+              {{ listMarketValueDifference() | moneyPipe }}
             </span>
             }
           </div>

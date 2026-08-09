@@ -6,7 +6,6 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatButton } from '@angular/material/button';
 import { MoneyPipe } from '@kickbase/definitions';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -18,7 +17,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     MatDialogTitle,
     MatDialogContent,
-    MatButton,
     MatDialogActions,
     MoneyPipe,
     MatFormField,

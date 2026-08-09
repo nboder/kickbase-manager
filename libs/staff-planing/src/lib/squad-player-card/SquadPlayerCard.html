@@ -36,18 +36,15 @@
         }
       </div>
     </div>
-    <div class="squad_play_card__content__player_info">
-      <div class="squad_play_card__name-row">
-        <span class="squad_play_card__name">{{ playerName() }}</span>
-        <lib-position-marker
-          class="squad_play_card__position"
-          [position]="position()"
-        ></lib-position-marker>
-      </div>
-      <lib-market-value-trend
-        [marketValueTrend]="marketValueTrend()"
-      ></lib-market-value-trend>
-    </div>
+    <span class="squad_play_card__name">{{ playerName() }}</span>
+    <lib-position-marker
+      class="squad_play_card__position"
+      [position]="position()"
+    ></lib-position-marker>
+    <lib-market-value-trend
+      class="squad_play_card__trend"
+      [marketValueTrend]="marketValueTrend()"
+    ></lib-market-value-trend>
     <div class="squad_play_card__content__sell_section">
       <div class="money-column">{{ marketValue() | moneyPipe }}</div>
       <div [ngClass]="marketValueWinOrLoss() > 0 ? 'positive' : 'negative'">
