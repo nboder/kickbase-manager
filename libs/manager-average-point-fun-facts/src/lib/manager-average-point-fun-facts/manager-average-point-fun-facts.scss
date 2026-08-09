@@ -4,16 +4,30 @@ $topBottomPadding: 4px;
   display: flex;
   flex-direction: column;
   gap: 1em;
-  height: calc(
+  min-height: calc(
     100dvh - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0) -
       12px
   );
+  padding: $topBottomPadding;
+  overflow-y: auto;
+  box-sizing: border-box;
 
   &__explanation-text {
     margin-left: 1em;
     margin-right: 1em;
+    flex-shrink: 0;
   }
 
-  &__total_average {
+  &__total_average,
+  &__stats-per-position {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
   }
 }

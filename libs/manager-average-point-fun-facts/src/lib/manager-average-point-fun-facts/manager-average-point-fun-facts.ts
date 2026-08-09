@@ -35,8 +35,12 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
   private selectedLeaguedId = signal<string>('');
   @ViewChild('totalStats')
   private totalStatsCanvas: ElementRef<HTMLCanvasElement> | undefined;
+  @ViewChild('totalStatsContainer')
+  private totalStatsContainer: ElementRef<HTMLDivElement> | undefined;
   @ViewChild('positionStats')
   private positionStatsCanvas: ElementRef<HTMLCanvasElement> | undefined;
+  @ViewChild('positionStatsContainer')
+  private positionStatsContainer: ElementRef<HTMLDivElement> | undefined;
   squadPerManager = signal<ManagerTeam[]>([]);
   private leagueOverview = signal<LeagueOverviewResponse | undefined>(
     undefined
@@ -90,9 +94,14 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
       const positionBasedProvider: ChartDataProvider =
         new PositionBasedDataProvider(this.squadPerManager());
 
+      this.setChartContainerHeight(
+        this.positionStatsContainer,
+        positionBasedProvider.labels.length
+      );
+
       const context = this.positionStatsCanvas?.nativeElement.getContext('2d');
       if (context) {
-        const chart = new Chart(context, {
+        new Chart(context, {
           type: positionBasedProvider.chartType,
           data: {
             labels: positionBasedProvider.labels,
@@ -100,9 +109,11 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
           },
           options: {
             indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
               x: {
-                beginAtZero: true,
+                min: 0,
               },
               y: {
                 ticks: {
@@ -123,9 +134,15 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
       const totalStatsProvider: ChartDataProvider = new TotalStateDataProvider(
         this.squadPerManager()
       );
+
+      this.setChartContainerHeight(
+        this.totalStatsContainer,
+        totalStatsProvider.labels.length
+      );
+
       const context = this.totalStatsCanvas?.nativeElement.getContext('2d');
       if (context) {
-        const chart = new Chart(context, {
+        new Chart(context, {
           type: totalStatsProvider.chartType,
           data: {
             labels: totalStatsProvider.labels,
@@ -133,9 +150,11 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
           },
           options: {
             indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
               x: {
-                beginAtZero: true,
+                min: 0,
               },
               y: {
                 ticks: {
@@ -154,6 +173,18 @@ export class ManagerAveragePointFunFacts implements OnInit, AfterViewInit {
       } else {
         console.error('Total stats Canvas cannot be loaded');
       }
+    }
+  }
+
+  private setChartContainerHeight(
+    container: ElementRef<HTMLDivElement> | undefined,
+    labelCount: number
+  ) {
+    const minHeight = 300;
+    const heightPerLabel = 30;
+    const chartHeight = Math.max(minHeight, labelCount * heightPerLabel + 80);
+    if (container) {
+      container.nativeElement.style.height = `${chartHeight}px`;
     }
   }
 
