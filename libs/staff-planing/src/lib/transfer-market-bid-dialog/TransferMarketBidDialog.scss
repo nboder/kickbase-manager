@@ -1,32 +1,32 @@
 .bid-dialog {
   &__title {
-    font-size: 1.25rem;
+    font-size: var(--kb-font-size-3xl);
     margin: 0;
-    padding: 16px 16px 8px;
+    padding: var(--kb-spacer-md) var(--kb-spacer-md) var(--kb-spacer-xs);
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
-    padding: 0 16px;
+    gap: var(--kb-spacer-xs);
+    padding: 0 var(--kb-spacer-md);
   }
 
   &__row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.5em;
+    gap: var(--kb-spacer-xs);
   }
 
   &__label {
     color: var(--mat-sys-on-surface-variant);
-    font-size: 0.9rem;
+    font-size: var(--kb-font-size-base);
   }
 
   &__value {
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: var(--kb-font-size-lg);
   }
 
   &__input {
@@ -36,17 +36,17 @@
   &__actions {
     display: flex;
     justify-content: flex-end;
-    gap: 0.5em;
-    padding: 8px 16px 16px;
+    gap: var(--kb-spacer-xs);
+    padding: var(--kb-spacer-xs) var(--kb-spacer-md) var(--kb-spacer-md);
   }
 
   &__button {
-    padding: 8px 12px;
-    border-radius: 999px;
+    padding: var(--kb-spacer-xs) var(--kb-spacer-sm);
+    border-radius: var(--kb-radius-full);
     border: 1px solid var(--mat-sys-outline);
     background: transparent;
     color: var(--mat-sys-primary);
-    font-size: 0.85rem;
+    font-size: var(--kb-font-size-md);
     font-weight: 500;
     cursor: pointer;
     white-space: nowrap;

@@ -1,12 +1,10 @@
 @use '@angular/material' as mat;
 
-$content_point_height: 1rem;
-
 .transfer-market-card {
-  min-height: 80px;
-  min-width: 320px;
-  max-width: 400px;
-  padding: 0.4em;
+  min-height: var(--kb-card-min-height);
+  min-width: var(--kb-card-min-width);
+  max-width: var(--kb-card-max-width);
+  padding: var(--kb-spacer-2xs);
 
   &__isBeingBought {
     @include mat.card-overrides(
@@ -19,18 +17,18 @@ $content_point_height: 1rem;
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 0.2em;
+    gap: var(--kb-spacer-3xs);
   }
 
   &__main {
     display: flex;
-    gap: 0.5em;
+    gap: var(--kb-spacer-xs);
     align-items: stretch;
   }
 
   &__player-image {
-    width: 64px;
-    height: 64px;
+    width: var(--kb-size-avatar-md);
+    height: var(--kb-size-avatar-md);
     object-fit: cover;
     border-radius: 50%;
     flex-shrink: 0;
@@ -44,14 +42,14 @@ $content_point_height: 1rem;
       background-color: var(--mat-sys-surface-container-highest);
       color: var(--mat-sys-on-surface-variant);
       font-weight: 500;
-      font-size: 1.5rem;
+      font-size: var(--kb-font-size-4xl);
     }
   }
 
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 0.25em;
+    gap: var(--kb-spacer-3xs);
     flex-grow: 1;
     min-width: 0;
 
@@ -59,7 +57,7 @@ $content_point_height: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 0.5em;
+      gap: var(--kb-spacer-xs);
       cursor: pointer;
     }
 
@@ -67,12 +65,12 @@ $content_point_height: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 0.5em;
+      gap: var(--kb-spacer-xs);
       background-color: var(--mat-sys-surface-container-highest);
-      border-radius: 1em;
-      padding: 0.15em 0.6em;
+      border-radius: var(--kb-radius-xl);
+      padding: var(--kb-spacer-4xs) var(--kb-spacer-xs);
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: var(--kb-font-size-base);
     }
   }
 
@@ -80,16 +78,16 @@ $content_point_height: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.1em;
+    gap: var(--kb-spacer-4xs);
     min-width: 0;
   }
 
   &__position-marker {
-    margin-bottom: 0.1em;
+    margin-bottom: var(--kb-spacer-4xs);
   }
 
   &__name {
-    font-size: 1.05rem;
+    font-size: var(--kb-font-size-2xl);
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
@@ -100,7 +98,7 @@ $content_point_height: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 0.1em;
+    gap: var(--kb-spacer-4xs);
     flex-shrink: 0;
     font-variant-numeric: tabular-nums;
   }
@@ -108,29 +106,29 @@ $content_point_height: 1rem;
   &__price-section {
     display: flex;
     flex-direction: column;
-    gap: 0.1em;
+    gap: var(--kb-spacer-4xs);
     min-width: 0;
   }
 
   &__price {
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: var(--kb-font-size-lg);
   }
 
   &__bid-row {
     display: flex;
     align-items: baseline;
-    gap: 0.4em;
+    gap: var(--kb-spacer-2xs);
     min-width: 0;
   }
 
   &__bid {
-    font-size: 0.8rem;
+    font-size: var(--kb-font-size-sm);
     white-space: nowrap;
   }
 
   &__difference {
-    font-size: 0.75rem;
+    font-size: var(--kb-font-size-xs);
     white-space: nowrap;
 
     &--over {
@@ -147,7 +145,7 @@ $content_point_height: 1rem;
   }
 
   &__expiration {
-    font-size: 0.8rem;
+    font-size: var(--kb-font-size-sm);
     color: var(--mat-sys-on-surface-variant);
     white-space: nowrap;
   }
@@ -158,10 +156,10 @@ $content_point_height: 1rem;
     justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
-    width: 24px;
+    width: var(--kb-size-icon-md);
 
     > svg {
-      height: 12px;
+      height: var(--kb-size-icon-xs);
       fill: var(--mat-sys-on-surface);
     }
   }
@@ -171,32 +169,32 @@ $content_point_height: 1rem;
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-bottom: 2px;
-    gap: 1.2rem;
-    min-height: $content_point_height;
-    max-height: $content_point_height;
+    padding-left: var(--kb-spacer-md);
+    padding-right: var(--kb-spacer-md);
+    padding-bottom: var(--kb-spacer-4xs);
+    gap: var(--kb-spacer-lg);
+    min-height: var(--kb-font-size-xl);
+    max-height: var(--kb-font-size-xl);
 
     &__point-indication {
-      height: $content_point_height;
-      width: calc($content_point_height / 1.5);
+      height: var(--kb-font-size-xl);
+      width: calc(var(--kb-font-size-xl) / 1.5);
     }
 
     &__price-per-point {
-      height: $content_point_height;
+      height: var(--kb-font-size-xl);
       white-space: nowrap;
-      font-size: 0.85rem;
+      font-size: var(--kb-font-size-md);
       font-weight: 500;
     }
 
     &__total-games {
-      height: $content_point_height;
-      width: calc($content_point_height * 4);
+      height: var(--kb-font-size-xl);
+      width: calc(var(--kb-font-size-xl) * 4);
 
       > img {
-        height: $content_point_height;
-        width: $content_point_height;
+        height: var(--kb-font-size-xl);
+        width: var(--kb-font-size-xl);
       }
     }
   }
@@ -206,7 +204,7 @@ $content_point_height: 1rem;
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  gap: 0.3em;
+  gap: var(--kb-spacer-3xs);
   white-space: nowrap;
 
   &__value {
@@ -215,7 +213,7 @@ $content_point_height: 1rem;
   }
 
   &__label {
-    font-size: 0.75rem;
+    font-size: var(--kb-font-size-xs);
     color: var(--mat-sys-on-surface-variant);
   }
 }
