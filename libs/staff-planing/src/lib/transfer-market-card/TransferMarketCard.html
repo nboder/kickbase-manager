@@ -4,126 +4,182 @@
   [class.transfer-market-card__isBeingBought]="transferMarketPlayer().hasAnOffer()"
 >
   <div class="transfer-market-card__content">
-    <div class="transfer-market-card__content__main">
+    <div class="transfer-market-card__main">
+      @if (transferMarketPlayer().playerImageUrl) {
+      <img
+        class="transfer-market-card__player-image"
+        src="{{ cdnService.cdnUrl(transferMarketPlayer().playerImageUrl) }}"
+        alt="{{ transferMarketPlayer().name }}"
+        role="button"
+        tabindex="0"
+        (click)="openPlayerDetails()"
+        (keydown.enter)="openPlayerDetails()"
+        (keydown.space)="openPlayerDetails(); $event.preventDefault()"
+      />
+      } @else {
       <div
-        class="transfer-market-card__content__main__meta-information"
-        (click)="togglePointDetails()"
+        class="transfer-market-card__player-image transfer-market-card__player-image--placeholder"
+        role="button"
+        tabindex="0"
+        (click)="openPlayerDetails()"
+        (keydown.enter)="openPlayerDetails()"
+        (keydown.space)="openPlayerDetails(); $event.preventDefault()"
       >
-        <div class="centered-content">
-          <lib-position-marker
-            [position]="transferMarketPlayer().position"
-          ></lib-position-marker>
-        </div>
-        <div class="centered-content">
-          @let hours = transferMarketPlayer().transferExpirationInHours(); @if
-          (hours < showHoursThreshold) { {{
-          transferMarketPlayer().transferExpirationInMinutes() | expirationTime
-          }} min } @else if (hours > showHoursThreshold && hours <
-          showDaysThreshold) { {{
-          transferMarketPlayer().transferExpirationInHours() | expirationTime }}
-          h } @else { {{ transferMarketPlayer().transferExpirationInDays() |
-          expirationTime }} Days }
-        </div>
-        <div class="centered-content">
-          {{ transferMarketPlayer().averagePoints }} avg
+        {{ playerImagePlaceholder() }}
+      </div>
+      }
+      <div class="transfer-market-card__body">
+        <div
+          class="transfer-market-card__body__top"
+          role="button"
+          tabindex="0"
+          (click)="openPlayerDetails()"
+          (keydown.enter)="openPlayerDetails()"
+          (keydown.space)="openPlayerDetails(); $event.preventDefault()"
+        >
+          <div class="transfer-market-card__name-section">
+            <span class="transfer-market-card__name">
+              {{ transferMarketPlayer().firstName }}
+              {{ transferMarketPlayer().name }}
+            </span>
+            <lib-market-value-trend
+              [marketValueTrend]="transferMarketPlayer().twentyForHoursTrend"
+            ></lib-market-value-trend>
+          </div>
+          <div class="transfer-market-card__stats">
+            <lib-position-marker
+              class="transfer-market-card__position-marker"
+              [position]="transferMarketPlayer().position"
+            ></lib-position-marker>
+            <div class="stat">
+              <span class="stat__value">{{
+                transferMarketPlayer().averagePoints
+              }}</span>
+              <span class="stat__label">avg</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value">{{
+                transferMarketPlayer().totalPoints
+              }}</span>
+              <span class="stat__label">Pkt</span>
+            </div>
+          </div>
         </div>
         <div
-          class="transfer-market-card__content__main__meta-information__expand centered-content"
+          class="transfer-market-card__body__bottom"
+          role="button"
+          tabindex="0"
+          (click)="showSellingDialog()"
+          (keydown.enter)="showSellingDialog()"
+          (keydown.space)="showSellingDialog(); $event.preventDefault()"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="12px"
-            viewBox="0 -960 960 960"
-            width="12px"
-          >
-            <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
-          </svg>
-        </div>
-      </div>
-      <div class="transfer-market-card__content__main__player-information">
-        <div>
-          <lib-player-name-and-value
-            [playerFirstName]="transferMarketPlayer().firstName"
-            [playerLastName]="transferMarketPlayer().name"
-            [marketValueTrend]="transferMarketPlayer().twentyForHoursTrend"
-          ></lib-player-name-and-value>
-        </div>
-        <div
-          class="transfer-market-card__content__main__player-information__team-section"
-        >
-          <img
-            src="{{ cdnService.cdnUrl(transferMarketPlayer().teamImageUrl) }}"
-            alt="{{ transferMarketPlayer().teamName }}"
-          />{{ transferMarketPlayer().teamName }}
+          <div class="transfer-market-card__price-section">
+            <span class="transfer-market-card__price">{{
+              transferMarketPlayer().price | moneyPipe
+            }}</span>
+            @if (transferMarketPlayer().hasAnOffer()) {
+            <div class="transfer-market-card__bid-row">
+              <span class="transfer-market-card__bid">{{
+                transferMarketPlayer().currentOffer.offer | moneyPipe
+              }}</span>
+              @if (showListMarketValueDifference()) {
+              <span
+                class="transfer-market-card__difference"
+                [class.transfer-market-card__difference--over]="listMarketValueDifference() > 0"
+                [class.transfer-market-card__difference--under]="listMarketValueDifference() < 0"
+              >
+                {{ listMarketValueDifference() | moneyPipe }}
+              </span>
+              }
+            </div>
+            } @else if (showListMarketValueDifference()) {
+            <span
+              class="transfer-market-card__difference"
+              [class.transfer-market-card__difference--over]="listMarketValueDifference() > 0"
+              [class.transfer-market-card__difference--under]="listMarketValueDifference() < 0"
+            >
+              {{ listMarketValueDifference() | moneyPipe }}
+            </span>
+            }
+          </div>
+          <div class="transfer-market-card__expiration">
+            @if (!transferMarketPlayer().hasTransferExpiration()) { - } @else {
+            @let hours = transferMarketPlayer().transferExpirationInHours(); @if
+            (hours < showHoursThreshold) { {{
+            transferMarketPlayer().transferExpirationInMinutes() | expirationTime
+            }} min } @else if (hours > showHoursThreshold && hours <
+            showDaysThreshold) { {{
+            transferMarketPlayer().transferExpirationInHours() | expirationTime }}
+            h } @else { {{ transferMarketPlayer().transferExpirationInDays() |
+            expirationTime }} Days } }
+          </div>
         </div>
       </div>
       <div
-        class="transfer-market-card__content__main__money-information"
-        (click)="showSellingDialog()"
+        class="transfer-market-card__expand"
+        role="button"
+        tabindex="0"
+        (click)="togglePointDetails($event)"
+        (keydown.enter)="togglePointDetails($event)"
+        (keydown.space)="togglePointDetails($event); $event.preventDefault()"
       >
-        <div class="money-column">
-          {{ transferMarketPlayer().price | moneyPipe }}
-        </div>
-        @if (transferMarketPlayer().currentOffer.offer > 0) {
-        <div class="money-column bid-value">
-          {{ transferMarketPlayer().currentOffer.offer | moneyPipe }}
-        </div>
-        <div class="money-column overpay-value">
-          {{ overpayment() | moneyPipe }}
-        </div>
-        } @else if (shouldShowMarketValueDiffToPrice()) {
-        <div class="money-column bid-value">
-          MV: {{ transferMarketPlayer().marketValue | moneyPipe }}
-        </div>
-        <div class="money-column overpay-value">
-          {{ priceDifferenceToMarketValue() | moneyPipe }}
-        </div>
-        }
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="12px"
+          viewBox="0 -960 960 960"
+          width="12px"
+        >
+          <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
+        </svg>
       </div>
     </div>
     @if (showDetailedPoints()) {
     <mat-divider></mat-divider>
-    <div class="transfer-market-card__content__points">
-      <div>{{ transferMarketPlayer().totalPoints }} Pkt</div>
+    <div class="transfer-market-card__points">
+      <div class="transfer-market-card__points__price-per-point">
+        @if (transferMarketPlayer().averagePoints > 0) {
+          {{ pricePerPoint() | moneyPipe }} / pkt
+        } @else { - }
+      </div>
       @let countOfGreatGames = transferMarketPlayer().countOfGreatGames();
       <lib-point-indicator-view
         [pointIndication]="PointIndication.GREAT"
         [countOfIndications]="countOfGreatGames"
-        class="transfer-market-card__content__points__point-indication"
+        class="transfer-market-card__points__point-indication"
       ></lib-point-indicator-view>
       @let countOfVeryGoodtGames =
       transferMarketPlayer().countOfVeryGoodGames();
       <lib-point-indicator-view
         [pointIndication]="PointIndication.VERY_GOOD"
         [countOfIndications]="countOfVeryGoodtGames"
-        class="transfer-market-card__content__points__point-indication"
+        class="transfer-market-card__points__point-indication"
       ></lib-point-indicator-view>
       @let countOfGoodGames = transferMarketPlayer().countOfGoodGames();
       <lib-point-indicator-view
         [pointIndication]="PointIndication.GOOD"
         [countOfIndications]="countOfGoodGames"
-        class="transfer-market-card__content__points__point-indication"
+        class="transfer-market-card__points__point-indication"
       ></lib-point-indicator-view>
       @let countOfNormalGames = transferMarketPlayer().countOfNormalGames();
       <lib-point-indicator-view
         [pointIndication]="PointIndication.JUST_A_PLAYER"
         [countOfIndications]="countOfNormalGames"
-        class="transfer-market-card__content__points__point-indication"
+        class="transfer-market-card__points__point-indication"
       ></lib-point-indicator-view>
       @let countOfBadGames = transferMarketPlayer().countOfBadGames();
       <lib-point-indicator-view
         [pointIndication]="PointIndication.BAD_GAME"
         [countOfIndications]="countOfBadGames"
-        class="transfer-market-card__content__points__point-indication"
+        class="transfer-market-card__points__point-indication"
       ></lib-point-indicator-view>
       @let countOfUnPlayedGames =
       transferMarketPlayer().countOfNotPlayedGames();
       <lib-point-indicator-view
         [pointIndication]="PointIndication.NOT_PLAYED"
         [countOfIndications]="countOfUnPlayedGames"
-        class="transfer-market-card__content__points__point-indication"
+        class="transfer-market-card__points__point-indication"
       ></lib-point-indicator-view>
-      <div class="transfer-market-card__content__points__total-games">
+      <div class="transfer-market-card__points__total-games">
         - {{ transferMarketPlayer().countOfGames() -
         transferMarketPlayer().countOfNotPlayedGames() }}/{{
         transferMarketPlayer().countOfGames() }}

@@ -1,12 +1,10 @@
 @use '@angular/material' as mat;
 
-$content_point_height: 1rem;
-
 .transfer-market-card {
-  min-height: 65px;
-  min-width: 320px;
-  max-width: 400px;
-  padding-top: 0.4em;
+  min-height: var(--kb-card-min-height);
+  min-width: var(--kb-card-min-width);
+  max-width: var(--kb-card-max-width);
+  padding: var(--kb-spacer-2xs);
 
   &__isBeingBought {
     @include mat.card-overrides(
@@ -19,99 +17,203 @@ $content_point_height: 1rem;
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 0.2em;
+    gap: var(--kb-spacer-3xs);
+  }
 
-    &__main {
+  &__main {
+    display: flex;
+    gap: var(--kb-spacer-xs);
+    align-items: stretch;
+  }
+
+  &__player-image {
+    width: var(--kb-size-avatar-md);
+    height: var(--kb-size-avatar-md);
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+    align-self: center;
+    cursor: pointer;
+
+    &--placeholder {
       display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--mat-sys-surface-container-highest);
+      color: var(--mat-sys-on-surface-variant);
+      font-weight: 500;
+      font-size: var(--kb-font-size-4xl);
+    }
+  }
 
-      &__meta-information {
-        display: inherit;
-        flex-direction: column;
-        justify-content: start;
-        gap: 2px;
-        min-width: 75px;
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--kb-spacer-3xs);
+    flex-grow: 1;
+    min-width: 0;
 
-        &__expand {
-          > svg {
-            height: 12px;
-            fill: var(--mat-sys-on-surface);
-          }
-        }
-      }
+    &__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--kb-spacer-xs);
+      cursor: pointer;
+    }
 
-      &__player-information {
-        display: inherit;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.2rem;
-        flex-grow: 1;
+    &__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--kb-spacer-xs);
+      background-color: var(--mat-sys-surface-container-highest);
+      border-radius: var(--kb-radius-xl);
+      padding: var(--kb-spacer-4xs) var(--kb-spacer-xs);
+      cursor: pointer;
+      font-size: var(--kb-font-size-base);
+    }
+  }
 
-        &__team-section {
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          > img {
-            max-height: 24px;
-          }
-        }
-      }
+  &__name-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--kb-spacer-4xs);
+    min-width: 0;
+  }
 
-      &__money-information {
-        display: inherit;
-        flex-direction: column;
-        align-items: end;
-        justify-content: center;
-        gap: 2px;
-        flex-grow: 0.25;
+  &__position-marker {
+    margin-bottom: var(--kb-spacer-4xs);
+  }
+
+  &__name {
+    font-size: var(--kb-font-size-2xl);
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--kb-spacer-4xs);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__price-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--kb-spacer-4xs);
+    min-width: 0;
+  }
+
+  &__price {
+    font-weight: 500;
+    font-size: var(--kb-font-size-lg);
+  }
+
+  &__bid-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--kb-spacer-2xs);
+    min-width: 0;
+  }
+
+  &__bid {
+    font-size: var(--kb-font-size-sm);
+    white-space: nowrap;
+  }
+
+  &__difference {
+    font-size: var(--kb-font-size-xs);
+    white-space: nowrap;
+
+    &--over {
+      color: red;
+
+      &::before {
+        content: '+';
       }
     }
 
-    &__points {
-      display: flex;
-      flex-direction: row;
-      justify-content: left;
-      align-items: center;
-      padding-left: 1em;
-      padding-right: 1em;
-      padding-bottom: 2px;
-      gap: 1.2rem;
-      min-height: $content_point_height;
-      max-height: $content_point_height;
+    &--under {
+      color: green;
+    }
+  }
 
-      &__point-indication {
-        height: $content_point_height;
-        width: calc($content_point_height / 1.5);
-      }
+  &__expiration {
+    font-size: var(--kb-font-size-sm);
+    color: var(--mat-sys-on-surface-variant);
+    white-space: nowrap;
+  }
 
-      &__total-games {
-        height: $content_point_height;
-        width: calc($content_point_height * 4);
+  &__expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: var(--kb-size-icon-md);
 
-        > img {
-          height: $content_point_height;
-          width: $content_point_height;
-        }
+    > svg {
+      height: var(--kb-size-icon-xs);
+      fill: var(--mat-sys-on-surface);
+    }
+  }
+
+  &__points {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding-left: var(--kb-spacer-md);
+    padding-right: var(--kb-spacer-md);
+    padding-bottom: var(--kb-spacer-4xs);
+    gap: var(--kb-spacer-lg);
+    min-height: var(--kb-font-size-xl);
+    max-height: var(--kb-font-size-xl);
+
+    &__point-indication {
+      height: var(--kb-font-size-xl);
+      width: calc(var(--kb-font-size-xl) / 1.5);
+    }
+
+    &__price-per-point {
+      height: var(--kb-font-size-xl);
+      white-space: nowrap;
+      font-size: var(--kb-font-size-md);
+      font-weight: 500;
+    }
+
+    &__total-games {
+      height: var(--kb-font-size-xl);
+      width: calc(var(--kb-font-size-xl) * 4);
+
+      > img {
+        height: var(--kb-font-size-xl);
+        width: var(--kb-font-size-xl);
       }
     }
   }
 }
 
-.centered-content {
-  text-align: center;
-}
+.stat {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--kb-spacer-3xs);
+  white-space: nowrap;
 
-.bid-value {
-  color: green;
-}
+  &__value {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
 
-.overpay-value {
-  color: red;
-}
-
-.moep {
-  align-items: center;
-  justify-content: center;
-  min-width: 12px;
-  max-width: 18px;
-  min-height: 12px;
+  &__label {
+    font-size: var(--kb-font-size-xs);
+    color: var(--mat-sys-on-surface-variant);
+  }
 }

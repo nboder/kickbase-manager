@@ -1,119 +1,113 @@
-<div class="money-section">
-  <div class="heading">Gesamt Übersicht</div>
-  <div class="money-section-overview">
-    <div class="money-section-entry">
-      <span class="money-section-entry__title">Aktueller Teamvalue</span>
-      <span class="money-section-entry__value"
-        >{{ teamValue() | moneyPipe }}</span
-      >
-    </div>
-    <div class="money-section-entry">
-      <span class="money-section-entry__title">Profit</span>
-      <span class="money-section-entry__value">{{ profit() | moneyPipe }}</span>
-    </div>
-    <div class="money-section-entry">
-      <span class="money-section-entry__title">Aktueller Kontostand</span>
-      <span class="money-section-entry__value">{{ budget() | moneyPipe }}</span>
-    </div>
-    <div class="money-section-entry">
-      <span class="money-section-entry__title">Summer aller Verkäufe</span>
-      <span class="money-section-entry__value"
-        >{{ sumOfSoldPlayers() | moneyPipe }}</span
-      >
-    </div>
-    <div class="money-section-entry">
-      <span class="money-section-entry__title">Summer aller Einkäufe</span>
-      <span class="money-section-entry__value"
-        >{{ sumOfBuyingPlayer() | moneyPipe }}</span
-      >
-    </div>
-    <mat-divider></mat-divider>
-    <div class="money-section-entry">
-      <span class="money-section-entry__title">Finaler Kontostand</span>
-      <span class="money-section-entry__value emphasized"
-        >{{ finalAccountBalance() | moneyPipe }}</span
-      >
-    </div>
-  </div>
-</div>
+<div class="money-page">
+  <mat-card class="money-overview-card">
+    <mat-card-header>
+      <mat-card-title>Übersicht</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="overview-grid">
+        <div class="overview-item">
+          <span class="overview-item__label">Aktueller Teamwert</span>
+          <span class="overview-item__value">{{ teamValue() | moneyPipe }}</span>
+        </div>
+        <div class="overview-item">
+          <span class="overview-item__label">Profit</span>
+          <span
+            class="overview-item__value"
+            [class.positive]="profit() > 0"
+            [class.negative]="profit() < 0"
+            >{{ profit() | moneyPipe }}</span
+          >
+        </div>
+        <div class="overview-item">
+          <span class="overview-item__label">Aktueller Kontostand</span>
+          <span class="overview-item__value">{{ budget() | moneyPipe }}</span>
+        </div>
+        <div class="overview-item">
+          <span class="overview-item__label">Summe aller Verkäufe</span>
+          <span class="overview-item__value">{{ sumOfSoldPlayers() | moneyPipe }}</span>
+        </div>
+        <div class="overview-item">
+          <span class="overview-item__label">Summe aller Einkäufe</span>
+          <span class="overview-item__value">{{ sumOfBuyingPlayer() | moneyPipe }}</span>
+        </div>
+      </div>
+      <mat-divider class="overview-divider"></mat-divider>
+      <div class="overview-item overview-item--final">
+        <span class="overview-item__label">Finaler Kontostand</span>
+        <span
+          class="overview-item__value emphasized"
+          [class.positive]="finalAccountBalance() >= 0"
+          [class.negative]="finalAccountBalance() < 0"
+          >{{ finalAccountBalance() | moneyPipe }}</span
+        >
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-<div class="prediction-section">
-  <div class="prediction-section-bench">
-    <div class="heading">
-      Predictions Bench Player ( {{
-      twentyFourHourPredictionsOnlyBenchPlayer().length }}Players )
-    </div>
-    <div class="prediction-section-entry">
-      <span class="prediction-section-entry__title"></span>
-      <span class="prediction-section-entry__value emphasized">
-        Expected Profit</span
-      >
-      <span class="prediction-section-entry__total emphasized"
-        >Expected Cash</span
-      >
-    </div>
-    <div class="prediction-section-entry">
-      <span class="prediction-section-entry__title">24h</span>
-      <span class="prediction-section-entry__value">
-        <lib-market-value-trend
-          [marketValueTrend]="twentyFourHourPredictionOnlyBenchPlayer()"
-        ></lib-market-value-trend
-      ></span>
-      <span class="prediction-section-entry__total"
-        >{{ finalAccountBalance() + twentyFourHourPredictionOnlyBenchPlayer() |
-        moneyPipe }}</span
-      >
-    </div>
-    <div class="prediction-section-entry">
-      <span class="prediction-section-entry__title">7 days</span>
-      <span class="prediction-section-entry__value">
-        <lib-market-value-trend
-          [marketValueTrend]="sevenDayPredictionOnlyBenchPlayer()"
-        ></lib-market-value-trend
-      ></span>
-      <span class="prediction-section-entry__total"
-        >{{ finalAccountBalance() + sevenDayPredictionOnlyBenchPlayer() |
-        moneyPipe }}</span
-      >
-    </div>
-  </div>
+  <mat-card class="predictions-card">
+    <mat-card-header>
+      <mat-card-title>Marktwert-Prognose</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="prediction-group">
+        <div class="prediction-group__title">
+          Bankspieler ({{ twentyFourHourPredictionsOnlyBenchPlayer().length }} Spieler)
+        </div>
+        <div class="prediction-row prediction-row--header">
+          <span class="prediction-row__label"></span>
+          <span class="prediction-row__trend">Erwarteter Profit</span>
+          <span class="prediction-row__total">Erwartetes Guthaben</span>
+        </div>
+        <div class="prediction-row">
+          <span class="prediction-row__label">24h</span>
+          <span class="prediction-row__trend">
+            <lib-market-value-trend
+              [marketValueTrend]="twentyFourHourPredictionOnlyBenchPlayer()"
+            ></lib-market-value-trend>
+          </span>
+          <span class="prediction-row__total">{{ finalAccountBalance() + twentyFourHourPredictionOnlyBenchPlayer() | moneyPipe }}</span>
+        </div>
+        <div class="prediction-row">
+          <span class="prediction-row__label">7 Tage</span>
+          <span class="prediction-row__trend">
+            <lib-market-value-trend
+              [marketValueTrend]="sevenDayPredictionOnlyBenchPlayer()"
+            ></lib-market-value-trend>
+          </span>
+          <span class="prediction-row__total">{{ finalAccountBalance() + sevenDayPredictionOnlyBenchPlayer() | moneyPipe }}</span>
+        </div>
+      </div>
 
-  <div class="prediction-section-team">
-    <div class="heading">
-      Predictions Complete Team ( {{ twentyFourHourPredictions().length }}
-      Players )
-    </div>
-    <div class="prediction-section-entry">
-      <span class="prediction-section-entry__title"></span>
-      <span class="prediction-section-entry__value emphasized">
-        Expected Profit</span
-      >
-      <span class="prediction-section-entry__total emphasized"
-        >Expected Cash</span
-      >
-    </div>
-    <div class="prediction-section-entry">
-      <span class="prediction-section-entry__title">24h</span>
-      <span class="prediction-section-entry__value">
-        <lib-market-value-trend
-          [marketValueTrend]="twentyFourHourPrediction()"
-        ></lib-market-value-trend
-      ></span>
-      <span class="prediction-section-entry__total"
-        >{{ finalAccountBalance() + twentyFourHourPrediction() | moneyPipe
-        }}</span
-      >
-    </div>
-    <div class="prediction-section-entry">
-      <span class="prediction-section-entry__title">7 days</span>
-      <span class="prediction-section-entry__value">
-        <lib-market-value-trend
-          [marketValueTrend]="sevenDayPrediction()"
-        ></lib-market-value-trend
-      ></span>
-      <span class="prediction-section-entry__total"
-        >{{ finalAccountBalance() + sevenDayPrediction() | moneyPipe }}</span
-      >
-    </div>
-  </div>
+      <mat-divider class="predictions-divider"></mat-divider>
+
+      <div class="prediction-group">
+        <div class="prediction-group__title">
+          Gesamtes Team ({{ twentyFourHourPredictions().length }} Spieler)
+        </div>
+        <div class="prediction-row prediction-row--header">
+          <span class="prediction-row__label"></span>
+          <span class="prediction-row__trend">Erwarteter Profit</span>
+          <span class="prediction-row__total">Erwartetes Guthaben</span>
+        </div>
+        <div class="prediction-row">
+          <span class="prediction-row__label">24h</span>
+          <span class="prediction-row__trend">
+            <lib-market-value-trend
+              [marketValueTrend]="twentyFourHourPrediction()"
+            ></lib-market-value-trend>
+          </span>
+          <span class="prediction-row__total">{{ finalAccountBalance() + twentyFourHourPrediction() | moneyPipe }}</span>
+        </div>
+        <div class="prediction-row">
+          <span class="prediction-row__label">7 Tage</span>
+          <span class="prediction-row__trend">
+            <lib-market-value-trend
+              [marketValueTrend]="sevenDayPrediction()"
+            ></lib-market-value-trend>
+          </span>
+          <span class="prediction-row__total">{{ finalAccountBalance() + sevenDayPrediction() | moneyPipe }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

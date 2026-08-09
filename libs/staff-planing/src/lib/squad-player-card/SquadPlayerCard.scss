@@ -1,10 +1,10 @@
 @use '@angular/material' as mat;
 
 .squad_play_card {
-  padding: 2px 4px;
+  padding: var(--kb-spacer-4xs) var(--kb-spacer-3xs);
   @include mat.card-overrides(
     (
-      outlined-outline-width: 2px,
+      outlined-outline-width: var(--kb-spacer-4xs),
     )
   );
 
@@ -25,41 +25,26 @@
   }
 
   &__content {
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-
-    &__player_listing {
-      flex-grow: 1;
-    }
-
-    &__meta_information {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    &__meta_information_listing {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: start;
-      gap: 2px;
-
-      > svg path {
-        fill: var(--mat-sys-on-surface);
-      }
-    }
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      'image name position'
+      'image trend sell';
+    align-items: center;
+    gap: var(--kb-spacer-4xs) var(--kb-spacer-xs);
 
     &__sell_section {
+      grid-area: sell;
       display: flex;
       align-items: end;
       justify-content: center;
       flex-direction: column;
-      gap: 0.15em;
+      gap: var(--kb-spacer-4xs);
+      min-width: 0;
 
       .positive {
-        font-size: small;
+        font-size: var(--kb-font-size-sm);
         color: green;
       }
 
@@ -68,9 +53,78 @@
       }
 
       .negative {
-        font-size: small;
+        font-size: var(--kb-font-size-sm);
         color: red;
       }
+    }
+  }
+
+  &__image-section {
+    grid-area: image;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--kb-spacer-4xs);
+    width: var(--kb-size-avatar-sm);
+
+    &__listing {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: var(--kb-spacer-4xs);
+      font-size: var(--kb-font-size-2xs);
+      color: var(--mat-sys-on-surface-variant);
+      white-space: nowrap;
+
+      > svg {
+        height: var(--kb-size-icon-xs);
+        width: var(--kb-size-icon-xs);
+
+        path {
+          fill: var(--mat-sys-on-surface);
+        }
+      }
+    }
+  }
+
+  &__name {
+    grid-area: name;
+    font-size: var(--kb-font-size-2xl);
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  &__position {
+    grid-area: position;
+    justify-self: end;
+    align-self: center;
+  }
+
+  &__trend {
+    grid-area: trend;
+    min-width: 0;
+  }
+
+  &__player-image {
+    width: var(--kb-size-avatar-xs);
+    height: var(--kb-size-avatar-xs);
+    object-fit: cover;
+    border-radius: 50%;
+
+    &--placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--kb-size-avatar-xs);
+      height: var(--kb-size-avatar-xs);
+      background-color: var(--mat-sys-surface-container-highest);
+      color: var(--mat-sys-on-surface-variant);
+      font-weight: 500;
+      font-size: var(--kb-font-size-3xl);
     }
   }
 }

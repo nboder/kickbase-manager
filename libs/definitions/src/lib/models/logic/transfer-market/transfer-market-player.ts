@@ -6,7 +6,7 @@ import { PlayerPerformanceLogic } from '../commoon/player-performance-logic';
 
 export class TransferMarketPlayer extends BasicPlayer {
   readonly firstName: string;
-  readonly transferExpiringSeconds: number;
+  readonly transferExpiringSeconds: number | undefined;
   readonly totalPoints: number;
   readonly price: number;
   twentyForHoursTrend = 0;
@@ -40,6 +40,10 @@ export class TransferMarketPlayer extends BasicPlayer {
     );
   }
 
+  hasTransferExpiration(): boolean {
+    return this.transferExpiringSeconds != undefined;
+  }
+
   transferExpirationInDays(): number {
     return this.transferExpirationInHours() / 24;
   }
@@ -49,7 +53,7 @@ export class TransferMarketPlayer extends BasicPlayer {
   }
 
   transferExpirationInMinutes(): number {
-    return this.transferExpiringSeconds / 60;
+    return (this.transferExpiringSeconds ?? 0) / 60;
   }
 
   countOfGreatGames(): number {

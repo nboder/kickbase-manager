@@ -9,6 +9,8 @@ export interface ManagerSquadPlayerResponse {
   readonly mvgl: number;
   readonly mv: number;
   readonly pos: number;
+  readonly pim?: string; // Player image Url
+  readonly tim?: string; // Team image Url
 }
 
 // "pi": "2038",

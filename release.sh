@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+2#!/usr/bin/env bash
 
 npm run release
 npm run deploy-build

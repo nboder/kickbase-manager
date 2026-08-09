@@ -1,5 +1,8 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
-import { LeagueManagementService } from '@kickbase/UserManagement';
+import {
+  GeneralLeagueInformation,
+  LeagueManagementService,
+} from '@kickbase/UserManagement';
 import {
   MatCard,
   MatCardActions,
@@ -8,7 +11,7 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AppRouteDefinitions } from '@kickbase/definitions';
 
 @Component({
@@ -20,7 +23,6 @@ import { AppRouteDefinitions } from '@kickbase/definitions';
     MatCardSubtitle,
     MatCardActions,
     MatButton,
-    RouterLink,
   ],
   templateUrl: './LeagueSelection.html',
   styleUrl: './LeagueSelection.scss',
@@ -38,8 +40,18 @@ export class LeagueSelection implements OnInit {
   });
 
   ngOnInit(): void {
-    console.log('moep');
+    const leagues = this.availableLeagues();
+    if (leagues.length === 1) {
+      this.selectLeague(leagues[0]);
+    }
   }
 
-  protected readonly AppRouteDefinitions = AppRouteDefinitions;
+  selectLeague(league: GeneralLeagueInformation) {
+    this.leagueManagementService.setLeagueInformation(league);
+    this.router.navigate([
+      '/',
+      AppRouteDefinitions.MANAGEMENT,
+      league.id,
+    ]);
+  }
 }

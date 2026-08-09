@@ -1,19 +1,40 @@
-<h2 mat-dialog-title>Bid for {{ data.playerName }}</h2>
-<mat-dialog-content>
-  <div>
-    <div class="market-value">
-      Current MV: {{ data.marketValue | moneyPipe }}
-    </div>
-    <mat-form-field class="bid">
-      <mat-label>Your Bid</mat-label>
-      <input matInput [(ngModel)]="currentBid" type="number" />
-    </mat-form-field>
+<h2 mat-dialog-title class="bid-dialog__title">Bid for {{ data.playerName }}</h2>
+<mat-dialog-content class="bid-dialog__content">
+  <div class="bid-dialog__row">
+    <span class="bid-dialog__label">Current MV</span>
+    <span class="bid-dialog__value">{{ data.marketValue | moneyPipe }}</span>
   </div>
+  <mat-form-field class="bid-dialog__input" appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Your Bid</mat-label>
+    <input
+      matInput
+      type="text"
+      inputmode="numeric"
+      [ngModel]="formattedBid"
+      (ngModelChange)="onBidInput($event)"
+    />
+  </mat-form-field>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button matButton="outlined" (click)="cancelDialog()">Cancel</button>
-  <button matButton="outlined" (click)="clearBidDialog()">Clear Bid</button>
-  <button matButton="filled" cdkFocusInitial (click)="acceptBid()">
+<mat-dialog-actions class="bid-dialog__actions">
+  <button
+    type="button"
+    class="bid-dialog__button bid-dialog__button--secondary"
+    (click)="cancelDialog()"
+  >
+    Cancel
+  </button>
+  <button
+    type="button"
+    class="bid-dialog__button bid-dialog__button--secondary"
+    (click)="clearBidDialog()"
+  >
+    Clear Bid
+  </button>
+  <button
+    type="button"
+    class="bid-dialog__button bid-dialog__button--primary"
+    (click)="acceptBid()"
+  >
     Set Bid
   </button>
 </mat-dialog-actions>

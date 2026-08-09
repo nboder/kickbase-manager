@@ -6,7 +6,8 @@
       outline-color: $color,
       label-text-color: $color,
       elevated-container-color: #404040,
-      container-height: 1.25em,
+      container-height: var(--kb-size-chip-height),
+      label-text-size: var(--kb-font-size-2xs),
     )
   );
 }
