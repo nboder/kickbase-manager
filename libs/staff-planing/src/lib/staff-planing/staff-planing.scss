@@ -30,6 +30,7 @@ $topBottomPadding: 4px;
         container-height: $tabHeight,
       )
     );
+    touch-action: pan-y;
   }
 
   &-container {
@@ -39,5 +40,6 @@ $topBottomPadding: 4px;
     height: calc(
       100dvh - #{$tabHeight} - calc(3 * $topBottomPadding) - var(--kickbase-toolbar-height, 0)
     );
+    touch-action: pan-y;
   }
 }
