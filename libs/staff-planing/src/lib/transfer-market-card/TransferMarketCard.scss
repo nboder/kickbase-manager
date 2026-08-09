@@ -3,10 +3,10 @@
 $content_point_height: 1rem;
 
 .transfer-market-card {
-  min-height: 65px;
+  min-height: 80px;
   min-width: 320px;
   max-width: 400px;
-  padding-top: 0.4em;
+  padding: 0.4em;
 
   &__isBeingBought {
     @include mat.card-overrides(
@@ -20,98 +20,193 @@ $content_point_height: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.2em;
+  }
 
-    &__main {
+  &__main {
+    display: flex;
+    gap: 0.5em;
+    align-items: stretch;
+  }
+
+  &__player-image {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+    align-self: center;
+    cursor: pointer;
+
+    &--placeholder {
       display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--mat-sys-surface-container-highest);
+      color: var(--mat-sys-on-surface-variant);
+      font-weight: 500;
+      font-size: 1.5rem;
+    }
+  }
 
-      &__meta-information {
-        display: inherit;
-        flex-direction: column;
-        justify-content: start;
-        gap: 2px;
-        min-width: 75px;
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    flex-grow: 1;
+    min-width: 0;
 
-        &__expand {
-          > svg {
-            height: 12px;
-            fill: var(--mat-sys-on-surface);
-          }
-        }
-      }
-
-      &__player-information {
-        display: inherit;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.2rem;
-        flex-grow: 1;
-
-        &__team-section {
-          display: flex;
-          align-items: center;
-          justify-content: start;
-          > img {
-            max-height: 24px;
-          }
-        }
-      }
-
-      &__money-information {
-        display: inherit;
-        flex-direction: column;
-        align-items: end;
-        justify-content: center;
-        gap: 2px;
-        flex-grow: 0.25;
-      }
+    &__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5em;
+      cursor: pointer;
     }
 
-    &__points {
+    &__bottom {
       display: flex;
-      flex-direction: row;
-      justify-content: left;
+      justify-content: space-between;
       align-items: center;
-      padding-left: 1em;
-      padding-right: 1em;
-      padding-bottom: 2px;
-      gap: 1.2rem;
-      min-height: $content_point_height;
-      max-height: $content_point_height;
+      gap: 0.5em;
+      background-color: var(--mat-sys-surface-container-highest);
+      border-radius: 1em;
+      padding: 0.15em 0.6em;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+  }
 
-      &__point-indication {
-        height: $content_point_height;
-        width: calc($content_point_height / 1.5);
-      }
+  &__name-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25em;
+    min-width: 0;
 
-      &__total-games {
-        height: $content_point_height;
-        width: calc($content_point_height * 4);
+    lib-position-marker {
+      ::ng-deep .mat-mdc-chip {
+        --mdc-chip-container-height: 1.2rem;
+        height: 1.2rem;
+        min-height: 1.2rem;
+        font-size: 0.75rem;
+        padding-inline: 6px;
 
-        > img {
-          height: $content_point_height;
-          width: $content_point_height;
+        .mat-mdc-chip-action-label,
+        .mdc-evolution-chip__text-label {
+          font-size: 0.75rem;
         }
+      }
+    }
+  }
+
+  &__name {
+    font-size: 1.05rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.1em;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__price-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
+  }
+
+  &__price {
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  &__bid {
+    font-size: 0.8rem;
+    color: green;
+  }
+
+  &__market-value {
+    font-size: 0.8rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  &__expiration {
+    font-size: 0.8rem;
+    color: var(--mat-sys-on-surface-variant);
+    white-space: nowrap;
+  }
+
+  &__expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 24px;
+
+    > svg {
+      height: 12px;
+      fill: var(--mat-sys-on-surface);
+    }
+  }
+
+  &__points {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 2px;
+    gap: 1.2rem;
+    min-height: $content_point_height;
+    max-height: $content_point_height;
+
+    &__point-indication {
+      height: $content_point_height;
+      width: calc($content_point_height / 1.5);
+    }
+
+    &__price-per-point {
+      height: $content_point_height;
+      white-space: nowrap;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    &__total-games {
+      height: $content_point_height;
+      width: calc($content_point_height * 4);
+
+      > img {
+        height: $content_point_height;
+        width: $content_point_height;
       }
     }
   }
 }
 
-.centered-content {
-  text-align: center;
-}
+.stat {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.3em;
+  white-space: nowrap;
 
-.bid-value {
-  color: green;
-}
+  &__value {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
 
-.overpay-value {
-  color: red;
-}
-
-.moep {
-  align-items: center;
-  justify-content: center;
-  min-width: 12px;
-  max-width: 18px;
-  min-height: 12px;
+  &__label {
+    font-size: 0.75rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
 }
