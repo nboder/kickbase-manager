@@ -35,7 +35,7 @@ import {
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { MatDivider } from '@angular/material/divider';
-import { NgClass } from '@angular/common';
+import { CurrencyPipe, DecimalPipe, NgClass } from '@angular/common';
 
 export interface LineupPlayer {
   readonly id: string;
@@ -128,6 +128,7 @@ function safeKickbasePosition(pos: number): KickbaseStaffPosition {
     MatButton,
     MatDivider,
   ],
+  providers: [CurrencyPipe, DecimalPipe],
   templateUrl: './LineupBuilder.html',
   styleUrl: './LineupBuilder.scss',
 })
